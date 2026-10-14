@@ -3,133 +3,391 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1510">
+<meta name="description" content="Demandez gratuitement un devis BoisRoyal pour le bois de chauffage et le charbon de bois.">
 <title>Demande de devis | BoisRoyal</title>
+
 <style>
-:root{--bg:#0b1510;--panel:#14271b;--gold:#d8b66a;--text:#f5f3eb;--muted:#bdc7bc}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:16px Arial,sans-serif;line-height:1.6}
-main{max-width:700px;margin:auto;padding:24px 16px 50px}
-a{color:var(--gold)}
-h1,h2{font-family:Georgia,serif}
-h1{font-size:clamp(32px,8vw,48px);line-height:1.1}
-h1 span{color:var(--gold)}
-.panel{background:var(--panel);padding:20px;border:1px solid #3d4b3d;border-radius:10px}
-.notice{padding:13px;background:#352c17;border:1px solid #8e7540;border-radius:6px;color:#f1d99b;font-size:14px}
-.products{display:grid;gap:12px;margin:20px 0}
-.product{display:grid;grid-template-columns:1fr 90px;gap:10px;align-items:center;padding:12px;border:1px solid #405041;border-radius:6px}
-.product small{display:block;color:var(--muted);font-size:12px}
-label{display:block;font-size:14px;margin:12px 0 5px}
-input,select,textarea{width:100%;padding:12px;background:#0b1510;border:1px solid #526252;border-radius:5px;color:white;font:inherit}
-button{width:100%;margin-top:20px;padding:15px;border:0;border-radius:5px;background:var(--gold);color:#172219;font-weight:bold;font-size:16px}
-button:disabled{opacity:.6}
-#status{color:#f1d99b;overflow-wrap:anywhere}
-small,.muted{color:var(--muted)}
-@media(max-width:400px){.panel{padding:14px}.product{grid-template-columns:1fr 75px}}
+:root {
+  --bg: #0b1510;
+  --panel: #14271b;
+  --panel2: #0e1b13;
+  --gold: #d8b66a;
+  --gold-light: #f1d99b;
+  --text: #f5f3eb;
+  --muted: #bdc7bc;
+  --line: #405041;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 Arial, sans-serif;
+}
+main {
+  width: min(700px, 100% - 28px);
+  margin: auto;
+  padding: 25px 0 50px;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.brand {
+  font: 700 25px Georgia, serif;
+  letter-spacing: 1px;
+  margin: 22px 0;
+}
+h1, h2 { font-family: Georgia, serif; }
+h1 { font-size: clamp(32px, 8vw, 46px); line-height: 1.15; }
+h1 span, .gold { color: var(--gold); }
+h2 { font-size: 21px; margin: 27px 0 12px; }
+.muted { color: var(--muted); }
+.panel {
+  background: var(--panel);
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.notice {
+  padding: 14px;
+  background: #352c17;
+  border: 1px solid #8e7540;
+  border-radius: 6px;
+  color: var(--gold-light);
+  font-size: 14px;
+  margin: 20px 0;
+}
+.product-list { display: grid; gap: 12px; }
+.product {
+  display: grid;
+  grid-template-columns: 1fr 90px;
+  gap: 10px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel2);
+}
+.product b { display: block; }
+.product small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.product .price {
+  display: block;
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 5px;
+}
+label {
+  display: block;
+  font-size: 14px;
+  margin: 14px 0 5px;
+}
+input, select, textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  background: #0b1510;
+  border: 1px solid #526252;
+  border-radius: 5px;
+  color: white;
+  font: inherit;
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--gold);
+  color: #172219;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { background: var(--gold-light); }
+button:disabled { opacity: .6; cursor: wait; }
+#status { overflow-wrap: anywhere; }
+#status.success { color: #bce7bb; }
+#status.error { color: #ffb4a9; }
+.footer-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+@media (max-width: 430px) {
+  .panel { padding: 15px; }
+  .product { grid-template-columns: minmax(0, 1fr) 78px; padding: 10px; }
+}
 </style>
 </head>
+
 <body>
 <main>
-<a href="index.html">← Retour à la boutique</a>
-<h1>Votre demande de <span>devis.</span></h1>
-<p class="muted">Choisissez vos produits. Nous vous recontacterons pour confirmer les prix, les stocks et la livraison.</p>
-<div class="notice"><b>À savoir :</b> demande gratuite et sans engagement. Aucun paiement en ligne. Votre demande n'est pas une commande confirmée.</div>
+  <a href="index.html">← Retour à la boutique</a>
 
-<form class="panel" id="form">
-<h2>1. Produits souhaités</h2>
-<div class="products">
-<div class="product"><div><b>🪵 Bois — petit filet</b><small>Prix à confirmer</small></div><div><label for="q1">Quantité</label><select id="q1"><option value="0">0</option><option>1</option><option>2</option><option>3</option><option>5</option><option>10</option></select></div></div>
-<div class="product"><div><b>🪵 Bois — lot familial</b><small>Prix à confirmer</small></div><div><label for="q2">Quantité</label><select id="q2"><option value="0">0</option><option>1</option><option>2</option><option>3</option><option>5</option><option>10</option></select></div></div>
-<div class="product"><div><b>🔥 Charbon — petit sac</b><small>Prix à confirmer</small></div><div><label for="q3">Quantité</label><select id="q3"><option value="0">0</option><option>1</option><option>2</option><option>3</option><option>5</option><option>10</option></select></div></div>
-<div class="product"><div><b>🔥 Charbon — grand sac</b><small>Prix à confirmer</small></div><div><label for="q4">Quantité</label><select id="q4"><option value="0">0</option><option>1</option><option>2</option><option>3</option><option>5</option><option>10</option></select></div></div>
-</div>
+  <div class="brand">♨ BoisRoyal</div>
 
-<h2>2. Vos coordonnées</h2>
-<label for="name">Nom complet *</label>
-<input id="name" maxlength="120" autocomplete="name" required>
-<label for="phone">Téléphone *</label>
-<input id="phone" type="tel" maxlength="40" autocomplete="tel" required>
-<label for="email">E-mail (facultatif)</label>
-<input id="email" type="email" maxlength="180" autocomplete="email">
-<label for="address">Adresse de livraison *</label>
-<input id="address" maxlength="220" autocomplete="street-address" required>
-<label for="postal">Code postal *</label>
-<input id="postal" maxlength="20" autocomplete="postal-code" required>
-<label for="city">Ville *</label>
-<input id="city" maxlength="100" autocomplete="address-level2" required>
-<label for="country">Pays *</label>
-<select id="country" required>
-<option>France</option><option>Belgique</option><option>Luxembourg</option><option>Suisse</option><option>Autre pays européen</option>
-</select>
-<label for="notes">Précisions facultatives</label>
-<textarea id="notes" maxlength="1200" rows="3" placeholder="Quantité, accès, préférences..."></textarea>
+  <h1>Votre demande de <span>devis.</span></h1>
+  <p class="muted">
+    Sélectionnez vos produits et vos quantités. Nous pourrons ensuite
+    confirmer les prix, les disponibilités et les frais de livraison.
+  </p>
 
-<div style="position:absolute;left:-9999px" aria-hidden="true">
-<label for="website">Ne pas remplir</label><input id="website" tabindex="-1" autocomplete="off">
-</div>
-<button id="send" type="submit">Envoyer ma demande gratuite</button>
-<p id="status" role="status" aria-live="polite"></p>
-<small>* Champs obligatoires. Aucun paiement n'est demandé.</small>
-</form>
+  <div class="notice">
+    <strong>Demande gratuite et sans engagement.</strong><br>
+    Les prix affichés sont provisoires. Aucun paiement n'est demandé
+    et votre demande ne constitue pas une commande confirmée.
+  </div>
+
+  <form class="panel" id="form">
+    <h2>1. Vos produits</h2>
+
+    <div class="product-list">
+      <div class="product">
+        <div>
+          <b>🪵 Bois — petit filet</b>
+          <small>Format indicatif : 12,5 L</small>
+          <span class="price">6,90 € <small>Prix provisoire</small></span>
+        </div>
+        <div>
+          <label for="q1">Quantité</label>
+          <select id="q1">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product">
+        <div>
+          <b>🪵 Bois — lot familial</b>
+          <small>Format indicatif : 40 L</small>
+          <span class="price">24,90 € <small>Prix provisoire</small></span>
+        </div>
+        <div>
+          <label for="q2">Quantité</label>
+          <select id="q2">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product">
+        <div>
+          <b>🔥 Charbon — petit sac</b>
+          <small>Format indicatif : 3 kg</small>
+          <span class="price">4,90 € <small>Prix provisoire</small></span>
+        </div>
+        <div>
+          <label for="q3">Quantité</label>
+          <select id="q3">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product">
+        <div>
+          <b>🔥 Charbon — grand sac</b>
+          <small>Format indicatif : 10 kg</small>
+          <span class="price">16,90 € <small>Prix provisoire</small></span>
+        </div>
+        <div>
+          <label for="q4">Quantité</label>
+          <select id="q4">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">
+      Formats et prix donnés à titre indicatif, à confirmer avant toute vente.
+      Les frais de livraison ne sont pas inclus.
+    </p>
+
+    <h2>2. Vos coordonnées</h2>
+
+    <label for="name">Nom complet *</label>
+    <input id="name" name="name" maxlength="120"
+      autocomplete="name" required>
+
+    <label for="phone">Téléphone *</label>
+    <input id="phone" name="phone" type="tel" maxlength="40"
+      autocomplete="tel" required>
+
+    <label for="email">Adresse e-mail (facultatif)</label>
+    <input id="email" name="email" type="email" maxlength="180"
+      autocomplete="email">
+
+    <h2>3. Adresse de livraison</h2>
+
+    <label for="address">Adresse complète *</label>
+    <input id="address" name="address" maxlength="220"
+      autocomplete="street-address" required>
+
+    <label for="postal">Code postal *</label>
+    <input id="postal" name="postal" maxlength="20"
+      autocomplete="postal-code" required>
+
+    <label for="city">Ville *</label>
+    <input id="city" name="city" maxlength="100"
+      autocomplete="address-level2" required>
+
+    <label for="country">Pays *</label>
+    <select id="country" name="country" required>
+      <option value="France">France</option>
+      <option value="Belgique">Belgique</option>
+      <option value="Luxembourg">Luxembourg</option>
+      <option value="Suisse">Suisse</option>
+      <option value="Autre pays européen">Autre pays européen</option>
+    </select>
+
+    <label for="notes">Précisions (facultatif)</label>
+    <textarea id="notes" name="notes" maxlength="1200" rows="3"
+      placeholder="Instructions de livraison ou informations utiles..."></textarea>
+
+    <div style="position:absolute;left:-9999px" aria-hidden="true">
+      <label for="website">Ne pas remplir</label>
+      <input id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <button id="send" type="submit">Envoyer ma demande gratuite</button>
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <p class="footer-note">
+      * Champs obligatoires. En envoyant ce formulaire, vous demandez
+      à BoisRoyal de vous recontacter au sujet de votre demande.
+      Aucun paiement n'est effectué.
+    </p>
+  </form>
+
+  <p style="text-align:center;margin-top:24px">
+    <a href="index.html">Retour à BoisRoyal</a>
+  </p>
 </main>
 
 <script>
-const URL_SUPABASE='https://evvblxiitorfdniqmqcf.supabase.co';
-const CLE_PUBLIQUE='sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
+const URL_SUPABASE = 'https://evvblxiitorfdniqmqcf.supabase.co';
+const CLE_PUBLIQUE = 'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
 
-document.getElementById('form').addEventListener('submit',async function(e){
-e.preventDefault();
-const status=document.getElementById('status');
-const button=document.getElementById('send');
-const val=id=>document.getElementById(id).value.trim();
+const form = document.getElementById('form');
+const button = document.getElementById('send');
+const status = document.getElementById('status');
 
-if(val('website')){status.textContent='Demande refusée.';return}
+form.addEventListener('submit', async function(event) {
+  event.preventDefault();
 
-const produits=[
-['demo-bois-petit-filet',Number(document.getElementById('q1').value)],
-['demo-bois-lot-familial',Number(document.getElementById('q2').value)],
-['demo-charbon-petit-sac',Number(document.getElementById('q3').value)],
-['demo-charbon-grand-sac',Number(document.getElementById('q4').value)]
-];
-const items=produits.filter(p=>p[1]>0).map(p=>({slug:p[0],quantity:p[1]}));
+  const val = id => document.getElementById(id).value.trim();
 
-if(!items.length){status.textContent='Choisissez au moins un produit.';return}
+  status.className = '';
+  status.textContent = '';
 
-const payload={
-customer_name:val('name'),
-customer_phone:val('phone'),
-customer_email:val('email'),
-delivery_address:val('address'),
-delivery_postal_code:val('postal'),
-delivery_city:val('city'),
-delivery_country:val('country'),
-delivery_notes:val('notes'),
-company_website:val('website'),
-items
-};
+  if (val('website')) {
+    status.textContent = 'Demande refusée.';
+    status.className = 'error';
+    return;
+  }
 
-button.disabled=true;
-button.textContent='Envoi en cours...';
-status.textContent='Envoi de votre demande...';
+  const products = [
+    ['demo-bois-petit-filet', Number(val('q1'))],
+    ['demo-bois-lot-familial', Number(val('q2'))],
+    ['demo-charbon-petit-sac', Number(val('q3'))],
+    ['demo-charbon-grand-sac', Number(val('q4'))]
+  ];
 
-try{
-const response=await fetch(URL_SUPABASE+'/functions/v1/boisroyal-order-request',{
-method:'POST',
-headers:{
-'Content-Type':'application/json',
-'apikey':CLE_PUBLIQUE
-},
-body:JSON.stringify(payload)
-});
-const result=await response.json();
-if(!response.ok)throw new Error(result.error||'Envoi impossible. Réessayez.');
-status.textContent='Demande envoyée ! Référence : '+result.order_number+'. Nous confirmerons le prix et la livraison avant toute commande.';
-this.reset();
-}catch(err){
-status.textContent=err.message||'Erreur de connexion. Réessayez.';
-}finally{
-button.disabled=false;
-button.textContent='Envoyer ma demande gratuite';
-}
+  const items = products
+    .filter(product => product[1] > 0)
+    .map(product => ({
+      slug: product[0],
+      quantity: product[1]
+    }));
+
+  if (!items.length) {
+    status.textContent = 'Choisissez au moins un produit.';
+    status.className = 'error';
+    return;
+  }
+
+  const payload = {
+    customer_name: val('name'),
+    customer_phone: val('phone'),
+    customer_email: val('email'),
+    delivery_address: val('address'),
+    delivery_postal_code: val('postal'),
+    delivery_city: val('city'),
+    delivery_country: val('country'),
+    delivery_notes: val('notes'),
+    company_website: val('website'),
+    items
+  };
+
+  button.disabled = true;
+  button.textContent = 'Envoi en cours...';
+  status.textContent = 'Envoi de votre demande...';
+
+  try {
+    const response = await fetch(
+      URL_SUPABASE + '/functions/v1/boisroyal-order-request',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': CLE_PUBLIQUE
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result.error || 'Envoi impossible. Veuillez réessayer.'
+      );
+    }
+
+    status.textContent =
+      'Demande envoyée avec succès ! Référence : ' +
+      result.order_number +
+      '. Les prix et la livraison devront être confirmés.';
+    status.className = 'success';
+
+    form.reset();
+  } catch (error) {
+    status.textContent =
+      error.message || 'Erreur de connexion. Veuillez réessayer.';
+    status.className = 'error';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Envoyer ma demande gratuite';
+  }
 });
 </script>
 </body>
