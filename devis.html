@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1510">
-<meta name="description" content="Demandez gratuitement un devis BoisRoyal pour le bois de chauffage et le charbon de bois.">
+<meta name="description" content="Demandez gratuitement un devis BoisRoyal pour le bois de chauffage en France et en Belgique.">
 <title>Demande de devis | BoisRoyal</title>
 
 <style>
@@ -136,8 +136,9 @@ button:disabled { opacity: .6; cursor: wait; }
 
   <h1>Votre demande de <span>devis.</span></h1>
   <p class="muted">
-    Sélectionnez vos produits et vos quantités. Nous pourrons ensuite
-    confirmer les prix, les disponibilités et les frais de livraison.
+    Sélectionnez les formats de bois et les quantités souhaités.
+    Nous confirmerons ensuite les disponibilités, les prix et les frais
+    de livraison en France ou en Belgique.
   </p>
 
   <div class="notice">
@@ -187,44 +188,6 @@ button:disabled { opacity: .6; cursor: wait; }
           </select>
         </div>
       </div>
-
-      <div class="product">
-        <div>
-          <b>🔥 Charbon — petit sac</b>
-          <small>Format indicatif : 3 kg</small>
-          <span class="price">4,90 € <small>Prix provisoire</small></span>
-        </div>
-        <div>
-          <label for="q3">Quantité</label>
-          <select id="q3">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="product">
-        <div>
-          <b>🔥 Charbon — grand sac</b>
-          <small>Format indicatif : 10 kg</small>
-          <span class="price">16,90 € <small>Prix provisoire</small></span>
-        </div>
-        <div>
-          <label for="q4">Quantité</label>
-          <select id="q4">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-      </div>
     </div>
 
     <p class="footer-note">
@@ -264,9 +227,6 @@ button:disabled { opacity: .6; cursor: wait; }
     <select id="country" name="country" required>
       <option value="France">France</option>
       <option value="Belgique">Belgique</option>
-      <option value="Luxembourg">Luxembourg</option>
-      <option value="Suisse">Suisse</option>
-      <option value="Autre pays européen">Autre pays européen</option>
     </select>
 
     <label for="notes">Précisions (facultatif)</label>
@@ -317,9 +277,7 @@ form.addEventListener('submit', async function(event) {
 
   const products = [
     ['demo-bois-petit-filet', Number(val('q1'))],
-    ['demo-bois-lot-familial', Number(val('q2'))],
-    ['demo-charbon-petit-sac', Number(val('q3'))],
-    ['demo-charbon-grand-sac', Number(val('q4'))]
+    ['demo-bois-lot-familial', Number(val('q2'))]
   ];
 
   const items = products
