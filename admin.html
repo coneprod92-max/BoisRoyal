@@ -5,233 +5,1070 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>BoisRoyal — Administration</title>
+
   <style>
-    :root{--bg:#0b1510;--panel:#12241a;--gold:#d8b66a;--gold2:#f1d99b;--text:#f5f3eb;--muted:#b8c2b7;--line:rgba(240,226,187,.16);--red:#e07a6a}
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5}
-    .wrap{width:min(1100px,calc(100% - 32px));margin:auto;padding:24px 0 60px}
-    h1,h2{margin:0 0 14px;font-weight:600}
-    h1{font-size:1.5rem}
-    h1 span{color:var(--gold)}
-    .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
-    label{display:block;font-size:.8rem;color:var(--muted);margin:12px 0 4px}
-    input,select,textarea{width:100%;padding:10px;border-radius:5px;border:1px solid var(--line);background:#0e1b13;color:var(--text);font:inherit}
-    textarea{min-height:70px;resize:vertical}
-    input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
-    button{font:inherit;cursor:pointer;border-radius:5px;padding:9px 14px;border:1px solid var(--line);background:transparent;color:var(--text);font-weight:600}
-    button:hover{border-color:var(--gold);color:var(--gold)}
-    .primary{background:var(--gold);color:#172219;border-color:var(--gold)}
-    .primary:hover{background:var(--gold2);color:#172219}
-    .danger:hover{border-color:var(--red);color:var(--red)}
-    .login{max-width:400px;margin:12vh auto 0}
-    .msg{margin-top:12px;font-size:.88rem;min-height:1.2em}
-    .err{color:var(--red)}.ok{color:#8fd19e}
-    table{width:100%;border-collapse:collapse;font-size:.88rem}
-    th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
-    th{color:var(--gold);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
-    .scroll{overflow-x:auto}
-    .tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.72rem;border:1px solid var(--line)}
-    .on{color:#8fd19e;border-color:#8fd19e}.off{color:var(--muted)}
-    .actions{display:flex;gap:6px;flex-wrap:wrap}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-    .row-check{display:flex;align-items:center;gap:8px;margin-top:14px}
-    .row-check input{width:auto}
-    .hidden{display:none}
-    @media(max-width:600px){.grid2{grid-template-columns:1fr}}
+    :root {
+      --bg: #0b1510;
+      --panel: #12241a;
+      --gold: #d8b66a;
+      --gold2: #f1d99b;
+      --text: #f5f3eb;
+      --muted: #b8c2b7;
+      --line: rgba(240,226,187,.16);
+      --red: #e07a6a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    .wrap {
+      width: min(1200px, calc(100% - 28px));
+      margin: auto;
+      padding: 24px 0 60px;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 14px;
+      font-weight: 600;
+    }
+
+    h1 { font-size: 1.5rem; }
+    h1 span { color: var(--gold); }
+
+    .bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: .8rem;
+      color: var(--muted);
+      margin: 12px 0 4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--line);
+      background: #0e1b13;
+      color: var(--text);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--gold);
+      outline-offset: 1px;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border-radius: 5px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    button:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+
+    .primary {
+      background: var(--gold);
+      color: #172219;
+      border-color: var(--gold);
+    }
+
+    .primary:hover {
+      background: var(--gold2);
+      color: #172219;
+    }
+
+    .danger:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .login {
+      max-width: 400px;
+      margin: 12vh auto 0;
+    }
+
+    .msg {
+      margin: 12px 0;
+      font-size: .88rem;
+      min-height: 1.2em;
+      overflow-wrap: anywhere;
+    }
+
+    .err { color: var(--red); }
+    .ok { color: #8fd19e; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+
+    th, td {
+      padding: 11px 9px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--gold);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .scroll { overflow-x: auto; }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: .72rem;
+      border: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .on { color: #8fd19e; border-color: #8fd19e; }
+    .off { color: var(--muted); }
+
+    .actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 14px;
+    }
+
+    .row-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .row-check input { width: auto; }
+
+    .hidden { display: none !important; }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 28px 0 14px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      padding: 2px 9px;
+      margin-left: 5px;
+      border-radius: 99px;
+      color: var(--gold);
+      background: rgba(216,182,106,.13);
+      font-size: .8rem;
+    }
+
+    .quote-details {
+      min-width: 180px;
+      max-width: 300px;
+      overflow-wrap: anywhere;
+    }
+
+    .quote-details small,
+    .quote-items small,
+    td small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .quote-items { min-width: 170px; }
+
+    .status-select {
+      min-width: 150px;
+      font-size: .82rem;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .notice {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: .85rem;
+      margin: 12px 0;
+    }
+
+    @media (max-width: 600px) {
+      .grid2 { grid-template-columns: 1fr; }
+      .wrap { width: calc(100% - 20px); padding-top: 14px; }
+      .card { padding: 13px; }
+      .section-title h2 { font-size: 1.1rem; }
+    }
   </style>
 </head>
+
 <body>
 <div class="wrap">
 
-  <!-- Connexion -->
+  <!-- CONNEXION ADMINISTRATEUR -->
   <section id="loginView" class="card login">
     <h1>Bois<span>Royal</span> · Admin</h1>
+
+    <p style="color:var(--muted);font-size:.9rem">
+      Connecte-toi pour gérer les produits et les demandes de devis.
+    </p>
+
     <form id="loginForm">
       <label for="email">Email</label>
       <input id="email" type="email" autocomplete="username" required>
+
       <label for="password">Mot de passe</label>
-      <input id="password" type="password" autocomplete="current-password" required>
-      <button class="primary" style="width:100%;margin-top:18px" type="submit">Se connecter</button>
+      <input id="password" type="password"
+             autocomplete="current-password" required>
+
+      <button class="primary" style="width:100%;margin-top:18px"
+              type="submit" id="loginBtn">
+        Se connecter
+      </button>
+
       <div class="msg err" id="loginMsg" role="alert"></div>
     </form>
   </section>
 
-  <!-- Espace admin -->
+
+  <!-- ESPACE ADMINISTRATEUR -->
   <section id="adminView" class="hidden">
+
     <div class="bar">
-      <h1>Bois<span>Royal</span> · Produits</h1>
+      <div>
+        <h1>Bois<span>Royal</span> · Administration</h1>
+        <div style="color:var(--muted);font-size:.85rem">
+          Gestion du catalogue et des demandes clients
+        </div>
+      </div>
+
       <div class="actions">
         <button class="primary" id="newBtn">+ Nouveau produit</button>
-        <a href="index.html"><button type="button">Voir le site</button></a>
+        <a href="index.html">
+          <button type="button">Voir le site</button>
+        </a>
         <button id="logoutBtn">Déconnexion</button>
       </div>
     </div>
+
+
+    <!-- GESTION DES PRODUITS -->
+    <div class="section-title">
+      <h2>Catalogue des produits</h2>
+      <button type="button" id="refreshProductsBtn">Actualiser</button>
+    </div>
+
     <div class="msg" id="listMsg" role="status"></div>
+
     <div class="card scroll">
       <table>
-        <thead><tr><th>Produit</th><th>Catégorie</th><th>Prix</th><th>Stock</th><th>Statut</th><th></th></tr></thead>
-        <tbody id="rows"><tr><td colspan="6">Chargement…</td></tr></tbody>
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Catégorie</th>
+            <th>Prix</th>
+            <th>Stock</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="rows">
+          <tr><td colspan="6">Chargement des produits…</td></tr>
+        </tbody>
       </table>
     </div>
 
+
+    <!-- FORMULAIRE PRODUIT -->
     <div class="card hidden" id="editor" style="margin-top:20px">
       <h2 id="editorTitle">Nouveau produit</h2>
+
       <form id="productForm">
         <div class="grid2">
-          <div><label for="f_name">Nom</label><input id="f_name" required maxlength="120"></div>
-          <div><label for="f_slug">Identifiant (slug)</label><input id="f_slug" maxlength="120" placeholder="auto si vide"></div>
-          <div><label for="f_category">Catégorie</label>
-            <select id="f_category"><option value="bois_chauffage">Bois de chauffage</option><option value="charbon">Charbon de bois</option></select></div>
-          <div><label for="f_unit">Format / unité</label><input id="f_unit" maxlength="120" placeholder="ex. 12,5 L"></div>
-          <div><label for="f_price">Prix (€)</label><input id="f_price" inputmode="decimal" required placeholder="6,90"></div>
-          <div><label for="f_stock">Stock</label><input id="f_stock" type="number" min="0" step="1" value="0"></div>
+          <div>
+            <label for="f_name">Nom du produit</label>
+            <input id="f_name" required maxlength="120">
+          </div>
+
+          <div>
+            <label for="f_slug">Identifiant (slug)</label>
+            <input id="f_slug" maxlength="120" placeholder="Auto si vide">
+          </div>
+
+          <div>
+            <label for="f_category">Catégorie</label>
+            <select id="f_category">
+              <option value="bois_chauffage">Bois de chauffage</option>
+              <option value="charbon">Charbon de bois</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="f_unit">Format / unité</label>
+            <input id="f_unit" maxlength="120" placeholder="Ex. filet, sac, stère">
+          </div>
+
+          <div>
+            <label for="f_price">Prix (€)</label>
+            <input id="f_price" inputmode="decimal" required placeholder="6,90">
+          </div>
+
+          <div>
+            <label for="f_stock">Stock</label>
+            <input id="f_stock" type="number" min="0" step="1" value="0">
+          </div>
         </div>
+
         <label for="f_image">Image (chemin ou URL)</label>
-        <input id="f_image" maxlength="300" placeholder="images/produit-filets.webp">
+        <input id="f_image" maxlength="500" placeholder="images/produit.webp">
+
         <label for="f_desc">Description</label>
         <textarea id="f_desc" maxlength="600"></textarea>
-        <label class="row-check"><input type="checkbox" id="f_active" checked> Visible sur le site</label>
+
+        <label class="row-check">
+          <input type="checkbox" id="f_active" checked>
+          Visible sur le site
+        </label>
+
         <div class="actions" style="margin-top:18px">
-          <button class="primary" type="submit">Enregistrer</button>
+          <button class="primary" type="submit" id="saveProductBtn">
+            Enregistrer
+          </button>
           <button type="button" id="cancelBtn">Annuler</button>
         </div>
+
         <div class="msg" id="formMsg" role="status"></div>
       </form>
     </div>
+
+
+    <!-- DEMANDES DE DEVIS -->
+    <div class="section-title" id="quotes">
+      <h2>Demandes de devis <span class="count" id="quoteCount">0</span></h2>
+      <button type="button" id="refreshQuotesBtn">Actualiser les demandes</button>
+    </div>
+
+    <div class="notice">
+      Les demandes de devis sont des demandes de renseignements.
+      Le prix définitif et les frais de livraison restent à confirmer avec le client.
+      Aucun paiement n'est réalisé depuis cette section.
+    </div>
+
+    <div class="msg" id="quotesMsg" role="status" aria-live="polite"></div>
+
+    <div class="card scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Référence / date</th>
+            <th>Client</th>
+            <th>Adresse de livraison</th>
+            <th>Produits demandés</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody id="quoteRows">
+          <tr><td colspan="5">Chargement des demandes…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
   </section>
 </div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+
 <script>
-  // Clé publique uniquement. La sécurité repose sur la connexion + les règles RLS côté Supabase.
+  // Utilise uniquement la clé publique Supabase dans le navigateur.
+  // Les autorisations doivent rester contrôlées par Supabase et ses règles RLS.
   const SUPABASE_URL = 'https://evvblxiitorfdniqmqcf.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const SUPABASE_PUBLISHABLE_KEY =
+    'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
+
+  const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
 
   const $ = id => document.getElementById(id);
-  const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const money = v => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(Number(v)||0);
-  const slugify = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-  const COLS = 'id,name,slug,category,description,price,unit,stock_quantity,is_active,image_url';
+
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+
+  const money = value =>
+    new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(Number(value) || 0);
+
+  const slugify = value => value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+  const PRODUCT_COLS =
+    'id,name,slug,category,description,price,unit,stock_quantity,is_active,image_url,created_at';
 
   let products = [];
   let editingId = null;
+  let quoteRequestIds = new Set();
 
-  function say(el, text, kind) { el.textContent = text || ''; el.className = 'msg ' + (kind || ''); }
+  function say(element, text, kind) {
+    element.textContent = text || '';
+    element.className = 'msg ' + (kind || '');
+  }
 
+  function formatDate(value) {
+    if (!value) return 'Date inconnue';
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) return 'Date inconnue';
+
+    return date.toLocaleString('fr-FR', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+
+  // AUTHENTIFICATION ET AUTORISATIONS ADMIN
   async function isAdmin() {
     const { data, error } = await db.rpc('is_br_admin');
     return !error && data === true;
   }
 
   async function showApp() {
-    const { data: { session } } = await db.auth.getSession();
-    if (!session) { $('loginView').classList.remove('hidden'); $('adminView').classList.add('hidden'); return; }
-    if (!(await isAdmin())) {
-      await db.auth.signOut();
-      $('loginView').classList.remove('hidden'); $('adminView').classList.add('hidden');
-      say($('loginMsg'), "Ce compte n'a pas les droits d'administration.", 'err');
+    const {
+      data: { session },
+      error
+    } = await db.auth.getSession();
+
+    if (error || !session) {
+      $('loginView').classList.remove('hidden');
+      $('adminView').classList.add('hidden');
       return;
     }
-    $('loginView').classList.add('hidden'); $('adminView').classList.remove('hidden');
-    loadProducts();
+
+    if (!(await isAdmin())) {
+      await db.auth.signOut();
+
+      $('loginView').classList.remove('hidden');
+      $('adminView').classList.add('hidden');
+
+      say(
+        $('loginMsg'),
+        "Ce compte n'a pas les droits d'administration.",
+        'err'
+      );
+
+      return;
+    }
+
+    $('loginView').classList.add('hidden');
+    $('adminView').classList.remove('hidden');
+
+    await Promise.all([
+      loadProducts(),
+      loadQuoteRequests()
+    ]);
   }
 
-  $('loginForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    say($('loginMsg'), 'Connexion…');
-    const { error } = await db.auth.signInWithPassword({ email: $('email').value.trim(), password: $('password').value });
-    $('password').value = '';
-    if (error) return say($('loginMsg'), 'Email ou mot de passe incorrect.', 'err');
-    say($('loginMsg'), '');
-    showApp();
+  $('loginForm').addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const button = $('loginBtn');
+    button.disabled = true;
+
+    say($('loginMsg'), 'Connexion en cours…');
+
+    try {
+      const { error } = await db.auth.signInWithPassword({
+        email: $('email').value.trim(),
+        password: $('password').value
+      });
+
+      $('password').value = '';
+
+      if (error) {
+        say(
+          $('loginMsg'),
+          'Connexion impossible. Vérifie ton email et ton mot de passe.',
+          'err'
+        );
+        return;
+      }
+
+      say($('loginMsg'), '');
+      await showApp();
+
+    } catch (error) {
+      say($('loginMsg'), 'Erreur de connexion : ' + error.message, 'err');
+    } finally {
+      button.disabled = false;
+    }
   });
 
-  $('logoutBtn').addEventListener('click', async () => { await db.auth.signOut(); showApp(); });
+  $('logoutBtn').addEventListener('click', async () => {
+    await db.auth.signOut();
+    $('loginMsg').textContent = '';
+    await showApp();
+  });
 
+
+  // GESTION DES PRODUITS
   async function loadProducts() {
-    const { data, error } = await db.from('br_products').select(COLS).order('created_at', { ascending: true });
-    if (error) { say($('listMsg'), 'Erreur de chargement : ' + error.message, 'err'); return; }
+    say($('listMsg'), 'Chargement des produits…');
+
+    const { data, error } = await db
+      .from('br_products')
+      .select(PRODUCT_COLS)
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      say(
+        $('listMsg'),
+        'Impossible de charger les produits : ' + error.message,
+        'err'
+      );
+      return;
+    }
+
     products = data || [];
     say($('listMsg'), '');
-    $('rows').innerHTML = products.length ? products.map(p => `
-      <tr>
-        <td><strong>${esc(p.name)}</strong><br><small style="color:var(--muted)">${esc(p.unit || '')}</small></td>
-        <td>${p.category === 'charbon' ? 'Charbon' : 'Bois'}</td>
-        <td>${money(p.price)}</td>
-        <td>${Number(p.stock_quantity) || 0}</td>
-        <td><span class="tag ${p.is_active ? 'on' : 'off'}">${p.is_active ? 'Visible' : 'Masqué'}</span></td>
-        <td class="actions">
-          <button data-edit="${esc(p.id)}">Modifier</button>
-          <button data-toggle="${esc(p.id)}">${p.is_active ? 'Masquer' : 'Afficher'}</button>
-          <button class="danger" data-del="${esc(p.id)}">Supprimer</button>
-        </td>
-      </tr>`).join('') : '<tr><td colspan="6">Aucun produit pour le moment.</td></tr>';
+
+    $('rows').innerHTML = products.length
+      ? products.map(product => `
+          <tr>
+            <td>
+              <strong>${esc(product.name)}</strong>
+              <small>${esc(product.unit || '')}</small>
+            </td>
+            <td>${product.category === 'charbon' ? 'Charbon' : 'Bois'}</td>
+            <td>${money(product.price)}</td>
+            <td>${Number(product.stock_quantity) || 0}</td>
+            <td>
+              <span class="tag ${product.is_active ? 'on' : 'off'}">
+                ${product.is_active ? 'Visible' : 'Masqué'}
+              </span>
+            </td>
+            <td>
+              <div class="actions">
+                <button type="button" data-edit="${esc(product.id)}">
+                  Modifier
+                </button>
+                <button type="button" data-toggle="${esc(product.id)}">
+                  ${product.is_active ? 'Masquer' : 'Afficher'}
+                </button>
+                <button type="button" class="danger" data-del="${esc(product.id)}">
+                  Supprimer
+                </button>
+              </div>
+            </td>
+          </tr>
+        `).join('')
+      : '<tr><td colspan="6" class="empty">Aucun produit enregistré.</td></tr>';
   }
 
-  $('rows').addEventListener('click', async e => {
-    const b = e.target.closest('button'); if (!b) return;
-    const id = b.dataset.edit || b.dataset.toggle || b.dataset.del;
-    const p = products.find(x => String(x.id) === String(id)); if (!p) return;
-    if (b.dataset.edit) return openEditor(p);
-    if (b.dataset.toggle) {
-      const { error } = await db.from('br_products').update({ is_active: !p.is_active }).eq('id', p.id);
-      return error ? say($('listMsg'), error.message, 'err') : loadProducts();
+  $('refreshProductsBtn').addEventListener('click', loadProducts);
+
+  $('rows').addEventListener('click', async event => {
+    const button = event.target.closest('button');
+    if (!button) return;
+
+    const id =
+      button.dataset.edit ||
+      button.dataset.toggle ||
+      button.dataset.del;
+
+    const product = products.find(item => String(item.id) === String(id));
+    if (!product) return;
+
+    if (button.dataset.edit) {
+      openEditor(product);
+      return;
     }
-    if (b.dataset.del && confirm(`Supprimer « ${p.name} » définitivement ?`)) {
-      const { error } = await db.from('br_products').delete().eq('id', p.id);
-      if (error) say($('listMsg'), error.message, 'err'); else { say($('listMsg'), 'Produit supprimé.', 'ok'); loadProducts(); }
+
+    button.disabled = true;
+
+    try {
+      if (button.dataset.toggle) {
+        const { error } = await db
+          .from('br_products')
+          .update({ is_active: !product.is_active })
+          .eq('id', product.id);
+
+        if (error) {
+          say($('listMsg'), error.message, 'err');
+        } else {
+          say($('listMsg'), 'Visibilité du produit mise à jour.', 'ok');
+          await loadProducts();
+        }
+      }
+
+      if (button.dataset.del &&
+          confirm(`Supprimer « ${product.name} » définitivement ?`)) {
+        const { error } = await db
+          .from('br_products')
+          .delete()
+          .eq('id', product.id);
+
+        if (error) {
+          say($('listMsg'), error.message, 'err');
+        } else {
+          say($('listMsg'), 'Produit supprimé.', 'ok');
+          await loadProducts();
+        }
+      }
+    } finally {
+      button.disabled = false;
     }
   });
 
-  function openEditor(p) {
-    editingId = p ? p.id : null;
-    $('editorTitle').textContent = p ? 'Modifier le produit' : 'Nouveau produit';
-    $('f_name').value = p?.name || '';
-    $('f_slug').value = p?.slug || '';
-    $('f_category').value = p?.category || 'bois_chauffage';
-    $('f_unit').value = p?.unit || '';
-    $('f_price').value = p ? String(p.price).replace('.', ',') : '';
-    $('f_stock').value = p?.stock_quantity ?? 0;
-    $('f_image').value = p?.image_url || '';
-    $('f_desc').value = p?.description || '';
-    $('f_active').checked = p ? !!p.is_active : true;
+  function openEditor(product) {
+    editingId = product ? product.id : null;
+
+    $('editorTitle').textContent =
+      product ? 'Modifier le produit' : 'Nouveau produit';
+
+    $('f_name').value = product?.name || '';
+    $('f_slug').value = product?.slug || '';
+    $('f_category').value = product?.category || 'bois_chauffage';
+    $('f_unit').value = product?.unit || '';
+    $('f_price').value = product
+      ? String(product.price).replace('.', ',')
+      : '';
+    $('f_stock').value = product?.stock_quantity ?? 0;
+    $('f_image').value = product?.image_url || '';
+    $('f_desc').value = product?.description || '';
+    $('f_active').checked = product ? !!product.is_active : true;
+
     say($('formMsg'), '');
+
     $('editor').classList.remove('hidden');
     $('editor').scrollIntoView({ behavior: 'smooth' });
   }
-  $('newBtn').addEventListener('click', () => openEditor(null));
-  $('cancelBtn').addEventListener('click', () => $('editor').classList.add('hidden'));
 
-  $('productForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    const price = parseFloat($('f_price').value.replace(',', '.'));
+  $('newBtn').addEventListener('click', () => openEditor(null));
+
+  $('cancelBtn').addEventListener('click', () => {
+    $('editor').classList.add('hidden');
+    editingId = null;
+  });
+
+  $('productForm').addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const price = parseFloat(
+      $('f_price').value.replace(',', '.').replace(/\s/g, '')
+    );
+
     const stock = parseInt($('f_stock').value, 10);
-    if (!(price >= 0)) return say($('formMsg'), 'Prix invalide.', 'err');
-    if (!(stock >= 0)) return say($('formMsg'), 'Stock invalide.', 'err');
+
+    if (!Number.isFinite(price) || price < 0) {
+      say($('formMsg'), 'Le prix est invalide.', 'err');
+      return;
+    }
+
+    if (!Number.isInteger(stock) || stock < 0) {
+      say($('formMsg'), 'Le stock est invalide.', 'err');
+      return;
+    }
+
+    const name = $('f_name').value.trim();
+
     const row = {
-      name: $('f_name').value.trim(),
-      slug: $('f_slug').value.trim() || slugify($('f_name').value),
+      name,
+      slug: $('f_slug').value.trim() || slugify(name),
       category: $('f_category').value,
       unit: $('f_unit').value.trim(),
-      price, stock_quantity: stock,
+      price,
+      stock_quantity: stock,
       image_url: $('f_image').value.trim() || null,
       description: $('f_desc').value.trim(),
       is_active: $('f_active').checked
     };
+
+    const button = $('saveProductBtn');
+    button.disabled = true;
+
     say($('formMsg'), 'Enregistrement…');
-    const q = editingId
-      ? db.from('br_products').update(row).eq('id', editingId)
-      : db.from('br_products').insert(row);
-    const { error } = await q;
-    if (error) return say($('formMsg'), 'Erreur : ' + error.message, 'err');
-    $('editor').classList.add('hidden');
-    say($('listMsg'), 'Produit enregistré.', 'ok');
-    loadProducts();
+
+    try {
+      const result = editingId
+        ? await db.from('br_products').update(row).eq('id', editingId)
+        : await db.from('br_products').insert(row);
+
+      if (result.error) {
+        say($('formMsg'), 'Erreur : ' + result.error.message, 'err');
+        return;
+      }
+
+      $('editor').classList.add('hidden');
+      editingId = null;
+
+      say($('listMsg'), 'Produit enregistré.', 'ok');
+      await loadProducts();
+
+    } catch (error) {
+      say($('formMsg'), 'Erreur : ' + error.message, 'err');
+    } finally {
+      button.disabled = false;
+    }
   });
 
-  db.auth.onAuthStateChange(evt => { if (evt === 'SIGNED_OUT') showApp(); });
+
+  // GESTION DES DEMANDES DE DEVIS
+  // Les demandes sont repérées par payment_provider = quote_request.
+  // Les autres commandes ne sont donc pas affichées dans cette section.
+
+  const quoteStatusLabels = {
+    pending: 'Nouvelle demande',
+    confirmed: 'Devis confirmé',
+    preparing: 'En préparation',
+    shipped: 'Expédiée',
+    delivered: 'Terminée',
+    cancelled: 'Annulée'
+  };
+
+  const quoteStatusOptions = Object.keys(quoteStatusLabels);
+
+  async function loadQuoteRequests() {
+    const tbody = $('quoteRows');
+    const refreshButton = $('refreshQuotesBtn');
+
+    refreshButton.disabled = true;
+    tbody.innerHTML =
+      '<tr><td colspan="5" class="empty">Chargement des demandes…</td></tr>';
+
+    say($('quotesMsg'), 'Récupération des demandes de devis…');
+
+    try {
+      const { data: orders, error } = await db
+        .from('br_orders')
+        .select(`
+          id,
+          order_number,
+          customer_name,
+          customer_email,
+          customer_phone,
+          delivery_address,
+          delivery_postal_code,
+          delivery_city,
+          delivery_country,
+          delivery_notes,
+          status,
+          payment_provider,
+          created_at
+        `)
+        .eq('payment_provider', 'quote_request')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        tbody.innerHTML =
+          '<tr><td colspan="5" class="empty">Erreur de chargement.</td></tr>';
+
+        say(
+          $('quotesMsg'),
+          'Erreur Supabase : ' + error.message,
+          'err'
+        );
+        return;
+      }
+
+      const requests = orders || [];
+
+      $('quoteCount').textContent = String(requests.length);
+      quoteRequestIds = new Set(requests.map(order => String(order.id)));
+
+      if (requests.length === 0) {
+        tbody.innerHTML =
+          '<tr><td colspan="5" class="empty">Aucune demande de devis trouvée.</td></tr>';
+
+        say(
+          $('quotesMsg'),
+          'Aucune demande trouvée. Utilise Actualiser pour vérifier à nouveau.'
+        );
+        return;
+      }
+
+      const ids = requests.map(order => order.id);
+
+      const { data: items, error: itemsError } = await db
+        .from('br_order_items')
+        .select('order_id,product_name,unit,quantity')
+        .in('order_id', ids);
+
+      if (itemsError) {
+        tbody.innerHTML =
+          '<tr><td colspan="5" class="empty">Les demandes sont présentes, mais leurs produits n’ont pas pu être chargés.</td></tr>';
+
+        say(
+          $('quotesMsg'),
+          'Erreur lors de la lecture des produits : ' + itemsError.message,
+          'err'
+        );
+        return;
+      }
+
+      const itemsByOrder = {};
+
+      (items || []).forEach(item => {
+        const key = String(item.order_id);
+
+        if (!itemsByOrder[key]) {
+          itemsByOrder[key] = [];
+        }
+
+        itemsByOrder[key].push(item);
+      });
+
+      tbody.innerHTML = requests.map(order => {
+        const key = String(order.id);
+        const orderItems = itemsByOrder[key] || [];
+
+        const status = quoteStatusOptions.includes(order.status)
+          ? order.status
+          : 'pending';
+
+        const productList = orderItems.length
+          ? orderItems.map(item => {
+              const unit = item.unit
+                ? ' ' + esc(item.unit)
+                : '';
+
+              return '<div>' +
+                esc(item.product_name || 'Produit') +
+                ' × ' + esc(item.quantity) +
+                unit +
+                '</div>';
+            }).join('')
+          : '<span>Détail des produits indisponible</span>';
+
+        const client = `
+          <strong>${esc(order.customer_name || 'Client non renseigné')}</strong>
+          <small>${esc(order.customer_phone || 'Téléphone non renseigné')}</small>
+          ${order.customer_email
+            ? `<small>${esc(order.customer_email)}</small>`
+            : ''}
+        `;
+
+        const address = `
+          ${esc(order.delivery_address || 'Adresse non renseignée')}
+          <small>
+            ${esc(order.delivery_postal_code || '')}
+            ${esc(order.delivery_city || '')}
+          </small>
+          <small>${esc(order.delivery_country || '')}</small>
+          ${order.delivery_notes
+            ? `<small>Instructions : ${esc(order.delivery_notes)}</small>`
+            : ''}
+        `;
+
+        const statusOptions = quoteStatusOptions.map(option => `
+          <option value="${option}" ${option === status ? 'selected' : ''}>
+            ${quoteStatusLabels[option]}
+          </option>
+        `).join('');
+
+        return `
+          <tr>
+            <td>
+              <strong>${esc(order.order_number || order.id)}</strong>
+              <small>${esc(formatDate(order.created_at))}</small>
+            </td>
+
+            <td class="quote-details">${client}</td>
+
+            <td class="quote-details">${address}</td>
+
+            <td class="quote-items">
+              ${productList}
+              <small>Prix définitif et livraison à confirmer.</small>
+            </td>
+
+            <td>
+              <select
+                class="status-select"
+                data-quote-status="${esc(order.id)}"
+                aria-label="Statut de la demande ${esc(order.order_number || order.id)}"
+              >
+                ${statusOptions}
+              </select>
+              <small class="quote-status-note">
+                ${quoteStatusLabels[status]}
+              </small>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      say(
+        $('quotesMsg'),
+        requests.length + ' demande(s) de devis chargée(s).',
+        'ok'
+      );
+
+    } catch (error) {
+      tbody.innerHTML =
+        '<tr><td colspan="5" class="empty">Une erreur inattendue est survenue.</td></tr>';
+
+      say($('quotesMsg'), error.message, 'err');
+
+    } finally {
+      refreshButton.disabled = false;
+    }
+  }
+
+  $('refreshQuotesBtn').addEventListener('click', loadQuoteRequests);
+
+
+  // ENREGISTRER UN CHANGEMENT DE STATUT
+  $('quoteRows').addEventListener('change', async event => {
+    const select = event.target.closest('select[data-quote-status]');
+
+    if (!select) return;
+
+    const orderId = select.dataset.quoteStatus;
+    const newStatus = select.value;
+
+    // Ne permet pas de modifier une ligne qui n'a pas été chargée comme devis.
+    if (!quoteRequestIds.has(String(orderId))) {
+      say($('quotesMsg'), 'Cette demande n’est pas valide.', 'err');
+      return;
+    }
+
+    if (!quoteStatusOptions.includes(newStatus)) {
+      say($('quotesMsg'), 'Statut invalide.', 'err');
+      return;
+    }
+
+    select.disabled = true;
+    say($('quotesMsg'), 'Enregistrement du statut…');
+
+    try {
+      const { error } = await db
+        .from('br_orders')
+        .update({
+          status: newStatus,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', orderId)
+        .eq('payment_provider', 'quote_request');
+
+      if (error) {
+        say(
+          $('quotesMsg'),
+          'Impossible de modifier le statut : ' + error.message,
+          'err'
+        );
+
+        await loadQuoteRequests();
+        return;
+      }
+
+      const note = select.parentElement.querySelector('.quote-status-note');
+
+      if (note) {
+        note.textContent = quoteStatusLabels[newStatus];
+      }
+
+      say($('quotesMsg'), 'Statut de la demande mis à jour.', 'ok');
+
+    } catch (error) {
+      say($('quotesMsg'), 'Erreur : ' + error.message, 'err');
+      await loadQuoteRequests();
+
+    } finally {
+      select.disabled = false;
+    }
+  });
+
+
+  // SESSION
+  db.auth.onAuthStateChange(event => {
+    if (event === 'SIGNED_OUT') {
+      $('adminView').classList.add('hidden');
+      $('loginView').classList.remove('hidden');
+    }
+  });
+
   showApp();
 </script>
 </body>
