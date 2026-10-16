@@ -214,10 +214,10 @@
       name: $('f_name').value.trim(),
       slug: $('f_slug').value.trim() || slugify($('f_name').value),
       category: $('f_category').value,
-      unit: $('f_unit').value.trim() || null,
+      unit: $('f_unit').value.trim(),
       price, stock_quantity: stock,
       image_url: $('f_image').value.trim() || null,
-      description: $('f_desc').value.trim() || null,
+      description: $('f_desc').value.trim(),
       is_active: $('f_active').checked
     };
     say($('formMsg'), 'Enregistrement…');
