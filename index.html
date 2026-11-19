@@ -2,296 +2,155 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#102b20">
-  <meta name="description" content="BoisRoyal : bois de chauffage, filets, bûches et charbon. Demandez votre devis de livraison simplement.">
-  <title>BoisRoyal — Le feu commence ici</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#30221B">
+  <meta name="description" content="BoisRoyal : bois de chauffage et charbon. Découvrez nos produits et préparez votre commande simplement.">
+  <title>BoisRoyal — La chaleur a son caractère</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --forest: #102b20;
-      --forest-2: #193d2d;
-      --forest-3: #24523b;
-      --gold: #d6b36b;
-      --gold-light: #f2dfad;
-      --cream: #f8f5ed;
-      --paper: #fffdf8;
-      --ink: #1c2821;
-      --muted: #68736b;
-      --line: rgba(16,43,32,.12);
-      --shadow: 0 18px 45px rgba(17, 42, 30, .10);
-      --radius: 22px;
+    :root{
+      --brown:#30221B;--brown-2:#493126;--brown-3:#65432F;
+      --cream:#F4EBDD;--paper:#FBF8F2;--orange:#D96B2B;--orange-dark:#B94F1B;
+      --charcoal:#292522;--muted:#766D64;--line:#E7DCCE;
+      --shadow:0 22px 60px rgba(48,34,27,.13);--radius:22px;
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font-family: "DM Sans", sans-serif;
-      line-height: 1.6;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--charcoal);font-family:"DM Sans",sans-serif;line-height:1.6}
+    img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}
+    .announcement{padding:9px 15px;text-align:center;background:var(--brown);color:#F8EBDD;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    header{position:sticky;top:0;z-index:30;background:rgba(251,248,242,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(48,34,27,.10)}
+    .nav{max-width:1240px;min-height:82px;margin:auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px}.brand-mark{width:47px;height:47px;display:grid;place-items:center;background:var(--brown);color:#F5D8B9;border:1px solid var(--orange);border-radius:15px;font-size:1.55rem;box-shadow:0 6px 16px #30221b22}
+    .brand-name{display:block;font:800 1.55rem "Playfair Display",serif;color:var(--brown);line-height:1.05;letter-spacing:-.03em}
+    .brand-tag{display:block;color:var(--muted);font-size:.59rem;letter-spacing:.19em;text-transform:uppercase;margin-top:5px;font-weight:700}
+    .nav-links{display:flex;align-items:center;gap:28px;font-size:.85rem;font-weight:800}.nav-links>a:not(.btn){transition:color .2s}.nav-links>a:not(.btn):hover{color:var(--orange)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 21px;min-height:48px;border:1px solid transparent;border-radius:999px;font-weight:800;font-size:.84rem;transition:transform .2s,background .2s,box-shadow .2s}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 9px 22px #0002}
+    .btn-copper{background:var(--orange);color:white}.btn-copper:hover{background:var(--orange-dark)}
+    .btn-dark{background:var(--brown);color:white}.btn-light{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.52);color:white}
+    .cart-button{background:var(--brown);color:white;border:0;border-radius:999px;padding:11px 16px;font-weight:800}
+    .cart-count{display:inline-grid;place-items:center;min-width:22px;height:22px;margin-left:5px;border-radius:50%;background:var(--orange);color:white;font-size:.7rem}
+    .hero{position:relative;min-height:690px;display:flex;align-items:center;isolation:isolate;color:white;background:var(--brown);overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:0;z-index:-2;background:url("hero-palettes.webp") center 54%/cover no-repeat;transform:scale(1.015)}
+    .hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(35,23,17,.96) 0%,rgba(42,27,19,.84) 42%,rgba(42,27,19,.24) 100%),linear-gradient(0deg,rgba(26,17,12,.48),transparent 55%)}
+    .hero-inner{max-width:1240px;width:100%;margin:auto;padding:105px 28px 112px}
+    .eyebrow,.kicker{font-size:.69rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}
+    .hero .eyebrow{display:inline-flex;align-items:center;gap:11px;color:#F7B27F}
+    .hero .eyebrow:before{content:"";width:34px;height:1px;background:var(--orange)}
+    .hero h1{max-width:820px;margin:22px 0 20px;font:700 clamp(3.5rem,7.5vw,6.6rem)/.98 "Playfair Display",serif;letter-spacing:-.055em}
+    .hero h1 em{color:#F39A5E;font-weight:600}
+    .hero-copy{max-width:560px;color:rgba(255,255,255,.82);font-size:1.02rem;line-height:1.8}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:31px}
+    .hero-points{display:flex;flex-wrap:wrap;gap:24px;margin-top:42px;color:#F4E8DA;font-size:.78rem;font-weight:700}
+    .hero-points span:before{content:"✦";color:#F39A5E;font-weight:900;margin-right:9px}
+    .trust{background:var(--cream);border-bottom:1px solid var(--line)}
+    .trust-inner{max-width:1240px;margin:auto;padding:23px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .trust-item{display:flex;justify-content:center;align-items:center;gap:12px;color:var(--brown);font-weight:800;font-size:.82rem}
+    .trust-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#E8D8C5;font-size:1.1rem}
+    .section{padding:96px 28px}.soft{background:#F2E9DC}.container{max-width:1240px;margin:auto}
+    .section-heading{max-width:720px;text-align:center;margin:0 auto 46px}
+    .section-heading h2,.catalog-title h2{font:700 clamp(2.2rem,4.3vw,3.6rem)/1.08 "Playfair Display",serif;color:var(--brown);margin:12px 0 14px;letter-spacing:-.035em}
+    .section-heading p,.catalog-title p{color:var(--muted);margin:0;font-size:.94rem}
+    .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .category{position:relative;min-height:390px;display:flex;align-items:flex-end;overflow:hidden;border-radius:8px;isolation:isolate;background:var(--brown);color:white;box-shadow:var(--shadow)}
+    .category:before{content:"";position:absolute;inset:0;z-index:-2;background-position:center;background-size:cover;transition:transform .6s}
+    .category:hover:before{transform:scale(1.07)}
+    .category:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(34,22,16,.96) 0%,rgba(34,22,16,.35) 58%,rgba(34,22,16,.04) 100%)}
+    .cat-filet:before{background-image:url("produit-filets.webp")}.cat-buches:before{background-image:url("histoire-acacia.webp")}.cat-charbon:before{background-image:url("produit-caisse-bouleau.webp")}
+    .category-content{padding:29px}.category-label{display:inline-block;padding:6px 11px;background:var(--orange);color:white;border-radius:2px;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .category h3{font:700 1.85rem "Playfair Display",serif;margin:13px 0 5px}.category p{color:rgba(255,255,255,.78);font-size:.84rem;margin:0 0 16px}
+    .category a,.category-content>span:last-child{color:#F7AE78;font-weight:800;font-size:.82rem}
+    .catalog-top{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:30px}
+    .catalog-title h2{margin-bottom:8px}.search{width:min(100%,340px);padding:14px 18px;border:1px solid #DCCDBB;border-radius:3px;background:#FFFCF8;outline:none;color:var(--brown)}
+    .search:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(217,107,43,.13)}
+    .filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:27px}
+    .filter{padding:10px 17px;border:1px solid #DCCDBB;border-radius:2px;background:#FFFCF8;color:var(--brown);font-size:.77rem;font-weight:800}
+    .filter.active,.filter:hover{background:var(--brown);color:white;border-color:var(--brown)}
+    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}
+    .product-card{overflow:hidden;background:#FFFCF8;border:1px solid #E6D9CA;border-radius:5px;box-shadow:0 8px 26px rgba(48,34,27,.055);transition:transform .25s,box-shadow .25s}
+    .product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+    .product-image{height:255px;position:relative;background:#E7DCCE;overflow:hidden}
+    .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.product-card:hover .product-image img{transform:scale(1.04)}
+    .product-badge{position:absolute;top:15px;left:15px;padding:7px 11px;background:var(--cream);color:var(--brown);border-radius:2px;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .product-body{padding:22px}.product-type{font-size:.63rem;color:var(--orange-dark);font-weight:800;text-transform:uppercase;letter-spacing:.15em}
+    .product-body h3{font:700 1.42rem "Playfair Display",serif;color:var(--brown);margin:7px 0}
+    .product-desc{min-height:44px;color:var(--muted);font-size:.82rem;margin:0 0 18px}
+    .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:15px;border-top:1px solid var(--line)}
+    .price{font-size:1.12rem;font-weight:800;color:var(--brown)}.unit{display:block;font-size:.68rem;color:var(--muted);font-weight:500}
+    .add-button{padding:11px 15px;background:var(--orange);color:white;border:0;border-radius:2px;font-size:.75rem;font-weight:800;transition:background .2s}
+    .add-button:hover{background:var(--brown)}.empty{grid-column:1/-1;padding:32px;text-align:center;background:#FFFCF8;border:1px dashed #DCCDBB;border-radius:5px;color:var(--muted)}
+    .delivery-panel{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border-radius:6px;background:var(--brown);color:white;box-shadow:var(--shadow)}
+    .delivery-copy{padding:clamp(32px,5vw,64px)}.delivery-copy h2{font:700 clamp(2.2rem,4vw,3.5rem)/1.08 "Playfair Display",serif;margin:14px 0;letter-spacing:-.03em}
+    .delivery-copy p{color:rgba(255,255,255,.76);font-size:.9rem}.delivery-copy ul{padding:0;list-style:none;display:grid;gap:13px;margin:26px 0}
+    .delivery-copy li:before{content:"✦";color:#F39A5E;font-weight:900;margin-right:11px}
+    .delivery-image{min-height:430px;background:url("hero-palettes.webp") center/cover no-repeat}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .step{padding:30px;border:1px solid #E5D8C9;border-radius:5px;background:#FFFCF8}
+    .step-number{width:47px;height:47px;display:grid;place-items:center;background:var(--brown);color:#F7B27F;border-radius:3px;font:700 1.2rem "Playfair Display",serif}
+    .step h3{font:700 1.38rem "Playfair Display",serif;color:var(--brown);margin:19px 0 8px}
+    .step p{margin:0;color:var(--muted);font-size:.85rem}
+    .final-cta{padding:0 28px 94px}
+    .final-inner{max-width:1240px;margin:auto;padding:45px clamp(28px,5vw,62px);display:flex;align-items:center;justify-content:space-between;gap:25px;border:1px solid #E4C9AF;border-radius:5px;background:var(--cream)}
+    .final-inner h2{font:700 clamp(2rem,3vw,2.8rem) "Playfair Display",serif;color:var(--brown);margin:9px 0}.final-inner p{margin:0;color:var(--muted);font-size:.9rem}
+    footer{padding:55px 28px 23px;background:#241914;color:rgba(255,255,255,.68)}
+    .footer-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:38px;padding-bottom:36px}
+    .footer-inner .brand-name{color:white}.footer-inner .brand-tag{color:#BFB0A2}.footer-about{max-width:350px;font-size:.83rem;margin-top:17px}
+    .footer-title{color:#F2A06A;font-weight:800;font-size:.77rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+    .footer-links{display:grid;gap:9px;font-size:.82rem}.footer-links a:hover{color:#F2A06A}
+    .footer-bottom{max-width:1240px;margin:auto;padding-top:19px;border-top:1px solid rgba(255,255,255,.14);font-size:.72rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .cart-overlay{position:fixed;inset:0;z-index:60;background:rgba(20,13,9,.62);opacity:0;visibility:hidden;transition:.2s}
+    .cart-overlay.open{opacity:1;visibility:visible}
+    .cart-drawer{position:absolute;right:0;top:0;height:100%;width:min(450px,100%);padding:25px;background:var(--paper);display:flex;flex-direction:column;transform:translateX(100%);transition:.25s}
+    .cart-overlay.open .cart-drawer{transform:translateX(0)}
+    .cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px}
+    .cart-head h2{font:700 1.8rem "Playfair Display",serif;color:var(--brown);margin:0}
+    .close-cart{width:39px;height:39px;border:0;border-radius:50%;background:var(--cream);color:var(--brown);font-size:1.3rem}
+    .cart-items{overflow:auto;flex:1;padding:15px 0}.cart-line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+    .cart-line strong{display:block;color:var(--brown)}.cart-line small{color:var(--muted)}
+    .qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{width:28px;height:28px;border:1px solid var(--line);border-radius:50%;background:white;color:var(--brown);font-weight:800}
+    .remove{border:0;background:none;color:#B94F1B;font-size:.77rem}.cart-total{padding:18px 0;border-top:1px solid var(--line)}
+    .total-row{display:flex;justify-content:space-between;font-weight:800;color:var(--brown);font-size:1.13rem}
+    .cart-note{font-size:.74rem;color:var(--muted);margin:9px 0 16px}.checkout{width:100%;border:0}
+    .cart-empty{text-align:center;color:var(--muted);padding:45px 10px}.mobile-cart{display:none}
+    @media(max-width:900px){
+      .nav-links>a:not(.btn){display:none}.category-grid,.product-grid{grid-template-columns:repeat(2,1fr)}
+      .category:last-child{grid-column:1/-1}.delivery-panel{grid-template-columns:1fr}
+      .delivery-image{min-height:300px;order:-1}.footer-inner{grid-template-columns:1fr 1fr}
+      .footer-inner>div:first-child{grid-column:1/-1}
     }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    button, input { font: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    .announcement {
-      padding: 9px 16px;
-      color: #f9f3e5;
-      background: #0b2118;
-      text-align: center;
-      font-size: .76rem;
-      letter-spacing: .12em;
-      font-weight: 700;
-      text-transform: uppercase;
+    @media(max-width:600px){
+      .announcement{font-size:.58rem;letter-spacing:.08em}.nav{min-height:68px;padding:9px 15px}
+      .brand-mark{width:39px;height:39px}.brand-name{font-size:1.28rem}.brand-tag{font-size:.52rem}
+      .nav-links{gap:7px}.nav-links .btn{display:none}.cart-button{padding:9px 12px;font-size:.76rem}
+      .hero{min-height:610px}.hero:after{background:linear-gradient(90deg,rgba(35,23,17,.92),rgba(42,27,19,.66)),linear-gradient(0deg,rgba(26,17,12,.5),transparent)}
+      .hero-inner{padding:76px 21px 82px}.hero h1{font-size:clamp(3.1rem,14vw,4.4rem)}
+      .hero-copy{font-size:.91rem}.hero-points{display:grid;gap:10px;margin-top:31px}
+      .trust-inner{grid-template-columns:1fr;gap:12px;padding:19px 21px}.trust-item{justify-content:flex-start}
+      .section{padding:67px 19px}.section-heading{margin-bottom:32px}
+      .category-grid,.product-grid{grid-template-columns:1fr}.category,.category:last-child{min-height:330px;grid-column:auto}
+      .catalog-top{align-items:stretch;flex-direction:column;gap:17px}.search{width:100%}
+      .product-image{height:255px}.product-desc{min-height:0}.steps{grid-template-columns:1fr}
+      .delivery-image{min-height:240px}.final-cta{padding:0 19px 68px}
+      .final-inner{align-items:flex-start;flex-direction:column;padding:29px 23px}
+      .footer-inner{grid-template-columns:1fr;gap:27px}.footer-inner>div:first-child{grid-column:auto}
+      .footer-bottom{flex-direction:column}.mobile-cart{display:block;position:fixed;bottom:13px;left:13px;right:13px;z-index:25}
+      .mobile-cart button{width:100%;padding:15px;background:var(--orange);color:white;border:0;border-radius:3px;font-weight:800;box-shadow:0 8px 25px #0004}
     }
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255,253,248,.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(16,43,32,.08);
-    }
-    .nav-wrap {
-      max-width: 1180px;
-      min-height: 82px;
-      margin: auto;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-    }
-    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; }
-    .brand-mark {
-      width: 46px; height: 46px; flex: 0 0 46px;
-      display: grid; place-items: center;
-      color: var(--gold-light);
-      background: var(--forest);
-      border: 1px solid rgba(214,179,107,.75);
-      border-radius: 14px;
-      font-size: 1.55rem;
-    }
-    .brand-name {
-      display: block;
-      color: var(--forest);
-      font-family: "Playfair Display", serif;
-      font-size: 1.42rem;
-      font-weight: 700;
-      letter-spacing: .01em;
-      line-height: 1.15;
-    }
-    .brand-tag { display: block; margin-top: 4px; color: var(--muted); font-size: .67rem; letter-spacing: .15em; text-transform: uppercase; }
-    .nav-links { display: flex; align-items: center; gap: 26px; font-size: .9rem; font-weight: 600; }
-    .nav-links a:not(.btn):hover { color: #8c6c2f; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-      min-height: 48px; padding: 12px 20px;
-      border: 1px solid transparent; border-radius: 999px;
-      font-weight: 700; font-size: .9rem; cursor: pointer;
-      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-gold { color: #18261c; background: var(--gold); box-shadow: 0 8px 22px rgba(214,179,107,.22); }
-    .btn-gold:hover { background: #e5c982; }
-    .btn-dark { color: white; background: var(--forest); }
-    .btn-dark:hover { background: var(--forest-2); }
-    .btn-outline { color: var(--forest); background: transparent; border-color: rgba(16,43,32,.25); }
-    .menu-toggle { display: none; border: 1px solid var(--line); background: white; border-radius: 12px; padding: 10px 13px; color: var(--forest); font-size: 1.25rem; }
-
-    .hero {
-      position: relative; overflow: hidden; color: white;
-      min-height: 590px; display: flex; align-items: center;
-      background: var(--forest);
-      isolation: isolate;
-    }
-    .hero::before {
-      content: ""; position: absolute; inset: 0; z-index: -2;
-      background-image: url("https://lebouscatier.com/cdn/shop/files/BOX-BOIS-XS-2_1.jpg?v=1706372227&width=1800");
-      background-size: cover; background-position: center 54%;
-      transform: scale(1.02);
-    }
-    .hero::after {
-      content: ""; position: absolute; inset: 0; z-index: -1;
-      background: linear-gradient(90deg, rgba(7,27,18,.94) 0%, rgba(7,27,18,.80) 43%, rgba(7,27,18,.28) 100%),
-                  linear-gradient(0deg, rgba(7,27,18,.34), transparent 50%);
-    }
-    .hero-inner { width: 100%; max-width: 1180px; margin: auto; padding: 82px 24px 88px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--gold-light); font-size: .76rem; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; }
-    .eyebrow::before { content: ""; width: 34px; height: 1px; background: var(--gold); }
-    h1, h2, h3, p { margin-top: 0; }
-    h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; }
-    h1 { max-width: 720px; margin: 19px 0 20px; font-size: clamp(2.7rem, 6.5vw, 5.3rem); line-height: 1.04; letter-spacing: -.035em; }
-    h1 span { color: var(--gold-light); font-style: italic; }
-    .hero-copy { max-width: 565px; color: rgba(255,255,255,.83); font-size: 1.08rem; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-    .hero .btn-outline { color: white; border-color: rgba(255,255,255,.45); }
-    .hero .btn-outline:hover { background: rgba(255,255,255,.1); }
-    .hero-points { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 37px; color: rgba(255,255,255,.85); font-size: .83rem; }
-    .hero-points span { display: inline-flex; align-items: center; gap: 8px; }
-    .hero-points b { color: var(--gold-light); font-size: 1rem; }
-
-    .trust-strip { background: var(--cream); border-bottom: 1px solid var(--line); }
-    .trust-inner { max-width: 1180px; margin: auto; padding: 21px 24px; display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .trust-item { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--forest); font-size: .9rem; font-weight: 700; }
-    .trust-icon { width: 40px; height: 40px; display: grid; place-items: center; flex: 0 0 40px; border-radius: 50%; background: #e9e1cc; font-size: 1.1rem; }
-
-    .section { padding: 88px 24px; }
-    .section-soft { background: var(--cream); }
-    .container { max-width: 1180px; margin: auto; }
-    .section-heading { max-width: 700px; margin: 0 auto 42px; text-align: center; }
-    .section-kicker { color: #92733a; font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-    h2 { margin: 10px 0 14px; color: var(--forest); font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.13; letter-spacing: -.025em; }
-    .section-heading p { margin-bottom: 0; color: var(--muted); }
-    .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .category-card {
-      position: relative; min-height: 350px; overflow: hidden; isolation: isolate;
-      display: flex; align-items: flex-end; border-radius: var(--radius);
-      background: var(--forest); box-shadow: var(--shadow);
-    }
-    .category-card::before {
-      content: ""; position: absolute; inset: 0; z-index: -2;
-      background-size: cover; background-position: center; transition: transform .45s ease;
-    }
-    .category-card:hover::before { transform: scale(1.06); }
-    .category-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(7,24,16,.94), rgba(7,24,16,.08) 75%); }
-    .category-filet::before { background-image: url("https://d2j6dbq0eux0bg.cloudfront.net/images/38651119/1710142185.jpg"); }
-    .category-buches::before { background-image: url("https://www.willab.se/pub_images/original/1700090-1.jpg"); }
-    .category-charbon::before { background-image: url("https://france.fra1.cdn.digitaloceanspaces.com/products_images/209004/large-bois-de-chauffage-de-tres-bonne-qualite-image-231-petites-annonces-occasion-209004-9j.webp"); }
-    .category-content { padding: 26px; color: white; }
-    .category-label { display: inline-block; margin-bottom: 10px; padding: 5px 10px; color: #18261c; background: var(--gold-light); border-radius: 999px; font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-    .category-content h3 { margin-bottom: 7px; font-size: 1.7rem; }
-    .category-content p { margin-bottom: 15px; color: rgba(255,255,255,.78); font-size: .9rem; }
-    .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-light); font-weight: 700; font-size: .88rem; }
-    .text-link:hover { gap: 12px; }
-
-    .catalog-top { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
-    .catalog-top h2 { margin-bottom: 7px; }
-    .catalog-top p { margin-bottom: 0; color: var(--muted); }
-    .search-wrap { position: relative; width: min(100%, 300px); }
-    .search-wrap input { width: 100%; min-height: 48px; padding: 12px 16px 12px 43px; border: 1px solid var(--line); border-radius: 999px; outline: none; background: white; }
-    .search-wrap input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(214,179,107,.18); }
-    .search-icon { position: absolute; left: 16px; top: 12px; color: var(--muted); }
-    .filter-row { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 25px; }
-    .filter-btn { padding: 9px 16px; color: var(--forest); background: white; border: 1px solid var(--line); border-radius: 999px; font-size: .83rem; font-weight: 700; cursor: pointer; }
-    .filter-btn.active, .filter-btn:hover { color: white; background: var(--forest); border-color: var(--forest); }
-    .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; }
-    .product-card { overflow: hidden; background: white; border: 1px solid rgba(16,43,32,.08); border-radius: 20px; box-shadow: 0 9px 28px rgba(17,42,30,.055); transition: transform .2s ease, box-shadow .2s ease; }
-    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-    .product-image { position: relative; height: 230px; overflow: hidden; background: #e8e4d9; }
-    .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
-    .product-card:hover .product-image img { transform: scale(1.04); }
-    .product-badge { position: absolute; top: 14px; left: 14px; padding: 6px 10px; color: var(--forest); background: rgba(255,253,248,.94); border-radius: 999px; font-size: .68rem; font-weight: 800; }
-    .product-body { padding: 21px; }
-    .product-category { color: #8b6b30; font-size: .7rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
-    .product-body h3 { margin: 6px 0 7px; color: var(--forest); font-size: 1.35rem; }
-    .product-description { min-height: 46px; margin-bottom: 17px; color: var(--muted); font-size: .87rem; }
-    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 15px; border-top: 1px solid var(--line); }
-    .product-price { color: var(--forest); font-size: 1.2rem; font-weight: 800; }
-    .product-unit { display: block; color: var(--muted); font-size: .72rem; font-weight: 500; }
-    .product-cta { min-height: 42px; padding: 10px 15px; font-size: .8rem; }
-    .catalog-message { grid-column: 1 / -1; padding: 30px; text-align: center; color: var(--muted); background: white; border: 1px dashed var(--line); border-radius: 18px; }
-
-    .delivery-panel { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 28px; background: var(--forest); box-shadow: var(--shadow); }
-    .delivery-copy { padding: clamp(28px, 5vw, 58px); color: white; }
-    .delivery-copy h2 { color: white; }
-    .delivery-copy p { color: rgba(255,255,255,.77); }
-    .delivery-copy .section-kicker { color: var(--gold-light); }
-    .delivery-list { display: grid; gap: 13px; margin: 25px 0 29px; padding: 0; list-style: none; }
-    .delivery-list li { display: flex; align-items: flex-start; gap: 11px; color: rgba(255,255,255,.9); }
-    .delivery-list li span { color: var(--gold-light); font-weight: 800; }
-    .delivery-image { min-height: 400px; background: url("https://www.willab.se/pub_images/original/1700090-1.jpg") center / cover no-repeat; }
-    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 25px; }
-    .step { padding: 27px; border: 1px solid var(--line); border-radius: 18px; background: white; }
-    .step-number { width: 43px; height: 43px; display: grid; place-items: center; margin-bottom: 19px; color: var(--forest); background: #eee2c4; border-radius: 14px; font-family: "Playfair Display",serif; font-size: 1.25rem; font-weight: 700; }
-    .step h3 { margin-bottom: 8px; color: var(--forest); font-size: 1.3rem; }
-    .step p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
-
-    .final-cta { padding: 0 24px 88px; }
-    .final-cta-inner { max-width: 1180px; margin: auto; padding: 42px clamp(25px, 5vw, 55px); display: flex; align-items: center; justify-content: space-between; gap: 25px; border: 1px solid rgba(214,179,107,.45); border-radius: 24px; background: #f5efdf; }
-    .final-cta h2 { margin: 0 0 7px; font-size: clamp(1.7rem,3.5vw,2.5rem); }
-    .final-cta p { margin: 0; color: var(--muted); }
-    footer { padding: 48px 24px 22px; color: rgba(255,255,255,.76); background: #0b2118; }
-    .footer-inner { max-width: 1180px; margin: auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 38px; padding-bottom: 35px; }
-    footer .brand-name { color: white; }
-    footer .brand-tag { color: rgba(255,255,255,.52); }
-    .footer-about { max-width: 330px; margin-top: 17px; font-size: .87rem; }
-    .footer-title { margin-bottom: 12px; color: var(--gold-light); font-weight: 800; }
-    .footer-links { display: grid; gap: 8px; font-size: .87rem; }
-    .footer-links a:hover { color: var(--gold-light); }
-    .footer-bottom { max-width: 1180px; margin: auto; padding-top: 19px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid rgba(255,255,255,.13); font-size: .76rem; color: rgba(255,255,255,.52); }
-    .floating-quote { position: fixed; right: 18px; bottom: 18px; z-index: 40; display: none; }
-    .floating-quote .btn { box-shadow: 0 10px 30px rgba(0,0,0,.2); }
-
-    @media (max-width: 900px) {
-      .nav-links { gap: 16px; }
-      .nav-links a:not(.btn) { display: none; }
-      .category-grid, .product-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-      .category-card:last-child { grid-column: 1 / -1; min-height: 300px; }
-      .delivery-panel { grid-template-columns: 1fr; }
-      .delivery-image { min-height: 300px; order: -1; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-      .footer-inner > div:first-child { grid-column: 1 / -1; }
-    }
-    @media (max-width: 600px) {
-      .announcement { font-size: .61rem; letter-spacing: .07em; }
-      .nav-wrap { min-height: 70px; padding: 10px 16px; }
-      .brand-mark { width: 40px; height: 40px; flex-basis: 40px; border-radius: 12px; }
-      .brand-name { font-size: 1.22rem; }
-      .brand-tag { font-size: .57rem; letter-spacing: .1em; }
-      .nav-links { gap: 8px; }
-      .nav-links .btn { min-height: 42px; padding: 9px 13px; font-size: .78rem; }
-      .hero { min-height: 560px; }
-      .hero-inner { padding: 70px 20px 62px; }
-      .hero-copy { font-size: .98rem; }
-      .hero-points { display: grid; gap: 10px; margin-top: 28px; }
-      .trust-inner { grid-template-columns: 1fr; gap: 12px; padding: 20px; }
-      .trust-item { justify-content: flex-start; }
-      .section { padding: 64px 18px; }
-      .section-heading { margin-bottom: 30px; }
-      .category-grid, .product-grid { grid-template-columns: 1fr; }
-      .category-card, .category-card:last-child { min-height: 310px; grid-column: auto; }
-      .catalog-top { align-items: stretch; flex-direction: column; gap: 18px; }
-      .search-wrap { width: 100%; }
-      .product-image { height: 245px; }
-      .product-description { min-height: 0; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .delivery-image { min-height: 240px; }
-      .final-cta { padding: 0 18px 65px; }
-      .final-cta-inner { align-items: flex-start; flex-direction: column; padding: 28px 23px; }
-      .footer-inner { grid-template-columns: 1fr; gap: 27px; }
-      .footer-inner > div:first-child { grid-column: auto; }
-      .footer-bottom { flex-direction: column; }
-      .floating-quote { display: block; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
   </style>
 </head>
 <body>
-  <div class="announcement">Bois de chauffage &amp; charbon · Livraison sur devis</div>
-
-  <header class="site-header">
-    <div class="nav-wrap">
-      <a class="brand" href="#accueil" aria-label="BoisRoyal, accueil">
-        <span class="brand-mark" aria-hidden="true">♨</span>
-        <span>
-          <span class="brand-name">BoisRoyal</span>
-          <span class="brand-tag">La chaleur naturelle</span>
-        </span>
-      </a>
-      <nav class="nav-links" aria-label="Navigation principale">
-        <a href="#produits">Nos produits</a>
-        <a href="#livraison">Livraison</a>
-        <a href="#comment">Comment commander</a>
-        <a class="btn btn-gold" href="devis.html">Demander un devis <span aria-hidden="true">↗</span></a>
+  <div class="announcement">Bois sélectionné · Commande simple · Livraison sur devis</div>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#accueil"><span class="brand-mark">♨</span><span><span class="brand-name">BoisRoyal</span><span class="brand-tag">La chaleur naturelle</span></span></a>
+      <nav class="nav-links">
+        <a href="#produits">Nos produits</a><a href="#livraison">Livraison</a><a href="#comment">Comment commander</a>
+        <button class="cart-button" type="button" onclick="openCart()">Panier <span class="cart-count" id="cartCount">0</span></button>
+        <a class="btn btn-copper" href="devis.html">Demander un devis ↗</a>
       </nav>
     </div>
   </header>
@@ -299,365 +158,140 @@
   <main>
     <section class="hero" id="accueil">
       <div class="hero-inner">
-        <span class="eyebrow">Le choix du feu de qualité</span>
-        <h1>Le feu commence<br>avec <span>le bon bois.</span></h1>
-        <p class="hero-copy">Découvrez notre sélection de bois de chauffage et de charbon pour vos soirées, votre maison ou votre activité. Choisissez votre produit et demandez un devis de livraison adapté à votre adresse.</p>
-        <div class="hero-actions">
-          <a class="btn btn-gold" href="#produits">Découvrir les produits <span aria-hidden="true">→</span></a>
-          <a class="btn btn-outline" href="devis.html">Obtenir mon devis</a>
-        </div>
-        <div class="hero-points">
-          <span><b>✓</b> Produits sélectionnés</span>
-          <span><b>✓</b> Commande simple</span>
-          <span><b>✓</b> Livraison sur devis</span>
-        </div>
+        <span class="eyebrow">Le goût des belles matières</span>
+        <h1>La chaleur<br>a du <em>caractère.</em></h1>
+        <p class="hero-copy">Du bois de chauffage au charbon, découvrez une sélection pensée pour les moments qui comptent. Choisissez vos produits, composez votre panier et préparez votre commande en quelques instants.</p>
+        <div class="hero-actions"><a class="btn btn-copper" href="#produits">Explorer la boutique →</a><a class="btn btn-light" href="devis.html">Demander un devis</a></div>
+        <div class="hero-points"><span>Une sélection soignée</span><span>Des prix affichés clairement</span><span>Livraison confirmée avec vous</span></div>
       </div>
     </section>
 
-    <section class="trust-strip" aria-label="Nos engagements">
-      <div class="trust-inner">
-        <div class="trust-item"><span class="trust-icon">🪵</span><span>Bois et combustibles au choix</span></div>
-        <div class="trust-item"><span class="trust-icon">📍</span><span>Livraison selon votre adresse</span></div>
-        <div class="trust-item"><span class="trust-icon">🤝</span><span>Devis clair avant confirmation</span></div>
-      </div>
-    </section>
+    <section class="trust"><div class="trust-inner">
+      <div class="trust-item"><span class="trust-icon">🪵</span>Bois et combustibles au choix</div>
+      <div class="trust-item"><span class="trust-icon">📍</span>Livraison selon votre adresse</div>
+      <div class="trust-item"><span class="trust-icon">🤝</span>Devis clair avant confirmation</div>
+    </div></section>
 
-    <section class="section" id="categories">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-kicker">Notre sélection</span>
-          <h2>La bonne solution pour chaque feu</h2>
-          <p>Du petit filet pratique aux volumes plus importants, trouvez le format qui vous convient. Les photos sont illustratives : la disponibilité et le conditionnement exacts sont confirmés lors du devis.</p>
-        </div>
-        <div class="category-grid">
-          <a class="category-card category-filet" href="#produits" data-category-link="bois">
-            <div class="category-content">
-              <span class="category-label">Pratique au quotidien</span>
-              <h3>Filets &amp; petits formats</h3>
-              <p>Faciles à transporter et à stocker pour vos besoins ponctuels.</p>
-              <span class="text-link">Voir les produits <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-          <a class="category-card category-buches" href="#produits" data-category-link="bois">
-            <div class="category-content">
-              <span class="category-label">Pour durer</span>
-              <h3>Bûches &amp; volumes</h3>
-              <p>Pour préparer votre réserve et commander selon vos besoins.</p>
-              <span class="text-link">Voir les produits <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-          <a class="category-card category-charbon" href="#produits" data-category-link="charbon">
-            <div class="category-content">
-              <span class="category-label">Cuisson &amp; braises</span>
-              <h3>Charbon</h3>
-              <p>Demandez les formats disponibles et le tarif de livraison.</p>
-              <span class="text-link">Voir les produits <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-        </div>
+    <section class="section" id="categories"><div class="container">
+      <div class="section-heading"><span class="kicker">La sélection BoisRoyal</span><h2>Le bon combustible. Le bon format.</h2><p>Des petits formats pratiques aux commandes plus importantes, trouvez le produit qui répond à votre besoin.</p></div>
+      <div class="category-grid">
+        <a class="category cat-filet" href="#produits" data-category-link="bois"><div class="category-content"><span class="category-label">Pratique au quotidien</span><h3>Filets & petits formats</h3><p>Des formats faciles à transporter et à stocker.</p><span>Explorer les produits →</span></div></a>
+        <a class="category cat-buches" href="#produits" data-category-link="bois"><div class="category-content"><span class="category-label">Pour vos réserves</span><h3>Bûches & volumes</h3><p>Préparez votre stock selon vos besoins.</p><span>Explorer les produits →</span></div></a>
+        <a class="category cat-charbon" href="#produits" data-category-link="charbon"><div class="category-content"><span class="category-label">Cuisson & braises</span><h3>Charbon</h3><p>Découvrez les conditionnements disponibles.</p><span>Explorer les produits →</span></div></a>
       </div>
-    </section>
+    </div></section>
 
-    <section class="section section-soft" id="produits">
-      <div class="container">
-        <div class="catalog-top">
-          <div>
-            <span class="section-kicker">Le catalogue BoisRoyal</span>
-            <h2>Nos produits</h2>
-            <p>Les prix affichés sont ceux enregistrés au catalogue. La livraison est chiffrée séparément.</p>
-          </div>
-          <label class="search-wrap">
-            <span class="search-icon" aria-hidden="true">⌕</span>
-            <input id="productSearch" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher un produit">
-          </label>
-        </div>
-        <div class="filter-row" aria-label="Filtrer les produits">
-          <button class="filter-btn active" type="button" data-filter="tous">Tout voir</button>
-          <button class="filter-btn" type="button" data-filter="bois">Bois de chauffage</button>
-          <button class="filter-btn" type="button" data-filter="charbon">Charbon</button>
-        </div>
-        <div class="product-grid" id="productGrid" aria-live="polite">
-          <div class="catalog-message">Chargement des produits…</div>
-        </div>
-      </div>
-    </section>
+    <section class="section soft" id="produits"><div class="container">
+      <div class="catalog-top"><div class="catalog-title"><span class="kicker">La boutique BoisRoyal</span><h2>Nos produits</h2><p>Ajoutez vos articles au panier. Les frais de livraison seront confirmés séparément.</p></div><input class="search" id="productSearch" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher un produit"></div>
+      <div class="filters"><button class="filter active" data-filter="tous">Tout voir</button><button class="filter" data-filter="bois">Bois de chauffage</button><button class="filter" data-filter="charbon">Charbon</button></div>
+      <div class="product-grid" id="productGrid"><div class="empty">Chargement du catalogue…</div></div>
+    </div></section>
 
-    <section class="section" id="livraison">
-      <div class="container">
-        <div class="delivery-panel">
-          <div class="delivery-copy">
-            <span class="section-kicker">La livraison, sans surprise</span>
-            <h2>Votre commande, au bon endroit.</h2>
-            <p>Le coût du transport dépend notamment de votre adresse, de la quantité et du type de produit. Envoyez-nous les détails : nous vous préparons un devis avant toute confirmation.</p>
-            <ul class="delivery-list">
-              <li><span>✓</span> Indiquez votre ville et votre quartier.</li>
-              <li><span>✓</span> Précisez le produit et la quantité souhaitée.</li>
-              <li><span>✓</span> Vérifiez le prix des produits et de la livraison.</li>
-            </ul>
-            <a class="btn btn-gold" href="devis.html">Calculer mon devis <span aria-hidden="true">→</span></a>
-          </div>
-          <div class="delivery-image" role="img" aria-label="Bois de chauffage prêt à être stocké"></div>
-        </div>
-      </div>
-    </section>
+    <section class="section" id="livraison"><div class="container"><div class="delivery-panel">
+      <div class="delivery-copy"><span class="kicker" style="color:#F3A06B">Une livraison transparente</span><h2>La chaleur, jusque chez vous.</h2><p>Le transport dépend de votre adresse, de la quantité et du type de produit. Nous vérifions les frais avec vous avant toute confirmation.</p><ul><li>Indiquez votre ville et votre adresse.</li><li>Choisissez les produits et les quantités.</li><li>Recevez le montant total avant confirmation.</li></ul><a class="btn btn-copper" href="devis.html">Préparer ma commande →</a></div>
+      <div class="delivery-image" role="img" aria-label="Bois prêt à être livré"></div>
+    </div></div></section>
 
-    <section class="section section-soft" id="comment">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-kicker">Simple et transparent</span>
-          <h2>Comment commander ?</h2>
-          <p>Trois étapes pour préparer votre commande sans mauvaise surprise.</p>
-        </div>
-        <div class="steps-grid">
-          <article class="step">
-            <div class="step-number">01</div>
-            <h3>Choisissez</h3>
-            <p>Parcourez le catalogue et repérez le bois ou le charbon qui vous intéresse.</p>
-          </article>
-          <article class="step">
-            <div class="step-number">02</div>
-            <h3>Demandez un devis</h3>
-            <p>Indiquez la quantité et votre adresse pour que le transport puisse être estimé.</p>
-          </article>
-          <article class="step">
-            <div class="step-number">03</div>
-            <h3>Confirmez</h3>
-            <p>Vérifiez les détails et le montant total avant de confirmer votre commande.</p>
-          </article>
-        </div>
+    <section class="section soft" id="comment"><div class="container">
+      <div class="section-heading"><span class="kicker">Simple et transparent</span><h2>Comment commander ?</h2><p>Vous gardez le contrôle à chaque étape.</p></div>
+      <div class="steps">
+        <article class="step"><div class="step-number">01</div><h3>Composez votre panier</h3><p>Choisissez vos produits et ajustez les quantités souhaitées.</p></article>
+        <article class="step"><div class="step-number">02</div><h3>Indiquez votre adresse</h3><p>Transmettez vos coordonnées pour que nous calculions la livraison.</p></article>
+        <article class="step"><div class="step-number">03</div><h3>Validez votre commande</h3><p>Vérifiez le prix des produits, du transport et les modalités de paiement avant confirmation.</p></article>
       </div>
-    </section>
+    </div></section>
 
-    <section class="final-cta">
-      <div class="final-cta-inner">
-        <div>
-          <span class="section-kicker">Prêt à commander ?</span>
-          <h2>Parlons de votre besoin.</h2>
-          <p>Un petit filet ou une commande en grande quantité : commencez par un devis.</p>
-        </div>
-        <a class="btn btn-dark" href="devis.html">Demander un devis <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+    <section class="final-cta"><div class="final-inner"><div><span class="kicker">Un projet, un besoin ?</span><h2>Préparons votre commande.</h2><p>Commencez par choisir vos produits ou demandez un devis personnalisé.</p></div><a class="btn btn-dark" href="devis.html">Demander un devis ↗</a></div></section>
   </main>
 
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <a class="brand" href="#accueil">
-          <span class="brand-mark" aria-hidden="true">♨</span>
-          <span><span class="brand-name">BoisRoyal</span><span class="brand-tag">La chaleur naturelle</span></span>
-        </a>
-        <p class="footer-about">Bois de chauffage et charbon, avec un devis de livraison adapté à votre commande.</p>
-      </div>
-      <div>
-        <div class="footer-title">Navigation</div>
-        <div class="footer-links">
-          <a href="#produits">Nos produits</a>
-          <a href="#livraison">Livraison</a>
-          <a href="#comment">Comment commander</a>
-          <a href="devis.html">Demander un devis</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-title">Notre engagement</div>
-        <div class="footer-links">
-          <span>Prix des produits affichés clairement</span>
-          <span>Transport confirmé sur devis</span>
-          <span>Commande confirmée après validation</span>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> BoisRoyal. Tous droits réservés.</span>
-      <span>Les photos présentées sont illustratives.</span>
-    </div>
-  </footer>
+  <footer><div class="footer-inner">
+    <div><a class="brand" href="#accueil"><span class="brand-mark">♨</span><span><span class="brand-name">BoisRoyal</span><span class="brand-tag">La chaleur naturelle</span></span></a><p class="footer-about">Bois de chauffage et charbon. Une boutique simple, une sélection soignée et une livraison confirmée avec vous.</p></div>
+    <div><div class="footer-title">Navigation</div><div class="footer-links"><a href="#produits">Nos produits</a><a href="#livraison">Livraison</a><a href="#comment">Comment commander</a><a href="devis.html">Demander un devis</a></div></div>
+    <div><div class="footer-title">Nos engagements</div><div class="footer-links"><span>Prix produits transparents</span><span>Transport confirmé sur devis</span><span>Commande après validation</span></div></div>
+  </div><div class="footer-bottom"><span>© <span id="year"></span> BoisRoyal. Tous droits réservés.</span><span>La chaleur naturelle, tout simplement.</span></div></footer>
 
-  <div class="floating-quote">
-    <a class="btn btn-gold" href="devis.html">Demander un devis ↗</a>
+  <div class="mobile-cart"><button type="button" onclick="openCart()">Voir mon panier · <span id="mobileCartCount">0</span> article(s)</button></div>
+  <div class="cart-overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()">
+    <aside class="cart-drawer" aria-label="Votre panier">
+      <div class="cart-head"><h2>Votre panier</h2><button class="close-cart" onclick="closeCart()" aria-label="Fermer">×</button></div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-total"><div class="total-row"><span>Sous-total produits</span><span id="cartTotal">0,00 €</span></div><p class="cart-note">Hors frais de livraison. Le montant du transport et le total définitif seront confirmés avec vous.</p><button class="btn btn-copper checkout" onclick="goToCheckout()">Continuer ma commande →</button></div>
+    </aside>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // Configuration Supabase existante du projet BoisRoyal.
-    // La clé publishable est destinée à être utilisée côté navigateur.
-    const SUPABASE_URL = "https://evvblxiitorfdniqmqcf.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC";
-    const PRODUCT_TABLE = "br_products";
-
-    const PHOTO_WOOD_NET = "https://d2j6dbq0eux0bg.cloudfront.net/images/38651119/1710142185.jpg";
-    const PHOTO_WOOD_LOGS = "https://www.willab.se/pub_images/original/1700090-1.jpg";
-    const PHOTO_CHARCOAL = "https://france.fra1.cdn.digitaloceanspaces.com/products_images/209004/large-bois-de-chauffage-de-tres-bonne-qualite-image-231-petites-annonces-occasion-209004-9j.webp";
-    const PHOTO_WOOD_BOX = "https://lebouscatier.com/cdn/shop/files/BOX-BOIS-XS-2_1.jpg?v=1706372227&width=1200";
-
-    const demoProducts = [
-      {
-        id: "demo-filet",
-        name: "Filet de bois de chauffage",
-        slug: "filet-bois-chauffage",
-        category: "bois_chauffage",
-        description: "Un format pratique pour vos besoins du quotidien.",
-        price: 6.90,
-        unit: "le filet",
-        is_active: true,
-        photo: PHOTO_WOOD_NET
-      },
-      {
-        id: "demo-lot",
-        name: "Lot de bois — format familial",
-        slug: "lot-bois-format-familial",
-        category: "bois_chauffage",
-        description: "Un lot pour constituer une réserve à la maison.",
-        price: 24.90,
-        unit: "le lot",
-        is_active: true,
-        photo: PHOTO_WOOD_LOGS
-      },
-      {
-        id: "demo-charbon",
-        name: "Charbon de bois",
-        slug: "charbon-de-bois",
-        category: "charbon",
-        description: "Demandez le conditionnement disponible et le devis de livraison.",
-        price: null,
-        unit: "selon format",
-        is_active: true,
-        photo: PHOTO_CHARCOAL
-      }
+    const SUPABASE_URL="https://evvblxiitorfdniqmqcf.supabase.co";
+    const SUPABASE_KEY="sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC";
+    const PRODUCT_TABLE="br_products";
+    const PHOTOS={wood:"produit-filets.webp",logs:"histoire-acacia.webp",charcoal:"produit-caisse-bouleau.webp"};
+    const demoProducts=[
+      {id:"demo-filet",name:"Filet de bois de chauffage",slug:"filet-bois-chauffage",category:"bois_chauffage",description:"Un format pratique pour vos besoins du quotidien.",price:6.90,unit:"le filet",image_url:PHOTOS.wood,is_active:true},
+      {id:"demo-lot",name:"Lot de bois — format familial",slug:"lot-bois-format-familial",category:"bois_chauffage",description:"Un lot pour constituer une réserve à la maison.",price:24.90,unit:"le lot",image_url:PHOTOS.logs,is_active:true},
+      {id:"demo-charbon",name:"Charbon de bois",slug:"charbon-de-bois",category:"charbon",description:"Contactez-nous pour connaître le conditionnement disponible.",price:null,unit:"selon format",image_url:PHOTOS.charcoal,is_active:true}
     ];
+    let products=[],filter="tous",cart=readCart();
 
-    let allProducts = [];
-    let currentFilter = "tous";
-
-    function escapeHTML(value) {
-      return String(value ?? "").replace(/[&<>"']/g, function (char) {
-        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char];
-      });
+    function readCart(){try{return JSON.parse(localStorage.getItem("boisroyal_cart")||"[]")}catch(e){return[]}}
+    function saveCart(){localStorage.setItem("boisroyal_cart",JSON.stringify(cart));updateCart()}
+    function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+    function category(p){return String(p.category||"").toLowerCase().includes("charbon")||String(p.name||"").toLowerCase().includes("charbon")?"charbon":"bois"}
+    function photo(p){if(p.image_url)return p.image_url;return category(p)==="charbon"?PHOTOS.charcoal:((p.name||"").toLowerCase().includes("filet")?PHOTOS.wood:PHOTOS.logs)}
+    function money(v){if(v===null||v===undefined||v===""||!Number.isFinite(Number(v)))return"Sur devis";return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(v))}
+    function renderProducts(){
+      const q=document.getElementById("productSearch").value.trim().toLowerCase();
+      const list=products.filter(p=>(filter==="tous"||category(p)===filter)&&[p.name,p.description,p.category,p.unit].join(" ").toLowerCase().includes(q));
+      const grid=document.getElementById("productGrid");
+      if(!list.length){grid.innerHTML='<div class="empty">Aucun produit trouvé. Essayez une autre recherche.</div>';return}
+      grid.innerHTML=list.map(p=>`<article class="product-card">
+        <div class="product-image"><img src="${esc(photo(p))}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='${PHOTOS.wood}'"><span class="product-badge">${category(p)==="charbon"?"Charbon":"Bois de chauffage"}</span></div>
+        <div class="product-body"><span class="product-type">${category(p)==="charbon"?"Combustible":"Bois de chauffage"}</span><h3>${esc(p.name)}</h3><p class="product-desc">${esc(p.description||"Contactez-nous pour plus de détails sur ce produit.")}</p>
+        <div class="product-bottom"><div class="price">${money(p.price)}<span class="unit">${esc(p.unit||"unité")}</span></div><button class="add-button" onclick="addToCart('${esc(String(p.id))}')">＋ Ajouter</button></div></div></article>`).join("");
     }
-
-    function normalizedCategory(product) {
-      const category = String(product.category || "").toLowerCase();
-      const name = String(product.name || "").toLowerCase();
-      if (category.includes("charbon") || name.includes("charbon")) return "charbon";
-      return "bois";
+    async function loadProducts(){
+      try{
+        if(!window.supabase?.createClient)throw new Error("Supabase indisponible");
+        const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+        const {data,error}=await db.from(PRODUCT_TABLE).select("id,name,slug,category,description,price,unit,stock_quantity,is_active,image_url,created_at").eq("is_active",true).order("created_at",{ascending:false});
+        if(error)throw error;
+        products=data||[];
+        if(!products.length)products=demoProducts;
+      }catch(e){console.warn("Chargement du catalogue :",e);products=demoProducts}
+      renderProducts();updateCart();
     }
-
-    function productPhoto(product) {
-      if (product.photo) return product.photo;
-      const category = normalizedCategory(product);
-      if (category === "charbon") return PHOTO_CHARCOAL;
-      const name = (String(product.name || "") + " " + String(product.unit || "")).toLowerCase();
-      if (name.includes("filet") || name.includes("sac") || name.includes("petit")) return PHOTO_WOOD_NET;
-      if (name.includes("stère") || name.includes("ster") || name.includes("palette") || name.includes("bûche") || name.includes("buche")) return PHOTO_WOOD_LOGS;
-      return PHOTO_WOOD_BOX;
+    function addToCart(id){
+      const p=products.find(x=>String(x.id)===String(id));if(!p)return;
+      let line=cart.find(x=>String(x.id)===String(p.id));
+      if(line)line.quantity++;else cart.push({id:p.id,name:p.name,slug:p.slug||"",price:p.price,unit:p.unit||"unité",quantity:1});
+      saveCart();openCart();
     }
-
-    function formatPrice(price) {
-      if (price === null || price === undefined || price === "" || !Number.isFinite(Number(price))) {
-        return '<span class="product-price">Sur devis</span>';
-      }
-      return '<span class="product-price">' +
-        new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 2 }).format(Number(price)) +
-        '</span>';
+    function changeQty(id,delta){
+      const line=cart.find(x=>String(x.id)===String(id));if(!line)return;
+      line.quantity+=delta;if(line.quantity<=0)cart=cart.filter(x=>String(x.id)!==String(id));saveCart();
     }
-
-    function quoteLink(product) {
-      const name = encodeURIComponent(product.name || "Produit BoisRoyal");
-      const id = encodeURIComponent(product.id || "");
-      return "devis.html?produit=" + name + (id ? "&id=" + id : "");
+    function removeItem(id){cart=cart.filter(x=>String(x.id)!==String(id));saveCart()}
+    function cartCount(){return cart.reduce((n,x)=>n+Number(x.quantity||0),0)}
+    function total(){return cart.reduce((n,x)=>n+(Number(x.price)||0)*Number(x.quantity||0),0)}
+    function updateCart(){
+      const count=cartCount();document.getElementById("cartCount").textContent=count;document.getElementById("mobileCartCount").textContent=count;
+      document.getElementById("cartTotal").textContent=money(total());
+      const box=document.getElementById("cartItems");
+      if(!cart.length){box.innerHTML='<div class="cart-empty">Votre panier est vide.<br>Découvrez nos produits pour commencer.</div>';document.querySelector(".checkout").disabled=true;return}
+      document.querySelector(".checkout").disabled=false;
+      box.innerHTML=cart.map(x=>`<div class="cart-line"><div><strong>${esc(x.name)}</strong><small>${money(x.price)} · ${esc(x.unit)}</small><div class="qty"><button onclick="changeQty('${esc(String(x.id))}',-1)">−</button><b>${x.quantity}</b><button onclick="changeQty('${esc(String(x.id))}',1)">+</button></div></div><div><b>${money((Number(x.price)||0)*x.quantity)}</b><br><button class="remove" onclick="removeItem('${esc(String(x.id))}')">Retirer</button></div></div>`).join("");
     }
-
-    function renderProducts() {
-      const grid = document.getElementById("productGrid");
-      const search = document.getElementById("productSearch").value.trim().toLowerCase();
-
-      const filtered = allProducts.filter(function (product) {
-        const matchesCategory = currentFilter === "tous" || normalizedCategory(product) === currentFilter;
-        const haystack = [product.name, product.description, product.category, product.unit].join(" ").toLowerCase();
-        return matchesCategory && haystack.includes(search);
-      });
-
-      if (!filtered.length) {
-        grid.innerHTML = '<div class="catalog-message">Aucun produit ne correspond à votre recherche. Essayez un autre mot ou demandez-nous un devis.</div>';
-        return;
-      }
-
-      grid.innerHTML = filtered.map(function (product) {
-        const category = normalizedCategory(product);
-        const label = category === "charbon" ? "Charbon" : "Bois de chauffage";
-        const description = product.description || "Contactez-nous pour confirmer les détails de ce produit.";
-        const unit = product.unit ? escapeHTML(product.unit) : "unité";
-        const image = productPhoto(product);
-        return `
-          <article class="product-card">
-            <div class="product-image">
-              <img src="${escapeHTML(image)}" alt="${escapeHTML(product.name)}" loading="lazy"
-                   onerror="this.onerror=null;this.src='${PHOTO_WOOD_BOX}'">
-              <span class="product-badge">${label}</span>
-            </div>
-            <div class="product-body">
-              <span class="product-category">${label}</span>
-              <h3>${escapeHTML(product.name || "Produit BoisRoyal")}</h3>
-              <p class="product-description">${escapeHTML(description)}</p>
-              <div class="product-bottom">
-                <div>${formatPrice(product.price)}<span class="product-unit">${unit}</span></div>
-                <a class="btn btn-dark product-cta" href="${quoteLink(product)}">Demander <span aria-hidden="true">→</span></a>
-              </div>
-            </div>
-          </article>`;
-      }).join("");
+    function openCart(){document.getElementById("cartOverlay").classList.add("open");document.body.style.overflow="hidden";updateCart()}
+    function closeCart(){document.getElementById("cartOverlay").classList.remove("open");document.body.style.overflow=""}
+    function goToCheckout(){
+      if(!cart.length)return;
+      localStorage.setItem("boisroyal_cart",JSON.stringify(cart));
+      window.location.href="devis.html?panier=1";
     }
-
-    async function loadProducts() {
-      const grid = document.getElementById("productGrid");
-      try {
-        if (!window.supabase || !window.supabase.createClient) throw new Error("Bibliothèque Supabase indisponible");
-        const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        const { data, error } = await client
-          .from(PRODUCT_TABLE)
-          .select("id,name,slug,category,description,price,unit,stock_quantity,is_active,created_at")
-          .eq("is_active", true)
-          .order("created_at", { ascending: false });
-
-        if (error) throw error;
-        allProducts = (data || []).map(function (product) {
-          return { ...product, photo: productPhoto(product) };
-        });
-        if (!allProducts.length) {
-          allProducts = demoProducts;
-          grid.insertAdjacentHTML("beforebegin", '<p style="color:#8a6a2f;font-size:.82rem;margin:0 0 12px">Catalogue de démonstration : ajoutez vos produits dans Supabase pour afficher votre catalogue réel.</p>');
-        }
-      } catch (error) {
-        console.warn("Catalogue Supabase indisponible :", error);
-        allProducts = demoProducts;
-        grid.insertAdjacentHTML("beforebegin", '<p style="color:#8a6a2f;font-size:.82rem;margin:0 0 12px">Affichage d’exemples provisoires : le catalogue en ligne n’a pas pu être chargé.</p>');
-      }
-      renderProducts();
-    }
-
-    document.querySelectorAll(".filter-btn").forEach(function (button) {
-      button.addEventListener("click", function () {
-        currentFilter = button.dataset.filter;
-        document.querySelectorAll(".filter-btn").forEach(function (item) {
-          item.classList.toggle("active", item === button);
-        });
-        renderProducts();
-      });
-    });
-
-    document.getElementById("productSearch").addEventListener("input", renderProducts);
-    document.querySelectorAll("[data-category-link]").forEach(function (link) {
-      link.addEventListener("click", function () {
-        currentFilter = link.dataset.categoryLink;
-        document.querySelectorAll(".filter-btn").forEach(function (button) {
-          button.classList.toggle("active", button.dataset.filter === currentFilter);
-        });
-        renderProducts();
-      });
-    });
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-    loadProducts();
+    document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderProducts()}));
+    document.getElementById("productSearch").addEventListener("input",renderProducts);
+    document.querySelectorAll("[data-category-link]").forEach(a=>a.addEventListener("click",()=>{filter=a.dataset.categoryLink;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));renderProducts()}));
+    document.getElementById("year").textContent=new Date().getFullYear();
+    updateCart();loadProducts();
   </script>
 </body>
 </html>

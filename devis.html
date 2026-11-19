@@ -1,352 +1,564 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1510">
-<meta name="description" content="Demandez gratuitement un devis BoisRoyal pour le bois de chauffage en France et en Belgique.">
-<title>Demande de devis | BoisRoyal</title>
-
-<style>
-:root {
-  --bg: #0b1510;
-  --panel: #14271b;
-  --panel2: #0e1b13;
-  --gold: #d8b66a;
-  --gold-light: #f1d99b;
-  --text: #f5f3eb;
-  --muted: #bdc7bc;
-  --line: #405041;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 16px/1.6 Arial, sans-serif;
-}
-main {
-  width: min(700px, 100% - 28px);
-  margin: auto;
-  padding: 25px 0 50px;
-}
-a { color: var(--gold); text-decoration: none; }
-a:hover { text-decoration: underline; }
-.brand {
-  font: 700 25px Georgia, serif;
-  letter-spacing: 1px;
-  margin: 22px 0;
-}
-h1, h2 { font-family: Georgia, serif; }
-h1 { font-size: clamp(32px, 8vw, 46px); line-height: 1.15; }
-h1 span, .gold { color: var(--gold); }
-h2 { font-size: 21px; margin: 27px 0 12px; }
-.muted { color: var(--muted); }
-.panel {
-  background: var(--panel);
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-}
-.notice {
-  padding: 14px;
-  background: #352c17;
-  border: 1px solid #8e7540;
-  border-radius: 6px;
-  color: var(--gold-light);
-  font-size: 14px;
-  margin: 20px 0;
-}
-.product-list { display: grid; gap: 12px; }
-.product {
-  display: grid;
-  grid-template-columns: 1fr 90px;
-  gap: 10px;
-  align-items: center;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: var(--panel2);
-}
-.product b { display: block; }
-.product small {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-}
-.product .price {
-  display: block;
-  color: var(--gold);
-  font-weight: 700;
-  margin-top: 5px;
-}
-label {
-  display: block;
-  font-size: 14px;
-  margin: 14px 0 5px;
-}
-input, select, textarea {
-  width: 100%;
-  min-width: 0;
-  padding: 12px;
-  background: #0b1510;
-  border: 1px solid #526252;
-  border-radius: 5px;
-  color: white;
-  font: inherit;
-}
-input:focus, select:focus, textarea:focus {
-  outline: 2px solid var(--gold);
-  outline-offset: 1px;
-}
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 15px;
-  border: 0;
-  border-radius: 5px;
-  background: var(--gold);
-  color: #172219;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-}
-button:hover { background: var(--gold-light); }
-button:disabled { opacity: .6; cursor: wait; }
-#status { overflow-wrap: anywhere; }
-#status.success { color: #bce7bb; }
-#status.error { color: #ffb4a9; }
-.footer-note {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 16px;
-}
-@media (max-width: 430px) {
-  .panel { padding: 15px; }
-  .product { grid-template-columns: minmax(0, 1fr) 78px; padding: 10px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#30221B">
+  <meta name="description" content="Demandez votre devis BoisRoyal pour le bois de chauffage et le charbon.">
+  <title>Votre demande de devis | BoisRoyal</title>
+  <style>
+    :root {
+      --brown: #30221B;
+      --brown-2: #493126;
+      --cream: #F4EBDD;
+      --paper: #FBF8F2;
+      --orange: #D96B2B;
+      --orange-dark: #B94F1B;
+      --ink: #292522;
+      --muted: #756B63;
+      --line: #E7DED2;
+      --white: #fff;
+      --shadow: 0 18px 55px rgba(48,34,27,.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .topbar {
+      background: var(--brown);
+      color: #F8EFE4;
+      padding: 13px 22px;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+    header {
+      background: rgba(251,248,242,.96);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+    .nav {
+      max-width: 1160px;
+      margin: auto;
+      min-height: 76px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      text-decoration: none;
+      color: var(--brown);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: -.06em;
+    }
+    .brand span { color: var(--orange); }
+    .back-link {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown-2);
+    }
+    .back-link:hover { color: var(--orange-dark); }
+    main { padding: 54px 20px 80px; }
+    .wrap { max-width: 1080px; margin: auto; }
+    .intro { max-width: 720px; margin: 0 auto 34px; text-align: center; }
+    .eyebrow {
+      color: var(--orange-dark);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    h1 {
+      margin: 10px 0 12px;
+      color: var(--brown);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(36px, 6vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+    }
+    .intro p { margin: 0; color: var(--muted); font-size: 16px; }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(290px, .75fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel-head {
+      padding: 22px 26px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+    .panel-head h2 {
+      margin: 0;
+      color: var(--brown);
+      font: 700 23px/1.2 Georgia, "Times New Roman", serif;
+    }
+    .panel-head p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    form { padding: 25px 26px 28px; }
+    .section-label {
+      margin: 0 0 16px;
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #51463F;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    input, textarea {
+      width: 100%;
+      border: 1px solid #DED4C8;
+      border-radius: 9px;
+      background: #FFFEFC;
+      color: var(--ink);
+      padding: 13px 14px;
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(217,107,43,.12);
+    }
+    textarea { min-height: 105px; resize: vertical; }
+    .hint { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
+    .divider { height: 1px; background: var(--line); margin: 25px 0 22px; }
+    .submit {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px 20px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--orange);
+      color: white;
+      font: 800 15px/1.2 inherit;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background .18s, transform .18s;
+    }
+    .submit:hover:not(:disabled) { background: var(--orange-dark); transform: translateY(-1px); }
+    .submit:disabled { opacity: .55; cursor: not-allowed; }
+    #status {
+      margin: 15px 0 0;
+      padding: 0;
+      font-size: 13px;
+      font-weight: 650;
+      overflow-wrap: anywhere;
+    }
+    #status.success, #status.error { padding: 12px 14px; border-radius: 8px; }
+    #status.success { color: #245A37; background: #EAF5EC; }
+    #status.error { color: #9C2F22; background: #FCEDEA; }
+    .summary { padding: 24px; }
+    .summary h2 {
+      margin: 0 0 5px;
+      color: var(--brown);
+      font: 700 23px/1.2 Georgia, "Times New Roman", serif;
+    }
+    .summary-intro { margin: 0 0 20px; color: var(--muted); font-size: 13px; }
+    #productList { display: grid; gap: 12px; }
+    .product {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .product b { display: block; color: var(--brown); font-size: 14px; }
+    .product small { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .quantity {
+      flex: 0 0 auto;
+      color: var(--orange-dark);
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .empty {
+      padding: 17px;
+      border: 1px dashed #D9CBBB;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .empty a { color: var(--orange-dark); font-weight: 800; }
+    .total {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 20px;
+      margin-top: 6px;
+      color: var(--brown);
+      font-weight: 800;
+    }
+    #cartTotal { text-align: right; }
+    .note-box {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 10px;
+      background: var(--cream);
+      color: #5F5045;
+      font-size: 12px;
+    }
+    .note-box strong { color: var(--brown); }
+    footer {
+      background: var(--brown);
+      color: #E9DED2;
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 12px;
+    }
+    footer a { color: #F2A06E; text-decoration: none; }
+    .honeypot { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; }
+    @media (max-width: 780px) {
+      main { padding: 38px 14px 55px; }
+      .layout { grid-template-columns: 1fr; }
+      .summary { order: -1; }
+      .nav { min-height: 66px; padding: 10px 16px; }
+      .brand { font-size: 24px; }
+      form { padding: 21px 18px 23px; }
+      .panel-head { padding: 19px 18px; }
+      .summary { padding: 20px 18px; }
+    }
+    @media (max-width: 520px) {
+      .fields { grid-template-columns: 1fr; gap: 13px; }
+      .field.full { grid-column: auto; }
+      .intro p { font-size: 14px; }
+      .back-link { font-size: 12px; }
+    }
+  </style>
 </head>
-
 <body>
-<main>
-  <a href="index.html">← Retour à la boutique</a>
+  <div class="topbar">BOIS DE CHAUFFAGE & CHARBON · QUALITÉ ET SERVICE</div>
+  <header>
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="index.html">Bois<span>Royal</span></a>
+      <a class="back-link" href="index.html">← Retour à la boutique</a>
+    </nav>
+  </header>
 
-  <div class="brand">♨ BoisRoyal</div>
+  <main>
+    <div class="wrap">
+      <section class="intro">
+        <div class="eyebrow">Votre commande, en toute simplicité</div>
+        <h1>Parlons de votre besoin.</h1>
+        <p>Envoyez-nous votre demande gratuitement. Notre équipe vous recontactera pour confirmer les prix, la disponibilité et la livraison.</p>
+      </section>
 
-  <h1>Votre demande de <span>devis.</span></h1>
-  <p class="muted">
-    Sélectionnez les formats de bois et les quantités souhaités.
-    Nous confirmerons ensuite les disponibilités, les prix et les frais
-    de livraison en France ou en Belgique.
-  </p>
+      <div class="layout">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Vos coordonnées</h2>
+            <p>Les champs marqués d’un * sont obligatoires.</p>
+          </div>
+          <form id="form">
+            <p class="section-label">Informations personnelles</p>
+            <div class="fields">
+              <div class="field">
+                <label for="name">Nom complet *</label>
+                <input id="name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Votre nom et prénom">
+              </div>
+              <div class="field">
+                <label for="phone">Téléphone *</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="Votre numéro de téléphone">
+              </div>
+              <div class="field full">
+                <label for="email">Adresse e-mail *</label>
+                <input id="email" name="email" type="email" autocomplete="email" required maxlength="180" placeholder="vous@exemple.com">
+              </div>
+            </div>
 
-  <div class="notice">
-    <strong>Demande gratuite et sans engagement.</strong><br>
-    Les prix affichés sont provisoires. Aucun paiement n'est demandé
-    et votre demande ne constitue pas une commande confirmée.
-  </div>
+            <div class="divider"></div>
+            <p class="section-label">Adresse de livraison</p>
+            <div class="fields">
+              <div class="field full">
+                <label for="address">Adresse complète *</label>
+                <input id="address" name="address" type="text" autocomplete="street-address" required maxlength="250" placeholder="Numéro, rue, complément d’adresse">
+              </div>
+              <div class="field">
+                <label for="postal">Code postal *</label>
+                <input id="postal" name="postal" type="text" autocomplete="postal-code" required maxlength="20" placeholder="Code postal">
+              </div>
+              <div class="field">
+                <label for="city">Ville *</label>
+                <input id="city" name="city" type="text" autocomplete="address-level2" required maxlength="100" placeholder="Votre ville">
+              </div>
+              <div class="field full">
+                <label for="country">Pays *</label>
+                <input id="country" name="country" type="text" autocomplete="country-name" required maxlength="100" placeholder="Votre pays">
+              </div>
+              <div class="field full">
+                <label for="notes">Précisions sur la livraison (facultatif)</label>
+                <textarea id="notes" name="notes" maxlength="1500" placeholder="Accès, horaires souhaités, instructions complémentaires…"></textarea>
+              </div>
+            </div>
 
-  <form class="panel" id="form">
-    <h2>1. Vos produits</h2>
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Ne pas remplir</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
 
-    <div class="product-list">
-      <div class="product">
-        <div>
-          <b>🪵 Bois — petit filet</b>
-          <small>Format indicatif : 12,5 L</small>
-          <span class="price">6,90 € <small>Prix provisoire</small></span>
-        </div>
-        <div>
-          <label for="q1">Quantité</label>
-          <select id="q1">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-      </div>
+            <button class="submit" id="send" type="submit">Envoyer ma demande gratuite</button>
+            <p id="status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
 
-      <div class="product">
-        <div>
-          <b>🪵 Bois — lot familial</b>
-          <small>Format indicatif : 40 L</small>
-          <span class="price">24,90 € <small>Prix provisoire</small></span>
-        </div>
-        <div>
-          <label for="q2">Quantité</label>
-          <select id="q2">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-          </select>
-        </div>
+        <aside class="panel">
+          <div class="summary">
+            <h2>Votre sélection</h2>
+            <p class="summary-intro">Vérifiez les produits et les quantités avant l’envoi.</p>
+            <div id="productList"></div>
+            <div class="total">
+              <span>Estimation du panier</span>
+              <span id="cartTotal">—</span>
+            </div>
+            <div class="note-box">
+              <strong>Bon à savoir</strong><br>
+              Cette demande est gratuite et sans engagement. Les prix définitifs, les frais de livraison et les modalités de paiement seront confirmés par BoisRoyal avant validation de la commande.
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
+  </main>
 
-    <p class="footer-note">
-      Formats et prix donnés à titre indicatif, à confirmer avant toute vente.
-      Les frais de livraison ne sont pas inclus.
-    </p>
+  <footer>© <span id="year"></span> BoisRoyal · <a href="index.html">Retour à la boutique</a></footer>
 
-    <h2>2. Vos coordonnées</h2>
+  <script>
+    const URL_SUPABASE = 'https://evvblxiitorfdniqmqcf.supabase.co';
+    const CLE_PUBLIQUE = 'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
 
-    <label for="name">Nom complet *</label>
-    <input id="name" name="name" maxlength="120"
-      autocomplete="name" required>
+    const form = document.getElementById('form');
+    const button = document.getElementById('send');
+    const status = document.getElementById('status');
+    const productList = document.getElementById('productList');
+    const cartTotal = document.getElementById('cartTotal');
 
-    <label for="phone">Téléphone *</label>
-    <input id="phone" name="phone" type="tel" maxlength="40"
-      autocomplete="tel" required>
+    let cart = [];
 
-    <label for="email">Adresse e-mail (facultatif)</label>
-    <input id="email" name="email" type="email" maxlength="180"
-      autocomplete="email">
-
-    <h2>3. Adresse de livraison</h2>
-
-    <label for="address">Adresse complète *</label>
-    <input id="address" name="address" maxlength="220"
-      autocomplete="street-address" required>
-
-    <label for="postal">Code postal *</label>
-    <input id="postal" name="postal" maxlength="20"
-      autocomplete="postal-code" required>
-
-    <label for="city">Ville *</label>
-    <input id="city" name="city" maxlength="100"
-      autocomplete="address-level2" required>
-
-    <label for="country">Pays *</label>
-    <select id="country" name="country" required>
-      <option value="France">France</option>
-      <option value="Belgique">Belgique</option>
-    </select>
-
-    <label for="notes">Précisions (facultatif)</label>
-    <textarea id="notes" name="notes" maxlength="1200" rows="3"
-      placeholder="Instructions de livraison ou informations utiles..."></textarea>
-
-    <div style="position:absolute;left:-9999px" aria-hidden="true">
-      <label for="website">Ne pas remplir</label>
-      <input id="website" name="website" tabindex="-1" autocomplete="off">
-    </div>
-
-    <button id="send" type="submit">Envoyer ma demande gratuite</button>
-    <p id="status" role="status" aria-live="polite"></p>
-
-    <p class="footer-note">
-      * Champs obligatoires. En envoyant ce formulaire, vous demandez
-      à BoisRoyal de vous recontacter au sujet de votre demande.
-      Aucun paiement n'est effectué.
-    </p>
-  </form>
-
-  <p style="text-align:center;margin-top:24px">
-    <a href="index.html">Retour à BoisRoyal</a>
-  </p>
-</main>
-
-<script>
-const URL_SUPABASE = 'https://evvblxiitorfdniqmqcf.supabase.co';
-const CLE_PUBLIQUE = 'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
-
-const form = document.getElementById('form');
-const button = document.getElementById('send');
-const status = document.getElementById('status');
-
-form.addEventListener('submit', async function(event) {
-  event.preventDefault();
-
-  const val = id => document.getElementById(id).value.trim();
-
-  status.className = '';
-  status.textContent = '';
-
-  if (val('website')) {
-    status.textContent = 'Demande refusée.';
-    status.className = 'error';
-    return;
-  }
-
-  const products = [
-    ['demo-bois-petit-filet', Number(val('q1'))],
-    ['demo-bois-lot-familial', Number(val('q2'))]
-  ];
-
-  const items = products
-    .filter(product => product[1] > 0)
-    .map(product => ({
-      slug: product[0],
-      quantity: product[1]
-    }));
-
-  if (!items.length) {
-    status.textContent = 'Choisissez au moins un produit.';
-    status.className = 'error';
-    return;
-  }
-
-  const payload = {
-    customer_name: val('name'),
-    customer_phone: val('phone'),
-    customer_email: val('email'),
-    delivery_address: val('address'),
-    delivery_postal_code: val('postal'),
-    delivery_city: val('city'),
-    delivery_country: val('country'),
-    delivery_notes: val('notes'),
-    company_website: val('website'),
-    items
-  };
-
-  button.disabled = true;
-  button.textContent = 'Envoi en cours...';
-  status.textContent = 'Envoi de votre demande...';
-
-  try {
-    const response = await fetch(
-      URL_SUPABASE + '/functions/v1/boisroyal-order-request',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': CLE_PUBLIQUE
-        },
-        body: JSON.stringify(payload)
+    function readCart() {
+      try {
+        const data = JSON.parse(localStorage.getItem('boisroyal_cart') || '[]');
+        return Array.isArray(data) ? data : [];
+      } catch (error) {
+        return [];
       }
-    );
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        result.error || 'Envoi impossible. Veuillez réessayer.'
-      );
     }
 
-    status.textContent =
-      'Demande envoyée avec succès ! Référence : ' +
-      result.order_number +
-      '. Les prix et la livraison devront être confirmés.';
-    status.className = 'success';
+    function money(value) {
+      if (value === null || value === undefined || value === '' ||
+          !Number.isFinite(Number(value))) {
+        return 'Sur devis';
+      }
+      return new Intl.NumberFormat('fr-FR', {
+        style: 'currency',
+        currency: 'EUR'
+      }).format(Number(value));
+    }
 
-    form.reset();
-  } catch (error) {
-    status.textContent =
-      error.message || 'Erreur de connexion. Veuillez réessayer.';
-    status.className = 'error';
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Envoyer ma demande gratuite';
-  }
-});
-</script>
+    function escapeHTML(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+    }
+
+    function renderCart() {
+      cart = readCart();
+
+      if (!cart.length) {
+        productList.innerHTML =
+          '<div class="empty">Votre panier est vide. ' +
+          '<a href="index.html">Retournez à la boutique pour choisir vos produits.</a></div>';
+        cartTotal.textContent = money(0);
+        button.disabled = true;
+        return;
+      }
+
+      let subtotal = 0;
+      let hasUnknownPrice = false;
+
+      productList.innerHTML = cart.map(item => {
+        const quantity = Number(item.quantity);
+        const price = item.price;
+
+        if (price === null || price === undefined || price === '' ||
+            !Number.isFinite(Number(price))) {
+          hasUnknownPrice = true;
+        } else {
+          subtotal += Number(price) * quantity;
+        }
+
+        return `
+          <div class="product">
+            <div>
+              <b>${escapeHTML(item.name || 'Produit BoisRoyal')}</b>
+              <small>${escapeHTML(item.unit || 'Unité')} · ${money(price)} / unité</small>
+            </div>
+            <div class="quantity">× ${quantity}</div>
+          </div>
+        `;
+      }).join('');
+
+      cartTotal.textContent = hasUnknownPrice
+        ? money(subtotal) + ' + produits sur devis'
+        : money(subtotal);
+
+      button.disabled = false;
+    }
+
+    function getOrderItems() {
+      return cart.map(item => {
+        const quantity = Number(item.quantity);
+        const slug = String(item.slug || '').trim();
+        const id = String(item.id || '');
+
+        if (!slug || id.startsWith('demo-')) {
+          throw new Error(
+            'Un produit de démonstration est présent dans votre panier. ' +
+            'Retournez à la boutique et rechargez le catalogue avant de recommencer.'
+          );
+        }
+
+        if (!Number.isInteger(quantity) || quantity < 1) {
+          throw new Error('Une quantité de produit est invalide.');
+        }
+
+        return { slug, quantity };
+      });
+    }
+
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const val = id => document.getElementById(id).value.trim();
+
+      status.className = '';
+      status.textContent = '';
+
+      if (val('website')) {
+        status.textContent = 'Demande refusée.';
+        status.className = 'error';
+        return;
+      }
+
+      cart = readCart();
+
+      if (!cart.length) {
+        status.textContent = 'Votre panier est vide.';
+        status.className = 'error';
+        return;
+      }
+
+      let items;
+      try {
+        items = getOrderItems();
+      } catch (error) {
+        status.textContent = error.message;
+        status.className = 'error';
+        return;
+      }
+
+      const payload = {
+        customer_name: val('name'),
+        customer_phone: val('phone'),
+        customer_email: val('email'),
+        delivery_address: val('address'),
+        delivery_postal_code: val('postal'),
+        delivery_city: val('city'),
+        delivery_country: val('country'),
+        delivery_notes: val('notes'),
+        company_website: val('website'),
+        items
+      };
+
+      button.disabled = true;
+      button.textContent = 'Envoi en cours...';
+      status.textContent = 'Envoi de votre demande...';
+
+      try {
+        const response = await fetch(
+          URL_SUPABASE + '/functions/v1/boisroyal-order-request',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': CLE_PUBLIQUE
+            },
+            body: JSON.stringify(payload)
+          }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Envoi impossible. Veuillez réessayer.');
+        }
+
+        localStorage.removeItem('boisroyal_cart');
+        cart = [];
+
+        productList.innerHTML =
+          '<div class="empty">Votre demande a bien été envoyée.</div>';
+        cartTotal.textContent = money(0);
+
+        status.textContent =
+          'Demande envoyée avec succès ! Référence : ' +
+          (result.order_number || 'enregistrée') +
+          '. BoisRoyal vous recontactera pour confirmer les prix, ' +
+          'la livraison et les modalités de paiement.';
+
+        status.className = 'success';
+        form.reset();
+        button.disabled = true;
+
+      } catch (error) {
+        status.textContent =
+          error.message || 'Erreur de connexion. Veuillez réessayer.';
+        status.className = 'error';
+        button.disabled = false;
+      } finally {
+        button.textContent = 'Envoyer ma demande gratuite';
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    renderCart();
+  </script>
 </body>
 </html>
