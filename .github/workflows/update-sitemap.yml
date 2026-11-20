@@ -1,0 +1,41 @@
+
+name: Mise a jour automatique du sitemap
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-sitemap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le depot
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generer le sitemap
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: node scripts/generate-sitemap.mjs
+
+      - name: Publier le nouveau sitemap
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Le sitemap est deja a jour."
+          else
+            git commit -m "Mise a jour automatique du sitemap"
+            git push
+          fi
