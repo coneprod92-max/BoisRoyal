@@ -16,6 +16,11 @@
   <meta property="og:title" content="Produit | BoisRoyal">
   <meta property="og:description" content="Découvrez nos produits de chauffage et de charbon.">
   <meta property="og:url" content="https://boisroyal.net/produit.html">
+  <meta property="og:image" content="https://boisroyal.net/produit-filets.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Produit | BoisRoyal">
+  <meta name="twitter:description" content="Découvrez ce produit BoisRoyal et demandez votre devis.">
+  <meta name="twitter:image" content="https://boisroyal.net/produit-filets.webp">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -354,8 +359,17 @@
     }
 
     function category(product) {
-      return String(product.category || "").toLowerCase().includes("charbon") ||
-        String(product.name || "").toLowerCase().includes("charbon")
+      const rawCategory = String(product.category || "").trim();
+      if (rawCategory) {
+        const normalized = rawCategory.toLowerCase();
+        if (normalized.includes("charbon")) return "Charbon de bois";
+        if (normalized.includes("bois") || normalized.includes("chauffage")) {
+          return "Bois de chauffage";
+        }
+        return rawCategory.charAt(0).toLocaleUpperCase("fr-FR") + rawCategory.slice(1);
+      }
+
+      return String(product.name || "").toLowerCase().includes("charbon")
         ? "Charbon de bois"
         : "Bois de chauffage";
     }
@@ -386,56 +400,99 @@
     }
 
     function updateSEO(product) {
-      const name = product.name || "Produit BoisRoyal";
-      const description = product.description ||
-        "Découvrez ce produit proposé par BoisRoyal.";
+      const name = String(product.name || "Produit BoisRoyal").trim();
+      const productCategory = category(product);
+      const rawDescription = String(product.description || "").trim();
+      const description = rawDescription ||
+        `${name} : découvrez ce produit ${productCategory} proposé par BoisRoyal.`;
+      const unit = String(product.unit || "").trim();
+      const title = `${name} | ${productCategory} | BoisRoyal`;
+      const metaDescription = `${description}${unit ? ` Conditionnement : ${unit}.` : ""}`
+        .replace(/\s+/g, " ")
+        .slice(0, 155);
 
-      const title = `${name} | BoisRoyal`;
+      const canonical = `https://boisroyal.net/produit.html?slug=${encodeURIComponent(product.slug || "")}`;
+      const imageUrl = new URL(photo(product), window.location.href).href;
 
       document.title = title;
       document.querySelector('meta[name="description"]')
-        .setAttribute("content", description.slice(0, 155));
-
-      const canonical = `https://boisroyal.net/produit.html?slug=${encodeURIComponent(product.slug)}`;
+        .setAttribute("content", metaDescription);
       document.querySelector('link[rel="canonical"]').href = canonical;
 
-      document.querySelector('meta[property="og:title"]')
-        .setAttribute("content", title);
+      const setMeta = (selector, value) => {
+        const element = document.querySelector(selector);
+        if (element) element.setAttribute("content", value);
+      };
 
-      document.querySelector('meta[property="og:description"]')
-        .setAttribute("content", description.slice(0, 200));
+      setMeta('meta[property="og:title"]', title);
+      setMeta('meta[property="og:description"]', metaDescription);
+      setMeta('meta[property="og:url"]', canonical);
+      setMeta('meta[property="og:image"]', imageUrl);
+      setMeta('meta[name="twitter:title"]', title);
+      setMeta('meta[name="twitter:description"]', metaDescription);
+      setMeta('meta[name="twitter:image"]', imageUrl);
 
-      document.querySelector('meta[property="og:url"]')
-        .setAttribute("content", canonical);
-
-      const structuredData = {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": name,
-        "description": description,
-        "image": new URL(photo(product), window.location.href).href,
-        "url": canonical,
-        "brand": {
-          "@type": "Brand",
-          "name": "BoisRoyal"
+      const graph = [
+        {
+          "@type": "Product",
+          "name": name,
+          "description": description,
+          "image": [imageUrl],
+          "url": canonical,
+          "sku": String(product.slug || product.id || name),
+          "brand": {
+            "@type": "Brand",
+            "name": "BoisRoyal"
+          }
         },
-        "offers": {
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Accueil",
+              "item": "https://boisroyal.net/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Catalogue",
+              "item": "https://boisroyal.net/#catalogue"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": name,
+              "item": canonical
+            }
+          ]
+        }
+      ];
+
+      const hasPrice = product.price !== null &&
+        product.price !== undefined &&
+        product.price !== "" &&
+        Number.isFinite(Number(product.price));
+
+      if (hasPrice) {
+        const stockKnown = product.stock_quantity !== null &&
+          product.stock_quantity !== undefined &&
+          product.stock_quantity !== "";
+        const inStock = !stockKnown || Number(product.stock_quantity) > 0;
+
+        graph[0].offers = {
           "@type": "Offer",
           "url": canonical,
           "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock"
-        }
-      };
-
-      if (product.price !== null && product.price !== undefined &&
-          product.price !== "" && Number.isFinite(Number(product.price))) {
-        structuredData.offers.price = Number(product.price);
-      } else {
-        delete structuredData.offers.price;
+          "price": Number(product.price),
+          "availability": inStock
+            ? "https://schema.org/InStock"
+            : "https://schema.org/OutOfStock"
+        };
       }
 
       let script = document.getElementById("productStructuredData");
-
       if (!script) {
         script = document.createElement("script");
         script.id = "productStructuredData";
@@ -443,7 +500,10 @@
         document.head.appendChild(script);
       }
 
-      script.textContent = JSON.stringify(structuredData);
+      script.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": graph
+      });
     }
 
     function addToCart() {
