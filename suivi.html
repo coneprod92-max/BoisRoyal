@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#30221B">
+  <meta name="description" content="Suivez l’avancement de votre demande de commande BoisRoyal avec votre référence et vos coordonnées.">
+  <title>Suivre ma commande | BoisRoyal</title>
+  <style>
+    :root{--brown:#30221B;--brown2:#493126;--cream:#F4EBDD;--paper:#FBF8F2;--orange:#D96B2B;--orangeDark:#B94F1B;--ink:#292522;--muted:#75685E;--line:#E5D9C9;--green:#286442;--red:#A43E2D;--shadow:0 20px 55px rgba(48,34,27,.12)}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(circle at 8% 4%,rgba(217,107,43,.10),transparent 26rem),linear-gradient(180deg,var(--cream),#F8F4ED 48%,#EFE5D7);font:15px/1.65 Arial,Helvetica,sans-serif}a{color:var(--orangeDark);text-decoration:none}a:hover{text-decoration:underline}.wrap{width:min(850px,calc(100% - 30px));margin:auto;padding:24px 0 60px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.brand{display:flex;align-items:center;gap:9px;color:var(--brown);font:700 23px Georgia,serif}.brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--orange);color:white;font:20px Arial}.back{font-size:13px;font-weight:700;color:var(--brown)}.hero{padding:clamp(27px,6vw,46px);margin-bottom:20px;border-radius:20px;color:var(--paper);background:linear-gradient(105deg,rgba(35,24,19,.97),rgba(65,43,31,.92));box-shadow:var(--shadow)}.eyebrow{color:#F0A16F;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{margin:13px 0 12px;font:700 clamp(36px,7vw,55px)/1.06 Georgia,serif;letter-spacing:-1px}.hero h1 span{color:#F0A16F}.hero p{max-width:610px;margin:0;color:#E5D8CB;font-size:14px}.panel{padding:clamp(20px,5vw,36px);border:1px solid rgba(111,83,61,.12);border-radius:18px;background:var(--paper);box-shadow:var(--shadow)}h2{margin:0 0 8px;color:var(--brown);font:700 23px Georgia,serif}.intro{margin:0 0 18px;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 15px}.field.full{grid-column:1/-1}label{display:block;margin:13px 0 6px;color:var(--brown);font-size:12px;font-weight:800}input{width:100%;padding:13px 14px;border:1px solid #DCCFBE;border-radius:9px;background:white;color:var(--ink);font:inherit;font-size:14px;outline:none}input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(217,107,43,.13)}.hint{margin:7px 0 0;color:var(--muted);font-size:11px}.submit{width:100%;min-height:52px;margin-top:22px;padding:14px 18px;border:0;border-radius:9px;background:var(--orange);color:white;font-size:14px;font-weight:800;cursor:pointer}.submit:hover{background:var(--orangeDark)}.submit:disabled{opacity:.55;cursor:wait}.message{margin:13px 0 0;font-size:13px;font-weight:700;overflow-wrap:anywhere}.error{color:var(--red)}.success{color:var(--green)}.result{display:none;margin-top:20px;padding:clamp(19px,4vw,28px);border:1px solid var(--line);border-radius:16px;background:#fff}.result.visible{display:block}.result-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--line)}.ref{color:var(--orangeDark);font-weight:800;font-size:14px}.status-pill{display:inline-block;padding:6px 11px;border-radius:30px;background:#F7E8DA;color:var(--brown);font-size:11px;font-weight:800}.status-pill.cancelled{background:#FBE9E6;color:var(--red)}.meta{margin-top:8px;color:var(--muted);font-size:12px}.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:24px 0 20px}.step{position:relative;text-align:center;color:#9C9187;font-size:10px;font-weight:700}.step:before{content:"";display:block;width:15px;height:15px;margin:0 auto 8px;border:2px solid #D9CFC3;border-radius:50%;background:white}.step.done{color:var(--green)}.step.done:before{border-color:var(--green);background:var(--green);box-shadow:inset 0 0 0 3px white}.step.current{color:var(--orangeDark)}.step.current:before{border-color:var(--orange);background:var(--orange);box-shadow:0 0 0 4px rgba(217,107,43,.15)}.cancel-note{padding:12px 14px;border-radius:9px;background:#FFF0ED;color:var(--red);font-size:13px}.items{display:grid;gap:9px;margin-top:10px}.item{display:flex;justify-content:space-between;gap:12px;padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:#FFFCF7;font-size:13px}.item strong{color:var(--brown)}.footnote{margin:15px 0 0;color:var(--muted);font-size:12px}.bottom{text-align:center;margin:22px 0 0;font-size:13px;font-weight:700}@media(max-width:600px){.wrap{width:calc(100% - 22px);padding-top:15px}.topbar{margin-bottom:16px}.brand{font-size:20px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.panel{padding:19px 15px;border-radius:15px}.hero{padding:27px 21px;border-radius:16px}.timeline{gap:3px}.step{font-size:9px}.item{align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar"><a class="back" href="index.html">← Retour à la boutique</a><a class="brand" href="index.html"><span class="brand-mark">♨</span><span>BoisRoyal</span></a></div>
+    <header class="hero"><div class="eyebrow">Espace client · Suivi</div><h1>Où en est <span>votre commande ?</span></h1><p>Retrouvez l’avancement de votre demande avec la référence reçue après l’envoi et l’adresse e-mail ou le téléphone communiqué lors de la commande.</p></header>
+    <section class="panel" aria-labelledby="formTitle">
+      <h2 id="formTitle">Retrouver ma commande</h2>
+      <p class="intro">Ces informations permettent de retrouver uniquement votre demande.</p>
+      <form id="trackingForm">
+        <div class="grid">
+          <div class="field full"><label for="orderNumber">Référence de commande *</label><input id="orderNumber" name="orderNumber" required maxlength="100" autocomplete="off" placeholder="Ex. BR-AAAAMMJJ-XXXXXX"></div>
+          <div class="field full"><label for="contact">E-mail ou téléphone utilisé lors de la commande *</label><input id="contact" name="contact" required maxlength="180" autocomplete="email tel" placeholder="Votre e-mail ou numéro de téléphone"><p class="hint">Saisissez l’un des deux, exactement comme lors de votre demande.</p></div>
+        </div>
+        <button class="submit" id="trackButton" type="submit">Consulter le suivi →</button>
+        <p class="message" id="message" role="status" aria-live="polite"></p>
+      </form>
+      <section id="result" class="result" aria-live="polite">
+        <div class="result-head"><div><div class="ref" id="resultRef"></div><div class="meta" id="resultDate"></div></div><span class="status-pill" id="statusPill"></span></div>
+        <div id="progressArea"></div>
+        <h2 style="font-size:18px;margin-top:20px">Articles demandés</h2>
+        <div class="items" id="itemsList"></div>
+        <p class="footnote">Le suivi indique le dernier statut enregistré par BoisRoyal. Le prix définitif, les frais de transport et les modalités de paiement sont confirmés séparément avec vous.</p>
+      </section>
+    </section>
+    <p class="bottom"><a href="index.html">Retour à BoisRoyal</a> · <a href="mailto:contact@boisroyal.net">Besoin d’aide ? Contactez-nous</a></p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    'use strict';
+    const SUPABASE_URL = 'https://evvblxiitorfdniqmqcf.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const $ = id => document.getElementById(id);
+    const labels = {pending:'Nouvelle demande',confirmed:'Devis confirmé',preparing:'En préparation',shipped:'Expédiée',delivered:'Terminée',cancelled:'Annulée'};
+    const steps = [{key:'pending',label:'Reçue'},{key:'confirmed',label:'Confirmée'},{key:'preparing',label:'Préparation'},{key:'shipped',label:'Expédition'},{key:'delivered',label:'Terminée'}];
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const date = value => { if(!value) return 'Date non disponible'; const d=new Date(value); return Number.isNaN(d.getTime())?'Date non disponible':d.toLocaleString('fr-FR',{dateStyle:'long',timeStyle:'short'}); };
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('ref')) $('orderNumber').value = params.get('ref');
+
+    function showMessage(text, kind='') { $('message').textContent=text; $('message').className='message '+kind; }
+    function renderOrder(payload) {
+      const order = payload.order || {};
+      const status = String(order.status || 'pending');
+      $('resultRef').textContent = 'Référence : ' + (order.order_number || '—');
+      $('resultDate').textContent = 'Demande envoyée le ' + date(order.created_at);
+      $('statusPill').textContent = labels[status] || 'Statut en cours';
+      $('statusPill').className = 'status-pill' + (status === 'cancelled' ? ' cancelled' : '');
+
+      if (status === 'cancelled') {
+        $('progressArea').innerHTML = '<div class="cancel-note">Cette demande a été annulée. Contactez BoisRoyal pour toute précision.</div>';
+      } else {
+        const current = Math.max(0, steps.findIndex(step => step.key === status));
+        $('progressArea').innerHTML = '<div class="timeline">' + steps.map((step, index) => {
+          const state = index < current ? 'done' : index === current ? 'current' : '';
+          return '<div class="step '+state+'"><span></span>'+step.label+'</div>';
+        }).join('') + '</div>';
+      }
+
+      const items = Array.isArray(payload.items) ? payload.items : [];
+      $('itemsList').innerHTML = items.length ? items.map(item => '<div class="item"><strong>'+esc(item.product_name || 'Produit')+'</strong><span>× '+esc(item.quantity)+(item.unit ? ' · '+esc(item.unit) : '')+'</span></div>').join('') : '<div class="item">Détail des articles non disponible.</div>';
+      $('result').classList.add('visible');
+    }
+
+    $('trackingForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      $('result').classList.remove('visible');
+      showMessage('Recherche de votre demande…');
+      const orderNumber = $('orderNumber').value.trim();
+      const contact = $('contact').value.trim();
+      if (!orderNumber || !contact) { showMessage('Renseignez la référence et votre e-mail ou téléphone.', 'error'); return; }
+      const isEmail = contact.includes('@');
+      const button = $('trackButton');
+      button.disabled = true;
+      try {
+        const response = await fetch(SUPABASE_URL + '/functions/v1/boisroyal-order-track', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY
+          },
+          body: JSON.stringify({
+            order_number: orderNumber,
+            email: isEmail ? contact.toLowerCase() : '',
+            phone: isEmail ? '' : contact
+          })
+        });
+        const data = await response.json();
+        if (!response.ok || !data || data.ok !== true) {
+          showMessage(data?.message || 'Aucune demande ne correspond à ces informations. Vérifiez votre référence et vos coordonnées.', 'error');
+          return;
+        }
+        renderOrder(data);
+        showMessage('Votre demande a été retrouvée.', 'success');
+      } catch (error) {
+        console.error('Suivi BoisRoyal :', error);
+        showMessage('Le suivi est momentanément indisponible. Réessayez plus tard ou contactez contact@boisroyal.net.', 'error');
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

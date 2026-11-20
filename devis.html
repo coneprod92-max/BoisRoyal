@@ -1,564 +1,728 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#30221B">
-  <meta name="description" content="Demandez votre devis BoisRoyal pour le bois de chauffage et le charbon.">
-  <title>Votre demande de devis | BoisRoyal</title>
-  <style>
-    :root {
-      --brown: #30221B;
-      --brown-2: #493126;
-      --cream: #F4EBDD;
-      --paper: #FBF8F2;
-      --orange: #D96B2B;
-      --orange-dark: #B94F1B;
-      --ink: #292522;
-      --muted: #756B63;
-      --line: #E7DED2;
-      --white: #fff;
-      --shadow: 0 18px 55px rgba(48,34,27,.10);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.55;
-    }
-    a { color: inherit; }
-    .topbar {
-      background: var(--brown);
-      color: #F8EFE4;
-      padding: 13px 22px;
-      text-align: center;
-      font-size: 13px;
-      letter-spacing: .04em;
-    }
-    header {
-      background: rgba(251,248,242,.96);
-      border-bottom: 1px solid var(--line);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-    }
-    .nav {
-      max-width: 1160px;
-      margin: auto;
-      min-height: 76px;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .brand {
-      text-decoration: none;
-      color: var(--brown);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 27px;
-      font-weight: 700;
-      letter-spacing: -.06em;
-    }
-    .brand span { color: var(--orange); }
-    .back-link {
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--brown-2);
-    }
-    .back-link:hover { color: var(--orange-dark); }
-    main { padding: 54px 20px 80px; }
-    .wrap { max-width: 1080px; margin: auto; }
-    .intro { max-width: 720px; margin: 0 auto 34px; text-align: center; }
-    .eyebrow {
-      color: var(--orange-dark);
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      font-size: 11px;
-      font-weight: 800;
-    }
-    h1 {
-      margin: 10px 0 12px;
-      color: var(--brown);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(36px, 6vw, 58px);
-      line-height: 1.04;
-      letter-spacing: -.045em;
-    }
-    .intro p { margin: 0; color: var(--muted); font-size: 16px; }
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(290px, .75fr);
-      gap: 24px;
-      align-items: start;
-    }
-    .panel {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .panel-head {
-      padding: 22px 26px;
-      background: var(--cream);
-      border-bottom: 1px solid var(--line);
-    }
-    .panel-head h2 {
-      margin: 0;
-      color: var(--brown);
-      font: 700 23px/1.2 Georgia, "Times New Roman", serif;
-    }
-    .panel-head p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
-    form { padding: 25px 26px 28px; }
-    .section-label {
-      margin: 0 0 16px;
-      color: var(--brown);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .fields {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .field { min-width: 0; }
-    .field.full { grid-column: 1 / -1; }
-    label {
-      display: block;
-      margin-bottom: 7px;
-      color: #51463F;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    input, textarea {
-      width: 100%;
-      border: 1px solid #DED4C8;
-      border-radius: 9px;
-      background: #FFFEFC;
-      color: var(--ink);
-      padding: 13px 14px;
-      font: inherit;
-      font-size: 14px;
-      outline: none;
-      transition: border-color .18s, box-shadow .18s;
-    }
-    input:focus, textarea:focus {
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(217,107,43,.12);
-    }
-    textarea { min-height: 105px; resize: vertical; }
-    .hint { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
-    .divider { height: 1px; background: var(--line); margin: 25px 0 22px; }
-    .submit {
-      width: 100%;
-      margin-top: 20px;
-      padding: 15px 20px;
-      border: 0;
-      border-radius: 9px;
-      background: var(--orange);
-      color: white;
-      font: 800 15px/1.2 inherit;
-      font-size: 15px;
-      cursor: pointer;
-      transition: background .18s, transform .18s;
-    }
-    .submit:hover:not(:disabled) { background: var(--orange-dark); transform: translateY(-1px); }
-    .submit:disabled { opacity: .55; cursor: not-allowed; }
-    #status {
-      margin: 15px 0 0;
-      padding: 0;
-      font-size: 13px;
-      font-weight: 650;
-      overflow-wrap: anywhere;
-    }
-    #status.success, #status.error { padding: 12px 14px; border-radius: 8px; }
-    #status.success { color: #245A37; background: #EAF5EC; }
-    #status.error { color: #9C2F22; background: #FCEDEA; }
-    .summary { padding: 24px; }
-    .summary h2 {
-      margin: 0 0 5px;
-      color: var(--brown);
-      font: 700 23px/1.2 Georgia, "Times New Roman", serif;
-    }
-    .summary-intro { margin: 0 0 20px; color: var(--muted); font-size: 13px; }
-    #productList { display: grid; gap: 12px; }
-    .product {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .product b { display: block; color: var(--brown); font-size: 14px; }
-    .product small { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
-    .quantity {
-      flex: 0 0 auto;
-      color: var(--orange-dark);
-      font-size: 14px;
-      font-weight: 800;
-    }
-    .empty {
-      padding: 17px;
-      border: 1px dashed #D9CBBB;
-      border-radius: 10px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .empty a { color: var(--orange-dark); font-weight: 800; }
-    .total {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding-top: 20px;
-      margin-top: 6px;
-      color: var(--brown);
-      font-weight: 800;
-    }
-    #cartTotal { text-align: right; }
-    .note-box {
-      margin-top: 22px;
-      padding: 16px;
-      border-radius: 10px;
-      background: var(--cream);
-      color: #5F5045;
-      font-size: 12px;
-    }
-    .note-box strong { color: var(--brown); }
-    footer {
-      background: var(--brown);
-      color: #E9DED2;
-      padding: 25px 20px;
-      text-align: center;
-      font-size: 12px;
-    }
-    footer a { color: #F2A06E; text-decoration: none; }
-    .honeypot { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; }
-    @media (max-width: 780px) {
-      main { padding: 38px 14px 55px; }
-      .layout { grid-template-columns: 1fr; }
-      .summary { order: -1; }
-      .nav { min-height: 66px; padding: 10px 16px; }
-      .brand { font-size: 24px; }
-      form { padding: 21px 18px 23px; }
-      .panel-head { padding: 19px 18px; }
-      .summary { padding: 20px 18px; }
-    }
-    @media (max-width: 520px) {
-      .fields { grid-template-columns: 1fr; gap: 13px; }
-      .field.full { grid-column: auto; }
-      .intro p { font-size: 14px; }
-      .back-link { font-size: 12px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#30221B">
+<meta name="description" content="Demandez votre devis BoisRoyal pour le bois de chauffage et le charbon.">
+<title>Votre commande | BoisRoyal</title>
+
+<style>
+:root {
+  --brown: #30221B;
+  --brown-2: #493126;
+  --brown-3: #604331;
+  --cream: #F4EBDD;
+  --paper: #FBF8F2;
+  --orange: #D96B2B;
+  --orange-dark: #B94F1B;
+  --charcoal: #292522;
+  --muted: #75685E;
+  --line: #E5D9C9;
+  --white: #FFFFFF;
+  --success: #286442;
+  --danger: #A43E2D;
+  --shadow: 0 22px 65px rgba(48, 34, 27, .12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--charcoal);
+  background:
+    radial-gradient(circle at 8% 4%, rgba(217,107,43,.10), transparent 26rem),
+    linear-gradient(180deg, var(--cream) 0%, #F8F4ED 48%, #EFE5D7 100%);
+  font: 15px/1.65 Arial, Helvetica, sans-serif;
+}
+a { color: var(--orange-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+main {
+  width: min(850px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 64px;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brown);
+  font-size: 13px;
+  font-weight: 700;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--brown);
+  font: 700 23px Georgia, "Times New Roman", serif;
+  letter-spacing: .3px;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  font: 20px Arial, sans-serif;
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(25px, 6vw, 48px);
+  margin-bottom: 22px;
+  border-radius: 22px;
+  color: var(--paper);
+  background:
+    linear-gradient(105deg, rgba(35,24,19,.96), rgba(65,43,31,.91)),
+    var(--brown);
+  box-shadow: var(--shadow);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -90px;
+  top: -105px;
+  border: 1px solid rgba(244,235,221,.17);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px rgba(244,235,221,.035), 0 0 0 52px rgba(244,235,221,.025);
+  pointer-events: none;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: #F0A16F;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--orange);
+}
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; }
+h1 {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(36px, 7vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
+h1 span { color: #F0A16F; }
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 18px 0 0;
+  color: #E5D8CB;
+  font-size: 15px;
+}
+.notice {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 17px 19px;
+  margin: 0 0 22px;
+  border: 1px solid #E8C9A8;
+  border-radius: 13px;
+  color: #65401F;
+  background: #FFF4E5;
+  font-size: 13px;
+}
+.notice-icon {
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  background: var(--orange);
+  font-weight: 800;
+}
+.notice strong { display: block; margin-bottom: 2px; color: var(--brown); }
+.panel {
+  padding: clamp(20px, 5vw, 38px);
+  border: 1px solid rgba(111,83,61,.12);
+  border-radius: 20px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 0 0 18px;
+}
+.section-number {
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: white;
+  background: var(--brown);
+  font: 700 15px Georgia, serif;
+}
+h2 {
+  margin: 0;
+  color: var(--brown);
+  font-size: 22px;
+  line-height: 1.2;
+}
+.section-divider {
+  height: 1px;
+  margin: 28px 0;
+  background: var(--line);
+}
+.product-list { display: grid; gap: 10px; }
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 17px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #FFFDF9;
+}
+.product b {
+  display: block;
+  color: var(--brown);
+  font-size: 14px;
+}
+.product small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.product .price {
+  display: block;
+  margin-top: 5px;
+  color: var(--orange-dark);
+  font-weight: 800;
+}
+.quantity {
+  white-space: nowrap;
+  padding: 7px 11px;
+  border-radius: 8px;
+  color: var(--brown);
+  background: var(--cream);
+  font-size: 13px;
+  font-weight: 800;
+}
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0 5px;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--brown);
+  font-weight: 800;
+}
+.cart-total strong { color: var(--orange-dark); font-size: 18px; text-align: right; }
+.footer-note {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+.field { min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+label {
+  display: block;
+  margin: 14px 0 6px;
+  color: var(--brown);
+  font-size: 12px;
+  font-weight: 800;
+}
+input, select, textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid #DCCFBE;
+  border-radius: 9px;
+  outline: none;
+  color: var(--charcoal);
+  background: #FFFFFF;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color .18s, box-shadow .18s, background .18s;
+}
+input::placeholder, textarea::placeholder { color: #A69A8E; }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--orange);
+  background: #FFFEFC;
+  box-shadow: 0 0 0 3px rgba(217,107,43,.13);
+}
+textarea { resize: vertical; min-height: 100px; }
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 25px;
+  padding: 15px 20px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  background: var(--orange);
+  box-shadow: 0 8px 20px rgba(185,79,27,.20);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .18s, transform .18s, box-shadow .18s;
+}
+button:hover:not(:disabled) {
+  background: var(--orange-dark);
+  box-shadow: 0 10px 24px rgba(185,79,27,.25);
+  transform: translateY(-1px);
+}
+button:disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
+#status {
+  overflow-wrap: anywhere;
+  margin: 14px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+#status.success {
+  padding: 13px 15px;
+  border: 1px solid #B8D8C0;
+  border-radius: 9px;
+  color: var(--success);
+  background: #EDF8EF;
+}
+#status.error {
+  padding: 13px 15px;
+  border: 1px solid #E6BDB5;
+  border-radius: 9px;
+  color: var(--danger);
+  background: #FFF0ED;
+}
+.empty {
+  padding: 22px 16px;
+  border: 1px dashed #D8C8B6;
+  border-radius: 11px;
+  color: var(--muted);
+  background: #FFFCF7;
+  text-align: center;
+  font-size: 13px;
+}
+.empty a { font-weight: 700; }
+.bottom-link {
+  margin: 25px 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+.bottom-link a { color: var(--brown); }
+@media (max-width: 600px) {
+  main { width: min(100% - 22px, 850px); padding-top: 17px; }
+  .topbar { margin-bottom: 18px; }
+  .brand { font-size: 20px; }
+  .brand-mark { width: 30px; height: 30px; font-size: 18px; }
+  .hero { border-radius: 16px; padding: 28px 22px; margin-bottom: 15px; }
+  .hero-copy { font-size: 14px; }
+  .notice { padding: 14px; margin-bottom: 15px; }
+  .panel { padding: 19px 15px; border-radius: 15px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .product { padding: 13px 12px; }
+  .product b { font-size: 13px; }
+  .quantity { padding: 6px 8px; font-size: 12px; }
+  h2 { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+</style>
 </head>
+
 <body>
-  <div class="topbar">BOIS DE CHAUFFAGE & CHARBON · QUALITÉ ET SERVICE</div>
-  <header>
-    <nav class="nav" aria-label="Navigation principale">
-      <a class="brand" href="index.html">Bois<span>Royal</span></a>
-      <a class="back-link" href="index.html">← Retour à la boutique</a>
-    </nav>
+<main>
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Retour à la boutique</a>
+    <a class="brand" href="index.html" aria-label="BoisRoyal, accueil">
+      <span class="brand-mark">♨</span>
+      <span>BoisRoyal</span>
+    </a>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Votre commande</div>
+    <h1>La chaleur commence <span>ici.</span></h1>
+    <p class="hero-copy">
+      Vérifiez votre sélection et indiquez votre adresse de livraison.
+      Notre équipe vous recontactera pour confirmer les disponibilités,
+      les frais de transport et les modalités de paiement.
+    </p>
   </header>
 
-  <main>
-    <div class="wrap">
-      <section class="intro">
-        <div class="eyebrow">Votre commande, en toute simplicité</div>
-        <h1>Parlons de votre besoin.</h1>
-        <p>Envoyez-nous votre demande gratuitement. Notre équipe vous recontactera pour confirmer les prix, la disponibilité et la livraison.</p>
-      </section>
-
-      <div class="layout">
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Vos coordonnées</h2>
-            <p>Les champs marqués d’un * sont obligatoires.</p>
-          </div>
-          <form id="form">
-            <p class="section-label">Informations personnelles</p>
-            <div class="fields">
-              <div class="field">
-                <label for="name">Nom complet *</label>
-                <input id="name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Votre nom et prénom">
-              </div>
-              <div class="field">
-                <label for="phone">Téléphone *</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="Votre numéro de téléphone">
-              </div>
-              <div class="field full">
-                <label for="email">Adresse e-mail *</label>
-                <input id="email" name="email" type="email" autocomplete="email" required maxlength="180" placeholder="vous@exemple.com">
-              </div>
-            </div>
-
-            <div class="divider"></div>
-            <p class="section-label">Adresse de livraison</p>
-            <div class="fields">
-              <div class="field full">
-                <label for="address">Adresse complète *</label>
-                <input id="address" name="address" type="text" autocomplete="street-address" required maxlength="250" placeholder="Numéro, rue, complément d’adresse">
-              </div>
-              <div class="field">
-                <label for="postal">Code postal *</label>
-                <input id="postal" name="postal" type="text" autocomplete="postal-code" required maxlength="20" placeholder="Code postal">
-              </div>
-              <div class="field">
-                <label for="city">Ville *</label>
-                <input id="city" name="city" type="text" autocomplete="address-level2" required maxlength="100" placeholder="Votre ville">
-              </div>
-              <div class="field full">
-                <label for="country">Pays *</label>
-                <input id="country" name="country" type="text" autocomplete="country-name" required maxlength="100" placeholder="Votre pays">
-              </div>
-              <div class="field full">
-                <label for="notes">Précisions sur la livraison (facultatif)</label>
-                <textarea id="notes" name="notes" maxlength="1500" placeholder="Accès, horaires souhaités, instructions complémentaires…"></textarea>
-              </div>
-            </div>
-
-            <div class="honeypot" aria-hidden="true">
-              <label for="website">Ne pas remplir</label>
-              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-            </div>
-
-            <button class="submit" id="send" type="submit">Envoyer ma demande gratuite</button>
-            <p id="status" role="status" aria-live="polite"></p>
-          </form>
-        </section>
-
-        <aside class="panel">
-          <div class="summary">
-            <h2>Votre sélection</h2>
-            <p class="summary-intro">Vérifiez les produits et les quantités avant l’envoi.</p>
-            <div id="productList"></div>
-            <div class="total">
-              <span>Estimation du panier</span>
-              <span id="cartTotal">—</span>
-            </div>
-            <div class="note-box">
-              <strong>Bon à savoir</strong><br>
-              Cette demande est gratuite et sans engagement. Les prix définitifs, les frais de livraison et les modalités de paiement seront confirmés par BoisRoyal avant validation de la commande.
-            </div>
-          </div>
-        </aside>
-      </div>
+  <div class="notice">
+    <span class="notice-icon">✓</span>
+    <div>
+      <strong>Demande gratuite et sans engagement.</strong>
+      Aucun paiement n'est demandé à cette étape. Votre commande sera
+      confirmée après validation avec notre équipe.
     </div>
-  </main>
+  </div>
 
-  <footer>© <span id="year"></span> BoisRoyal · <a href="index.html">Retour à la boutique</a></footer>
+  <form class="panel" id="form">
+    <section aria-labelledby="basket-title">
+      <div class="section-heading">
+        <span class="section-number">01</span>
+        <h2 id="basket-title">Votre sélection</h2>
+      </div>
 
-  <script>
-    const URL_SUPABASE = 'https://evvblxiitorfdniqmqcf.supabase.co';
-    const CLE_PUBLIQUE = 'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
+      <div class="product-list" id="productList">
+        <div class="empty">Chargement de votre panier...</div>
+      </div>
 
-    const form = document.getElementById('form');
-    const button = document.getElementById('send');
-    const status = document.getElementById('status');
-    const productList = document.getElementById('productList');
-    const cartTotal = document.getElementById('cartTotal');
+      <div class="cart-total">
+        <span>Sous-total des produits</span>
+        <strong id="cartTotal">—</strong>
+      </div>
 
-    let cart = [];
+      <p class="footer-note">
+        Les frais de livraison ne sont pas inclus. Le montant définitif
+        sera confirmé par BoisRoyal avant toute validation.
+      </p>
+    </section>
 
-    function readCart() {
-      try {
-        const data = JSON.parse(localStorage.getItem('boisroyal_cart') || '[]');
-        return Array.isArray(data) ? data : [];
-      } catch (error) {
-        return [];
-      }
+    <div class="section-divider"></div>
+
+    <section aria-labelledby="contact-title">
+      <div class="section-heading">
+        <span class="section-number">02</span>
+        <h2 id="contact-title">Vos coordonnées</h2>
+      </div>
+
+      <div class="form-grid">
+        <div class="field full">
+          <label for="name">Nom complet *</label>
+          <input id="name" name="name" maxlength="120"
+            autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="phone">Téléphone *</label>
+          <input id="phone" name="phone" type="tel" maxlength="40"
+            autocomplete="tel" required>
+        </div>
+        <div class="field">
+          <label for="email">Adresse e-mail (facultatif)</label>
+          <input id="email" name="email" type="email" maxlength="180"
+            autocomplete="email">
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section aria-labelledby="delivery-title">
+      <div class="section-heading">
+        <span class="section-number">03</span>
+        <h2 id="delivery-title">Adresse de livraison</h2>
+      </div>
+
+      <div class="form-grid">
+        <div class="field full">
+          <label for="address">Adresse complète *</label>
+          <input id="address" name="address" maxlength="220"
+            autocomplete="street-address" required>
+        </div>
+        <div class="field">
+          <label for="postal">Code postal *</label>
+          <input id="postal" name="postal" maxlength="20"
+            autocomplete="postal-code" required>
+        </div>
+        <div class="field">
+          <label for="city">Ville *</label>
+          <input id="city" name="city" maxlength="100"
+            autocomplete="address-level2" required>
+        </div>
+        <div class="field full">
+          <label for="country">Pays *</label>
+          <select id="country" name="country" required>
+            <option value="France">France</option>
+            <option value="Belgique">Belgique</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="notes">Précisions (facultatif)</label>
+          <textarea id="notes" name="notes" maxlength="1200" rows="3"
+            placeholder="Instructions de livraison ou informations utiles..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div style="position:absolute;left:-9999px" aria-hidden="true">
+      <label for="website">Ne pas remplir</label>
+      <input id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <button id="send" type="submit" disabled>
+      Envoyer ma demande gratuite <span aria-hidden="true">→</span>
+    </button>
+
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <p class="footer-note">
+      * Champs obligatoires. Aucun paiement n'est effectué lors de
+      l'envoi de cette demande.
+    </p>
+  </form>
+
+  <p class="bottom-link">
+    <a href="index.html">← Retour à BoisRoyal</a>
+  </p>
+</main>
+
+<script>
+const URL_SUPABASE = 'https://evvblxiitorfdniqmqcf.supabase.co';
+const CLE_PUBLIQUE = 'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
+
+const form = document.getElementById('form');
+const button = document.getElementById('send');
+const status = document.getElementById('status');
+const productList = document.getElementById('productList');
+const cartTotal = document.getElementById('cartTotal');
+
+let cart = [];
+
+function readCart() {
+  try {
+    const data = JSON.parse(localStorage.getItem('boisroyal_cart') || '[]');
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function money(value) {
+  if (value === null || value === undefined || value === '' ||
+      !Number.isFinite(Number(value))) {
+    return 'Sur devis';
+  }
+
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(Number(value));
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+function renderCart() {
+  cart = readCart();
+
+  if (!cart.length) {
+    productList.innerHTML =
+      '<div class="empty">Votre panier est vide. ' +
+      '<a href="index.html">Retournez à la boutique pour choisir vos produits.</a></div>';
+
+    cartTotal.textContent = money(0);
+    button.disabled = true;
+    return;
+  }
+
+  let subtotal = 0;
+  let hasUnknownPrice = false;
+
+  productList.innerHTML = cart.map(item => {
+    const quantity = Number(item.quantity);
+    const price = item.price;
+
+    if (price === null || price === undefined || price === '' ||
+        !Number.isFinite(Number(price))) {
+      hasUnknownPrice = true;
+    } else {
+      subtotal += Number(price) * quantity;
     }
 
-    function money(value) {
-      if (value === null || value === undefined || value === '' ||
-          !Number.isFinite(Number(value))) {
-        return 'Sur devis';
-      }
-      return new Intl.NumberFormat('fr-FR', {
-        style: 'currency',
-        currency: 'EUR'
-      }).format(Number(value));
+    return `
+      <div class="product">
+        <div>
+          <b>${escapeHTML(item.name || 'Produit BoisRoyal')}</b>
+          <small>${escapeHTML(item.unit || 'Unité')} · ${money(price)} / unité</small>
+        </div>
+        <div class="quantity">× ${quantity}</div>
+      </div>
+    `;
+  }).join('');
+
+  cartTotal.textContent = hasUnknownPrice
+    ? money(subtotal) + ' + produits sur devis'
+    : money(subtotal);
+
+  button.disabled = false;
+}
+
+function getOrderItems() {
+  return cart.map(item => {
+    const quantity = Number(item.quantity);
+    const slug = String(item.slug || '').trim();
+    const id = String(item.id || '');
+
+    if (!slug || id.startsWith('demo-')) {
+      throw new Error(
+        'Un produit de démonstration est présent dans votre panier. ' +
+        'Retournez à la boutique et rechargez le catalogue avant de recommencer.'
+      );
     }
 
-    function escapeHTML(value) {
-      return String(value ?? '').replace(/[&<>"']/g, char => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-      }[char]));
+    if (!Number.isInteger(quantity) || quantity < 1) {
+      throw new Error('Une quantité de produit est invalide.');
     }
 
-    function renderCart() {
-      cart = readCart();
+    return { slug, quantity };
+  });
+}
 
-      if (!cart.length) {
-        productList.innerHTML =
-          '<div class="empty">Votre panier est vide. ' +
-          '<a href="index.html">Retournez à la boutique pour choisir vos produits.</a></div>';
-        cartTotal.textContent = money(0);
-        button.disabled = true;
-        return;
+form.addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const val = id => document.getElementById(id).value.trim();
+
+  status.className = '';
+  status.textContent = '';
+
+  if (val('website')) {
+    status.textContent = 'Demande refusée.';
+    status.className = 'error';
+    return;
+  }
+
+  cart = readCart();
+
+  if (!cart.length) {
+    status.textContent = 'Votre panier est vide.';
+    status.className = 'error';
+    return;
+  }
+
+  let items;
+
+  try {
+    items = getOrderItems();
+  } catch (error) {
+    status.textContent = error.message;
+    status.className = 'error';
+    return;
+  }
+
+  const payload = {
+    customer_name: val('name'),
+    customer_phone: val('phone'),
+    customer_email: val('email'),
+    delivery_address: val('address'),
+    delivery_postal_code: val('postal'),
+    delivery_city: val('city'),
+    delivery_country: val('country'),
+    delivery_notes: val('notes'),
+    company_website: val('website'),
+    items
+  };
+
+  button.disabled = true;
+  button.textContent = 'Envoi en cours...';
+  status.textContent = 'Envoi de votre demande...';
+
+  try {
+    const response = await fetch(
+      URL_SUPABASE + '/functions/v1/boisroyal-order-request',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': CLE_PUBLIQUE
+        },
+        body: JSON.stringify(payload)
       }
+    );
 
-      let subtotal = 0;
-      let hasUnknownPrice = false;
+    const result = await response.json();
 
-      productList.innerHTML = cart.map(item => {
-        const quantity = Number(item.quantity);
-        const price = item.price;
-
-        if (price === null || price === undefined || price === '' ||
-            !Number.isFinite(Number(price))) {
-          hasUnknownPrice = true;
-        } else {
-          subtotal += Number(price) * quantity;
-        }
-
-        return `
-          <div class="product">
-            <div>
-              <b>${escapeHTML(item.name || 'Produit BoisRoyal')}</b>
-              <small>${escapeHTML(item.unit || 'Unité')} · ${money(price)} / unité</small>
-            </div>
-            <div class="quantity">× ${quantity}</div>
-          </div>
-        `;
-      }).join('');
-
-      cartTotal.textContent = hasUnknownPrice
-        ? money(subtotal) + ' + produits sur devis'
-        : money(subtotal);
-
-      button.disabled = false;
+    if (!response.ok) {
+      throw new Error(
+        result.error || 'Envoi impossible. Veuillez réessayer.'
+      );
     }
 
-    function getOrderItems() {
-      return cart.map(item => {
-        const quantity = Number(item.quantity);
-        const slug = String(item.slug || '').trim();
-        const id = String(item.id || '');
+    localStorage.removeItem('boisroyal_cart');
+    cart = [];
 
-        if (!slug || id.startsWith('demo-')) {
-          throw new Error(
-            'Un produit de démonstration est présent dans votre panier. ' +
-            'Retournez à la boutique et rechargez le catalogue avant de recommencer.'
-          );
-        }
+    productList.innerHTML =
+      '<div class="empty">Votre demande a bien été envoyée.</div>';
+    cartTotal.textContent = money(0);
 
-        if (!Number.isInteger(quantity) || quantity < 1) {
-          throw new Error('Une quantité de produit est invalide.');
-        }
+    status.textContent =
+      'Demande envoyée avec succès ! Référence : ' +
+      (result.order_number || 'enregistrée') +
+      '. BoisRoyal vous recontactera pour confirmer les prix, ' +
+      'la livraison et les modalités de paiement.';
 
-        return { slug, quantity };
-      });
-    }
+    status.className = 'success';
 
-    form.addEventListener('submit', async function(event) {
-      event.preventDefault();
+    const trackingLink = document.createElement('a');
+    trackingLink.href = 'suivi.html?ref=' + encodeURIComponent(result.order_number || '');
+    trackingLink.textContent = 'Suivre ma commande →';
+    trackingLink.style.display = 'inline-block';
+    trackingLink.style.marginTop = '8px';
+    trackingLink.style.fontWeight = '800';
+    status.appendChild(document.createElement('br'));
+    status.appendChild(trackingLink);
 
-      const val = id => document.getElementById(id).value.trim();
+    form.reset();
+    button.disabled = true;
 
-      status.className = '';
-      status.textContent = '';
+  } catch (error) {
+    status.textContent =
+      error.message || 'Erreur de connexion. Veuillez réessayer.';
+    status.className = 'error';
+    button.disabled = false;
+  } finally {
+    button.textContent = 'Envoyer ma demande gratuite';
+  }
+});
 
-      if (val('website')) {
-        status.textContent = 'Demande refusée.';
-        status.className = 'error';
-        return;
-      }
-
-      cart = readCart();
-
-      if (!cart.length) {
-        status.textContent = 'Votre panier est vide.';
-        status.className = 'error';
-        return;
-      }
-
-      let items;
-      try {
-        items = getOrderItems();
-      } catch (error) {
-        status.textContent = error.message;
-        status.className = 'error';
-        return;
-      }
-
-      const payload = {
-        customer_name: val('name'),
-        customer_phone: val('phone'),
-        customer_email: val('email'),
-        delivery_address: val('address'),
-        delivery_postal_code: val('postal'),
-        delivery_city: val('city'),
-        delivery_country: val('country'),
-        delivery_notes: val('notes'),
-        company_website: val('website'),
-        items
-      };
-
-      button.disabled = true;
-      button.textContent = 'Envoi en cours...';
-      status.textContent = 'Envoi de votre demande...';
-
-      try {
-        const response = await fetch(
-          URL_SUPABASE + '/functions/v1/boisroyal-order-request',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': CLE_PUBLIQUE
-            },
-            body: JSON.stringify(payload)
-          }
-        );
-
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.error || 'Envoi impossible. Veuillez réessayer.');
-        }
-
-        localStorage.removeItem('boisroyal_cart');
-        cart = [];
-
-        productList.innerHTML =
-          '<div class="empty">Votre demande a bien été envoyée.</div>';
-        cartTotal.textContent = money(0);
-
-        status.textContent =
-          'Demande envoyée avec succès ! Référence : ' +
-          (result.order_number || 'enregistrée') +
-          '. BoisRoyal vous recontactera pour confirmer les prix, ' +
-          'la livraison et les modalités de paiement.';
-
-        status.className = 'success';
-        form.reset();
-        button.disabled = true;
-
-      } catch (error) {
-        status.textContent =
-          error.message || 'Erreur de connexion. Veuillez réessayer.';
-        status.className = 'error';
-        button.disabled = false;
-      } finally {
-        button.textContent = 'Envoyer ma demande gratuite';
-      }
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-    renderCart();
-  </script>
+renderCart();
+</script>
 </body>
 </html>

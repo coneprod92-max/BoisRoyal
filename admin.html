@@ -317,8 +317,27 @@
         Se connecter
       </button>
 
-      <div class="msg err" id="loginMsg" role="alert"></div>
+      <button type="button" id="forgotPasswordBtn"
+              style="width:100%;margin-top:10px;background:transparent;border:0;color:var(--orange-dark);text-decoration:underline">
+        Mot de passe oublié ?
+      </button>
+
+      <div class="msg" id="loginMsg" role="status" aria-live="polite"></div>
     </form>
+
+    <div id="passwordRecoveryBox" class="hidden" style="margin-top:20px;padding-top:18px;border-top:1px solid var(--line)">
+      <h2 style="font-size:1.15rem">Créer un nouveau mot de passe</h2>
+      <p style="color:var(--muted);font-size:.88rem">Choisis un nouveau mot de passe pour ton accès administrateur.</p>
+      <form id="passwordRecoveryForm">
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input id="newPassword" type="password" minlength="8" autocomplete="new-password" required>
+        <label for="confirmNewPassword">Confirmer le mot de passe</label>
+        <input id="confirmNewPassword" type="password" minlength="8" autocomplete="new-password" required>
+        <button class="primary" type="submit" id="saveNewPasswordBtn" style="width:100%;margin-top:16px">Enregistrer le nouveau mot de passe</button>
+      </form>
+      <div class="msg" id="recoveryMsg" role="status" aria-live="polite"></div>
+      <button type="button" id="backToLoginBtn" style="margin-top:8px">Retour à la connexion</button>
+    </div>
   </section>
 
 
@@ -540,7 +559,97 @@
     return !error && data === true;
   }
 
+  let passwordRecoveryActive = false;
+
+  function showPasswordRecovery(message = '') {
+    passwordRecoveryActive = true;
+    $('loginView').classList.remove('hidden');
+    $('adminView').classList.add('hidden');
+    $('loginForm').classList.add('hidden');
+    $('passwordRecoveryBox').classList.remove('hidden');
+    say($('recoveryMsg'), message, 'ok');
+  }
+
+  function returnToLogin(message = '') {
+    passwordRecoveryActive = false;
+    $('passwordRecoveryBox').classList.add('hidden');
+    $('loginForm').classList.remove('hidden');
+    $('passwordRecoveryForm').reset();
+    say($('recoveryMsg'), '');
+    say($('loginMsg'), message, message ? 'ok' : '');
+  }
+
+  $('forgotPasswordBtn').addEventListener('click', async () => {
+    const emailInput = $('email');
+    const email = emailInput.value.trim();
+
+    if (!email || !emailInput.checkValidity()) {
+      say($('loginMsg'), 'Saisis d’abord ton adresse e-mail dans le champ Email.', 'err');
+      emailInput.focus();
+      return;
+    }
+
+    const button = $('forgotPasswordBtn');
+    button.disabled = true;
+    say($('loginMsg'), 'Envoi du lien de réinitialisation…');
+
+    try {
+      const redirectTo = new URL('admin.html?mode=recovery', window.location.href).href;
+      const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo });
+      if (error) throw error;
+
+      say(
+        $('loginMsg'),
+        'Si un compte correspond à cette adresse, un lien de réinitialisation vient d’être envoyé. Vérifie aussi les courriers indésirables.',
+        'ok'
+      );
+    } catch (error) {
+      say($('loginMsg'), 'Envoi impossible : ' + error.message, 'err');
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  $('passwordRecoveryForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const password = $('newPassword').value;
+    const confirmation = $('confirmNewPassword').value;
+
+    if (password.length < 8) {
+      say($('recoveryMsg'), 'Le mot de passe doit contenir au moins 8 caractères.', 'err');
+      return;
+    }
+    if (password !== confirmation) {
+      say($('recoveryMsg'), 'Les deux mots de passe ne correspondent pas.', 'err');
+      return;
+    }
+
+    const button = $('saveNewPasswordBtn');
+    button.disabled = true;
+    say($('recoveryMsg'), 'Mise à jour du mot de passe…');
+
+    try {
+      const { error } = await db.auth.updateUser({ password });
+      if (error) throw error;
+
+      await db.auth.signOut();
+      history.replaceState(null, '', window.location.pathname);
+      returnToLogin('Mot de passe mis à jour. Tu peux maintenant te connecter.');
+    } catch (error) {
+      say($('recoveryMsg'), 'Impossible de modifier le mot de passe : ' + error.message, 'err');
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  $('backToLoginBtn').addEventListener('click', () => returnToLogin());
+
   async function showApp() {
+    if (new URLSearchParams(window.location.search).get('mode') === 'recovery' || window.location.hash.includes('type=recovery')) {
+      showPasswordRecovery();
+      return;
+    }
+
     const {
       data: { session },
       error
@@ -1089,9 +1198,16 @@
 
   // SESSION
   db.auth.onAuthStateChange(event => {
-    if (event === 'SIGNED_OUT') {
+    if (event === 'PASSWORD_RECOVERY') {
+      showPasswordRecovery('Lien validé. Choisis maintenant ton nouveau mot de passe.');
+      return;
+    }
+
+    if (event === 'SIGNED_OUT' && !passwordRecoveryActive) {
       $('adminView').classList.add('hidden');
       $('loginView').classList.remove('hidden');
+      $('loginForm').classList.remove('hidden');
+      $('passwordRecoveryBox').classList.add('hidden');
     }
   });
 

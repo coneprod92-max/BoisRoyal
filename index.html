@@ -1,702 +1,210 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
-  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#30221B">
-
   <title>BoisRoyal | Bois de chauffage et charbon de qualité</title>
-
   <meta name="description" content="Découvrez BoisRoyal : bois de chauffage et charbon sélectionnés. Consultez notre catalogue, demandez votre devis et profitez de solutions de livraison en Europe selon votre destination.">
-
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://boisroyal.net/">
-
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="BoisRoyal">
   <meta property="og:title" content="BoisRoyal | Bois de chauffage et charbon de qualité">
   <meta property="og:description" content="Découvrez notre sélection de bois de chauffage et de charbon. Demandez votre devis auprès de BoisRoyal.">
   <meta property="og:url" content="https://boisroyal.net/">
-
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://boisroyal.net/hero-palettes.webp">
+  <meta property="og:image:alt" content="Sélection de bois de chauffage BoisRoyal">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BoisRoyal | Bois de chauffage et charbon">
   <meta name="twitter:description" content="Découvrez notre sélection de bois de chauffage et de charbon.">
-
+  <meta name="twitter:image" content="https://boisroyal.net/hero-palettes.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
-
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://boisroyal.net/#organization",
+        "name":"BoisRoyal",
+        "url":"https://boisroyal.net/",
+        "email":"contact@boisroyal.net",
+        "telephone":"+33745767085",
+        "description":"Boutique de bois de chauffage et de charbon de bois. Livraison étudiée selon la destination."
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://boisroyal.net/#website",
+        "url":"https://boisroyal.net/",
+        "name":"BoisRoyal",
+        "publisher":{"@id":"https://boisroyal.net/#organization"},
+        "inLanguage":"fr-FR"
+      }
+    ]
+  }
+  </script>
   <style>
-
-    :root{
-
-      --brown:#30221B;--brown-2:#493126;--brown-3:#65432F;
-
-      --cream:#F4EBDD;--paper:#FBF8F2;--orange:#D96B2B;--orange-dark:#B94F1B;
-
-      --charcoal:#292522;--muted:#766D64;--line:#E7DCCE;
-
-      --shadow:0 22px 60px rgba(48,34,27,.13);--radius:22px;
-
-    }
-
-    *{box-sizing:border-box}
-
-    html{scroll-behavior:smooth}
-
-    body{margin:0;background:var(--paper);color:var(--charcoal);font-family:"DM Sans",sans-serif;line-height:1.6}
-
-    img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}
-
-    .announcement{padding:9px 15px;text-align:center;background:var(--brown);color:#F8EBDD;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
-
+    :root{--brown:#30221B;--brown2:#493126;--brown3:#65432F;--cream:#F4EBDD;--paper:#FBF8F2;--orange:#D96B2B;--orangeDark:#B94F1B;--charcoal:#292522;--muted:#766D64;--line:#E7DCCE;--shadow:0 22px 60px rgba(48,34,27,.13)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--charcoal);font-family:"DM Sans",sans-serif;line-height:1.6}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}
+    .announcement{padding:9px 15px;text-align:center;background:#211711;color:#F8EBDD;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .contact-bar{padding:0 24px;text-transform:none;letter-spacing:0;font-size:.75rem}.contact-bar-inner{max-width:1320px;min-height:43px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}.contact-bar-inner>a,.top-promise,.top-trace{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}.contact-bar-inner>a{color:#F7EBDD}.contact-bar-inner>a:hover{color:#F3A06A}.top-promise{font-weight:800;color:#F3A06A}.top-promise small{font-size:.68rem;font-weight:500;color:#D9C9B9}.top-trace{color:#D9C9B9;font-size:.69rem}
     header{position:sticky;top:0;z-index:30;background:rgba(251,248,242,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(48,34,27,.10)}
-
-    .nav{max-width:1240px;min-height:82px;margin:auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-
-    .brand{display:flex;align-items:center;gap:12px}.brand-mark{width:47px;height:47px;display:grid;place-items:center;background:var(--brown);color:#F5D8B9;border:1px solid var(--orange);border-radius:15px;font-size:1.55rem;box-shadow:0 6px 16px #30221b22}
-
-    .brand-name{display:block;font:800 1.55rem "Playfair Display",serif;color:var(--brown);line-height:1.05;letter-spacing:-.03em}
-
-    .brand-tag{display:block;color:var(--muted);font-size:.59rem;letter-spacing:.19em;text-transform:uppercase;margin-top:5px;font-weight:700}
-
-    .nav-links{display:flex;align-items:center;gap:28px;font-size:.85rem;font-weight:800}.nav-links>a:not(.btn){transition:color .2s}.nav-links>a:not(.btn):hover{color:var(--orange)}
-
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 21px;min-height:48px;border:1px solid transparent;border-radius:999px;font-weight:800;font-size:.84rem;transition:transform .2s,*background* .2s,box-shadow .2s}
-
-    .btn:hover{transform:translateY(-2px);box-shadow:0 9px 22px #0002}
-
-    .btn-copper{background:var(--orange);color:white}.btn-copper:hover{background:var(--orange-dark)}
-
-    .btn-dark{background:var(--brown);color:white}.btn-light{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.52);color:white}
-
-    .cart-button{background:var(--brown);color:white;border:0;border-radius:999px;padding:11px 16px;font-weight:800}
-
-    .cart-count{display:inline-grid;place-items:center;min-width:22px;height:22px;margin-left:5px;border-radius:50%;background:var(--orange);color:white;font-size:.7rem}
-
-    .hero{position:relative;min-height:690px;display:flex;align-items:center;isolation:isolate;color:white;background:var(--brown);overflow:hidden}
-
-    .hero:before{content:"";position:absolute;inset:0;z-index:-2;background:url("hero-palettes.webp") center 54%/cover no-repeat;transform:scale(1.015)}
-
-    .hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(35,23,17,.96) 0%,rgba(42,27,19,.84) 42%,rgba(42,27,19,.24) 100%),linear-gradient(0deg,rgba(26,17,12,.48),transparent 55%)}
-
-    .hero-inner{max-width:1240px;width:100%;margin:auto;padding:105px 28px 112px}
-
-    .eyebrow,.kicker{font-size:.69rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}
-
-    .hero .eyebrow{display:inline-flex;align-items:center;gap:11px;color:#F7B27F}
-
-    .hero .eyebrow:before{content:"";width:34px;height:1px;background:var(--orange)}
-
-    .hero h1{max-width:820px;margin:22px 0 20px;font:700 clamp(3.5rem,7.5vw,6.6rem)/.98 "Playfair Display",serif;letter-spacing:-.055em}
-
-    .hero h1 em{color:#F39A5E;font-weight:600}
-
-    .hero-copy{max-width:560px;color:rgba(255,255,255,.82);font-size:1.02rem;line-height:1.8}
-
-    .hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:31px}
-
-    .hero-points{display:flex;flex-wrap:wrap;gap:24px;margin-top:42px;color:#F4E8DA;font-size:.78rem;font-weight:700}
-
-    .hero-points span:before{content:"✦";color:#F39A5E;font-weight:900;margin-right:9px}
-
-    .trust{background:var(--cream);border-bottom:1px solid var(--line)}
-
-    .trust-inner{max-width:1240px;margin:auto;padding:23px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-
-    .trust-item{display:flex;justify-content:center;align-items:center;gap:12px;color:var(--brown);font-weight:800;font-size:.82rem}
-
-    .trust-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#E8D8C5;font-size:1.1rem}
-
-    .section{padding:96px 28px}.soft{background:#F2E9DC}.container{max-width:1240px;margin:auto}
-
-    .section-heading{max-width:720px;text-align:center;margin:0 auto 46px}
-
-    .section-heading h2,.catalog-title h2{font:700 clamp(2.2rem,4.3vw,3.6rem)/1.08 "Playfair Display",serif;color:var(--brown);margin:12px 0 14px;letter-spacing:-.035em}
-
-    .section-heading p,.catalog-title p{color:var(--muted);margin:0;font-size:.94rem}
-
-    .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-
-    .category{position:relative;min-height:390px;display:flex;align-items:flex-end;overflow:hidden;border-radius:8px;isolation:isolate;background:var(--brown);color:white;box-shadow:var(--shadow)}
-
-    .category:before{content:"";position:absolute;inset:0;z-index:-2;background-position:center;background-size:cover;transition:transform .6s}
-
-    .category:hover:before{transform:scale(1.07)}
-
-    .category:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(34,22,16,.96) 0%,rgba(34,22,16,.35) 58%,rgba(34,22,16,.04) 100%)}
-
-    .cat-filet:before{background-image:url("produit-filets.webp")}.cat-buches:before{background-image:url("histoire-acacia.webp")}.cat-charbon:before{background-image:url("produit-caisse-bouleau.webp")}
-
-    .category-content{padding:29px}.category-label{display:inline-block;padding:6px 11px;background:var(--orange);color:white;border-radius:2px;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-
-    .category h3{font:700 1.85rem "Playfair Display",serif;margin:13px 0 5px}.category p{color:rgba(255,255,255,.78);font-size:.84rem;margin:0 0 16px}
-
-    .category a,.category-content>span:last-child{color:#F7AE78;font-weight:800;font-size:.82rem}
-
-    .catalog-top{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:30px}
-
-    .catalog-title h2{margin-bottom:8px}.search{width:min(100%,340px);padding:14px 18px;border:1px solid #DCCDBB;border-radius:3px;background:#FFFCF8;outline:none;color:var(--brown)}
-
-    .search:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(217,107,43,.13)}
-
-    .filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:27px}
-
-    .filter{padding:10px 17px;border:1px solid #DCCDBB;border-radius:2px;background:#FFFCF8;color:var(--brown);font-size:.77rem;font-weight:800}
-
-    .filter.active,.filter:hover{background:var(--brown);color:white;border-color:var(--brown)}
-
-    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}
-
-    .product-card{overflow:hidden;background:#FFFCF8;border:1px solid #E6D9CA;border-radius:5px;box-shadow:0 8px 26px rgba(48,34,27,.055);transition:transform .25s,box-shadow .25s}
-
-    .product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-
-    .product-image{height:255px;position:relative;background:#E7DCCE;overflow:hidden}
-
-    .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.product-card:hover .product-image img{transform:scale(1.04)}
-
-    .product-badge{position:absolute;top:15px;left:15px;padding:7px 11px;background:var(--cream);color:var(--brown);border-radius:2px;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-
-    .product-body{padding:22px}.product-type{font-size:.63rem;color:var(--orange-dark);font-weight:800;text-transform:uppercase;letter-spacing:.15em}
-
-    .product-body h3{font:700 1.42rem "Playfair Display",serif;color:var(--brown);margin:7px 0}
-
-    .product-desc{min-height:44px;color:var(--muted);font-size:.82rem;margin:0 0 18px}
-
-    .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:15px;border-top:1px solid var(--line)}
-
-    .price{font-size:1.12rem;font-weight:800;color:var(--brown)}.unit{display:block;font-size:.68rem;color:var(--muted);font-weight:500}
-
-    .add-button{padding:11px 15px;background:var(--orange);color:white;border:0;border-radius:2px;font-size:.75rem;font-weight:800;transition:*background* .2s}
-
-    .add-button:hover{background:var(--brown)}.empty{grid-column:1/-1;padding:32px;text-align:center;background:#FFFCF8;border:1px dashed #DCCDBB;border-radius:5px;color:var(--muted)}
-
-    .delivery-panel{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border-radius:6px;background:var(--brown);color:white;box-shadow:var(--shadow)}
-
-    .delivery-copy{padding:clamp(32px,5vw,64px)}.delivery-copy h2{font:700 clamp(2.2rem,4vw,3.5rem)/1.08 "Playfair Display",serif;margin:14px 0;letter-spacing:-.03em}
-
-    .delivery-copy p{color:rgba(255,255,255,.76);font-size:.9rem}.delivery-copy ul{padding:0;list-style:none;display:grid;gap:13px;margin:26px 0}
-
-    .delivery-copy li:before{content:"✦";color:#F39A5E;font-weight:900;margin-right:11px}
-
-    .delivery-image{min-height:430px;background:url("hero-palettes.webp") center/cover no-repeat}
-
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-
-    .step{padding:30px;border:1px solid #E5D8C9;border-radius:5px;background:#FFFCF8}
-
-    .step-number{width:47px;height:47px;display:grid;place-items:center;background:var(--brown);color:#F7B27F;border-radius:3px;font:700 1.2rem "Playfair Display",serif}
-
-    .step h3{font:700 1.38rem "Playfair Display",serif;color:var(--brown);margin:19px 0 8px}
-
-    .step p{margin:0;color:var(--muted);font-size:.85rem}
-
-    .final-cta{padding:0 28px 94px}
-
-    .final-inner{max-width:1240px;margin:auto;padding:45px clamp(28px,5vw,62px);display:flex;align-items:center;justify-content:space-between;gap:25px;border:1px solid #E4C9AF;border-radius:5px;background:var(--cream)}
-
-    .final-inner h2{font:700 clamp(2rem,3vw,2.8rem) "Playfair Display",serif;color:var(--brown);margin:9px 0}.final-inner p{margin:0;color:var(--muted);font-size:.9rem}
-
-    footer{padding:55px 28px 23px;background:#241914;color:rgba(255,255,255,.68)}
-
-    .footer-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:38px;padding-bottom:36px}
-
-    .footer-inner .brand-name{color:white}.footer-inner .brand-tag{color:#BFB0A2}.footer-about{max-width:350px;font-size:.83rem;margin-top:17px}
-
-    .footer-title{color:#F2A06A;font-weight:800;font-size:.77rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
-
-    .footer-links{display:grid;gap:9px;font-size:.82rem}.footer-links a:hover{color:#F2A06A}
-
-    .footer-bottom{max-width:1240px;margin:auto;padding-top:19px;border-top:1px solid rgba(255,255,255,.14);font-size:.72rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-
-    .cart-overlay{position:fixed;inset:0;z-index:60;background:rgba(20,13,9,.62);opacity:0;visibility:hidden;transition:.2s}
-
-    .cart-overlay.open{opacity:1;visibility:visible}
-
-    .cart-drawer{position:absolute;right:0;top:0;height:100%;width:min(450px,100%);padding:25px;background:var(--paper);display:flex;flex-direction:column;transform:translateX(100%);transition:.25s}
-
-    .cart-overlay.open .cart-drawer{transform:translateX(0)}
-
-    .cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px}
-
-    .cart-head h2{font:700 1.8rem "Playfair Display",serif;color:var(--brown);margin:0}
-
-    .close-cart{width:39px;height:39px;border:0;border-radius:50%;background:var(--cream);color:var(--brown);font-size:1.3rem}
-
-    .cart-items{overflow:auto;flex:1;padding:15px 0}.cart-line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
-
-    .cart-line strong{display:block;color:var(--brown)}.cart-line small{color:var(--muted)}
-
-    .qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{width:28px;height:28px;border:1px solid var(--line);border-radius:50%;background:white;color:var(--brown);font-weight:800}
-
-    .remove{border:0;background:none;color:#B94F1B;font-size:.77rem}.cart-total{padding:18px 0;border-top:1px solid var(--line)}
-
-    .total-row{display:flex;justify-content:space-between;font-weight:800;color:var(--brown);font-size:1.13rem}
-
-    .cart-note{font-size:.74rem;color:var(--muted);margin:9px 0 16px}.checkout{width:100%;border:0}
-
-    .cart-empty{text-align:center;color:var(--muted);padding:45px 10px}.mobile-cart{display:none}
-
-    @media(max-width:900px){
-
-      .nav-links>a:not(.btn){display:none}.category-grid,.product-grid{grid-template-columns:repeat(2,1fr)}
-
-      .category:last-child{grid-column:1/-1}.delivery-panel{grid-template-columns:1fr}
-
-      .delivery-image{min-height:300px;order:-1}.footer-inner{grid-template-columns:1fr 1fr}
-
-      .footer-inner>div:first-child{grid-column:1/-1}
-
-    }
-
-    @media(max-width:600px){
-
-      .announcement{font-size:.58rem;letter-spacing:.08em}.nav{min-height:68px;padding:9px 15px}
-
-      .brand-mark{width:39px;height:39px}.brand-name{font-size:1.28rem}.brand-tag{font-size:.52rem}
-
-      .nav-links{gap:7px}.nav-links .btn{display:none}.cart-button{padding:9px 12px;font-size:.76rem}
-
-      .hero{min-height:610px}.hero:after{background:linear-gradient(90deg,rgba(35,23,17,.92),rgba(42,27,19,.66)),linear-gradient(0deg,rgba(26,17,12,.5),transparent)}
-
-      .hero-inner{padding:76px 21px 82px}.hero h1{font-size:clamp(3.1rem,14vw,4.4rem)}
-
-      .hero-copy{font-size:.91rem}.hero-points{display:grid;gap:10px;margin-top:31px}
-
-      .trust-inner{grid-template-columns:1fr;gap:12px;padding:19px 21px}.trust-item{justify-content:flex-start}
-
-      .section{padding:67px 19px}.section-heading{margin-bottom:32px}
-
-      .category-grid,.product-grid{grid-template-columns:1fr}.category,.category:last-child{min-height:330px;grid-column:auto}
-
-      .catalog-top{align-items:stretch;flex-direction:column;gap:17px}.search{width:100%}
-
-      .product-image{height:255px}.product-desc{min-height:0}.steps{grid-template-columns:1fr}
-
-      .delivery-image{min-height:240px}.final-cta{padding:0 19px 68px}
-
-      .final-inner{align-items:flex-start;flex-direction:column;padding:29px 23px}
-
-      .footer-inner{grid-template-columns:1fr;gap:27px}.footer-inner>div:first-child{grid-column:auto}
-
-      .footer-bottom{flex-direction:column}.mobile-cart{display:block;position:fixed;bottom:13px;left:13px;right:13px;z-index:25}
-
-      .mobile-cart button{width:100%;padding:15px;background:var(--orange);color:white;border:0;border-radius:3px;font-weight:800;box-shadow:0 8px 25px #0004}
-
-    }
-
+    .nav{max-width:1320px;min-height:88px;margin:auto;padding:12px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:50px;height:50px;display:grid;place-items:center;background:var(--brown);color:#F5D8B9;border:1px solid var(--orange);border-radius:50%;font-size:1.65rem;box-shadow:0 6px 16px #30221b22}.brand-name{display:block;font:800 1.72rem "Playfair Display",serif;color:var(--brown);line-height:1.05;letter-spacing:-.045em}.brand-tag{display:block;color:var(--muted);font-size:.59rem;letter-spacing:.19em;text-transform:uppercase;margin-top:5px;font-weight:700}
+    .nav-links{display:flex;align-items:center;gap:25px;font-size:.82rem;font-weight:800}.nav-links>a:not(.btn){color:var(--brown2);transition:color .2s}.nav-links>a:not(.btn):hover{color:var(--orange)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 21px;min-height:48px;border:1px solid transparent;border-radius:3px;font-weight:800;font-size:.84rem;transition:transform .2s,background .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 9px 22px #0002}.btn-copper{background:var(--orange);color:white}.btn-copper:hover{background:var(--orangeDark)}.btn-dark{background:var(--brown);color:white}.btn-light{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.52);color:white}.nav-links .btn{padding:14px 20px;box-shadow:0 7px 18px rgba(185,79,27,.18)}
+    .cart-button{background:#F0E5D8;color:var(--brown);border:0;border-radius:3px;padding:11px 16px;font-weight:800}.cart-count{display:inline-grid;place-items:center;min-width:22px;height:22px;margin-left:5px;border-radius:50%;background:var(--orange);color:white;font-size:.7rem}
+    .hero{position:relative;min-height:710px;display:flex;align-items:center;isolation:isolate;color:white;background:var(--brown);overflow:hidden}.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:url("hero-palettes.webp") center 58%/cover no-repeat;transform:scale(1.025)}.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(28,18,13,.96),rgba(38,25,18,.84) 43%,rgba(42,27,19,.18)),linear-gradient(0deg,rgba(26,17,12,.52),transparent 58%)}
+    .hero-inner{max-width:1320px;width:100%;margin:auto;padding:118px 28px}.eyebrow,.kicker{font-size:.69rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}.hero .eyebrow{display:inline-flex;align-items:center;gap:11px;color:#F7B27F}.hero .eyebrow:before{content:"";width:34px;height:1px;background:var(--orange)}.hero h1{max-width:760px;margin:22px 0 20px;font:700 clamp(4rem,8vw,7.2rem)/.94 "Playfair Display",serif;letter-spacing:-.055em}.hero h1 em{color:#F39A5E;font-weight:600}.hero-copy{max-width:590px;color:rgba(255,255,255,.82);font-size:1.04rem;line-height:1.8}.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:31px}.hero-actions .btn{min-height:54px;padding:15px 25px}.hero-points{display:flex;flex-wrap:wrap;gap:25px;margin-top:42px;color:#F4E8DA;font-size:.75rem;font-weight:700}.hero-points span:before{content:"✦";color:#F39A5E;margin-right:9px}
+    .trust{background:var(--cream);border-bottom:1px solid var(--line)}.trust-inner{max-width:1320px;margin:auto;padding:27px 28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.trust-item{display:flex;justify-content:flex-start;align-items:center;gap:12px;color:var(--brown);font-weight:800;font-size:.78rem}.trust-icon{width:44px;height:44px;flex:0 0 44px;display:grid;place-items:center;border-radius:50%;background:#E9D6C2;font-size:1.1rem}
+    .section{padding:108px 28px}.soft{background:#F0E7DB}.container{max-width:1240px;margin:auto}.section-heading{max-width:720px;text-align:center;margin:0 auto 46px}.section-heading h2,.catalog-title h2{font:700 clamp(2.5rem,4.6vw,4rem)/1.08 "Playfair Display",serif;color:var(--brown);margin:12px 0 14px;letter-spacing:-.035em}.section-heading p,.catalog-title p{color:var(--muted);margin:0;font-size:.94rem}
+    .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.category{position:relative;min-height:420px;display:flex;align-items:flex-end;overflow:hidden;border-radius:4px;isolation:isolate;background:var(--brown);color:white;box-shadow:var(--shadow)}.category:before{content:"";position:absolute;inset:0;z-index:-2;background-position:center;background-size:cover;transition:transform .6s}.category:hover:before{transform:scale(1.07)}.category:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(28,18,13,.97),rgba(28,18,13,.32) 62%,rgba(28,18,13,.02))}.cat-filet:before{background-image:url("produit-filets.webp")}.cat-buches:before{background-image:url("histoire-acacia.webp")}.cat-charbon:before{background-image:url("produit-caisse-bouleau.webp")}.category-content{padding:32px}.category-label{display:inline-block;padding:6px 11px;background:var(--orange);color:white;border-radius:2px;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.category h3{font:700 2rem "Playfair Display",serif;margin:13px 0 5px}.category p{color:rgba(255,255,255,.78);font-size:.84rem;margin:0 0 16px}.category-content>span:last-child{color:#F7AE78;font-weight:800;font-size:.82rem}
+    .catalog-top{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:30px}.catalog-title h2{margin-bottom:8px}.search{width:min(100%,340px);padding:14px 18px;min-height:52px;border:1px solid #DCCDBB;border-radius:3px;background:#FFFCF8;outline:none;color:var(--brown)}.search:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(217,107,43,.13)}.filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:27px}.filter{padding:11px 19px;border:1px solid #DCCDBB;border-radius:3px;background:#FFFCF8;color:var(--brown);font-size:.77rem;font-weight:800}.filter.active,.filter:hover{background:var(--brown);color:white;border-color:var(--brown)}
+    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}.product-card{overflow:hidden;background:#FFFCF8;border:1px solid #E6D9CA;border-radius:4px;box-shadow:0 8px 26px rgba(48,34,27,.055);transition:transform .25s,box-shadow .25s}.product-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.product-image{height:275px;position:relative;background:#E7DCCE;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.product-card:hover .product-image img{transform:scale(1.04)}.product-badge{position:absolute;top:15px;left:15px;padding:7px 11px;background:var(--cream);color:var(--brown);border-radius:2px;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.product-body{padding:25px}.product-type{font-size:.63rem;color:var(--orangeDark);font-weight:800;text-transform:uppercase;letter-spacing:.15em}.product-body h3{font:700 1.55rem "Playfair Display",serif;color:var(--brown);margin:7px 0}.product-desc{min-height:44px;color:var(--muted);font-size:.82rem;margin:0 0 12px}.product-detail{display:inline-block;margin:5px 0 15px;color:var(--orange);font-size:13px;font-weight:700}.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:15px;border-top:1px solid var(--line)}.price{font-size:1.12rem;font-weight:800;color:var(--brown)}.unit{display:block;font-size:.68rem;color:var(--muted);font-weight:500}.add-button{padding:12px 16px;background:var(--orange);color:white;border:0;border-radius:3px;font-size:.75rem;font-weight:800;transition:background .2s}.add-button:hover{background:var(--brown)}.empty{grid-column:1/-1;padding:32px;text-align:center;background:#FFFCF8;border:1px dashed #DCCDBB;border-radius:5px;color:var(--muted)}
+    .delivery-panel{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border-radius:4px;background:var(--brown);color:white;box-shadow:var(--shadow)}.delivery-copy{padding:clamp(36px,5.5vw,72px)}.delivery-copy h2{font:700 clamp(2.2rem,4vw,3.5rem)/1.08 "Playfair Display",serif;margin:14px 0;letter-spacing:-.03em}.delivery-copy p{color:rgba(255,255,255,.76);font-size:.9rem}.delivery-copy ul{padding:0;list-style:none;display:grid;gap:13px;margin:26px 0}.delivery-copy li:before{content:"✦";color:#F39A5E;font-weight:900;margin-right:11px}.delivery-image{min-height:500px;background:url("hero-palettes.webp") center/cover no-repeat}
+    .commitments{background:#2B1D16;color:#F8F0E7}.commitment-intro{max-width:760px;margin-bottom:42px}.commitment-intro h2{font:700 clamp(2.5rem,5vw,4.3rem)/1.03 "Playfair Display",serif;letter-spacing:-.04em;margin:15px 0;color:#FFF8EF}.commitment-intro h2 em{color:#F39A5E;font-weight:600}.commitment-intro p{max-width:590px;color:#D2C2B3;font-size:.95rem}.commitment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.commitment-grid article{padding:30px 28px;border:1px solid rgba(244,235,221,.19);background:rgba(255,255,255,.035);min-height:225px}.commitment-number{display:inline-block;color:#F39A5E;font:700 1.3rem "Playfair Display",serif;margin-bottom:24px}.commitment-grid h3{font:700 1.5rem "Playfair Display",serif;color:#FFF8EF;margin:0 0 10px}.commitment-grid p{color:#D2C2B3;font-size:.84rem;margin:0;line-height:1.8}.certification-note{max-width:980px;margin:28px 0 0;padding:15px 18px;border-left:2px solid var(--orange);background:rgba(255,255,255,.045);color:#CBBBAD;font-size:.73rem;line-height:1.7}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.step{padding:34px;border:1px solid #E5D8C9;border-radius:4px;background:#FFFCF8}.step-number{width:47px;height:47px;display:grid;place-items:center;background:var(--brown);color:#F7B27F;border-radius:3px;font:700 1.2rem "Playfair Display",serif}.step h3{font:700 1.38rem "Playfair Display",serif;color:var(--brown);margin:19px 0 8px}.step p{margin:0;color:var(--muted);font-size:.85rem}
+    .final-cta{padding:0 28px 94px}.final-inner{max-width:1240px;margin:auto;padding:52px clamp(28px,5vw,62px);display:flex;align-items:center;justify-content:space-between;gap:25px;border:1px solid #E4C9AF;border-radius:4px;background:var(--cream)}.final-inner h2{font:700 clamp(2rem,3vw,2.8rem) "Playfair Display",serif;color:var(--brown);margin:9px 0}.final-inner p{margin:0;color:var(--muted);font-size:.9rem}
+    footer{padding:65px 28px 23px;background:#241914;color:rgba(255,255,255,.68)}.footer-inner{max-width:1320px;margin:auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:38px;padding-bottom:36px}.footer-inner .brand-name{color:white}.footer-inner .brand-tag{color:#BFB0A2}.footer-about{max-width:350px;font-size:.83rem;margin-top:17px}.footer-title{color:#F2A06A;font-weight:800;font-size:.77rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}.footer-links{display:grid;gap:9px;font-size:.82rem}.footer-links a:hover{color:#F2A06A}.footer-bottom{max-width:1320px;margin:auto;padding-top:19px;border-top:1px solid rgba(255,255,255,.14);font-size:.72rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .cart-overlay{position:fixed;inset:0;z-index:60;background:rgba(20,13,9,.62);opacity:0;visibility:hidden;transition:.2s}.cart-overlay.open{opacity:1;visibility:visible}.cart-drawer{position:absolute;right:0;top:0;height:100%;width:min(450px,100%);padding:25px;background:var(--paper);display:flex;flex-direction:column;transform:translateX(100%);transition:.25s}.cart-overlay.open .cart-drawer{transform:translateX(0)}.cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px}.cart-head h2{font:700 1.8rem "Playfair Display",serif;color:var(--brown);margin:0}.close-cart{width:39px;height:39px;border:0;border-radius:50%;background:var(--cream);color:var(--brown);font-size:1.3rem}.cart-items{overflow:auto;flex:1;padding:15px 0}.cart-line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}.cart-line strong{display:block;color:var(--brown)}.cart-line small{color:var(--muted)}.qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{width:28px;height:28px;border:1px solid var(--line);border-radius:50%;background:white;color:var(--brown);font-weight:800}.remove{border:0;background:none;color:#B94F1B;font-size:.77rem}.cart-total{padding:18px 0;border-top:1px solid var(--line)}.total-row{display:flex;justify-content:space-between;font-weight:800;color:var(--brown);font-size:1.13rem}.cart-note{font-size:.74rem;color:var(--muted);margin:9px 0 16px}.checkout{width:100%;border:0}.checkout:disabled{opacity:.45;cursor:not-allowed}.cart-empty{text-align:center;color:var(--muted);padding:45px 10px}.mobile-cart{display:none}
+    @media(max-width:900px){.nav-links>a:not(.btn){display:none}.category-grid,.product-grid{grid-template-columns:repeat(2,1fr)}.category:last-child{grid-column:1/-1}.delivery-panel{grid-template-columns:1fr}.delivery-image{min-height:330px;order:-1}.footer-inner{grid-template-columns:1fr 1fr}.footer-inner>div:first-child{grid-column:1/-1}.contact-bar-inner{justify-content:center;flex-wrap:wrap;padding:10px 0;gap:8px 20px}.top-trace{display:none}.nav{padding-left:20px;padding-right:20px}.commitment-grid{grid-template-columns:1fr 1fr}.commitment-grid article:last-child{grid-column:1/-1}}
+    @media(max-width:600px){.announcement{font-size:.58rem;letter-spacing:.08em}.contact-bar{padding:0 12px}.contact-bar-inner{justify-content:flex-start;gap:5px 15px;min-height:0;padding:9px 0;font-size:.66rem}.contact-bar-inner>a,.top-promise{white-space:normal}.contact-bar-inner>a:nth-child(2){font-size:.63rem}.top-promise small{font-size:.61rem}.nav{min-height:70px;padding:9px 15px}.brand-mark{width:40px;height:40px}.brand-name{font-size:1.28rem}.brand-tag{font-size:.52rem}.nav-links{gap:7px}.nav-links .btn{display:none}.cart-button{padding:9px 12px;font-size:.76rem}.hero{min-height:640px}.hero:after{background:linear-gradient(90deg,rgba(35,23,17,.92),rgba(42,27,19,.66)),linear-gradient(0deg,rgba(26,17,12,.5),transparent)}.hero-inner{padding:82px 21px 88px}.hero h1{font-size:clamp(3.5rem,15vw,4.8rem)}.hero-copy{font-size:.9rem}.hero-points{display:grid;gap:10px;margin-top:31px}.trust-inner{grid-template-columns:1fr;gap:13px;padding:20px 21px}.section{padding:74px 19px}.section-heading{margin-bottom:32px}.category-grid,.product-grid{grid-template-columns:1fr}.category,.category:last-child{min-height:350px;grid-column:auto}.catalog-top{align-items:stretch;flex-direction:column;gap:17px}.search{width:100%}.product-image{height:260px}.product-desc{min-height:0}.steps{grid-template-columns:1fr}.delivery-image{min-height:245px}.commitment-grid{grid-template-columns:1fr}.commitment-grid article:last-child{grid-column:auto}.commitment-grid article{min-height:0;padding:25px}.commitment-number{margin-bottom:14px}.certification-note{font-size:.69rem;padding:13px}.final-cta{padding:0 19px 68px}.final-inner{align-items:flex-start;flex-direction:column;padding:31px 23px}.footer-inner{grid-template-columns:1fr;gap:27px}.footer-inner>div:first-child{grid-column:auto}.footer-bottom{flex-direction:column}.mobile-cart{display:block;position:fixed;bottom:13px;left:13px;right:13px;z-index:25}.mobile-cart button{width:100%;padding:15px;background:var(--orange);color:white;border:0;border-radius:3px;font-weight:800;box-shadow:0 8px 25px #0004}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
-
-
-
-    /* Refonte premium BoisRoyal — couche visuelle complémentaire */
-    .contact-bar{padding:0 24px;background:#211711;color:#F7EBDD;text-transform:none;letter-spacing:0;font-size:.75rem}
-    .contact-bar-inner{max-width:1240px;min-height:43px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
-    .contact-bar-inner>a,.top-promise,.top-trace{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
-    .contact-bar-inner>a{color:#F7EBDD}.contact-bar-inner>a:hover{color:#F3A06A}
-    .top-promise{font-weight:800;color:#F3A06A}.top-promise small{font-size:.68rem;font-weight:500;color:#D9C9B9}
-    .top-trace{color:#D9C9B9;font-size:.69rem}
-    .nav{max-width:1320px;min-height:88px;padding-left:30px;padding-right:30px}
-    .brand-mark{border-radius:50%;width:50px;height:50px;font-size:1.65rem}
-    .brand-name{font-size:1.72rem;letter-spacing:-.045em}
-    .nav-links{gap:25px}.nav-links>a:not(.btn){font-size:.82rem;color:#493126}
-    .nav-links .btn{border-radius:3px;padding:14px 20px;box-shadow:0 7px 18px rgba(185,79,27,.18)}
-    .cart-button{border-radius:3px;background:#F0E5D8;color:#30221B}
-    .hero{min-height:710px}
-    .hero:before{background-position:center 58%;transform:scale(1.025)}
-    .hero:after{background:linear-gradient(90deg,rgba(28,18,13,.96) 0%,rgba(38,25,18,.84) 43%,rgba(42,27,19,.18) 100%),linear-gradient(0deg,rgba(26,17,12,.52),transparent 58%)}
-    .hero-inner{max-width:1320px;padding-top:118px;padding-bottom:118px}
-    .hero h1{max-width:760px;font-size:clamp(4rem,8vw,7.2rem);line-height:.94}
-    .hero h1 em{color:#F39A5E}
-    .hero-copy{max-width:590px;font-size:1.04rem}
-    .hero-actions .btn{border-radius:3px;min-height:54px;padding:15px 25px}
-    .hero-points{gap:25px;font-size:.75rem;letter-spacing:.02em}
-    .trust-inner{max-width:1320px;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:27px;padding-bottom:27px}
-    .trust-item{justify-content:flex-start;font-size:.78rem;line-height:1.4}
-    .trust-icon{flex:0 0 44px;background:#E9D6C2;color:#493126}
-    .section{padding-top:108px;padding-bottom:108px}
-    .section-heading h2,.catalog-title h2{font-size:clamp(2.5rem,4.6vw,4rem)}
-    .category{border-radius:4px;min-height:420px}
-    .category-content{padding:32px}
-    .category h3{font-size:2rem}
-    .category:after{background:linear-gradient(0deg,rgba(28,18,13,.97) 0%,rgba(28,18,13,.32) 62%,rgba(28,18,13,.02) 100%)}
-    .soft{background:#F0E7DB}
-    .catalog-top{align-items:end}
-    .search{border-radius:3px;min-height:52px}
-    .filter{border-radius:3px;padding:11px 19px}
-    .product-card{border-radius:4px}.product-image{height:275px}
-    .product-body{padding:25px}.product-body h3{font-size:1.55rem}
-    .add-button{border-radius:3px;padding:12px 16px}
-    .delivery-panel{border-radius:4px}.delivery-copy{padding:clamp(36px,5.5vw,72px)}
-    .delivery-image{min-height:500px}
-    .commitments{background:#2B1D16;color:#F8F0E7}
-    .commitment-intro{max-width:760px;margin-bottom:42px}
-    .commitment-intro h2{font:700 clamp(2.5rem,5vw,4.3rem)/1.03 "Playfair Display",serif;letter-spacing:-.04em;margin:15px 0;color:#FFF8EF}
-    .commitment-intro h2 em{color:#F39A5E;font-weight:600}
-    .commitment-intro p{max-width:590px;color:#D2C2B3;font-size:.95rem}
-    .commitment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .commitment-grid article{padding:30px 28px;border:1px solid rgba(244,235,221,.19);background:rgba(255,255,255,.035);min-height:225px}
-    .commitment-number{display:inline-block;color:#F39A5E;font:700 1.3rem "Playfair Display",serif;margin-bottom:24px}
-    .commitment-grid h3{font:700 1.5rem "Playfair Display",serif;color:#FFF8EF;margin:0 0 10px}
-    .commitment-grid p{color:#D2C2B3;font-size:.84rem;margin:0;line-height:1.8}
-    .certification-note{max-width:980px;margin:28px 0 0;padding:15px 18px;border-left:2px solid #D96B2B;background:rgba(255,255,255,.045);color:#CBBBAD;font-size:.73rem;line-height:1.7}
-    .step{border-radius:4px;padding:34px}
-    .final-inner{border-radius:4px;padding-top:52px;padding-bottom:52px}
-    footer{padding-top:65px}
-    .footer-inner{max-width:1320px}
-    .footer-bottom{max-width:1320px}
-    @media(max-width:900px){
-      .contact-bar-inner{justify-content:center;flex-wrap:wrap;padding:10px 0;gap:8px 20px}
-      .top-trace{display:none}.nav{padding-left:20px;padding-right:20px}
-      .commitment-grid{grid-template-columns:1fr 1fr}.commitment-grid article:last-child{grid-column:1/-1}
-      .delivery-image{min-height:330px}
-    }
-    @media(max-width:600px){
-      .contact-bar{padding:0 12px}.contact-bar-inner{justify-content:flex-start;gap:5px 15px;min-height:0;padding:9px 0;font-size:.66rem}
-      .contact-bar-inner>a,.top-promise{white-space:normal}.contact-bar-inner>a:nth-child(2){font-size:.63rem}
-      .top-promise small{font-size:.61rem}
-      .nav{min-height:70px;padding:9px 15px}.brand-mark{width:40px;height:40px}
-      .nav-links{gap:7px}.nav-links .btn{display:none}.cart-button{padding:9px 12px}
-      .hero{min-height:640px}.hero-inner{padding:82px 21px 88px}
-      .hero h1{font-size:clamp(3.5rem,15vw,4.8rem)}.hero-copy{font-size:.9rem}
-      .trust-inner{grid-template-columns:1fr;gap:13px;padding:20px 21px}
-      .section{padding:74px 19px}.category{min-height:350px}
-      .product-image{height:260px}.delivery-image{min-height:245px}
-      .commitment-grid{grid-template-columns:1fr}.commitment-grid article:last-child{grid-column:auto}
-      .commitment-grid article{min-height:0;padding:25px}
-      .commitment-number{margin-bottom:14px}
-      .certification-note{font-size:.69rem;padding:13px}
-      .final-inner{padding:31px 23px}
-    }
-
   </style>
-
 </head>
-
 <body>
-
-  <div class="announcement contact-bar">
-    <div class="contact-bar-inner">
-      <a href="tel:+33745767085">☎ <span>+33 7 45 76 70 85</span></a>
-      <a href="mailto:contact@boisroyal.net">✉ <span>contact@boisroyal.net</span></a>
-      <span class="top-promise">⌖ Livraison en Europe <small>selon destination</small></span>
-      <span class="top-trace">✦ Sélection & traçabilité fournisseurs</span>
-    </div>
-  </div>
-
-  <header>
-
-    <div class="nav">
-
-      <a class="brand" href="#accueil"><span class="brand-mark">♨</span><span><span class="brand-name">BoisRoyal</span><span class="brand-tag">La chaleur naturelle</span></span></a>
-
-      <nav class="nav-links">
-
-        <a href="#produits">Nos produits</a><a href="#livraison">Livraison</a><a href="#comment">Comment commander</a>
-
-        <button class="cart-button" type="button" onclick="openCart()">Panier <span class="cart-count" id="cartCount">0</span></button>
-
-        <a class="btn btn-copper" href="devis.html">Demander un devis ↗</a>
-
-      </nav>
-
-    </div>
-
-  </header>
-
-
-
+  <div class="announcement contact-bar"><div class="contact-bar-inner">
+    <a href="tel:+33745767085">☎ <span>+33 7 45 76 70 85</span></a>
+    <a href="mailto:contact@boisroyal.net">✉ <span>contact@boisroyal.net</span></a>
+    <span class="top-promise">⌖ Livraison en Europe <small>selon destination</small></span>
+    <span class="top-trace">✦ Sélection & traçabilité fournisseurs</span>
+  </div></div>
+  <header><div class="nav">
+    <a class="brand" href="#accueil"><span class="brand-mark">♨</span><span><span class="brand-name">BoisRoyal</span><span class="brand-tag">La chaleur naturelle</span></span></a>
+    <nav class="nav-links"><a href="#produits">Nos produits</a><a href="#livraison">Livraison</a><a href="suivi.html">Suivre ma commande</a><a href="#comment">Comment commander</a><button class="cart-button" type="button" onclick="openCart()">Panier <span class="cart-count" id="cartCount">0</span></button><a class="btn btn-copper" href="devis.html">Demander un devis ↗</a></nav>
+  </div></header>
   <main>
-
-    <section class="hero" id="accueil">
-
-      <div class="hero-inner">
-
-        <span class="eyebrow">Le goût des belles matières</span>
-
-        <h1>La chaleur<br>a du <em>caractère.</em></h1>
-
-        <p class="hero-copy">Du bois de chauffage au charbon, découvrez une sélection pensée pour les moments qui comptent. Choisissez vos produits, composez votre panier et préparez votre commande en quelques instants.</p>
-
-        <div class="hero-actions"><a class="btn btn-copper" href="#produits">Explorer la boutique →</a><a class="btn btn-light" href="devis.html">Demander un devis</a></div>
-
-        <div class="hero-points"><span>Sélection soignée</span><span>Prix transparents</span><span>Livraison organisée sur devis</span></div>
-
-      </div>
-
-    </section>
-
-
-
-    <section class="trust"><div class="trust-inner">
-
-      <div class="trust-item"><span class="trust-icon">🪵</span>Bois et combustibles au choix</div>
-
-      <div class="trust-item"><span class="trust-icon">📍</span>Livraison selon votre adresse</div>
-
-      <div class="trust-item"><span class="trust-icon">🌿</span>Informations de traçabilité selon fournisseur</div>
-
+    <section class="hero" id="accueil"><div class="hero-inner">
+      <span class="eyebrow">Le goût des belles matières</span><h1>La chaleur<br>a du <em>caractère.</em></h1>
+      <p class="hero-copy">Du bois de chauffage au charbon, découvrez une sélection pensée pour les moments qui comptent. Choisissez vos produits, composez votre panier et préparez votre commande en quelques instants.</p>
+      <div class="hero-actions"><a class="btn btn-copper" href="#produits">Explorer la boutique →</a><a class="btn btn-light" href="devis.html">Demander un devis</a><a class="btn btn-light" href="suivi.html">Suivre ma commande</a></div>
+      <div class="hero-points"><span>Sélection soignée</span><span>Prix transparents</span><span>Livraison organisée sur devis</span></div>
     </div></section>
-
-
-
+    <section class="trust"><div class="trust-inner"><div class="trust-item"><span class="trust-icon">🪵</span>Bois et combustibles au choix</div><div class="trust-item"><span class="trust-icon">📍</span>Livraison selon votre adresse</div><div class="trust-item"><span class="trust-icon">🌿</span>Informations de traçabilité selon fournisseur</div></div></section>
     <section class="section" id="categories"><div class="container">
-
       <div class="section-heading"><span class="kicker">La sélection BoisRoyal</span><h2>Le bon combustible. Le bon format.</h2><p>Des petits formats pratiques aux commandes plus importantes, trouvez le produit qui répond à votre besoin.</p></div>
-
       <div class="category-grid">
-
         <a class="category cat-filet" href="#produits" data-category-link="bois"><div class="category-content"><span class="category-label">Pratique au quotidien</span><h3>Filets & petits formats</h3><p>Des formats faciles à transporter et à stocker.</p><span>Explorer les produits →</span></div></a>
-
         <a class="category cat-buches" href="#produits" data-category-link="bois"><div class="category-content"><span class="category-label">Pour vos réserves</span><h3>Bûches & volumes</h3><p>Préparez votre stock selon vos besoins.</p><span>Explorer les produits →</span></div></a>
-
         <a class="category cat-charbon" href="#produits" data-category-link="charbon"><div class="category-content"><span class="category-label">Cuisson & braises</span><h3>Charbon</h3><p>Découvrez les conditionnements disponibles.</p><span>Explorer les produits →</span></div></a>
-
       </div>
-
     </div></section>
-
-
-
     <section class="section soft" id="produits"><div class="container">
-
       <div class="catalog-top"><div class="catalog-title"><span class="kicker">La boutique BoisRoyal</span><h2>Nos produits</h2><p>Ajoutez vos articles au panier. Les frais de livraison seront confirmés séparément.</p></div><input class="search" id="productSearch" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher un produit"></div>
-
       <div class="filters"><button class="filter active" data-filter="tous">Tout voir</button><button class="filter" data-filter="bois">Bois de chauffage</button><button class="filter" data-filter="charbon">Charbon</button></div>
-
       <div class="product-grid" id="productGrid"><div class="empty">Chargement du catalogue…</div></div>
-
+      <div class="empty" id="catalogError" role="status" hidden>Le catalogue ne peut pas être chargé pour le moment. Merci de réessayer dans quelques instants ou de nous contacter.</div>
+      <div style="margin-top:28px;text-align:center"><span class="kicker">Accès direct</span><p style="color:var(--muted);font-size:.84rem">Retrouvez aussi nos quatre fiches produits :</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px"><a class="btn btn-dark" href="produit.html?slug=demo-bois-petit-filet">Bois petit filet</a><a class="btn btn-dark" href="produit.html?slug=demo-bois-lot-familial">Lot familial 40 L</a><a class="btn btn-dark" href="produit.html?slug=demo-charbon-petit-sac">Charbon petit sac</a><a class="btn btn-dark" href="produit.html?slug=demo-charbon-grand-sac">Charbon grand sac</a></div>
+      </div>
     </div></section>
-
-
-
     <section class="section" id="livraison"><div class="container"><div class="delivery-panel">
-
       <div class="delivery-copy"><span class="kicker" style="color:#F3A06B">Une livraison transparente</span><h2>La chaleur, jusque chez vous.</h2><p>Le transport dépend de votre adresse, de la quantité et du type de produit. Nous vérifions les frais avec vous avant toute confirmation.</p><ul><li>Indiquez votre ville et votre adresse.</li><li>Choisissez les produits et les quantités.</li><li>Recevez le montant total avant confirmation.</li></ul><a class="btn btn-copper" href="devis.html">Préparer ma commande →</a></div>
-
       <div class="delivery-image" role="img" aria-label="Bois prêt à être livré"></div>
-
     </div></div></section>
-
-
-
     <section class="section commitments" id="engagements"><div class="container">
-      <div class="commitment-intro">
-        <span class="kicker">L’exigence BoisRoyal</span>
-        <h2>La qualité se choisit.<br><em>La confiance se construit.</em></h2>
-        <p>Nous privilégions une sélection attentive, des informations claires et une relation transparente à chaque étape.</p>
-      </div>
-      <div class="commitment-grid">
-        <article><span class="commitment-number">01</span><h3>Sélection attentive</h3><p>Des produits choisis selon leur usage, leur format et les informations communiquées par nos fournisseurs.</p></article>
-        <article><span class="commitment-number">02</span><h3>Transparence</h3><p>Les prix des produits sont affichés clairement. Les frais de transport sont confirmés avant validation.</p></article>
-        <article><span class="commitment-number">03</span><h3>Traçabilité</h3><p>Les informations d’origine et les justificatifs disponibles sont vérifiés auprès des fournisseurs, selon les produits.</p></article>
-      </div>
+      <div class="commitment-intro"><span class="kicker">L’exigence BoisRoyal</span><h2>La qualité se choisit.<br><em>La confiance se construit.</em></h2><p>Nous privilégions une sélection attentive, des informations claires et une relation transparente à chaque étape.</p></div>
+      <div class="commitment-grid"><article><span class="commitment-number">01</span><h3>Sélection attentive</h3><p>Des produits choisis selon leur usage, leur format et les informations communiquées par nos fournisseurs.</p></article><article><span class="commitment-number">02</span><h3>Transparence</h3><p>Les prix des produits sont affichés clairement. Les frais de transport sont confirmés avant validation.</p></article><article><span class="commitment-number">03</span><h3>Traçabilité</h3><p>Les informations d’origine et les justificatifs disponibles sont vérifiés auprès des fournisseurs, selon les produits.</p></article></div>
       <p class="certification-note">BoisRoyal ne revendique pas à ce jour de certification PEFC ou FSC propre à l’entreprise. Toute référence à une certification fournisseur sera indiquée uniquement lorsqu’elle est documentée et vérifiable.</p>
     </div></section>
-
-    <section class="section soft" id="comment"><div class="container">
-
-      <div class="section-heading"><span class="kicker">Simple et transparent</span><h2>Comment commander ?</h2><p>Vous gardez le contrôle à chaque étape.</p></div>
-
-      <div class="steps">
-
-        <article class="step"><div class="step-number">01</div><h3>Composez votre panier</h3><p>Choisissez vos produits et ajustez les quantités souhaitées.</p></article>
-
-        <article class="step"><div class="step-number">02</div><h3>Indiquez votre adresse</h3><p>Transmettez vos coordonnées pour que nous calculions la livraison.</p></article>
-
-        <article class="step"><div class="step-number">03</div><h3>Validez votre commande</h3><p>Vérifiez le prix des produits, du transport et les modalités de paiement avant confirmation.</p></article>
-
-      </div>
-
-    </div></section>
-
-
-
+    <section class="section soft" id="comment"><div class="container"><div class="section-heading"><span class="kicker">Simple et transparent</span><h2>Comment commander ?</h2><p>Vous gardez le contrôle à chaque étape.</p></div><div class="steps">
+      <article class="step"><div class="step-number">01</div><h3>Composez votre panier</h3><p>Choisissez vos produits et ajustez les quantités souhaitées.</p></article><article class="step"><div class="step-number">02</div><h3>Indiquez votre adresse</h3><p>Transmettez vos coordonnées pour que nous calculions la livraison.</p></article><article class="step"><div class="step-number">03</div><h3>Validez votre commande</h3><p>Vérifiez le prix des produits, du transport et les modalités de paiement avant confirmation.</p></article>
+    </div></div></section>
     <section class="final-cta"><div class="final-inner"><div><span class="kicker">Un projet, un besoin ?</span><h2>Préparons votre commande.</h2><p>Commencez par choisir vos produits ou demandez un devis personnalisé.</p></div><a class="btn btn-dark" href="devis.html">Demander un devis ↗</a></div></section>
-
   </main>
-
-
-
   <footer><div class="footer-inner">
-
     <div><a class="brand" href="#accueil"><span class="brand-mark">♨</span><span><span class="brand-name">BoisRoyal</span><span class="brand-tag">La chaleur naturelle</span></span></a><p class="footer-about">Bois de chauffage et charbon. Une boutique simple, une sélection soignée et une livraison confirmée avec vous.</p></div>
-
-    <div><div class="footer-title">Navigation</div><div class="footer-links"><a href="#produits">Nos produits</a><a href="#livraison">Livraison</a><a href="#comment">Comment commander</a><a href="devis.html">Demander un devis</a></div></div>
-
+    <div><div class="footer-title">Navigation</div><div class="footer-links"><a href="#produits">Nos produits</a><a href="#livraison">Livraison</a><a href="#comment">Comment commander</a><a href="devis.html">Demander un devis</a><a href="suivi.html">Suivre ma commande</a></div></div>
     <div><div class="footer-title">Nous contacter</div><div class="footer-links"><a href="tel:+33745767085">+33 7 45 76 70 85</a><a href="mailto:contact@boisroyal.net">contact@boisroyal.net</a><span>Livraison en Europe selon destination</span><span>Informations fournisseurs vérifiées selon disponibilité</span></div></div>
-
   </div><div class="footer-bottom"><span>© <span id="year"></span> BoisRoyal. Tous droits réservés.</span><span>BoisRoyal · La chaleur a du caractère.</span></div></footer>
-
-
-
   <div class="mobile-cart"><button type="button" onclick="openCart()">Voir mon panier · <span id="mobileCartCount">0</span> article(s)</button></div>
-
-  <div class="cart-overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()">
-
-    <aside class="cart-drawer" aria-label="Votre panier">
-
-      <div class="cart-head"><h2>Votre panier</h2><button class="close-cart" onclick="closeCart()" aria-label="Fermer">×</button></div>
-
-      <div class="cart-items" id="cartItems"></div>
-
-      <div class="cart-total"><div class="total-row"><span>Sous-total produits</span><span id="cartTotal">0,00 €</span></div><p class="cart-note">Hors frais de livraison. Le montant du transport et le total définitif seront confirmés avec vous.</p><button class="btn btn-copper checkout" onclick="goToCheckout()">Continuer ma commande →</button></div>
-
-    </aside>
-
-  </div>
-
-
-
+  <div class="cart-overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()"><aside class="cart-drawer" aria-label="Votre panier">
+    <div class="cart-head"><h2>Votre panier</h2><button class="close-cart" onclick="closeCart()" aria-label="Fermer">×</button></div><div class="cart-items" id="cartItems"></div>
+    <div class="cart-total"><div class="total-row"><span>Sous-total produits</span><span id="cartTotal">0,00 €</span></div><p class="cart-note">Hors frais de livraison. Le montant du transport et le total définitif seront confirmés avec vous.</p><button class="btn btn-copper checkout" onclick="goToCheckout()">Continuer ma commande →</button></div>
+  </aside></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script>
-
+    "use strict";
     const SUPABASE_URL="https://evvblxiitorfdniqmqcf.supabase.co";
-
     const SUPABASE_KEY="sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC";
-
     const PRODUCT_TABLE="br_products";
-
     const PHOTOS={wood:"produit-filets.webp",logs:"histoire-acacia.webp",charcoal:"produit-caisse-bouleau.webp"};
-
-    const demoProducts=[
-
-      {id:"demo-filet",name:"Filet de bois de chauffage",slug:"filet-bois-chauffage",category:"bois_chauffage",description:"Un format pratique pour vos besoins du quotidien.",price:6.90,unit:"le filet",image_url:PHOTOS.wood,is_active:true},
-
-      {id:"demo-lot",name:"Lot de bois — format familial",slug:"lot-bois-format-familial",category:"bois_chauffage",description:"Un lot pour constituer une réserve à la maison.",price:24.90,unit:"le lot",image_url:PHOTOS.logs,is_active:true},
-
-      {id:"demo-charbon",name:"Charbon de bois",slug:"charbon-de-bois",category:"charbon",description:"Contactez-nous pour connaître le conditionnement disponible.",price:null,unit:"selon format",image_url:PHOTOS.charcoal,is_active:true}
-
+    const PRODUCT_LINKS=[
+      {slug:"demo-bois-petit-filet",label:"Bois de chauffage — petit filet",category:"bois"},
+      {slug:"demo-bois-lot-familial",label:"Bois de chauffage — lot familial",category:"bois"},
+      {slug:"demo-charbon-petit-sac",label:"Charbon de bois — petit sac",category:"charbon"},
+      {slug:"demo-charbon-grand-sac",label:"Charbon de bois — grand sac",category:"charbon"}
     ];
-
     let products=[],filter="tous",cart=readCart();
-
-
-
     function readCart(){try{return JSON.parse(localStorage.getItem("boisroyal_cart")||"[]")}catch(e){return[]}}
-
     function saveCart(){localStorage.setItem("boisroyal_cart",JSON.stringify(cart));updateCart()}
-
     function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-
     function category(p){return String(p.category||"").toLowerCase().includes("charbon")||String(p.name||"").toLowerCase().includes("charbon")?"charbon":"bois"}
-
     function photo(p){if(p.image_url)return p.image_url;return category(p)==="charbon"?PHOTOS.charcoal:((p.name||"").toLowerCase().includes("filet")?PHOTOS.wood:PHOTOS.logs)}
-
     function money(v){if(v===null||v===undefined||v===""||!Number.isFinite(Number(v)))return"Sur devis";return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(v))}
-
     function renderProducts(){
-  const q=document.getElementById("productSearch").value.trim().toLowerCase();
-  const list=products.filter(p=>(filter==="tous"||category(p)===filter)&&[p.name,p.description,p.category,p.unit].join(" ").toLowerCase().includes(q));
-  const grid=document.getElementById("productGrid");
-  if(!list.length){grid.innerHTML='<div class="empty">Aucun produit trouvé. Essayez une autre recherche.</div>';return}
-  grid.innerHTML=list.map(p=>{
-    const detailUrl="produit.html?slug="+encodeURIComponent(p.slug||"");
-    return `<article class="product-card">
-      <div class="product-image"><a href="${esc(detailUrl)}" aria-label="Voir ${esc(p.name)}"><img src="${esc(photo(p))}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='${PHOTOS.wood}'"></a><span class="product-badge">${category(p)==="charbon"?"Charbon":"Bois de chauffage"}</span></div>
-      <div class="product-body"><span class="product-type">${category(p)==="charbon"?"Combustible":"Bois de chauffage"}</span><h3><a href="${esc(detailUrl)}">${esc(p.name)}</a></h3><p class="product-desc">${esc(p.description||"Contactez-nous pour plus de détails sur ce produit.")}</p>
-      <a href="${esc(detailUrl)}" style="display:inline-block;margin:8px 0 15px;color:#D96B2B;font-size:13px;font-weight:700">Voir la fiche produit →</a>
-      <div class="product-bottom"><div class="price">${money(p.price)}<span class="unit">${esc(p.unit||"unité")}</span></div><button class="add-button" onclick="addToCart('${esc(String(p.id))}')">＋ Ajouter</button></div></div></article>`;
-  }).join("");
-}
-
-async function loadProducts(){
-
+      const q=document.getElementById("productSearch").value.trim().toLowerCase();
+      const list=products.filter(p=>(filter==="tous"||category(p)===filter)&&[p.name,p.description,p.category,p.unit].join(" ").toLowerCase().includes(q));
+      const grid=document.getElementById("productGrid"),error=document.getElementById("catalogError");error.hidden=true;
+      if(!list.length){grid.innerHTML='<div class="empty">Aucun produit trouvé. Essayez une autre recherche.</div>';return}
+      grid.innerHTML=list.map(p=>{
+        const detailUrl="produit.html?slug="+encodeURIComponent(p.slug||"");
+        return `<article class="product-card"><div class="product-image"><a href="${esc(detailUrl)}" aria-label="Voir ${esc(p.name)}"><img src="${esc(photo(p))}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='${PHOTOS.wood}'"></a><span class="product-badge">${category(p)==="charbon"?"Charbon":"Bois de chauffage"}</span></div><div class="product-body"><span class="product-type">${category(p)==="charbon"?"Combustible":"Bois de chauffage"}</span><h3><a href="${esc(detailUrl)}">${esc(p.name)}</a></h3><p class="product-desc">${esc(p.description||"Contactez-nous pour plus de détails sur ce produit.")}</p><a class="product-detail" href="${esc(detailUrl)}">Voir la fiche produit →</a><div class="product-bottom"><div class="price">${money(p.price)}<span class="unit">${esc(p.unit||"unité")}</span></div><button class="add-button" onclick="addToCart('${esc(String(p.id))}')">＋ Ajouter</button></div></div></article>`;
+      }).join("");
+    }
+    async function loadProducts(){
+      const grid=document.getElementById("productGrid"),errorBox=document.getElementById("catalogError");
       try{
-
-        if(!window.supabase?.createClient)throw new Error("Supabase indisponible");
-
+        if(!window.supabase?.createClient)throw new Error("Bibliothèque Supabase indisponible");
         const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
         const {data,error}=await db.from(PRODUCT_TABLE).select("id,name,slug,category,description,price,unit,stock_quantity,is_active,image_url,created_at").eq("is_active",true).order("created_at",{ascending:false});
-
         if(error)throw error;
-
         products=data||[];
-
-        if(!products.length)products=demoProducts;
-
-      }catch(e){console.warn("Chargement du catalogue :",e);products=demoProducts}
-
-      renderProducts();updateCart();
-
+        if(!products.length){grid.innerHTML='<div class="empty">Aucun produit n’est actuellement disponible. Revenez bientôt ou contactez-nous.</div>';errorBox.hidden=true;updateCart();return}
+        renderProducts();updateCart();
+      }catch(e){
+        console.error("Chargement du catalogue :",e);
+        products=[];grid.innerHTML="";errorBox.hidden=false;
+      }
     }
-
     function addToCart(id){
-
       const p=products.find(x=>String(x.id)===String(id));if(!p)return;
-
       let line=cart.find(x=>String(x.id)===String(p.id));
-
       if(line)line.quantity++;else cart.push({id:p.id,name:p.name,slug:p.slug||"",price:p.price,unit:p.unit||"unité",quantity:1});
-
       saveCart();openCart();
-
     }
-
-    function changeQty(id,delta){
-
-      const line=cart.find(x=>String(x.id)===String(id));if(!line)return;
-
-      line.quantity+=delta;if(line.quantity<=0)cart=cart.filter(x=>String(x.id)!==String(id));saveCart();
-
-    }
-
+    function changeQty(id,delta){const line=cart.find(x=>String(x.id)===String(id));if(!line)return;line.quantity+=delta;if(line.quantity<=0)cart=cart.filter(x=>String(x.id)!==String(id));saveCart()}
     function removeItem(id){cart=cart.filter(x=>String(x.id)!==String(id));saveCart()}
-
     function cartCount(){return cart.reduce((n,x)=>n+Number(x.quantity||0),0)}
-
     function total(){return cart.reduce((n,x)=>n+(Number(x.price)||0)*Number(x.quantity||0),0)}
-
     function updateCart(){
-
-      const count=cartCount();document.getElementById("cartCount").textContent=count;document.getElementById("mobileCartCount").textContent=count;
-
-      document.getElementById("cartTotal").textContent=money(total());
-
-      const box=document.getElementById("cartItems");
-
-      if(!cart.length){box.innerHTML='<div class="cart-empty">Votre panier est vide.<br>Découvrez nos produits pour commencer.</div>';document.querySelector(".checkout").disabled=true;return}
-
-      document.querySelector(".checkout").disabled=false;
-
-      box.innerHTML=cart.map(x=>`<div class="cart-line"><div><strong>${esc(x.name)}</strong><small>${money(x.price)} · ${esc(x.unit)}</small><div class="qty"><button onclick="changeQty('${esc(String(x.id))}',-1)">−</button><b>${x.quantity}</b><button onclick="changeQty('${esc(String(x.id))}',1)">+</button></div></div><div><b>${money((Number(x.price)||0)*x.quantity)}</b><br><button class="remove" onclick="removeItem('${esc(String(x.id))}')">Retirer</button></div></div>`).join("");
-
+      const count=cartCount();document.getElementById("cartCount").textContent=count;document.getElementById("mobileCartCount").textContent=count;document.getElementById("cartTotal").textContent=money(total());
+      const box=document.getElementById("cartItems"),checkout=document.querySelector(".checkout");
+      if(!cart.length){box.innerHTML='<div class="cart-empty">Votre panier est vide.<br>Découvrez nos produits pour commencer.</div>';checkout.disabled=true;return}
+      checkout.disabled=false;
+      box.innerHTML=cart.map(x=>`<div class="cart-line"><div><strong>${esc(x.name)}</strong><small>${money(x.price)} · ${esc(x.unit)}</small><div class="qty"><button onclick="changeQty('${esc(String(x.id))}',-1)">−</button><b>${Number(x.quantity)||0}</b><button onclick="changeQty('${esc(String(x.id))}',1)">+</button></div></div><div><b>${money((Number(x.price)||0)*x.quantity)}</b><br><button class="remove" onclick="removeItem('${esc(String(x.id))}')">Retirer</button></div></div>`).join("");
     }
-
     function openCart(){document.getElementById("cartOverlay").classList.add("open");document.body.style.overflow="hidden";updateCart()}
-
     function closeCart(){document.getElementById("cartOverlay").classList.remove("open");document.body.style.overflow=""}
-
-    function goToCheckout(){
-
-      if(!cart.length)return;
-
-      localStorage.setItem("boisroyal_cart",JSON.stringify(cart));
-
-      window.location.href="devis.html?panier=1";
-
-    }
-
+    function goToCheckout(){if(!cart.length)return;localStorage.setItem("boisroyal_cart",JSON.stringify(cart));window.location.href="devis.html?panier=1"}
     document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderProducts()}));
-
     document.getElementById("productSearch").addEventListener("input",renderProducts);
-
     document.querySelectorAll("[data-category-link]").forEach(a=>a.addEventListener("click",()=>{filter=a.dataset.categoryLink;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));renderProducts()}));
-
     document.getElementById("year").textContent=new Date().getFullYear();
-
     updateCart();loadProducts();
-
   </script>
-
 </body>
-
 </html>
