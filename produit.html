@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#30221B">
+
+  <title>Produit | BoisRoyal</title>
+  <meta name="description" content="Découvrez ce produit BoisRoyal et demandez votre devis.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://boisroyal.net/produit.html">
+
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="BoisRoyal">
+  <meta property="og:title" content="Produit | BoisRoyal">
+  <meta property="og:description" content="Découvrez nos produits de chauffage et de charbon.">
+  <meta property="og:url" content="https://boisroyal.net/produit.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brown: #30221B;
+      --brown2: #493126;
+      --cream: #F4EBDD;
+      --paper: #FBF8F2;
+      --orange: #D96B2B;
+      --dark: #292522;
+      --muted: #81766D;
+      --border: #E8DED1;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--dark);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .topbar {
+      background: var(--brown);
+      color: #F4EBDD;
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 19px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .logo span { color: var(--orange); }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .cart-link {
+      background: var(--brown);
+      color: white;
+      border-radius: 30px;
+      padding: 12px 19px;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: auto;
+      padding: 35px 22px 85px;
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+    .breadcrumb a { color: var(--orange); }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .photo-box {
+      background: var(--cream);
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-info .kicker {
+      color: var(--orange);
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      color: var(--brown);
+      font-size: clamp(34px, 5vw, 53px);
+      line-height: 1.12;
+      margin: 16px 0;
+    }
+
+    .description {
+      font-size: 15px;
+      color: #71675F;
+      line-height: 1.9;
+      margin: 22px 0;
+    }
+
+    .price {
+      font-size: 29px;
+      font-weight: 800;
+      color: var(--brown);
+      margin: 25px 0 5px;
+    }
+
+    .unit {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .availability {
+      margin: 23px 0;
+      font-size: 13px;
+      color: #55734A;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    button, .quote-button {
+      border: 0;
+      border-radius: 6px;
+      padding: 16px 23px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .add-button {
+      background: var(--orange);
+      color: white;
+    }
+
+    .quote-button {
+      background: var(--brown);
+      color: white;
+    }
+
+    button:hover, .quote-button:hover { opacity: .88; }
+
+    .trust {
+      border-top: 1px solid var(--border);
+      margin-top: 35px;
+      padding-top: 23px;
+      display: grid;
+      gap: 13px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .notice {
+      margin-top: 55px;
+      padding: 27px;
+      background: var(--cream);
+      border-radius: 12px;
+      color: var(--brown);
+      line-height: 1.8;
+      font-size: 13px;
+    }
+
+    .state {
+      padding: 70px 15px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    footer {
+      background: var(--brown);
+      color: var(--cream);
+      padding: 35px 5%;
+      text-align: center;
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    footer a { color: #F3A06B; }
+
+    @media(max-width: 760px) {
+      header { padding: 16px 5%; }
+      nav { gap: 12px; }
+      nav a:not(.cart-link) { display: none; }
+      .logo { font-size: 24px; }
+      main { padding: 25px 17px 55px; }
+      .product-layout { grid-template-columns: 1fr; gap: 30px; }
+      .photo-box { min-height: 280px; }
+      .photo-box img { height: 300px; }
+      h1 { font-size: 37px; }
+      .actions { flex-direction: column; }
+      .actions button, .actions a { text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <span>📞 +33 7 45 76 70 85</span>
+    <span>✉ contact@boisroyal.net</span>
+    <span>Livraison en Europe selon destination</span>
+  </div>
+
+  <header>
+    <a href="index.html" class="logo">Bois<span>Royal</span></a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="index.html#catalogue">Catalogue</a>
+      <a href="devis.html" class="cart-link">Mon panier</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a> /
+      <a href="index.html#catalogue">Catalogue</a> /
+      <span id="breadcrumbName">Produit</span>
+    </div>
+
+    <div id="loading" class="state">Chargement du produit…</div>
+
+    <section id="productContent" hidden>
+      <div class="product-layout">
+        <div class="photo-box">
+          <img id="productImage" src="" alt="">
+        </div>
+
+        <div class="product-info">
+          <span class="kicker" id="productCategory">BoisRoyal</span>
+          <h1 id="productName"></h1>
+          <p class="description" id="productDescription"></p>
+
+          <div class="price" id="productPrice"></div>
+          <div class="unit" id="productUnit"></div>
+
+          <div class="availability">✓ Consultez la disponibilité avant confirmation</div>
+
+          <div class="actions">
+            <button class="add-button" id="addButton" type="button">
+              Ajouter au panier
+            </button>
+            <a href="devis.html" class="quote-button">Demander un devis →</a>
+          </div>
+
+          <div class="trust">
+            <span>✓ Informations produit transparentes</span>
+            <span>✓ Frais de livraison confirmés avant validation</span>
+            <span>✓ Accompagnement pour votre commande</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>Une question sur ce produit ?</strong><br>
+        Contactez notre équipe pour obtenir des informations complémentaires
+        sur le conditionnement, la disponibilité et les modalités de livraison.
+        <br><a href="mailto:contact@boisroyal.net">contact@boisroyal.net</a>
+      </div>
+    </section>
+
+    <div id="error" class="state" hidden>
+      <h2>Produit introuvable</h2>
+      <p>Ce produit n'est peut-être plus disponible.</p>
+      <a href="index.html#catalogue" class="quote-button">Retour au catalogue</a>
+    </div>
+  </main>
+
+  <footer>
+    <strong>BoisRoyal</strong><br>
+    Bois de chauffage et charbon sélectionnés.<br>
+    <a href="mailto:contact@boisroyal.net">contact@boisroyal.net</a>
+    · +33 7 45 76 70 85<br>
+    © <span id="year"></span> BoisRoyal. Tous droits réservés.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://evvblxiitorfdniqmqcf.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC";
+    const PRODUCT_TABLE = "br_products";
+
+    const PHOTOS = {
+      wood: "produit-filets.webp",
+      logs: "histoire-acacia.webp",
+      charcoal: "produit-caisse-bouleau.webp"
+    };
+
+    let currentProduct = null;
+
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;",
+        '"': "&quot;", "'": "&#39;"
+      })[c]);
+    }
+
+    function category(product) {
+      return String(product.category || "").toLowerCase().includes("charbon") ||
+        String(product.name || "").toLowerCase().includes("charbon")
+        ? "Charbon de bois"
+        : "Bois de chauffage";
+    }
+
+    function photo(product) {
+      if (product.image_url) return product.image_url;
+
+      if (category(product) === "Charbon de bois") return PHOTOS.charcoal;
+
+      return String(product.name || "").toLowerCase().includes("filet")
+        ? PHOTOS.wood : PHOTOS.logs;
+    }
+
+    function money(value) {
+      if (value === null || value === undefined || value === "" ||
+          !Number.isFinite(Number(value))) return "Sur devis";
+
+      return new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR"
+      }).format(Number(value));
+    }
+
+    function showError() {
+      document.getElementById("loading").hidden = true;
+      document.getElementById("productContent").hidden = true;
+      document.getElementById("error").hidden = false;
+    }
+
+    function updateSEO(product) {
+      const name = product.name || "Produit BoisRoyal";
+      const description = product.description ||
+        "Découvrez ce produit proposé par BoisRoyal.";
+
+      const title = `${name} | BoisRoyal`;
+
+      document.title = title;
+      document.querySelector('meta[name="description"]')
+        .setAttribute("content", description.slice(0, 155));
+
+      const canonical = `https://boisroyal.net/produit.html?slug=${encodeURIComponent(product.slug)}`;
+      document.querySelector('link[rel="canonical"]').href = canonical;
+
+      document.querySelector('meta[property="og:title"]')
+        .setAttribute("content", title);
+
+      document.querySelector('meta[property="og:description"]')
+        .setAttribute("content", description.slice(0, 200));
+
+      document.querySelector('meta[property="og:url"]')
+        .setAttribute("content", canonical);
+
+      const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": name,
+        "description": description,
+        "image": new URL(photo(product), window.location.href).href,
+        "url": canonical,
+        "brand": {
+          "@type": "Brand",
+          "name": "BoisRoyal"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": canonical,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        }
+      };
+
+      if (product.price !== null && product.price !== undefined &&
+          product.price !== "" && Number.isFinite(Number(product.price))) {
+        structuredData.offers.price = Number(product.price);
+      } else {
+        delete structuredData.offers.price;
+      }
+
+      let script = document.getElementById("productStructuredData");
+
+      if (!script) {
+        script = document.createElement("script");
+        script.id = "productStructuredData";
+        script.type = "application/ld+json";
+        document.head.appendChild(script);
+      }
+
+      script.textContent = JSON.stringify(structuredData);
+    }
+
+    function addToCart() {
+      if (!currentProduct) return;
+
+      let cart = [];
+
+      try {
+        cart = JSON.parse(localStorage.getItem("boisroyal_cart") || "[]");
+        if (!Array.isArray(cart)) cart = [];
+      } catch (error) {
+        cart = [];
+      }
+
+      const existing = cart.find(item =>
+        String(item.id) === String(currentProduct.id)
+      );
+
+      if (existing) {
+        existing.quantity = Number(existing.quantity || 0) + 1;
+      } else {
+        cart.push({
+          id: currentProduct.id,
+          name: currentProduct.name,
+          slug: currentProduct.slug || "",
+          price: currentProduct.price,
+          unit: currentProduct.unit || "unité",
+          quantity: 1
+        });
+      }
+
+      localStorage.setItem("boisroyal_cart", JSON.stringify(cart));
+
+      window.location.href = "devis.html?panier=1";
+    }
+
+    async function loadProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+
+      if (!slug) {
+        showError();
+        return;
+      }
+
+      try {
+        if (!window.supabase?.createClient) {
+          throw new Error("Supabase indisponible");
+        }
+
+        const db = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_KEY
+        );
+
+        const { data, error } = await db
+          .from(PRODUCT_TABLE)
+          .select("id,name,slug,category,description,price,unit,stock_quantity,is_active,image_url,created_at")
+          .eq("slug", slug)
+          .eq("is_active", true)
+          .maybeSingle();
+
+        if (error) throw error;
+        if (!data) {
+          showError();
+          return;
+        }
+
+        currentProduct = data;
+
+        document.getElementById("loading").hidden = true;
+        document.getElementById("productContent").hidden = false;
+
+        document.getElementById("productName").textContent = data.name;
+        document.getElementById("breadcrumbName").textContent = data.name;
+        document.getElementById("productCategory").textContent = category(data);
+        document.getElementById("productDescription").textContent =
+          data.description || "Contactez-nous pour plus d'informations sur ce produit.";
+
+        document.getElementById("productPrice").textContent = money(data.price);
+        document.getElementById("productUnit").textContent = data.unit || "Unité";
+
+        const image = document.getElementById("productImage");
+        image.src = photo(data);
+        image.alt = data.name;
+
+        image.onerror = () => {
+          image.onerror = null;
+          image.src = PHOTOS.wood;
+        };
+
+        updateSEO(data);
+
+      } catch (error) {
+        console.error("Erreur de chargement du produit :", error);
+        showError();
+      }
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("addButton").addEventListener("click", addToCart);
+
+    loadProduct();
+  </script>
+
+</body>
+</html>

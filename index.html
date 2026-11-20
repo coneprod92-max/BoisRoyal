@@ -593,26 +593,21 @@
     function money(v){if(v===null||v===undefined||v===""||!Number.isFinite(Number(v)))return"Sur devis";return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(v))}
 
     function renderProducts(){
+  const q=document.getElementById("productSearch").value.trim().toLowerCase();
+  const list=products.filter(p=>(filter==="tous"||category(p)===filter)&&[p.name,p.description,p.category,p.unit].join(" ").toLowerCase().includes(q));
+  const grid=document.getElementById("productGrid");
+  if(!list.length){grid.innerHTML='<div class="empty">Aucun produit trouvé. Essayez une autre recherche.</div>';return}
+  grid.innerHTML=list.map(p=>{
+    const detailUrl="produit.html?slug="+encodeURIComponent(p.slug||"");
+    return `<article class="product-card">
+      <div class="product-image"><a href="${esc(detailUrl)}" aria-label="Voir ${esc(p.name)}"><img src="${esc(photo(p))}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='${PHOTOS.wood}'"></a><span class="product-badge">${category(p)==="charbon"?"Charbon":"Bois de chauffage"}</span></div>
+      <div class="product-body"><span class="product-type">${category(p)==="charbon"?"Combustible":"Bois de chauffage"}</span><h3><a href="${esc(detailUrl)}">${esc(p.name)}</a></h3><p class="product-desc">${esc(p.description||"Contactez-nous pour plus de détails sur ce produit.")}</p>
+      <a href="${esc(detailUrl)}" style="display:inline-block;margin:8px 0 15px;color:#D96B2B;font-size:13px;font-weight:700">Voir la fiche produit →</a>
+      <div class="product-bottom"><div class="price">${money(p.price)}<span class="unit">${esc(p.unit||"unité")}</span></div><button class="add-button" onclick="addToCart('${esc(String(p.id))}')">＋ Ajouter</button></div></div></article>`;
+  }).join("");
+}
 
-      const q=document.getElementById("productSearch").value.trim().toLowerCase();
-
-      const list=products.filter(p=>(filter==="tous"||category(p)===filter)&&[p.name,p.description,p.category,p.unit].join(" ").toLowerCase().includes(q));
-
-      const grid=document.getElementById("productGrid");
-
-      if(!list.length){grid.innerHTML='<div class="empty">Aucun produit trouvé. Essayez une autre recherche.</div>';return}
-
-      grid.innerHTML=list.map(p=>`<article class="product-card">
-
-        <div class="product-image"><img src="${esc(photo(p))}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='${PHOTOS.wood}'"><span class="product-badge">${category(p)==="charbon"?"Charbon":"Bois de chauffage"}</span></div>
-
-        <div class="product-body"><span class="product-type">${category(p)==="charbon"?"Combustible":"Bois de chauffage"}</span><h3>${esc(p.name)}</h3><p class="product-desc">${esc(p.description||"Contactez-nous pour plus de détails sur ce produit.")}</p>
-
-        <div class="product-bottom"><div class="price">${money(p.price)}<span class="unit">${esc(p.unit||"unité")}</span></div><button class="add-button" onclick="addToCart('${esc(String(p.id))}')">＋ Ajouter</button></div></div></article>`).join("");
-
-    }
-
-    async function loadProducts(){
+async function loadProducts(){
 
       try{
 
