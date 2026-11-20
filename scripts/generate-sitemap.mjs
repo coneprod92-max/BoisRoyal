@@ -43,12 +43,21 @@ const xmlEscape = (value) =>
 const today = new Date().toISOString().slice(0, 10);
 
 const urls = [
-  `  <url>
-    <loc>${SITE_URL}/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>`
+  {
+    loc: `${SITE_URL}/`,
+    lastmod: today,
+    priority: "1.0"
+  },
+  {
+    loc: `${SITE_URL}/bois-de-chauffage.html`,
+    lastmod: today,
+    priority: "0.9"
+  },
+  {
+    loc: `${SITE_URL}/charbon-de-bois.html`,
+    lastmod: today,
+    priority: "0.9"
+  }
 ];
 
 for (const product of products) {
@@ -59,17 +68,21 @@ for (const product of products) {
     ? new Date(product.created_at).toISOString().slice(0, 10)
     : today;
 
-  urls.push(`  <url>
-    <loc>${xmlEscape(`${SITE_URL}/produit.html?slug=${slug}`)}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>`);
+  urls.push({
+    loc: `${SITE_URL}/produit.html?slug=${slug}`,
+    lastmod,
+    priority: "0.8"
+  });
 }
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.join("\n")}
+${urls.map(url => `  <url>
+    <loc>${xmlEscape(url.loc)}</loc>
+    <lastmod>${url.lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${url.priority}</priority>
+  </url>`).join("\n")}
 </urlset>
 `;
 
@@ -79,4 +92,6 @@ await writeFile(
   "utf8"
 );
 
-console.log(`Sitemap généré : ${products.length} produit(s) actif(s).`);
+console.log(
+  `Sitemap généré : ${urls.length} URL(s), dont ${products.length} produit(s) actif(s).`
+);
