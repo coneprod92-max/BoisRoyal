@@ -1,1217 +1,1095 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <title>BoisRoyal — Administration</title>
-
-  <style>
-    :root {
-      --bg: #F4EBDD;
-      --paper: #FBF8F2;
-      --panel: #FFFFFF;
-      --brown: #30221B;
-      --brown-2: #493126;
-      --orange: #D96B2B;
-      --orange-dark: #B94F1B;
-      --ink: #292522;
-      --muted: #756B63;
-      --line: #E7DED2;
-      --red: #B83E30;
-      --green: #287044;
-      --shadow: 0 14px 38px rgba(48,34,27,.08);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background:
-        radial-gradient(ellipse at 12% 0%, rgba(217,107,43,.09), transparent 32rem),
-        var(--bg);
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-      line-height: 1.55;
-    }
-
-    .wrap {
-      width: min(1280px, calc(100% - 36px));
-      margin: auto;
-      padding: 28px 0 70px;
-    }
-
-    h1, h2, h3 {
-      margin: 0 0 14px;
-      font-weight: 700;
-      color: var(--brown);
-      letter-spacing: -.025em;
-    }
-
-    h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.65rem, 3vw, 2.25rem);
-      line-height: 1.12;
-    }
-    h1 span { color: var(--orange); }
-    h2 { font-size: 1.25rem; }
-    h3 { font-size: 1.05rem; }
-
-    .bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 28px;
-      padding: 22px 24px;
-      flex-wrap: wrap;
-      background: var(--brown);
-      color: #F8EFE4;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-    }
-    .bar h1 { color: #FFF9F1; margin-bottom: 5px; }
-    .bar h1 span { color: #F2A06E; }
-    .bar > div:first-child > div { color: #D8C9BA !important; }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    label {
-      display: block;
-      font-size: .82rem;
-      color: var(--muted);
-      margin: 13px 0 6px;
-      font-weight: 650;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 11px 13px;
-      border-radius: 9px;
-      border: 1px solid #DED4C8;
-      background: #FFFEFC;
-      color: var(--ink);
-      font: inherit;
-      transition: border-color .18s, box-shadow .18s;
-    }
-
-    textarea { min-height: 90px; resize: vertical; }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(217,107,43,.13);
-    }
-
-    button {
-      font: inherit;
-      cursor: pointer;
-      border-radius: 9px;
-      padding: 10px 15px;
-      border: 1px solid #D8CBBE;
-      background: #FFFDF9;
-      color: var(--brown);
-      font-weight: 700;
-      transition: transform .16s, background .16s, border-color .16s;
-    }
-
-    button:hover {
-      border-color: var(--orange);
-      color: var(--orange-dark);
-      transform: translateY(-1px);
-    }
-
-    button:disabled { opacity: .55; cursor: wait; transform: none; }
-
-    .primary {
-      background: var(--orange);
-      color: #FFFFFF;
-      border-color: var(--orange);
-    }
-    .primary:hover {
-      background: var(--orange-dark);
-      border-color: var(--orange-dark);
-      color: #FFFFFF;
-    }
-
-    .danger:hover { border-color: var(--red); color: var(--red); }
-
-    .login {
-      max-width: 440px;
-      margin: 12vh auto 0;
-      padding: 34px;
-      border-radius: 20px;
-    }
-    .login h1 { margin-bottom: 12px; }
-    .login form { margin-top: 22px; }
-    .login .primary { min-height: 46px; }
-
-    .msg {
-      margin: 12px 0;
-      font-size: .88rem;
-      min-height: 1.2em;
-      overflow-wrap: anywhere;
-    }
-    .err { color: var(--red); }
-    .ok { color: var(--green); }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .88rem;
-    }
-    th, td {
-      padding: 13px 11px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-    th {
-      color: var(--brown-2);
-      background: #F7F0E7;
-      font-size: .72rem;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-    tbody tr:hover { background: #FFFCF7; }
-    .scroll {
-      overflow-x: auto;
-      border-radius: 15px;
-    }
-    .tag {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 99px;
-      font-size: .72rem;
-      font-weight: 750;
-      border: 1px solid var(--line);
-      white-space: nowrap;
-      background: #F7F2EB;
-    }
-    .on { color: #23643A; border-color: #B8D8C0; background: #EDF7EF; }
-    .off { color: var(--muted); background: #F2EFEB; }
-
-    .actions { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
-    .actions button { padding: 7px 11px; font-size: .8rem; }
-
-    .grid2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 16px;
-    }
-
-    .row-check {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-top: 14px;
-      color: var(--brown);
-      font-weight: 650;
-    }
-    .row-check input { width: auto; accent-color: var(--orange); }
-
-    .hidden { display: none !important; }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin: 34px 0 14px;
-    }
-    .section-title h2 { margin: 0; font-size: 1.3rem; }
-
-    .count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 29px;
-      padding: 3px 10px;
-      margin-left: 6px;
-      border-radius: 99px;
-      color: #FFFFFF;
-      background: var(--orange);
-      font-size: .78rem;
-      vertical-align: middle;
-    }
-
-    .quote-details {
-      min-width: 180px;
-      max-width: 300px;
-      overflow-wrap: anywhere;
-    }
-    .quote-details small, .quote-items small, td small {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: .78rem;
-    }
-    .quote-items { min-width: 170px; }
-    .status-select {
-      min-width: 155px;
-      font-size: .82rem;
-      font-weight: 650;
-    }
-    .empty {
-      color: var(--muted);
-      padding: 24px;
-      text-align: center;
-    }
-    .notice {
-      padding: 14px 16px;
-      border: 1px solid #EBC6A9;
-      border-left: 4px solid var(--orange);
-      border-radius: 10px;
-      color: #6D4A35;
-      background: #FFF5EC;
-      font-size: .85rem;
-      margin: 12px 0 16px;
-    }
-
-    #editor { margin-top: 20px !important; }
-    #editorTitle { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-
-    @media (max-width: 760px) {
-      .grid2 { grid-template-columns: 1fr; }
-      .wrap { width: calc(100% - 20px); padding-top: 12px; }
-      .card { padding: 15px; }
-      .login { padding: 25px 20px; margin-top: 7vh; }
-      .bar { padding: 18px; border-radius: 14px; }
-      .section-title { margin-top: 27px; }
-      .section-title h2 { font-size: 1.12rem; }
-      th, td { padding: 11px 9px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BoisRoyal — Administration</title>
+<style>
+:root {
+--bg: #F4EBDD;
+--paper: #FBF8F2;
+--panel: #FFFFFF;
+--brown: #30221B;
+--brown-2: #493126;
+--orange: #D96B2B;
+--orange-dark: #B94F1B;
+--ink: #292522;
+--muted: #756B63;
+--line: #E7DED2;
+--red: #B83E30;
+--green: #287044;
+--shadow: 0 14px 38px rgba(48,34,27,.08);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background:
+radial-gradient(ellipse at 12% 0%, rgba(217,107,43,.09), transparent 32rem),
+var(--bg);
+color: var(--ink);
+font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+line-height: 1.55;
+}
+.wrap {
+width: min(1280px, calc(100% - 36px));
+margin: auto;
+padding: 28px 0 70px;
+}
+h1, h2, h3 {
+margin: 0 0 14px;
+font-weight: 700;
+color: var(--brown);
+letter-spacing: -.025em;
+}
+h1 {
+font-family: Georgia, "Times New Roman", serif;
+font-size: clamp(1.65rem, 3vw, 2.25rem);
+line-height: 1.12;
+}
+h1 span { color: var(--orange); }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
+.bar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 18px;
+margin-bottom: 28px;
+padding: 22px 24px;
+flex-wrap: wrap;
+background: var(--brown);
+color: #F8EFE4;
+border-radius: 18px;
+box-shadow: var(--shadow);
+}
+.bar h1 { color: #FFF9F1; margin-bottom: 5px; }
+.bar h1 span { color: #F2A06E; }
+.bar > div:first-child > div { color: #D8C9BA !important; }
+.card {
+background: var(--panel);
+border: 1px solid var(--line);
+border-radius: 16px;
+padding: 22px;
+box-shadow: var(--shadow);
+}
+label {
+display: block;
+font-size: .82rem;
+color: var(--muted);
+margin: 13px 0 6px;
+font-weight: 650;
+}
+input, select, textarea {
+width: 100%;
+padding: 11px 13px;
+border-radius: 9px;
+border: 1px solid #DED4C8;
+background: #FFFEFC;
+color: var(--ink);
+font: inherit;
+transition: border-color .18s, box-shadow .18s;
+}
+textarea { min-height: 90px; resize: vertical; }
+input:focus, select:focus, textarea:focus {
+outline: none;
+border-color: var(--orange);
+box-shadow: 0 0 0 3px rgba(217,107,43,.13);
+}
+button {
+font: inherit;
+cursor: pointer;
+border-radius: 9px;
+padding: 10px 15px;
+border: 1px solid #D8CBBE;
+background: #FFFDF9;
+color: var(--brown);
+font-weight: 700;
+transition: transform .16s, background .16s, border-color .16s;
+}
+button:hover {
+border-color: var(--orange);
+color: var(--orange-dark);
+transform: translateY(-1px);
+}
+button:disabled { opacity: .55; cursor: wait; transform: none; }
+.primary {
+background: var(--orange);
+color: #FFFFFF;
+border-color: var(--orange);
+}
+.primary:hover {
+background: var(--orange-dark);
+border-color: var(--orange-dark);
+color: #FFFFFF;
+}
+.danger:hover { border-color: var(--red); color: var(--red); }
+.login {
+max-width: 440px;
+margin: 12vh auto 0;
+padding: 34px;
+border-radius: 20px;
+}
+.login h1 { margin-bottom: 12px; }
+.login form { margin-top: 22px; }
+.login .primary { min-height: 46px; }
+.msg {
+margin: 12px 0;
+font-size: .88rem;
+min-height: 1.2em;
+overflow-wrap: anywhere;
+}
+.err { color: var(--red); }
+.ok { color: var(--green); }
+table {
+width: 100%;
+border-collapse: collapse;
+font-size: .88rem;
+}
+th, td {
+padding: 13px 11px;
+border-bottom: 1px solid var(--line);
+text-align: left;
+vertical-align: top;
+}
+th {
+color: var(--brown-2);
+background: #F7F0E7;
+font-size: .72rem;
+text-transform: uppercase;
+letter-spacing: .07em;
+font-weight: 800;
+white-space: nowrap;
+}
+tbody tr:hover { background: #FFFCF7; }
+.scroll {
+overflow-x: auto;
+border-radius: 15px;
+}
+.tag {
+display: inline-block;
+padding: 4px 10px;
+border-radius: 99px;
+font-size: .72rem;
+font-weight: 750;
+border: 1px solid var(--line);
+white-space: nowrap;
+background: #F7F2EB;
+}
+.on { color: #23643A; border-color: #B8D8C0; background: #EDF7EF; }
+.off { color: var(--muted); background: #F2EFEB; }
+.actions { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+.actions button { padding: 7px 11px; font-size: .8rem; }
+.grid2 {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0 16px;
+}
+.row-check {
+display: flex;
+align-items: center;
+gap: 9px;
+margin-top: 14px;
+color: var(--brown);
+font-weight: 650;
+}
+.row-check input { width: auto; accent-color: var(--orange); }
+.hidden { display: none !important; }
+.section-title {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 12px;
+flex-wrap: wrap;
+margin: 34px 0 14px;
+}
+.section-title h2 { margin: 0; font-size: 1.3rem; }
+.count {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+min-width: 29px;
+padding: 3px 10px;
+margin-left: 6px;
+border-radius: 99px;
+color: #FFFFFF;
+background: var(--orange);
+font-size: .78rem;
+vertical-align: middle;
+}
+.quote-details {
+min-width: 180px;
+max-width: 300px;
+overflow-wrap: anywhere;
+}
+.quote-details small, .quote-items small, td small {
+display: block;
+margin-top: 5px;
+color: var(--muted);
+font-size: .78rem;
+}
+.quote-items { min-width: 170px; }
+.status-select {
+min-width: 155px;
+font-size: .82rem;
+font-weight: 650;
+}
+.empty {
+color: var(--muted);
+padding: 24px;
+text-align: center;
+}
+.notice {
+padding: 14px 16px;
+border: 1px solid #EBC6A9;
+border-left: 4px solid var(--orange);
+border-radius: 10px;
+color: #6D4A35;
+background: #FFF5EC;
+font-size: .85rem;
+margin: 12px 0 16px;
+}
+#editor { margin-top: 20px !important; }
+#editorTitle { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.review-comment-admin { min-width:190px; max-width:360px; white-space:pre-wrap; overflow-wrap:anywhere; }
+.review-stars-admin { color:#D98A20; letter-spacing:2px; white-space:nowrap; font-weight:800; }
+.review-actions { min-width:175px; }
+.review-actions button { margin:2px; }
+@media (max-width: 760px) {
+.grid2 { grid-template-columns: 1fr; }
+.wrap { width: calc(100% - 20px); padding-top: 12px; }
+.card { padding: 15px; }
+.login { padding: 25px 20px; margin-top: 7vh; }
+.bar { padding: 18px; border-radius: 14px; }
+.section-title { margin-top: 27px; }
+.section-title h2 { font-size: 1.12rem; }
+th, td { padding: 11px 9px; }
+}
+</style>
 </head>
-
 <body>
 <div class="wrap">
 
-  <!-- CONNEXION ADMINISTRATEUR -->
-  <section id="loginView" class="card login">
-    <h1>Bois<span>Royal</span> · Admin</h1>
+<section id="loginView" class="card login">
+<h1>Bois<span>Royal</span> · Admin</h1>
+<p style="color:var(--muted);font-size:.9rem">
+Connecte-toi pour gérer les produits et les demandes de devis.
+</p>
+<form id="loginForm">
+<label for="email">Email</label>
+<input id="email" type="email" autocomplete="username" required>
+<label for="password">Mot de passe</label>
+<input id="password" type="password"
+autocomplete="current-password" required>
+<button class="primary" style="width:100%;margin-top:18px"
+type="submit" id="loginBtn">
+Se connecter
+</button>
+<button type="button" id="forgotPasswordBtn"
+style="width:100%;margin-top:10px;background:transparent;border:0;color:var(--orange-dark);text-decoration:underline">
+Mot de passe oublié ?
+</button>
+<div class="msg" id="loginMsg" role="status" aria-live="polite"></div>
+</form>
+<div id="passwordRecoveryBox" class="hidden" style="margin-top:20px;padding-top:18px;border-top:1px solid var(--line)">
+<h2 style="font-size:1.15rem">Créer un nouveau mot de passe</h2>
+<p style="color:var(--muted);font-size:.88rem">Choisis un nouveau mot de passe pour ton accès administrateur.</p>
+<form id="passwordRecoveryForm">
+<label for="newPassword">Nouveau mot de passe</label>
+<input id="newPassword" type="password" minlength="8" autocomplete="new-password" required>
+<label for="confirmNewPassword">Confirmer le mot de passe</label>
+<input id="confirmNewPassword" type="password" minlength="8" autocomplete="new-password" required>
+<button class="primary" type="submit" id="saveNewPasswordBtn" style="width:100%;margin-top:16px">Enregistrer le nouveau mot de passe</button>
+</form>
+<div class="msg" id="recoveryMsg" role="status" aria-live="polite"></div>
+<button type="button" id="backToLoginBtn" style="margin-top:8px">Retour à la connexion</button>
+</div>
+</section>
 
-    <p style="color:var(--muted);font-size:.9rem">
-      Connecte-toi pour gérer les produits et les demandes de devis.
-    </p>
-
-    <form id="loginForm">
-      <label for="email">Email</label>
-      <input id="email" type="email" autocomplete="username" required>
-
-      <label for="password">Mot de passe</label>
-      <input id="password" type="password"
-             autocomplete="current-password" required>
-
-      <button class="primary" style="width:100%;margin-top:18px"
-              type="submit" id="loginBtn">
-        Se connecter
-      </button>
-
-      <button type="button" id="forgotPasswordBtn"
-              style="width:100%;margin-top:10px;background:transparent;border:0;color:var(--orange-dark);text-decoration:underline">
-        Mot de passe oublié ?
-      </button>
-
-      <div class="msg" id="loginMsg" role="status" aria-live="polite"></div>
-    </form>
-
-    <div id="passwordRecoveryBox" class="hidden" style="margin-top:20px;padding-top:18px;border-top:1px solid var(--line)">
-      <h2 style="font-size:1.15rem">Créer un nouveau mot de passe</h2>
-      <p style="color:var(--muted);font-size:.88rem">Choisis un nouveau mot de passe pour ton accès administrateur.</p>
-      <form id="passwordRecoveryForm">
-        <label for="newPassword">Nouveau mot de passe</label>
-        <input id="newPassword" type="password" minlength="8" autocomplete="new-password" required>
-        <label for="confirmNewPassword">Confirmer le mot de passe</label>
-        <input id="confirmNewPassword" type="password" minlength="8" autocomplete="new-password" required>
-        <button class="primary" type="submit" id="saveNewPasswordBtn" style="width:100%;margin-top:16px">Enregistrer le nouveau mot de passe</button>
-      </form>
-      <div class="msg" id="recoveryMsg" role="status" aria-live="polite"></div>
-      <button type="button" id="backToLoginBtn" style="margin-top:8px">Retour à la connexion</button>
-    </div>
-  </section>
-
-
-  <!-- ESPACE ADMINISTRATEUR -->
-  <section id="adminView" class="hidden">
-
-    <div class="bar">
-      <div>
-        <h1>Bois<span>Royal</span> · Administration</h1>
-        <div style="color:var(--muted);font-size:.85rem">
-          Gestion du catalogue et des demandes clients
-        </div>
-      </div>
-
-      <div class="actions">
-        <button class="primary" id="newBtn">+ Nouveau produit</button>
-        <a href="index.html">
-          <button type="button">Voir le site</button>
-        </a>
-        <button id="logoutBtn">Déconnexion</button>
-      </div>
-    </div>
-
-
-    <!-- GESTION DES PRODUITS -->
-    <div class="section-title">
-      <h2>Catalogue des produits</h2>
-      <button type="button" id="refreshProductsBtn">Actualiser</button>
-    </div>
-
-    <div class="msg" id="listMsg" role="status"></div>
-
-    <div class="card scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Produit</th>
-            <th>Catégorie</th>
-            <th>Prix</th>
-            <th>Stock</th>
-            <th>Statut</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="rows">
-          <tr><td colspan="6">Chargement des produits…</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-
-    <!-- FORMULAIRE PRODUIT -->
-    <div class="card hidden" id="editor" style="margin-top:20px">
-      <h2 id="editorTitle">Nouveau produit</h2>
-
-      <form id="productForm">
-        <div class="grid2">
-          <div>
-            <label for="f_name">Nom du produit</label>
-            <input id="f_name" required maxlength="120">
-          </div>
-
-          <div>
-            <label for="f_slug">Identifiant (slug)</label>
-            <input id="f_slug" maxlength="120" placeholder="Auto si vide">
-          </div>
-
-          <div>
-            <label for="f_category">Catégorie</label>
-            <select id="f_category">
-              <option value="bois_chauffage">Bois de chauffage</option>
-              <option value="charbon">Charbon de bois</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="f_unit">Format / unité</label>
-            <input id="f_unit" maxlength="120" placeholder="Ex. filet, sac, stère">
-          </div>
-
-          <div>
-            <label for="f_price">Prix (€)</label>
-            <input id="f_price" inputmode="decimal" required placeholder="6,90">
-          </div>
-
-          <div>
-            <label for="f_stock">Stock</label>
-            <input id="f_stock" type="number" min="0" step="1" value="0">
-          </div>
-        </div>
-
-        <label for="f_image">Image (chemin ou URL)</label>
-        <input id="f_image" maxlength="500" placeholder="images/produit.webp">
-
-        <label for="f_desc">Description</label>
-        <textarea id="f_desc" maxlength="600"></textarea>
-
-        <label class="row-check">
-          <input type="checkbox" id="f_active" checked>
-          Visible sur le site
-        </label>
-
-        <div class="actions" style="margin-top:18px">
-          <button class="primary" type="submit" id="saveProductBtn">
-            Enregistrer
-          </button>
-          <button type="button" id="cancelBtn">Annuler</button>
-        </div>
-
-        <div class="msg" id="formMsg" role="status"></div>
-      </form>
-    </div>
-
-
-    <!-- DEMANDES DE DEVIS -->
-    <div class="section-title" id="quotes">
-      <h2>Demandes de devis <span class="count" id="quoteCount">0</span></h2>
-      <button type="button" id="refreshQuotesBtn">Actualiser les demandes</button>
-    </div>
-
-    <div class="notice">
-      Les demandes de devis sont des demandes de renseignements.
-      Le prix définitif et les frais de livraison restent à confirmer avec le client.
-      Aucun paiement n'est réalisé depuis cette section.
-    </div>
-
-    <div class="msg" id="quotesMsg" role="status" aria-live="polite"></div>
-
-    <div class="card scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Référence / date</th>
-            <th>Client</th>
-            <th>Adresse de livraison</th>
-            <th>Produits demandés</th>
-            <th>Statut</th>
-          </tr>
-        </thead>
-        <tbody id="quoteRows">
-          <tr><td colspan="5">Chargement des demandes…</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-  </section>
+<section id="adminView" class="hidden">
+<div class="bar">
+<div>
+<h1>Bois<span>Royal</span> · Administration</h1>
+<div style="color:var(--muted);font-size:.85rem">
+Gestion du catalogue et des demandes clients
+</div>
+</div>
+<div class="actions">
+<button class="primary" id="newBtn">+ Nouveau produit</button>
+<a href="index.html">
+<button type="button">Voir le site</button>
+</a>
+<button id="logoutBtn">Déconnexion</button>
+</div>
 </div>
 
+<div class="section-title">
+<h2>Catalogue des produits</h2>
+<button type="button" id="refreshProductsBtn">Actualiser</button>
+</div>
+<div class="msg" id="listMsg" role="status"></div>
+<div class="card scroll">
+<table>
+<thead>
+<tr>
+<th>Produit</th>
+<th>Catégorie</th>
+<th>Prix</th>
+<th>Stock</th>
+<th>Statut</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="rows">
+<tr><td colspan="6">Chargement des produits…</td></tr>
+</tbody>
+</table>
+</div>
 
+<div class="card hidden" id="editor" style="margin-top:20px">
+<h2 id="editorTitle">Nouveau produit</h2>
+<form id="productForm">
+<div class="grid2">
+<div>
+<label for="f_name">Nom du produit</label>
+<input id="f_name" required maxlength="120">
+</div>
+<div>
+<label for="f_slug">Identifiant (slug)</label>
+<input id="f_slug" maxlength="120" placeholder="Auto si vide">
+</div>
+<div>
+<label for="f_category">Catégorie</label>
+<select id="f_category">
+<option value="bois_chauffage">Bois de chauffage</option>
+<option value="charbon">Charbon de bois</option>
+</select>
+</div>
+<div>
+<label for="f_unit">Format / unité</label>
+<input id="f_unit" maxlength="120" placeholder="Ex. filet, sac, stère">
+</div>
+<div>
+<label for="f_price">Prix (€)</label>
+<input id="f_price" inputmode="decimal" required placeholder="6,90">
+</div>
+<div>
+<label for="f_stock">Stock</label>
+<input id="f_stock" type="number" min="0" step="1" value="0">
+</div>
+</div>
+<label for="f_image">Image (chemin ou URL)</label>
+<input id="f_image" maxlength="500" placeholder="images/produit.webp">
+<label for="f_desc">Description</label>
+<textarea id="f_desc" maxlength="600"></textarea>
+<label class="row-check">
+<input type="checkbox" id="f_active" checked>
+Visible sur le site
+</label>
+<div class="actions" style="margin-top:18px">
+<button class="primary" type="submit" id="saveProductBtn">
+Enregistrer
+</button>
+<button type="button" id="cancelBtn">Annuler</button>
+</div>
+<div class="msg" id="formMsg" role="status"></div>
+</form>
+</div>
+
+<div class="section-title" id="quotes">
+<h2>Demandes de devis <span class="count" id="quoteCount">0</span></h2>
+<button type="button" id="refreshQuotesBtn">Actualiser les demandes</button>
+</div>
+<div class="notice">
+Les demandes de devis sont des demandes de renseignements.
+Le prix définitif et les frais de livraison restent à confirmer avec le client.
+Aucun paiement n'est réalisé depuis cette section.
+</div>
+<div class="msg" id="quotesMsg" role="status" aria-live="polite"></div>
+<div class="card scroll">
+<table>
+<thead>
+<tr>
+<th>Référence / date</th>
+<th>Client</th>
+<th>Adresse de livraison</th>
+<th>Produits demandés</th>
+<th>Statut</th>
+</tr>
+</thead>
+<tbody id="quoteRows">
+<tr><td colspan="5">Chargement des demandes…</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section-title" id="reviewsAdmin">
+<h2>Avis clients <span class="count" id="adminReviewCount">0</span></h2>
+<button type="button" id="refreshReviewsBtn">Actualiser les avis</button>
+</div>
+<div class="notice">Les avis envoyés par les clients restent invisibles sur le site jusqu'à leur approbation. Vérifie le commentaire et la note avant de publier un avis.</div>
+<div class="msg" id="reviewsAdminMsg" role="status" aria-live="polite"></div>
+<div class="card scroll"><table>
+<thead><tr><th>Produit</th><th>Client</th><th>Note</th><th>Commentaire</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead>
+<tbody id="adminReviewRows"><tr><td colspan="7" class="empty">Chargement des avis…</td></tr></tbody>
+</table></div>
+</section>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
-
 <script>
-  // Utilise uniquement la clé publique Supabase dans le navigateur.
-  // Les autorisations doivent rester contrôlées par Supabase et ses règles RLS.
-  const SUPABASE_URL = 'https://evvblxiitorfdniqmqcf.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY =
-    'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
 
-  const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-  const $ = id => document.getElementById(id);
-
-  const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  })[char]);
-
-  const money = value =>
-    new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'EUR'
-    }).format(Number(value) || 0);
-
-  const slugify = value => value
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-
-  const PRODUCT_COLS =
-    'id,name,slug,category,description,price,unit,stock_quantity,is_active,image_url,created_at';
-
-  let products = [];
-  let editingId = null;
-  let quoteRequestIds = new Set();
-
-  function say(element, text, kind) {
-    element.textContent = text || '';
-    element.className = 'msg ' + (kind || '');
-  }
-
-  function formatDate(value) {
-    if (!value) return 'Date inconnue';
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) return 'Date inconnue';
-
-    return date.toLocaleString('fr-FR', {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  }
-
-
-  // AUTHENTIFICATION ET AUTORISATIONS ADMIN
-  async function isAdmin() {
-    const { data, error } = await db.rpc('is_br_admin');
-    return !error && data === true;
-  }
-
-  let passwordRecoveryActive = false;
-
-  function showPasswordRecovery(message = '') {
-    passwordRecoveryActive = true;
-    $('loginView').classList.remove('hidden');
-    $('adminView').classList.add('hidden');
-    $('loginForm').classList.add('hidden');
-    $('passwordRecoveryBox').classList.remove('hidden');
-    say($('recoveryMsg'), message, 'ok');
-  }
-
-  function returnToLogin(message = '') {
-    passwordRecoveryActive = false;
-    $('passwordRecoveryBox').classList.add('hidden');
-    $('loginForm').classList.remove('hidden');
-    $('passwordRecoveryForm').reset();
-    say($('recoveryMsg'), '');
-    say($('loginMsg'), message, message ? 'ok' : '');
-  }
-
-  $('forgotPasswordBtn').addEventListener('click', async () => {
-    const emailInput = $('email');
-    const email = emailInput.value.trim();
-
-    if (!email || !emailInput.checkValidity()) {
-      say($('loginMsg'), 'Saisis d’abord ton adresse e-mail dans le champ Email.', 'err');
-      emailInput.focus();
-      return;
-    }
-
-    const button = $('forgotPasswordBtn');
-    button.disabled = true;
-    say($('loginMsg'), 'Envoi du lien de réinitialisation…');
-
-    try {
-      const redirectTo = new URL('admin.html?mode=recovery', window.location.href).href;
-      const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo });
-      if (error) throw error;
-
-      say(
-        $('loginMsg'),
-        'Si un compte correspond à cette adresse, un lien de réinitialisation vient d’être envoyé. Vérifie aussi les courriers indésirables.',
-        'ok'
-      );
-    } catch (error) {
-      say($('loginMsg'), 'Envoi impossible : ' + error.message, 'err');
-    } finally {
-      button.disabled = false;
-    }
-  });
-
-  $('passwordRecoveryForm').addEventListener('submit', async event => {
-    event.preventDefault();
-    const password = $('newPassword').value;
-    const confirmation = $('confirmNewPassword').value;
-
-    if (password.length < 8) {
-      say($('recoveryMsg'), 'Le mot de passe doit contenir au moins 8 caractères.', 'err');
-      return;
-    }
-    if (password !== confirmation) {
-      say($('recoveryMsg'), 'Les deux mots de passe ne correspondent pas.', 'err');
-      return;
-    }
-
-    const button = $('saveNewPasswordBtn');
-    button.disabled = true;
-    say($('recoveryMsg'), 'Mise à jour du mot de passe…');
-
-    try {
-      const { error } = await db.auth.updateUser({ password });
-      if (error) throw error;
-
-      await db.auth.signOut();
-      history.replaceState(null, '', window.location.pathname);
-      returnToLogin('Mot de passe mis à jour. Tu peux maintenant te connecter.');
-    } catch (error) {
-      say($('recoveryMsg'), 'Impossible de modifier le mot de passe : ' + error.message, 'err');
-    } finally {
-      button.disabled = false;
-    }
-  });
-
-  $('backToLoginBtn').addEventListener('click', () => returnToLogin());
-
-  async function showApp() {
-    if (new URLSearchParams(window.location.search).get('mode') === 'recovery' || window.location.hash.includes('type=recovery')) {
-      showPasswordRecovery();
-      return;
-    }
-
-    const {
-      data: { session },
-      error
-    } = await db.auth.getSession();
-
-    if (error || !session) {
-      $('loginView').classList.remove('hidden');
-      $('adminView').classList.add('hidden');
-      return;
-    }
-
-    if (!(await isAdmin())) {
-      await db.auth.signOut();
-
-      $('loginView').classList.remove('hidden');
-      $('adminView').classList.add('hidden');
-
-      say(
-        $('loginMsg'),
-        "Ce compte n'a pas les droits d'administration.",
-        'err'
-      );
-
-      return;
-    }
-
-    $('loginView').classList.add('hidden');
-    $('adminView').classList.remove('hidden');
-
-    await Promise.all([
-      loadProducts(),
-      loadQuoteRequests()
-    ]);
-  }
-
-  $('loginForm').addEventListener('submit', async event => {
-    event.preventDefault();
-
-    const button = $('loginBtn');
-    button.disabled = true;
-
-    say($('loginMsg'), 'Connexion en cours…');
-
-    try {
-      const { error } = await db.auth.signInWithPassword({
-        email: $('email').value.trim(),
-        password: $('password').value
-      });
-
-      $('password').value = '';
-
-      if (error) {
-        say(
-          $('loginMsg'),
-          'Connexion impossible. Vérifie ton email et ton mot de passe.',
-          'err'
-        );
-        return;
-      }
-
-      say($('loginMsg'), '');
-      await showApp();
-
-    } catch (error) {
-      say($('loginMsg'), 'Erreur de connexion : ' + error.message, 'err');
-    } finally {
-      button.disabled = false;
-    }
-  });
-
-  $('logoutBtn').addEventListener('click', async () => {
-    await db.auth.signOut();
-    $('loginMsg').textContent = '';
-    await showApp();
-  });
-
-
-  // GESTION DES PRODUITS
-  async function loadProducts() {
-    say($('listMsg'), 'Chargement des produits…');
-
-    const { data, error } = await db
-      .from('br_products')
-      .select(PRODUCT_COLS)
-      .order('created_at', { ascending: true });
-
-    if (error) {
-      say(
-        $('listMsg'),
-        'Impossible de charger les produits : ' + error.message,
-        'err'
-      );
-      return;
-    }
-
-    products = data || [];
-    say($('listMsg'), '');
-
-    $('rows').innerHTML = products.length
-      ? products.map(product => `
-          <tr>
-            <td>
-              <strong>${esc(product.name)}</strong>
-              <small>${esc(product.unit || '')}</small>
-            </td>
-            <td>${product.category === 'charbon' ? 'Charbon' : 'Bois'}</td>
-            <td>${money(product.price)}</td>
-            <td>${Number(product.stock_quantity) || 0}</td>
-            <td>
-              <span class="tag ${product.is_active ? 'on' : 'off'}">
-                ${product.is_active ? 'Visible' : 'Masqué'}
-              </span>
-            </td>
-            <td>
-              <div class="actions">
-                <button type="button" data-edit="${esc(product.id)}">
-                  Modifier
-                </button>
-                <button type="button" data-toggle="${esc(product.id)}">
-                  ${product.is_active ? 'Masquer' : 'Afficher'}
-                </button>
-                <button type="button" class="danger" data-del="${esc(product.id)}">
-                  Supprimer
-                </button>
-              </div>
-            </td>
-          </tr>
-        `).join('')
-      : '<tr><td colspan="6" class="empty">Aucun produit enregistré.</td></tr>';
-  }
-
-  $('refreshProductsBtn').addEventListener('click', loadProducts);
-
-  $('rows').addEventListener('click', async event => {
-    const button = event.target.closest('button');
-    if (!button) return;
-
-    const id =
-      button.dataset.edit ||
-      button.dataset.toggle ||
-      button.dataset.del;
-
-    const product = products.find(item => String(item.id) === String(id));
-    if (!product) return;
-
-    if (button.dataset.edit) {
-      openEditor(product);
-      return;
-    }
-
-    button.disabled = true;
-
-    try {
-      if (button.dataset.toggle) {
-        const { error } = await db
-          .from('br_products')
-          .update({ is_active: !product.is_active })
-          .eq('id', product.id);
-
-        if (error) {
-          say($('listMsg'), error.message, 'err');
-        } else {
-          say($('listMsg'), 'Visibilité du produit mise à jour.', 'ok');
-          await loadProducts();
-        }
-      }
-
-      if (button.dataset.del &&
-          confirm(`Supprimer « ${product.name} » définitivement ?`)) {
-        const { error } = await db
-          .from('br_products')
-          .delete()
-          .eq('id', product.id);
-
-        if (error) {
-          say($('listMsg'), error.message, 'err');
-        } else {
-          say($('listMsg'), 'Produit supprimé.', 'ok');
-          await loadProducts();
-        }
-      }
-    } finally {
-      button.disabled = false;
-    }
-  });
-
-  function openEditor(product) {
-    editingId = product ? product.id : null;
-
-    $('editorTitle').textContent =
-      product ? 'Modifier le produit' : 'Nouveau produit';
-
-    $('f_name').value = product?.name || '';
-    $('f_slug').value = product?.slug || '';
-    $('f_category').value = product?.category || 'bois_chauffage';
-    $('f_unit').value = product?.unit || '';
-    $('f_price').value = product
-      ? String(product.price).replace('.', ',')
-      : '';
-    $('f_stock').value = product?.stock_quantity ?? 0;
-    $('f_image').value = product?.image_url || '';
-    $('f_desc').value = product?.description || '';
-    $('f_active').checked = product ? !!product.is_active : true;
-
-    say($('formMsg'), '');
-
-    $('editor').classList.remove('hidden');
-    $('editor').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  $('newBtn').addEventListener('click', () => openEditor(null));
-
-  $('cancelBtn').addEventListener('click', () => {
-    $('editor').classList.add('hidden');
-    editingId = null;
-  });
-
-  $('productForm').addEventListener('submit', async event => {
-    event.preventDefault();
-
-    const price = parseFloat(
-      $('f_price').value.replace(',', '.').replace(/\s/g, '')
-    );
-
-    const stock = parseInt($('f_stock').value, 10);
-
-    if (!Number.isFinite(price) || price < 0) {
-      say($('formMsg'), 'Le prix est invalide.', 'err');
-      return;
-    }
-
-    if (!Number.isInteger(stock) || stock < 0) {
-      say($('formMsg'), 'Le stock est invalide.', 'err');
-      return;
-    }
-
-    const name = $('f_name').value.trim();
-
-    const row = {
-      name,
-      slug: $('f_slug').value.trim() || slugify(name),
-      category: $('f_category').value,
-      unit: $('f_unit').value.trim(),
-      price,
-      stock_quantity: stock,
-      image_url: $('f_image').value.trim() || null,
-      description: $('f_desc').value.trim(),
-      is_active: $('f_active').checked
-    };
-
-    const button = $('saveProductBtn');
-    button.disabled = true;
-
-    say($('formMsg'), 'Enregistrement…');
-
-    try {
-      const result = editingId
-        ? await db.from('br_products').update(row).eq('id', editingId)
-        : await db.from('br_products').insert(row);
-
-      if (result.error) {
-        say($('formMsg'), 'Erreur : ' + result.error.message, 'err');
-        return;
-      }
-
-      $('editor').classList.add('hidden');
-      editingId = null;
-
-      say($('listMsg'), 'Produit enregistré.', 'ok');
-      await loadProducts();
-
-    } catch (error) {
-      say($('formMsg'), 'Erreur : ' + error.message, 'err');
-    } finally {
-      button.disabled = false;
-    }
-  });
-
-
-  // GESTION DES DEMANDES DE DEVIS
-  // Les demandes sont repérées par payment_provider = quote_request.
-  // Les autres commandes ne sont donc pas affichées dans cette section.
-
-  const quoteStatusLabels = {
-    pending: 'Nouvelle demande',
-    confirmed: 'Devis confirmé',
-    preparing: 'En préparation',
-    shipped: 'Expédiée',
-    delivered: 'Terminée',
-    cancelled: 'Annulée'
-  };
-
-  const quoteStatusOptions = Object.keys(quoteStatusLabels);
-
-  async function loadQuoteRequests() {
-    const tbody = $('quoteRows');
-    const refreshButton = $('refreshQuotesBtn');
-
-    refreshButton.disabled = true;
-    tbody.innerHTML =
-      '<tr><td colspan="5" class="empty">Chargement des demandes…</td></tr>';
-
-    say($('quotesMsg'), 'Récupération des demandes de devis…');
-
-    try {
-      const { data: orders, error } = await db
-        .from('br_orders')
-        .select(`
-          id,
-          order_number,
-          customer_name,
-          customer_email,
-          customer_phone,
-          delivery_address,
-          delivery_postal_code,
-          delivery_city,
-          delivery_country,
-          delivery_notes,
-          status,
-          payment_provider,
-          created_at
-        `)
-        .eq('payment_provider', 'quote_request')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        tbody.innerHTML =
-          '<tr><td colspan="5" class="empty">Erreur de chargement.</td></tr>';
-
-        say(
-          $('quotesMsg'),
-          'Erreur Supabase : ' + error.message,
-          'err'
-        );
-        return;
-      }
-
-      const requests = orders || [];
-
-      $('quoteCount').textContent = String(requests.length);
-      quoteRequestIds = new Set(requests.map(order => String(order.id)));
-
-      if (requests.length === 0) {
-        tbody.innerHTML =
-          '<tr><td colspan="5" class="empty">Aucune demande de devis trouvée.</td></tr>';
-
-        say(
-          $('quotesMsg'),
-          'Aucune demande trouvée. Utilise Actualiser pour vérifier à nouveau.'
-        );
-        return;
-      }
-
-      const ids = requests.map(order => order.id);
-
-      const { data: items, error: itemsError } = await db
-        .from('br_order_items')
-        .select('order_id,product_name,unit,quantity')
-        .in('order_id', ids);
-
-      if (itemsError) {
-        tbody.innerHTML =
-          '<tr><td colspan="5" class="empty">Les demandes sont présentes, mais leurs produits n’ont pas pu être chargés.</td></tr>';
-
-        say(
-          $('quotesMsg'),
-          'Erreur lors de la lecture des produits : ' + itemsError.message,
-          'err'
-        );
-        return;
-      }
-
-      const itemsByOrder = {};
-
-      (items || []).forEach(item => {
-        const key = String(item.order_id);
-
-        if (!itemsByOrder[key]) {
-          itemsByOrder[key] = [];
-        }
-
-        itemsByOrder[key].push(item);
-      });
-
-      tbody.innerHTML = requests.map(order => {
-        const key = String(order.id);
-        const orderItems = itemsByOrder[key] || [];
-
-        const status = quoteStatusOptions.includes(order.status)
-          ? order.status
-          : 'pending';
-
-        const productList = orderItems.length
-          ? orderItems.map(item => {
-              const unit = item.unit
-                ? ' ' + esc(item.unit)
-                : '';
-
-              return '<div>' +
-                esc(item.product_name || 'Produit') +
-                ' × ' + esc(item.quantity) +
-                unit +
-                '</div>';
-            }).join('')
-          : '<span>Détail des produits indisponible</span>';
-
-        const client = `
-          <strong>${esc(order.customer_name || 'Client non renseigné')}</strong>
-          <small>${esc(order.customer_phone || 'Téléphone non renseigné')}</small>
-          ${order.customer_email
-            ? `<small>${esc(order.customer_email)}</small>`
-            : ''}
-        `;
-
-        const address = `
-          ${esc(order.delivery_address || 'Adresse non renseignée')}
-          <small>
-            ${esc(order.delivery_postal_code || '')}
-            ${esc(order.delivery_city || '')}
-          </small>
-          <small>${esc(order.delivery_country || '')}</small>
-          ${order.delivery_notes
-            ? `<small>Instructions : ${esc(order.delivery_notes)}</small>`
-            : ''}
-        `;
-
-        const statusOptions = quoteStatusOptions.map(option => `
-          <option value="${option}" ${option === status ? 'selected' : ''}>
-            ${quoteStatusLabels[option]}
-          </option>
-        `).join('');
-
-        return `
-          <tr>
-            <td>
-              <strong>${esc(order.order_number || order.id)}</strong>
-              <small>${esc(formatDate(order.created_at))}</small>
-            </td>
-
-            <td class="quote-details">${client}</td>
-
-            <td class="quote-details">${address}</td>
-
-            <td class="quote-items">
-              ${productList}
-              <small>Prix définitif et livraison à confirmer.</small>
-            </td>
-
-            <td>
-              <select
-                class="status-select"
-                data-quote-status="${esc(order.id)}"
-                aria-label="Statut de la demande ${esc(order.order_number || order.id)}"
-              >
-                ${statusOptions}
-              </select>
-              <small class="quote-status-note">
-                ${quoteStatusLabels[status]}
-              </small>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      say(
-        $('quotesMsg'),
-        requests.length + ' demande(s) de devis chargée(s).',
-        'ok'
-      );
-
-    } catch (error) {
-      tbody.innerHTML =
-        '<tr><td colspan="5" class="empty">Une erreur inattendue est survenue.</td></tr>';
-
-      say($('quotesMsg'), error.message, 'err');
-
-    } finally {
-      refreshButton.disabled = false;
-    }
-  }
-
-  $('refreshQuotesBtn').addEventListener('click', loadQuoteRequests);
-
-
-  // ENREGISTRER UN CHANGEMENT DE STATUT
-  $('quoteRows').addEventListener('change', async event => {
-    const select = event.target.closest('select[data-quote-status]');
-
-    if (!select) return;
-
-    const orderId = select.dataset.quoteStatus;
-    const newStatus = select.value;
-
-    // Ne permet pas de modifier une ligne qui n'a pas été chargée comme devis.
-    if (!quoteRequestIds.has(String(orderId))) {
-      say($('quotesMsg'), 'Cette demande n’est pas valide.', 'err');
-      return;
-    }
-
-    if (!quoteStatusOptions.includes(newStatus)) {
-      say($('quotesMsg'), 'Statut invalide.', 'err');
-      return;
-    }
-
-    select.disabled = true;
-    say($('quotesMsg'), 'Enregistrement du statut…');
-
-    try {
-      const { error } = await db
-        .from('br_orders')
-        .update({
-          status: newStatus,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', orderId)
-        .eq('payment_provider', 'quote_request');
-
-      if (error) {
-        say(
-          $('quotesMsg'),
-          'Impossible de modifier le statut : ' + error.message,
-          'err'
-        );
-
-        await loadQuoteRequests();
-        return;
-      }
-
-      const note = select.parentElement.querySelector('.quote-status-note');
-
-      if (note) {
-        note.textContent = quoteStatusLabels[newStatus];
-      }
-
-      say($('quotesMsg'), 'Statut de la demande mis à jour.', 'ok');
-
-    } catch (error) {
-      say($('quotesMsg'), 'Erreur : ' + error.message, 'err');
-      await loadQuoteRequests();
-
-    } finally {
-      select.disabled = false;
-    }
-  });
-
-
-  // SESSION
-  db.auth.onAuthStateChange(event => {
-    if (event === 'PASSWORD_RECOVERY') {
-      showPasswordRecovery('Lien validé. Choisis maintenant ton nouveau mot de passe.');
-      return;
-    }
-
-    if (event === 'SIGNED_OUT' && !passwordRecoveryActive) {
-      $('adminView').classList.add('hidden');
-      $('loginView').classList.remove('hidden');
-      $('loginForm').classList.remove('hidden');
-      $('passwordRecoveryBox').classList.add('hidden');
-    }
-  });
-
-  showApp();
+const SUPABASE_URL = 'https://evvblxiitorfdniqmqcf.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY =
+'sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
+const db = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+const $ = id => document.getElementById(id);
+const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+'&': '&amp;',
+'<': '&lt;',
+'>': '&gt;',
+'"': '&quot;',
+"'": '&#39;'
+})[char]);
+const money = value =>
+new Intl.NumberFormat('fr-FR', {
+style: 'currency',
+currency: 'EUR'
+}).format(Number(value) || 0);
+const slugify = value => value
+.toLowerCase()
+.normalize('NFD')
+.replace(/[\u0300-\u036f]/g, '')
+.replace(/[^a-z0-9]+/g, '-')
+.replace(/^-|-$/g, '');
+const PRODUCT_COLS =
+'id,name,slug,category,description,price,unit,stock_quantity,is_active,image_url,created_at';
+let products = [];
+let editingId = null;
+let quoteRequestIds = new Set();
+function say(element, text, kind) {
+element.textContent = text || '';
+element.className = 'msg ' + (kind || '');
+}
+function formatDate(value) {
+if (!value) return 'Date inconnue';
+const date = new Date(value);
+if (Number.isNaN(date.getTime())) return 'Date inconnue';
+return date.toLocaleString('fr-FR', {
+year: 'numeric',
+month: 'short',
+day: '2-digit',
+hour: '2-digit',
+minute: '2-digit'
+});
+}
+
+async function isAdmin() {
+const { data, error } = await db.rpc('is_br_admin');
+return !error && data === true;
+}
+let passwordRecoveryActive = false;
+function showPasswordRecovery(message = '') {
+passwordRecoveryActive = true;
+$('loginView').classList.remove('hidden');
+$('adminView').classList.add('hidden');
+$('loginForm').classList.add('hidden');
+$('passwordRecoveryBox').classList.remove('hidden');
+say($('recoveryMsg'), message, 'ok');
+}
+function returnToLogin(message = '') {
+passwordRecoveryActive = false;
+$('passwordRecoveryBox').classList.add('hidden');
+$('loginForm').classList.remove('hidden');
+$('passwordRecoveryForm').reset();
+say($('recoveryMsg'), '');
+say($('loginMsg'), message, message ? 'ok' : '');
+}
+$('forgotPasswordBtn').addEventListener('click', async () => {
+const emailInput = $('email');
+const email = emailInput.value.trim();
+if (!email || !emailInput.checkValidity()) {
+say($('loginMsg'), 'Saisis d’abord ton adresse e-mail dans le champ Email.', 'err');
+emailInput.focus();
+return;
+}
+const button = $('forgotPasswordBtn');
+button.disabled = true;
+say($('loginMsg'), 'Envoi du lien de réinitialisation…');
+try {
+const redirectTo = new URL('admin.html?mode=recovery', window.location.href).href;
+const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo });
+if (error) throw error;
+say(
+$('loginMsg'),
+'Si un compte correspond à cette adresse, un lien de réinitialisation vient d’être envoyé. Vérifie aussi les courriers indésirables.',
+'ok'
+);
+} catch (error) {
+say($('loginMsg'), 'Envoi impossible : ' + error.message, 'err');
+} finally {
+button.disabled = false;
+}
+});
+$('passwordRecoveryForm').addEventListener('submit', async event => {
+event.preventDefault();
+const password = $('newPassword').value;
+const confirmation = $('confirmNewPassword').value;
+if (password.length < 8) {
+say($('recoveryMsg'), 'Le mot de passe doit contenir au moins 8 caractères.', 'err');
+return;
+}
+if (password !== confirmation) {
+say($('recoveryMsg'), 'Les deux mots de passe ne correspondent pas.', 'err');
+return;
+}
+const button = $('saveNewPasswordBtn');
+button.disabled = true;
+say($('recoveryMsg'), 'Mise à jour du mot de passe…');
+try {
+const { error } = await db.auth.updateUser({ password });
+if (error) throw error;
+await db.auth.signOut();
+history.replaceState(null, '', window.location.pathname);
+returnToLogin('Mot de passe mis à jour. Tu peux maintenant te connecter.');
+} catch (error) {
+say($('recoveryMsg'), 'Impossible de modifier le mot de passe : ' + error.message, 'err');
+} finally {
+button.disabled = false;
+}
+});
+$('backToLoginBtn').addEventListener('click', () => returnToLogin());
+async function showApp() {
+if (new URLSearchParams(window.location.search).get('mode') === 'recovery' || window.location.hash.includes('type=recovery')) {
+showPasswordRecovery();
+return;
+}
+const {
+data: { session },
+error
+} = await db.auth.getSession();
+if (error || !session) {
+$('loginView').classList.remove('hidden');
+$('adminView').classList.add('hidden');
+return;
+}
+if (!(await isAdmin())) {
+await db.auth.signOut();
+$('loginView').classList.remove('hidden');
+$('adminView').classList.add('hidden');
+say(
+$('loginMsg'),
+"Ce compte n'a pas les droits d'administration.",
+'err'
+);
+return;
+}
+$('loginView').classList.add('hidden');
+$('adminView').classList.remove('hidden');
+await Promise.all([
+loadProducts(),
+loadQuoteRequests(),
+loadAdminReviews()
+]);
+}
+$('loginForm').addEventListener('submit', async event => {
+event.preventDefault();
+const button = $('loginBtn');
+button.disabled = true;
+say($('loginMsg'), 'Connexion en cours…');
+try {
+const { error } = await db.auth.signInWithPassword({
+email: $('email').value.trim(),
+password: $('password').value
+});
+$('password').value = '';
+if (error) {
+say(
+$('loginMsg'),
+'Connexion impossible. Vérifie ton email et ton mot de passe.',
+'err'
+);
+return;
+}
+say($('loginMsg'), '');
+await showApp();
+} catch (error) {
+say($('loginMsg'), 'Erreur de connexion : ' + error.message, 'err');
+} finally {
+button.disabled = false;
+}
+});
+$('logoutBtn').addEventListener('click', async () => {
+await db.auth.signOut();
+$('loginMsg').textContent = '';
+await showApp();
+});
+
+async function loadProducts() {
+say($('listMsg'), 'Chargement des produits…');
+const { data, error } = await db
+.from('br_products')
+.select(PRODUCT_COLS)
+.order('created_at', { ascending: true });
+if (error) {
+say(
+$('listMsg'),
+'Impossible de charger les produits : ' + error.message,
+'err'
+);
+return;
+}
+products = data || [];
+say($('listMsg'), '');
+$('rows').innerHTML = products.length
+? products.map(product => `
+<tr>
+<td>
+<strong>${esc(product.name)}</strong>
+<small>${esc(product.unit || '')}</small>
+</td>
+<td>${product.category === 'charbon' ? 'Charbon' : 'Bois'}</td>
+<td>${money(product.price)}</td>
+<td>${Number(product.stock_quantity) || 0}</td>
+<td>
+<span class="tag ${product.is_active ? 'on' : 'off'}">
+${product.is_active ? 'Visible' : 'Masqué'}
+</span>
+</td>
+<td>
+<div class="actions">
+<button type="button" data-edit="${esc(product.id)}">
+Modifier
+</button>
+<button type="button" data-toggle="${esc(product.id)}">
+${product.is_active ? 'Masquer' : 'Afficher'}
+</button>
+<button type="button" class="danger" data-del="${esc(product.id)}">
+Supprimer
+</button>
+</div>
+</td>
+</tr>
+`).join('')
+: '<tr><td colspan="6" class="empty">Aucun produit enregistré.</td></tr>';
+}
+$('refreshProductsBtn').addEventListener('click', loadProducts);
+$('rows').addEventListener('click', async event => {
+const button = event.target.closest('button');
+if (!button) return;
+const id =
+button.dataset.edit ||
+button.dataset.toggle ||
+button.dataset.del;
+const product = products.find(item => String(item.id) === String(id));
+if (!product) return;
+if (button.dataset.edit) {
+openEditor(product);
+return;
+}
+button.disabled = true;
+try {
+if (button.dataset.toggle) {
+const { error } = await db
+.from('br_products')
+.update({ is_active: !product.is_active })
+.eq('id', product.id);
+if (error) {
+say($('listMsg'), error.message, 'err');
+} else {
+say($('listMsg'), 'Visibilité du produit mise à jour.', 'ok');
+await loadProducts();
+}
+}
+if (button.dataset.del &&
+confirm(`Supprimer « ${product.name} » définitivement ?`)) {
+const { error } = await db
+.from('br_products')
+.delete()
+.eq('id', product.id);
+if (error) {
+say($('listMsg'), error.message, 'err');
+} else {
+say($('listMsg'), 'Produit supprimé.', 'ok');
+await loadProducts();
+}
+}
+} finally {
+button.disabled = false;
+}
+});
+function openEditor(product) {
+editingId = product ? product.id : null;
+$('editorTitle').textContent =
+product ? 'Modifier le produit' : 'Nouveau produit';
+$('f_name').value = product?.name || '';
+$('f_slug').value = product?.slug || '';
+$('f_category').value = product?.category || 'bois_chauffage';
+$('f_unit').value = product?.unit || '';
+$('f_price').value = product
+? String(product.price).replace('.', ',')
+: '';
+$('f_stock').value = product?.stock_quantity ?? 0;
+$('f_image').value = product?.image_url || '';
+$('f_desc').value = product?.description || '';
+$('f_active').checked = product ? !!product.is_active : true;
+say($('formMsg'), '');
+$('editor').classList.remove('hidden');
+$('editor').scrollIntoView({ behavior: 'smooth' });
+}
+$('newBtn').addEventListener('click', () => openEditor(null));
+$('cancelBtn').addEventListener('click', () => {
+$('editor').classList.add('hidden');
+editingId = null;
+});
+$('productForm').addEventListener('submit', async event => {
+event.preventDefault();
+const price = parseFloat(
+$('f_price').value.replace(',', '.').replace(/\s/g, '')
+);
+const stock = parseInt($('f_stock').value, 10);
+if (!Number.isFinite(price) || price < 0) {
+say($('formMsg'), 'Le prix est invalide.', 'err');
+return;
+}
+if (!Number.isInteger(stock) || stock < 0) {
+say($('formMsg'), 'Le stock est invalide.', 'err');
+return;
+}
+const name = $('f_name').value.trim();
+const row = {
+name,
+slug: $('f_slug').value.trim() || slugify(name),
+category: $('f_category').value,
+unit: $('f_unit').value.trim(),
+price,
+stock_quantity: stock,
+image_url: $('f_image').value.trim() || null,
+description: $('f_desc').value.trim(),
+is_active: $('f_active').checked
+};
+const button = $('saveProductBtn');
+button.disabled = true;
+say($('formMsg'), 'Enregistrement…');
+try {
+const result = editingId
+? await db.from('br_products').update(row).eq('id', editingId)
+: await db.from('br_products').insert(row);
+if (result.error) {
+say($('formMsg'), 'Erreur : ' + result.error.message, 'err');
+return;
+}
+$('editor').classList.add('hidden');
+editingId = null;
+say($('listMsg'), 'Produit enregistré.', 'ok');
+await loadProducts();
+} catch (error) {
+say($('formMsg'), 'Erreur : ' + error.message, 'err');
+} finally {
+button.disabled = false;
+}
+});
+
+const quoteStatusLabels = {
+pending: 'Nouvelle demande',
+confirmed: 'Devis confirmé',
+preparing: 'En préparation',
+shipped: 'Expédiée',
+delivered: 'Terminée',
+cancelled: 'Annulée'
+};
+const quoteStatusOptions = Object.keys(quoteStatusLabels);
+async function loadQuoteRequests() {
+const tbody = $('quoteRows');
+const refreshButton = $('refreshQuotesBtn');
+refreshButton.disabled = true;
+tbody.innerHTML =
+'<tr><td colspan="5" class="empty">Chargement des demandes…</td></tr>';
+say($('quotesMsg'), 'Récupération des demandes de devis…');
+try {
+const { data: orders, error } = await db
+.from('br_orders')
+.select(`
+id,
+order_number,
+customer_name,
+customer_email,
+customer_phone,
+delivery_address,
+delivery_postal_code,
+delivery_city,
+delivery_country,
+delivery_notes,
+status,
+payment_provider,
+created_at
+`)
+.eq('payment_provider', 'quote_request')
+.order('created_at', { ascending: false });
+if (error) {
+tbody.innerHTML =
+'<tr><td colspan="5" class="empty">Erreur de chargement.</td></tr>';
+say(
+$('quotesMsg'),
+'Erreur Supabase : ' + error.message,
+'err'
+);
+return;
+}
+const requests = orders || [];
+$('quoteCount').textContent = String(requests.length);
+quoteRequestIds = new Set(requests.map(order => String(order.id)));
+if (requests.length === 0) {
+tbody.innerHTML =
+'<tr><td colspan="5" class="empty">Aucune demande de devis trouvée.</td></tr>';
+say(
+$('quotesMsg'),
+'Aucune demande trouvée. Utilise Actualiser pour vérifier à nouveau.'
+);
+return;
+}
+const ids = requests.map(order => order.id);
+const { data: items, error: itemsError } = await db
+.from('br_order_items')
+.select('order_id,product_name,unit,quantity')
+.in('order_id', ids);
+if (itemsError) {
+tbody.innerHTML =
+'<tr><td colspan="5" class="empty">Les demandes sont présentes, mais leurs produits n’ont pas pu être chargés.</td></tr>';
+say(
+$('quotesMsg'),
+'Erreur lors de la lecture des produits : ' + itemsError.message,
+'err'
+);
+return;
+}
+const itemsByOrder = {};
+(items || []).forEach(item => {
+const key = String(item.order_id);
+if (!itemsByOrder[key]) {
+itemsByOrder[key] = [];
+}
+itemsByOrder[key].push(item);
+});
+tbody.innerHTML = requests.map(order => {
+const key = String(order.id);
+const orderItems = itemsByOrder[key] || [];
+const status = quoteStatusOptions.includes(order.status)
+? order.status
+: 'pending';
+const productList = orderItems.length
+? orderItems.map(item => {
+const unit = item.unit
+? ' ' + esc(item.unit)
+: '';
+return '<div>' +
+esc(item.product_name || 'Produit') +
+' × ' + esc(item.quantity) +
+unit +
+'</div>';
+}).join('')
+: '<span>Détail des produits indisponible</span>';
+const client = `
+<strong>${esc(order.customer_name || 'Client non renseigné')}</strong>
+<small>${esc(order.customer_phone || 'Téléphone non renseigné')}</small>
+${order.customer_email
+? `<small>${esc(order.customer_email)}</small>`
+: ''}
+`;
+const address = `
+${esc(order.delivery_address || 'Adresse non renseignée')}
+<small>
+${esc(order.delivery_postal_code || '')}
+${esc(order.delivery_city || '')}
+</small>
+<small>${esc(order.delivery_country || '')}</small>
+${order.delivery_notes
+? `<small>Instructions : ${esc(order.delivery_notes)}</small>`
+: ''}
+`;
+const statusOptions = quoteStatusOptions.map(option => `
+<option value="${option}" ${option === status ? 'selected' : ''}>
+${quoteStatusLabels[option]}
+</option>
+`).join('');
+return `
+<tr>
+<td>
+<strong>${esc(order.order_number || order.id)}</strong>
+<small>${esc(formatDate(order.created_at))}</small>
+</td>
+<td class="quote-details">${client}</td>
+<td class="quote-details">${address}</td>
+<td class="quote-items">
+${productList}
+<small>Prix définitif et livraison à confirmer.</small>
+</td>
+<td>
+<select
+class="status-select"
+data-quote-status="${esc(order.id)}"
+aria-label="Statut de la demande ${esc(order.order_number || order.id)}"
+>
+${statusOptions}
+</select>
+<small class="quote-status-note">
+${quoteStatusLabels[status]}
+</small>
+</td>
+</tr>
+`;
+}).join('');
+say(
+$('quotesMsg'),
+requests.length + ' demande(s) de devis chargée(s).',
+'ok'
+);
+} catch (error) {
+tbody.innerHTML =
+'<tr><td colspan="5" class="empty">Une erreur inattendue est survenue.</td></tr>';
+say($('quotesMsg'), error.message, 'err');
+} finally {
+refreshButton.disabled = false;
+}
+}
+$('refreshQuotesBtn').addEventListener('click', loadQuoteRequests);
+
+$('quoteRows').addEventListener('change', async event => {
+const select = event.target.closest('select[data-quote-status]');
+if (!select) return;
+const orderId = select.dataset.quoteStatus;
+const newStatus = select.value;
+
+if (!quoteRequestIds.has(String(orderId))) {
+say($('quotesMsg'), 'Cette demande n’est pas valide.', 'err');
+return;
+}
+if (!quoteStatusOptions.includes(newStatus)) {
+say($('quotesMsg'), 'Statut invalide.', 'err');
+return;
+}
+select.disabled = true;
+say($('quotesMsg'), 'Enregistrement du statut…');
+try {
+const { error } = await db
+.from('br_orders')
+.update({
+status: newStatus,
+updated_at: new Date().toISOString()
+})
+.eq('id', orderId)
+.eq('payment_provider', 'quote_request');
+if (error) {
+say(
+$('quotesMsg'),
+'Impossible de modifier le statut : ' + error.message,
+'err'
+);
+await loadQuoteRequests();
+return;
+}
+const note = select.parentElement.querySelector('.quote-status-note');
+if (note) {
+note.textContent = quoteStatusLabels[newStatus];
+}
+say($('quotesMsg'), 'Statut de la demande mis à jour.', 'ok');
+} catch (error) {
+say($('quotesMsg'), 'Erreur : ' + error.message, 'err');
+await loadQuoteRequests();
+} finally {
+select.disabled = false;
+}
+});
+
+const reviewStatusLabels = { pending: 'En attente', approved: 'Approuvé', rejected: 'Refusé' };
+async function loadAdminReviews() {
+const tbody = $('adminReviewRows');
+const refreshButton = $('refreshReviewsBtn');
+refreshButton.disabled = true;
+tbody.innerHTML = '<tr><td colspan="7" class="empty">Chargement des avis…</td></tr>';
+say($('reviewsAdminMsg'), 'Récupération des avis clients…');
+try {
+const { data: reviews, error } = await db.from('br_product_reviews')
+.select('id,product_id,order_id,customer_name,rating,comment,status,created_at')
+.order('created_at', { ascending: false });
+if (error) throw error;
+const allReviews = reviews || [];
+const pendingCount = allReviews.filter(review => review.status === 'pending').length;
+$('adminReviewCount').textContent = String(pendingCount);
+if (!allReviews.length) {
+tbody.innerHTML = '<tr><td colspan="7" class="empty">Aucun avis reçu pour le moment.</td></tr>';
+say($('reviewsAdminMsg'), 'Aucun avis client à modérer.');
+return;
+}
+const productIds = [...new Set(allReviews.map(review => review.product_id).filter(Boolean))];
+const productNames = {};
+if (productIds.length) {
+const { data: productData, error: productError } = await db.from('br_products').select('id,name').in('id', productIds);
+if (productError) throw productError;
+(productData || []).forEach(product => { productNames[String(product.id)] = product.name; });
+}
+tbody.innerHTML = allReviews.map(review => {
+const status = reviewStatusLabels[review.status] || 'Inconnu';
+const rating = Number(review.rating);
+const validRating = Number.isInteger(rating) && rating >= 1 && rating <= 5;
+const starText = validRating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) : 'Note invalide';
+const productName = productNames[String(review.product_id)] || 'Produit supprimé';
+const statusClass = review.status === 'approved' ? 'on' : review.status === 'pending' ? '' : 'off';
+let actions = '';
+if (review.status !== 'approved') actions += '<button type="button" class="primary" data-review-action="approve" data-review-id="' + esc(review.id) + '">Approuver</button>';
+if (review.status !== 'rejected') actions += '<button type="button" data-review-action="reject" data-review-id="' + esc(review.id) + '">Refuser</button>';
+actions += '<button type="button" class="danger" data-review-action="delete" data-review-id="' + esc(review.id) + '">Supprimer</button>';
+return `<tr><td><strong>${esc(productName)}</strong></td><td>${esc(review.customer_name || 'Client')}</td><td><span class="review-stars-admin">${esc(starText)}</span></td><td class="review-comment-admin">${esc(review.comment || 'Aucun commentaire')}</td><td>${esc(formatDate(review.created_at))}</td><td><span class="tag ${statusClass}">${esc(status)}</span></td><td><div class="actions">${actions}</div></td></tr>`;
+}).join('');
+say($('reviewsAdminMsg'), allReviews.length + ' avis chargé(s), dont ' + pendingCount + ' en attente.', 'ok');
+} catch (error) {
+tbody.innerHTML = '<tr><td colspan="7" class="empty">Impossible de charger les avis.</td></tr>';
+say($('reviewsAdminMsg'), 'Erreur : ' + error.message, 'err');
+} finally { refreshButton.disabled = false; }
+}
+$('refreshReviewsBtn').addEventListener('click', loadAdminReviews);
+$('adminReviewRows').addEventListener('click', async event => {
+const button = event.target.closest('button[data-review-action]');
+if (!button) return;
+const reviewId = button.dataset.reviewId;
+const action = button.dataset.reviewAction;
+if (!reviewId || !['approve', 'reject', 'delete'].includes(action)) return;
+if (action === 'delete' && !confirm('Supprimer définitivement cet avis ? Cette action est irréversible.')) return;
+if (action === 'approve' && !confirm('Publier cet avis sur le site BoisRoyal ?')) return;
+button.disabled = true;
+say($('reviewsAdminMsg'), 'Mise à jour de l’avis…');
+try {
+if (action === 'delete') {
+const { error } = await db.from('br_product_reviews').delete().eq('id', reviewId);
+if (error) throw error;
+say($('reviewsAdminMsg'), 'Avis supprimé.', 'ok');
+} else {
+const newStatus = action === 'approve' ? 'approved' : 'rejected';
+const { error } = await db.from('br_product_reviews').update({ status: newStatus }).eq('id', reviewId);
+if (error) throw error;
+say($('reviewsAdminMsg'), action === 'approve' ? 'Avis approuvé : il est maintenant visible sur la page du produit.' : 'Avis refusé : il ne sera pas affiché sur le site.', 'ok');
+}
+await loadAdminReviews();
+} catch (error) {
+say($('reviewsAdminMsg'), 'Action impossible : ' + error.message, 'err');
+} finally { button.disabled = false; }
+});
+
+db.auth.onAuthStateChange(event => {
+if (event === 'PASSWORD_RECOVERY') {
+showPasswordRecovery('Lien validé. Choisis maintenant ton nouveau mot de passe.');
+return;
+}
+if (event === 'SIGNED_OUT' && !passwordRecoveryActive) {
+$('adminView').classList.add('hidden');
+$('loginView').classList.remove('hidden');
+$('loginForm').classList.remove('hidden');
+$('passwordRecoveryBox').classList.add('hidden');
+}
+});
+showApp();
 </script>
 </body>
 </html>
