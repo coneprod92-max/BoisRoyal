@@ -219,7 +219,9 @@
     document.getElementById("productSearch").addEventListener("input",renderProducts);
     document.querySelectorAll("[data-category-link]").forEach(a=>a.addEventListener("click",()=>{filter=a.dataset.categoryLink;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));renderProducts()}));
     document.getElementById("year").textContent=new Date().getFullYear();
-    updateCart();loadProducts();
+    updateCart();
+loadProducts();
+loadHomeReviews();
   </script>
 </body>
 </html>
