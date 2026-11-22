@@ -229,6 +229,193 @@
       color: var(--muted);
     }
 
+    /* AVIS CLIENTS */
+    .reviews-section {
+      margin-top: 65px;
+      padding: 35px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .reviews-section h2 {
+      margin: 0 0 10px;
+      color: var(--brown);
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+    }
+
+    .reviews-intro {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .review-summary {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 22px 0 28px;
+      padding: 20px;
+      background: var(--cream);
+      border-radius: 10px;
+    }
+
+    .review-average {
+      color: var(--brown);
+      font-size: 35px;
+      font-weight: 800;
+    }
+
+    .review-stars {
+      color: #E69A28;
+      letter-spacing: 2px;
+      font-size: 19px;
+    }
+
+    .review-count {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .review-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .review-card {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .review-card:last-child { border-bottom: 0; }
+
+    .review-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .review-author {
+      color: var(--brown);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .review-date {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .review-comment {
+      color: #71675F;
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 12px 0 0;
+      white-space: pre-wrap;
+    }
+
+    .no-reviews {
+      padding: 22px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--paper);
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .review-form-wrap {
+      margin-top: 35px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .review-form-wrap h3 {
+      color: var(--brown);
+      font-family: "Playfair Display", serif;
+      font-size: 23px;
+      margin: 0 0 10px;
+    }
+
+    .review-form {
+      display: grid;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .review-form label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .review-form input,
+    .review-form select,
+    .review-form textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--paper);
+      color: var(--dark);
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .review-form input:focus,
+    .review-form select:focus,
+    .review-form textarea:focus {
+      border-color: var(--orange);
+    }
+
+    .review-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .review-submit {
+      background: var(--orange);
+      color: #fff;
+      justify-self: start;
+    }
+
+    .review-submit:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .review-message {
+      display: none;
+      padding: 13px 15px;
+      border-radius: 7px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .review-message.success {
+      display: block;
+      background: #edf5e9;
+      color: #365b2d;
+    }
+
+    .review-message.error {
+      display: block;
+      background: #fff0ec;
+      color: #9b3927;
+    }
+
+    .review-note {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
     footer {
       background: var(--brown);
       color: var(--cream);
@@ -252,6 +439,9 @@
       h1 { font-size: 37px; }
       .actions { flex-direction: column; }
       .actions button, .actions a { text-align: center; }
+      .reviews-section { padding: 22px 17px; margin-top: 45px; }
+      .review-summary { gap: 10px; }
+      .review-submit { width: 100%; }
     }
   </style>
 </head>
@@ -313,6 +503,95 @@
         </div>
       </div>
 
+      <!-- ESPACE AVIS CLIENTS -->
+      <section class="reviews-section" id="reviewsSection">
+        <h2>Avis clients</h2>
+        <p class="reviews-intro">
+          Découvrez les retours de nos clients ayant reçu ce produit.
+          Chaque avis est vérifié et validé par notre équipe avant publication.
+        </p>
+
+        <div class="review-summary">
+          <div class="review-average" id="reviewAverage">—</div>
+          <div>
+            <div class="review-stars" id="reviewAverageStars">☆☆☆☆☆</div>
+            <div class="review-count" id="reviewCount">Aucun avis publié pour le moment</div>
+          </div>
+        </div>
+
+        <div class="review-list" id="reviewList">
+          <div class="no-reviews">Chargement des avis…</div>
+        </div>
+
+        <div class="review-form-wrap">
+          <h3>Vous avez acheté ce produit ?</h3>
+          <p class="reviews-intro">
+            Partagez votre expérience. Pour déposer un avis, votre commande
+            doit avoir été livrée. Votre référence de commande et votre adresse
+            e-mail permettront de vérifier votre achat.
+          </p>
+
+          <form class="review-form" id="reviewForm">
+            <div>
+              <label for="reviewOrder">Référence de commande *</label>
+              <input
+                type="text"
+                id="reviewOrder"
+                name="order_number"
+                placeholder="Ex. BR-2026-0001"
+                required
+                autocomplete="off"
+              >
+            </div>
+
+            <div>
+              <label for="reviewEmail">Adresse e-mail utilisée lors de la commande *</label>
+              <input
+                type="email"
+                id="reviewEmail"
+                name="customer_email"
+                placeholder="Votre adresse e-mail"
+                required
+                autocomplete="email"
+              >
+            </div>
+
+            <div>
+              <label for="reviewRating">Votre note *</label>
+              <select id="reviewRating" name="rating" required>
+                <option value="">Choisissez une note</option>
+                <option value="5">★★★★★ — Excellent</option>
+                <option value="4">★★★★☆ — Très bien</option>
+                <option value="3">★★★☆☆ — Bien</option>
+                <option value="2">★★☆☆☆ — Moyen</option>
+                <option value="1">★☆☆☆☆ — Décevant</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="reviewComment">Votre commentaire (facultatif)</label>
+              <textarea
+                id="reviewComment"
+                name="comment"
+                maxlength="1000"
+                placeholder="Parlez-nous de votre expérience avec ce produit…"
+              ></textarea>
+            </div>
+
+            <div class="review-note">
+              Votre avis sera transmis à notre équipe pour vérification.
+              Il ne sera visible publiquement qu'après approbation.
+            </div>
+
+            <div id="reviewMessage" class="review-message" role="status"></div>
+
+            <button class="review-submit" id="reviewSubmit" type="submit">
+              Envoyer mon avis
+            </button>
+          </form>
+        </div>
+      </section>
+
       <div class="notice">
         <strong>Une question sur ce produit ?</strong><br>
         Contactez notre équipe pour obtenir des informations complémentaires
@@ -350,6 +629,8 @@
     };
 
     let currentProduct = null;
+    let db = null;
+    let approvedReviews = [];
 
     function esc(value) {
       return String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -360,12 +641,16 @@
 
     function category(product) {
       const rawCategory = String(product.category || "").trim();
+
       if (rawCategory) {
         const normalized = rawCategory.toLowerCase();
+
         if (normalized.includes("charbon")) return "Charbon de bois";
+
         if (normalized.includes("bois") || normalized.includes("chauffage")) {
           return "Bois de chauffage";
         }
+
         return rawCategory.charAt(0).toLocaleUpperCase("fr-FR") + rawCategory.slice(1);
       }
 
@@ -399,14 +684,17 @@
       document.getElementById("error").hidden = false;
     }
 
-    function updateSEO(product) {
+    function updateSEO(product, reviews = []) {
       const name = String(product.name || "Produit BoisRoyal").trim();
       const productCategory = category(product);
       const rawDescription = String(product.description || "").trim();
+
       const description = rawDescription ||
         `${name} : découvrez ce produit ${productCategory} proposé par BoisRoyal.`;
+
       const unit = String(product.unit || "").trim();
       const title = `${name} | ${productCategory} | BoisRoyal`;
+
       const metaDescription = `${description}${unit ? ` Conditionnement : ${unit}.` : ""}`
         .replace(/\s+/g, " ")
         .slice(0, 155);
@@ -415,8 +703,10 @@
       const imageUrl = new URL(photo(product), window.location.href).href;
 
       document.title = title;
+
       document.querySelector('meta[name="description"]')
         .setAttribute("content", metaDescription);
+
       document.querySelector('link[rel="canonical"]').href = canonical;
 
       const setMeta = (selector, value) => {
@@ -432,19 +722,98 @@
       setMeta('meta[name="twitter:description"]', metaDescription);
       setMeta('meta[name="twitter:image"]', imageUrl);
 
-      const graph = [
-        {
-          "@type": "Product",
-          "name": name,
-          "description": description,
-          "image": [imageUrl],
+      const productSchema = {
+        "@type": "Product",
+        "name": name,
+        "description": description,
+        "image": [imageUrl],
+        "url": canonical,
+        "sku": String(product.slug || product.id || name),
+        "brand": {
+          "@type": "Brand",
+          "name": "BoisRoyal"
+        }
+      };
+
+      const hasPrice = product.price !== null &&
+        product.price !== undefined &&
+        product.price !== "" &&
+        Number.isFinite(Number(product.price));
+
+      if (hasPrice) {
+        const stockKnown = product.stock_quantity !== null &&
+          product.stock_quantity !== undefined &&
+          product.stock_quantity !== "";
+
+        const inStock = !stockKnown || Number(product.stock_quantity) > 0;
+
+        productSchema.offers = {
+          "@type": "Offer",
           "url": canonical,
-          "sku": String(product.slug || product.id || name),
-          "brand": {
-            "@type": "Brand",
-            "name": "BoisRoyal"
-          }
-        },
+          "priceCurrency": "EUR",
+          "price": Number(product.price),
+          "availability": inStock
+            ? "https://schema.org/InStock"
+            : "https://schema.org/OutOfStock"
+        };
+      }
+
+      /*
+       * Les données de notation structurées sont ajoutées uniquement
+       * si de vrais avis approuvés existent.
+       */
+      if (reviews.length > 0) {
+        const ratings = reviews
+          .map(review => Number(review.rating))
+          .filter(rating => Number.isInteger(rating) && rating >= 1 && rating <= 5);
+
+        if (ratings.length > 0) {
+          const average = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+
+          productSchema.aggregateRating = {
+            "@type": "AggregateRating",
+            "ratingValue": Number(average.toFixed(2)),
+            "reviewCount": ratings.length,
+            "bestRating": 5,
+            "worstRating": 1
+          };
+
+          productSchema.review = reviews
+            .filter(review => {
+              const rating = Number(review.rating);
+              return Number.isInteger(rating) && rating >= 1 && rating <= 5;
+            })
+            .slice(0, 10)
+            .map(review => {
+              const reviewSchema = {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": String(review.reviewer_name || "Client")
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": Number(review.rating),
+                  "bestRating": 5,
+                  "worstRating": 1
+                }
+              };
+
+              if (review.comment) {
+                reviewSchema.reviewBody = String(review.comment);
+              }
+
+              if (review.created_at) {
+                reviewSchema.datePublished = String(review.created_at).slice(0, 10);
+              }
+
+              return reviewSchema;
+            });
+        }
+      }
+
+      const graph = [
+        productSchema,
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
@@ -470,29 +839,8 @@
         }
       ];
 
-      const hasPrice = product.price !== null &&
-        product.price !== undefined &&
-        product.price !== "" &&
-        Number.isFinite(Number(product.price));
-
-      if (hasPrice) {
-        const stockKnown = product.stock_quantity !== null &&
-          product.stock_quantity !== undefined &&
-          product.stock_quantity !== "";
-        const inStock = !stockKnown || Number(product.stock_quantity) > 0;
-
-        graph[0].offers = {
-          "@type": "Offer",
-          "url": canonical,
-          "priceCurrency": "EUR",
-          "price": Number(product.price),
-          "availability": inStock
-            ? "https://schema.org/InStock"
-            : "https://schema.org/OutOfStock"
-        };
-      }
-
       let script = document.getElementById("productStructuredData");
+
       if (!script) {
         script = document.createElement("script");
         script.id = "productStructuredData";
@@ -506,6 +854,197 @@
       });
     }
 
+    function formatDate(value) {
+      if (!value) return "";
+
+      const date = new Date(value);
+
+      if (Number.isNaN(date.getTime())) return "";
+
+      return new Intl.DateTimeFormat("fr-FR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      }).format(date);
+    }
+
+    function stars(rating) {
+      const value = Math.max(0, Math.min(5, Math.round(Number(rating) || 0)));
+      return "★".repeat(value) + "☆".repeat(5 - value);
+    }
+
+    function renderReviews(reviews) {
+      approvedReviews = Array.isArray(reviews) ? reviews : [];
+
+      const validReviews = approvedReviews.filter(review => {
+        const rating = Number(review.rating);
+        return Number.isInteger(rating) && rating >= 1 && rating <= 5;
+      });
+
+      const averageElement = document.getElementById("reviewAverage");
+      const starsElement = document.getElementById("reviewAverageStars");
+      const countElement = document.getElementById("reviewCount");
+      const listElement = document.getElementById("reviewList");
+
+      if (validReviews.length === 0) {
+        averageElement.textContent = "—";
+        starsElement.textContent = "☆☆☆☆☆";
+        countElement.textContent = "Aucun avis publié pour le moment";
+
+        listElement.innerHTML = `
+          <div class="no-reviews">
+            Aucun avis client publié pour ce produit pour le moment.
+            Soyez le premier client à partager votre expérience après livraison.
+          </div>
+        `;
+
+        updateSEO(currentProduct, []);
+        return;
+      }
+
+      const total = validReviews.reduce(
+        (sum, review) => sum + Number(review.rating), 0
+      );
+
+      const average = total / validReviews.length;
+
+      averageElement.textContent = average.toFixed(1).replace(".", ",") + "/5";
+      starsElement.textContent = stars(average);
+
+      countElement.textContent =
+        `${validReviews.length} avis client${validReviews.length > 1 ? "s" : ""}`;
+
+      listElement.innerHTML = validReviews.map(review => `
+        <article class="review-card">
+          <div class="review-card-top">
+            <span class="review-author">${esc(review.reviewer_name || "Client")}</span>
+            <span class="review-date">${esc(formatDate(review.created_at))}</span>
+          </div>
+          <div class="review-stars" aria-label="${Number(review.rating)} sur 5">
+            ${stars(review.rating)}
+          </div>
+          ${review.comment ? `
+            <p class="review-comment">${esc(review.comment)}</p>
+          ` : ""}
+        </article>
+      `).join("");
+
+      updateSEO(currentProduct, validReviews);
+    }
+
+    async function loadReviews(productId) {
+      const listElement = document.getElementById("reviewList");
+
+      try {
+        const { data, error } = await db
+          .from("br_product_reviews_public")
+          .select("id,product_id,rating,comment,reviewer_name,created_at")
+          .eq("product_id", productId)
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        renderReviews(data || []);
+
+      } catch (error) {
+        console.error("Erreur de chargement des avis :", error);
+
+        listElement.innerHTML = `
+          <div class="no-reviews">
+            Les avis ne peuvent pas être chargés pour le moment.
+          </div>
+        `;
+
+        updateSEO(currentProduct, []);
+      }
+    }
+
+    function showReviewMessage(message, type) {
+      const element = document.getElementById("reviewMessage");
+      element.textContent = message;
+      element.className = `review-message ${type}`;
+    }
+
+    async function submitReview(event) {
+      event.preventDefault();
+
+      if (!currentProduct || !db) return;
+
+      const form = document.getElementById("reviewForm");
+      const submitButton = document.getElementById("reviewSubmit");
+
+      const orderNumber = document.getElementById("reviewOrder").value.trim();
+      const email = document.getElementById("reviewEmail").value.trim();
+      const rating = Number(document.getElementById("reviewRating").value);
+      const comment = document.getElementById("reviewComment").value.trim();
+
+      if (!orderNumber || !email || !rating) {
+        showReviewMessage("Merci de remplir les champs obligatoires.", "error");
+        return;
+      }
+
+      if (rating < 1 || rating > 5 || !Number.isInteger(rating)) {
+        showReviewMessage("Veuillez choisir une note valide.", "error");
+        return;
+      }
+
+      if (comment.length > 1000) {
+        showReviewMessage("Votre commentaire dépasse 1 000 caractères.", "error");
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Envoi en cours…";
+
+      try {
+        const { error } = await db.rpc("submit_br_product_review", {
+          p_order_number: orderNumber,
+          p_customer_email: email,
+          p_product_id: currentProduct.id,
+          p_rating: rating,
+          p_comment: comment || null
+        });
+
+        if (error) throw error;
+
+        form.reset();
+
+        showReviewMessage(
+          "Merci pour votre avis ! Votre achat a été vérifié et votre avis a été transmis à notre équipe. Il sera visible après validation.",
+          "success"
+        );
+
+      } catch (error) {
+        console.error("Erreur d'envoi de l'avis :", error);
+
+        let message = error?.message || "";
+
+        if (
+          message.toLowerCase().includes("duplicate") ||
+          message.toLowerCase().includes("unique")
+        ) {
+          message = "Un avis a déjà été envoyé pour ce produit avec cette commande.";
+        } else if (
+          message.toLowerCase().includes("commande introuvable") ||
+          message.toLowerCase().includes("livraison non confirmée")
+        ) {
+          message = "Commande introuvable, adresse e-mail incorrecte ou livraison non encore confirmée. Vérifiez vos informations.";
+        } else if (
+          message.toLowerCase().includes("ce produit ne figure pas")
+        ) {
+          message = "Ce produit ne figure pas dans la commande indiquée.";
+        } else if (!message) {
+          message = "Impossible d'envoyer votre avis pour le moment. Réessayez plus tard.";
+        }
+
+        showReviewMessage(message, "error");
+
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Envoyer mon avis";
+      }
+    }
+
     function addToCart() {
       if (!currentProduct) return;
 
@@ -513,7 +1052,9 @@
 
       try {
         cart = JSON.parse(localStorage.getItem("boisroyal_cart") || "[]");
+
         if (!Array.isArray(cart)) cart = [];
+
       } catch (error) {
         cart = [];
       }
@@ -524,6 +1065,7 @@
 
       if (existing) {
         existing.quantity = Number(existing.quantity || 0) + 1;
+
       } else {
         cart.push({
           id: currentProduct.id,
@@ -554,7 +1096,7 @@
           throw new Error("Supabase indisponible");
         }
 
-        const db = window.supabase.createClient(
+        db = window.supabase.createClient(
           SUPABASE_URL,
           SUPABASE_KEY
         );
@@ -567,6 +1109,7 @@
           .maybeSingle();
 
         if (error) throw error;
+
         if (!data) {
           showError();
           return;
@@ -580,6 +1123,7 @@
         document.getElementById("productName").textContent = data.name;
         document.getElementById("breadcrumbName").textContent = data.name;
         document.getElementById("productCategory").textContent = category(data);
+
         document.getElementById("productDescription").textContent =
           data.description || "Contactez-nous pour plus d'informations sur ce produit.";
 
@@ -587,6 +1131,7 @@
         document.getElementById("productUnit").textContent = data.unit || "Unité";
 
         const image = document.getElementById("productImage");
+
         image.src = photo(data);
         image.alt = data.name;
 
@@ -595,7 +1140,9 @@
           image.src = PHOTOS.wood;
         };
 
-        updateSEO(data);
+        updateSEO(data, []);
+
+        await loadReviews(data.id);
 
       } catch (error) {
         console.error("Erreur de chargement du produit :", error);
@@ -604,7 +1151,12 @@
     }
 
     document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("addButton").addEventListener("click", addToCart);
+
+    document.getElementById("addButton")
+      .addEventListener("click", addToCart);
+
+    document.getElementById("reviewForm")
+      .addEventListener("submit", submitReview);
 
     loadProduct();
   </script>
