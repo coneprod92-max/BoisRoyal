@@ -126,6 +126,23 @@
         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px"><a class="btn btn-dark" href="produit.html?slug=demo-bois-petit-filet">Bois petit filet</a><a class="btn btn-dark" href="produit.html?slug=demo-bois-lot-familial">Lot familial 40 L</a><a class="btn btn-dark" href="produit.html?slug=demo-charbon-petit-sac">Charbon petit sac</a><a class="btn btn-dark" href="produit.html?slug=demo-charbon-grand-sac">Charbon grand sac</a></div>
       </div>
     </div></section>
+    <section class="section reviews-section" id="avis-clients">
+  <div class="container">
+    <div class="section-heading">
+      <span class="kicker">La confiance de nos clients</span>
+      <h2>Ils parlent de leur expérience.</h2>
+      <p>Découvrez les retours de clients ayant réellement reçu leur commande.</p>
+    </div>
+    <div class="reviews-summary">
+      <div class="reviews-average" id="reviewsAverage">—</div>
+      <div class="reviews-stars" id="reviewsAverageStars">☆☆☆☆☆</div>
+      <div class="reviews-count" id="reviewsCount">Chargement des avis...</div>
+    </div>
+    <div class="reviews-grid" id="homeReviews">
+      <div class="reviews-empty">Chargement des témoignages...</div>
+    </div>
+  </div>
+</section>
     <section class="section" id="livraison"><div class="container"><div class="delivery-panel">
       <div class="delivery-copy"><span class="kicker" style="color:#F3A06B">Une livraison transparente</span><h2>La chaleur, jusque chez vous.</h2><p>Le transport dépend de votre adresse, de la quantité et du type de produit. Nous vérifions les frais avec vous avant toute confirmation.</p><ul><li>Indiquez votre ville et votre adresse.</li><li>Choisissez les produits et les quantités.</li><li>Recevez le montant total avant confirmation.</li></ul><a class="btn btn-copper" href="devis.html">Préparer ma commande →</a></div>
       <div class="delivery-image" role="img" aria-label="Bois prêt à être livré"></div>
@@ -194,6 +211,55 @@
         console.error("Chargement du catalogue :",e);
         products=[];grid.innerHTML="";errorBox.hidden=false;
       }
+    }
+    async function loadHomeReviews(){
+  const grid=document.getElementById("homeReviews");
+  const average=document.getElementById("reviewsAverage");
+  const stars=document.getElementById("reviewsAverageStars");
+  const count=document.getElementById("reviewsCount");
+
+  try{
+    const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+    const {data,error}=await db
+      .from("br_product_reviews_public")
+      .select("id,product_id,product_name,rating,comment,reviewer_name,created_at")
+      .order("created_at",{ascending:false})
+      .limit(6);
+
+    if(error)throw error;
+
+    if(!data||!data.length){
+      average.textContent="—";
+      stars.textContent="☆☆☆☆☆";
+      count.textContent="Aucun avis publié pour le moment.";
+      grid.innerHTML='<div class="reviews-empty">Soyez parmi les premiers à partager votre expérience !</div>';
+      return;
+    }
+
+    const avg=data.reduce((sum,r)=>sum+Number(r.rating),0)/data.length;
+    const rounded=Math.round(avg);
+
+    average.textContent=avg.toFixed(1).replace(".",",")+"/5";
+    stars.textContent="★★★★★".slice(0,rounded)+"☆☆☆☆☆".slice(0,5-rounded);
+    count.textContent=data.length+" avis clients affichés";
+
+    grid.innerHTML=data.map(r=>{
+      const rating=Math.max(0,Math.min(5,Number(r.rating)||0));
+      return `
+        <article class="review-card">
+          <div class="review-card-stars">${"★".repeat(rating)}${"☆".repeat(5-rating)}</div>
+          <p>${esc(r.comment||"")}</p>
+          <div class="review-author">${esc(r.reviewer_name||"Client BoisRoyal")}</div>
+          <div class="review-product">${esc(r.product_name||"Produit BoisRoyal")}</div>
+        </article>`;
+    }).join("");
+
+  }catch(error){
+    console.error("Erreur avis clients :",error);
+    count.textContent="Avis temporairement indisponibles.";
+    grid.innerHTML='<div class="reviews-empty">Les témoignages seront bientôt disponibles.</div>';
+  }
     }
     function addToCart(id){
       const p=products.find(x=>String(x.id)===String(id));if(!p)return;
