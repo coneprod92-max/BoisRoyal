@@ -149,7 +149,7 @@
       <p style="color:#766D64;font-size:.9rem;line-height:1.7;margin:0 auto 20px;max-width:600px">
         Votre exp&#233;rience compte ! Choisissez le produit achet&#233; dans notre catalogue et partagez votre avis.
       </p>
-      <a class="btn btn-copper" href="#produits">&#9997; Laisser un avis</a>
+      <button type="button" class="btn btn-copper" onclick="openHomeReviewModal()">&#9997; Laisser un avis</button>
     </div>
   </div>
 </section>
@@ -173,6 +173,38 @@
     <div><div class="footer-title">Nous contacter</div><div class="footer-links"><a href="tel:+33745767085">+33 7 45 76 70 85</a><a href="mailto:contact@boisroyal.net">contact@boisroyal.net</a><span>Livraison en Europe selon destination</span><span>Informations fournisseurs vérifiées selon disponibilité</span></div></div>
   </div><div class="footer-bottom"><span>© <span id="year"></span> BoisRoyal. Tous droits réservés.</span><span>BoisRoyal · La chaleur a du caractère.</span></div></footer>
   <div class="mobile-cart"><button type="button" onclick="openCart()">Voir mon panier · <span id="mobileCartCount">0</span> article(s)</button></div>
+<div id="homeReviewModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,12,8,.78);padding:20px;overflow-y:auto;align-items:center;justify-content:center" onclick="if(event.target===this)closeHomeReviewModal()">
+  <div style="background:#FFFCF8;color:#30221B;width:100%;max-width:560px;margin:auto;padding:28px;border-radius:8px;position:relative">
+    <button type="button" onclick="closeHomeReviewModal()" aria-label="Fermer" style="position:absolute;right:16px;top:12px;border:0;background:none;font-size:28px;cursor:pointer;color:#30221B">&times;</button>
+    <h2 style="font-family:'Playfair Display',serif;margin:0 35px 8px 0">Partagez votre expérience</h2>
+    <p style="color:#766D64;font-size:.9rem;line-height:1.6;margin-bottom:22px">Pour garantir l'authenticité des avis, indiquez les informations de votre commande livrée.</p>
+    <form id="homeReviewForm">
+      <label for="homeReviewProduct" style="display:block;margin:14px 0 6px;font-weight:600">Produit acheté</label>
+      <select id="homeReviewProduct" required style="width:100%;padding:13px;border:1px solid #D8CABB;border-radius:4px;background:white;color:#30221B">
+        <option value="">Choisissez votre produit</option>
+      </select>
+
+      <label for="homeReviewEmail" style="display:block;margin:14px 0 6px;font-weight:600">E-mail utilisé lors de la commande</label>
+      <input id="homeReviewEmail" type="email" required placeholder="Votre adresse e-mail" style="width:100%;padding:13px;border:1px solid #D8CABB;border-radius:4px;box-sizing:border-box">
+
+      <label for="homeReviewRating" style="display:block;margin:14px 0 6px;font-weight:600">Votre note</label>
+      <select id="homeReviewRating" required style="width:100%;padding:13px;border:1px solid #D8CABB;border-radius:4px;background:white;color:#30221B">
+        <option value="">Choisissez une note</option>
+        <option value="5">★★★★★ — Excellent</option>
+        <option value="4">★★★★ — Très bien</option>
+        <option value="3">★★★ — Bien</option>
+        <option value="2">★★ — Moyen</option>
+        <option value="1">★ — Décevant</option>
+      </select>
+
+      <label for="homeReviewComment" style="display:block;margin:14px 0 6px;font-weight:600">Votre commentaire</label>
+      <textarea id="homeReviewComment" maxlength="1000" rows="4" placeholder="Racontez-nous votre expérience (facultatif)..." style="width:100%;padding:13px;border:1px solid #D8CABB;border-radius:4px;box-sizing:border-box;resize:vertical"></textarea>
+
+      <p id="homeReviewMessage" role="status" style="font-size:.9rem;line-height:1.5;margin:14px 0"></p>
+      <button id="homeReviewSubmit" type="submit" class="btn btn-copper" style="width:100%;cursor:pointer">Envoyer mon avis</button>
+    </form>
+  </div>
+</div>
   <div class="cart-overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()"><aside class="cart-drawer" aria-label="Votre panier">
     <div class="cart-head"><h2>Votre panier</h2><button class="close-cart" onclick="closeCart()" aria-label="Fermer">×</button></div><div class="cart-items" id="cartItems"></div>
     <div class="cart-total"><div class="total-row"><span>Sous-total produits</span><span id="cartTotal">0,00 €</span></div><p class="cart-note">Hors frais de livraison. Le montant du transport et le total définitif seront confirmés avec vous.</p><button class="btn btn-copper checkout" onclick="goToCheckout()">Continuer ma commande →</button></div>
@@ -271,6 +303,53 @@
     grid.innerHTML='<div class="reviews-empty">Les témoignages seront bientôt disponibles.</div>';
   }
     }
+    function openHomeReviewModal(){
+      const modal=document.getElementById("homeReviewModal");
+      const select=document.getElementById("homeReviewProduct");
+      const message=document.getElementById("homeReviewMessage");
+      select.innerHTML='<option value="">Choisissez votre produit</option>'+products.map(p=>'<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>').join("");
+      message.textContent=products.length?"":"Le catalogue est encore en chargement. Réessayez dans quelques instants.";
+      modal.style.display="flex";
+      document.body.style.overflow="hidden";
+    }
+    function closeHomeReviewModal(){
+      document.getElementById("homeReviewModal").style.display="none";
+      document.body.style.overflow="";
+    }
+    document.getElementById("homeReviewForm").addEventListener("submit",async function(event){
+      event.preventDefault();
+      const button=document.getElementById("homeReviewSubmit");
+      const message=document.getElementById("homeReviewMessage");
+      const productId=document.getElementById("homeReviewProduct").value;
+      const email=document.getElementById("homeReviewEmail").value.trim();
+      const rating=Number(document.getElementById("homeReviewRating").value);
+      const comment=document.getElementById("homeReviewComment").value.trim();
+      if(!productId||!email||rating<1||rating>5){
+        message.textContent="Merci de remplir tous les champs obligatoires.";
+        return;
+      }
+      button.disabled=true;
+      button.textContent="Envoi en cours...";
+      message.textContent="";
+      try{
+        const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+        const {error}=await db.rpc("submit_br_product_review_by_email",{
+          p_customer_email:email,
+          p_product_id:productId,
+          p_rating:rating,
+          p_comment:comment||null
+        });
+        if(error)throw error;
+        document.getElementById("homeReviewForm").reset();
+        message.textContent="Merci ! Votre avis a bien été envoyé à notre équipe. Il sera vérifié et devra être approuvé avant sa publication.";
+      }catch(error){
+        console.error("Envoi de l'avis :",error);
+        message.textContent="L'avis n'a pas pu être envoyé. Vérifiez votre adresse e-mail et réessayez.";
+      }finally{
+        button.disabled=false;
+        button.textContent="Envoyer mon avis";
+      }
+    });
     function addToCart(id){
       const p=products.find(x=>String(x.id)===String(id));if(!p)return;
       let line=cart.find(x=>String(x.id)===String(p.id));
