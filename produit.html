@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -741,11 +741,9 @@
         Number.isFinite(Number(product.price));
 
       if (hasPrice) {
-        const stockKnown = product.stock_quantity !== null &&
-          product.stock_quantity !== undefined &&
-          product.stock_quantity !== "";
-
-        const inStock = !stockKnown || Number(product.stock_quantity) > 0;
+        // BoisRoyal fonctionne avec un stock illimite.
+// La disponibilite reelle est confirmee avant la commande.
+        const inStock = true;
 
         productSchema.offers = {
           "@type": "Offer",
