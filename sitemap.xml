@@ -19,7 +19,31 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://boisroyal.net/produit.html?slug=bois-de-chauffage-coupees-50-cm-chene-et-autres-a-charger-sur-place</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://boisroyal.net/produit.html?slug=bois-de-chauffage-chataignier-bien-sec-1-m</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://boisroyal.net/produit.html?slug=etagere-a-bois-de-chauffage-porte-buche-de-cheminee-en-acier-noir-33x33x115-cm</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://boisroyal.net/produit.html?slug=demo-bois-petit-filet</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://boisroyal.net/produit.html?slug=demo-charbon-grand-sac</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -32,12 +56,6 @@
   </url>
   <url>
     <loc>https://boisroyal.net/produit.html?slug=demo-charbon-petit-sac</loc>
-    <lastmod>2026-10-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://boisroyal.net/produit.html?slug=demo-charbon-grand-sac</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
