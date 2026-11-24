@@ -123,7 +123,7 @@
       <div class="product-grid" id="productGrid"><div class="empty">Chargement du catalogue…</div></div>
       <div class="empty" id="catalogError" role="status" hidden>Le catalogue ne peut pas être chargé pour le moment. Merci de réessayer dans quelques instants ou de nous contacter.</div>
       <div style="margin-top:28px;text-align:center"><span class="kicker">Accès direct</span><p style="color:var(--muted);font-size:.84rem">Retrouvez aussi nos quatre fiches produits :</p>
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px"><a class="btn btn-dark" href="produit.html?slug=demo-bois-petit-filet">Bois petit filet</a><a class="btn btn-dark" href="produit.html?slug=demo-bois-lot-familial">Lot familial 40 L</a><a class="btn btn-dark" href="produit.html?slug=demo-charbon-petit-sac">Charbon petit sac</a><a class="btn btn-dark" href="produit.html?slug=demo-charbon-grand-sac">Charbon grand sac</a></div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px"><a class="btn btn-dark" href="produit.html?slug=bois-de-chauffage-petit-filet-12-5-l">Bois petit filet</a><a class="btn btn-dark" href="produit.html?slug=bois-de-chauffage-lot-familial-40-l">Lot familial 40 L</a><a class="btn btn-dark" href="produit.html?slug=charbon-de-bois-petit-sac-3-kg">Charbon petit sac</a><a class="btn btn-dark" href="produit.html?slug=charbon-de-bois-grand-sac-10-kg">Charbon grand sac</a></div>
       </div>
     </div></section>
     <section class="section reviews-section" id="avis-clients">
@@ -144,7 +144,7 @@
 
     <div style="margin-top:34px;padding:28px 20px;text-align:center;background:#FFFCF8;border:1px solid #E7DCCE;border-radius:4px">
       <h3 style="font-family:'Playfair Display',serif;color:#30221B;margin:0 0 10px">
-        Vous avez dÃ©jÃ  commandÃ© chez BoisRoyal ?
+        Vous avez d&#233;j&#224; command&#233; chez BoisRoyal ?
       </h3>
       <p style="color:#766D64;font-size:.9rem;line-height:1.7;margin:0 auto 20px;max-width:600px">
         Votre exp&#233;rience compte ! Choisissez le produit achet&#233; dans notre catalogue et partagez votre avis.
@@ -217,10 +217,10 @@
     const PRODUCT_TABLE="br_products";
     const PHOTOS={wood:"produit-filets.webp",logs:"histoire-acacia.webp",charcoal:"produit-caisse-bouleau.webp"};
     const PRODUCT_LINKS=[
-      {slug:"demo-bois-petit-filet",label:"Bois de chauffage — petit filet",category:"bois"},
-      {slug:"demo-bois-lot-familial",label:"Bois de chauffage — lot familial",category:"bois"},
-      {slug:"demo-charbon-petit-sac",label:"Charbon de bois — petit sac",category:"charbon"},
-      {slug:"demo-charbon-grand-sac",label:"Charbon de bois — grand sac",category:"charbon"}
+      {slug:"bois-de-chauffage-petit-filet-12-5-l",label:"Bois de chauffage — petit filet",category:"bois"},
+      {slug:"bois-de-chauffage-lot-familial-40-l",label:"Bois de chauffage — lot familial",category:"bois"},
+      {slug:"charbon-de-bois-petit-sac-3-kg",label:"Charbon de bois — petit sac",category:"charbon"},
+      {slug:"charbon-de-bois-grand-sac-10-kg",label:"Charbon de bois — grand sac",category:"charbon"}
     ];
     let products=[],filter="tous",cart=readCart();
     function readCart(){try{return JSON.parse(localStorage.getItem("boisroyal_cart")||"[]")}catch(e){return[]}}
