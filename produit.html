@@ -728,7 +728,7 @@
         "description": description,
         "image": [imageUrl],
         "url": canonical,
-        "sku": String(product.slug || product.id || name),
+        "sku": `BR-${String(product.id).replace(/[^A-Za-z0-9_-]/g, "").slice(0, 46)}`,
         "brand": {
           "@type": "Brand",
           "name": "BoisRoyal"
