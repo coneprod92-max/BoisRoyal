@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://boisroyal.net/</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://boisroyal.net/bois-de-chauffage.html</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://boisroyal.net/charbon-de-bois.html</loc>
-    <lastmod>2026-11-24</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -37,13 +37,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://boisroyal.net/produit.html?slug=charbon-de-bois-grand-sac-10-kg</loc>
+    <loc>https://boisroyal.net/produit.html?slug=bois-de-chauffage-petit-filet-12-5-l</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://boisroyal.net/produit.html?slug=bois-de-chauffage-petit-filet-12-5-l</loc>
+    <loc>https://boisroyal.net/produit.html?slug=charbon-de-bois-grand-sac-10-kg</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
