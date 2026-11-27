@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#30221B">
+<meta name="description" content="Consultez et répondez à votre devis BoisRoyal.">
+<title>Mon devis — BoisRoyal</title>
+<style>
+:root {
+  --bg:#F4EBDD;
+  --paper:#FFFFFF;
+  --brown:#30221B;
+  --orange:#D96B2B;
+  --ink:#292522;
+  --muted:#756B63;
+  --line:#E7DED2;
+  --green:#287044;
+  --red:#B83E30;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:24px 14px 60px;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Arial,sans-serif;
+  line-height:1.6;
+}
+.wrap{max-width:760px;margin:auto}
+header{
+  background:var(--brown);
+  color:white;
+  padding:22px 26px;
+  border-radius:16px 16px 0 0;
+}
+.logo{font-family:Georgia,serif;font-size:28px;font-weight:bold}
+.logo span{color:#F2A06E}
+header p{margin:4px 0 0;color:#E6D8CB;font-size:14px}
+main{
+  background:var(--paper);
+  padding:26px;
+  border-radius:0 0 16px 16px;
+  box-shadow:0 14px 38px rgba(48,34,27,.08);
+}
+h1{font-family:Georgia,serif;color:var(--brown);font-size:27px;margin:0 0 8px}
+h2{font-size:17px;color:var(--brown);margin:25px 0 10px}
+p{margin:8px 0}
+.muted{color:var(--muted);font-size:14px}
+.reference{
+  display:inline-block;
+  background:#FFF5EC;
+  color:#8C451F;
+  padding:5px 10px;
+  border-radius:7px;
+  font-size:13px;
+  font-weight:bold;
+}
+.status{
+  display:inline-block;
+  padding:5px 11px;
+  border-radius:30px;
+  background:#EDF7EF;
+  color:var(--green);
+  font-size:13px;
+  font-weight:bold;
+}
+.status.rejected,.status.expired{background:#FCEDEA;color:var(--red)}
+.status.pending{background:#FFF5EC;color:#8C451F}
+.panel{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px;
+  margin-top:18px;
+}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{
+  padding:12px 8px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+  font-size:14px;
+}
+th{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+td:last-child,th:last-child{text-align:right}
+.totals{max-width:330px;margin:18px 0 0 auto}
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:6px 0;
+  font-size:14px;
+}
+.grand-total{
+  border-top:2px solid var(--brown);
+  margin-top:8px;
+  padding-top:13px;
+  font-size:21px;
+  font-weight:bold;
+  color:var(--orange);
+}
+.note{
+  background:#FFF5EC;
+  border-left:4px solid var(--orange);
+  border-radius:7px;
+  padding:13px;
+  margin-top:18px;
+  white-space:pre-wrap;
+  font-size:14px;
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:24px;
+}
+button{
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:13px 18px;
+  background:white;
+  color:var(--brown);
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+}
+button.primary{background:var(--orange);border-color:var(--orange);color:white}
+button.danger{color:var(--red)}
+button:disabled{opacity:.55;cursor:wait}
+.message{
+  margin-top:18px;
+  padding:13px;
+  border-radius:9px;
+  background:#F7F2EB;
+  font-size:14px;
+  white-space:pre-wrap;
+}
+.message.error{background:#FCEDEA;color:var(--red)}
+.message.success{background:#EDF7EF;color:var(--green)}
+.hidden{display:none!important}
+.loading{text-align:center;padding:45px 15px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}
+@media(max-width:520px){
+  body{padding:12px 9px 35px}
+  header{padding:19px}
+  main{padding:18px 14px}
+  h1{font-size:23px}
+  th,td{padding:10px 5px;font-size:12px}
+  .actions button{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">Bois<span>Royal</span></div>
+    <p>Votre devis personnalisé</p>
+  </header>
+
+  <main>
+    <div id="loading" class="loading">Chargement de votre devis…</div>
+
+    <section id="content" class="hidden">
+      <h1>Bonjour <span id="customerName"></span> !</h1>
+      <p>Voici le détail de votre devis BoisRoyal.</p>
+
+      <p style="margin-top:15px">
+        <span class="reference" id="orderNumber"></span>
+        <span class="status" id="quoteStatus"></span>
+      </p>
+
+      <div class="panel">
+        <h2 style="margin-top:0">Votre livraison</h2>
+        <p id="deliveryAddress"></p>
+        <p class="muted" id="validUntil"></p>
+      </div>
+
+      <h2>Détail des produits</h2>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Produit</th>
+              <th>Quantité</th>
+              <th>Prix total</th>
+            </tr>
+          </thead>
+          <tbody id="itemsRows"></tbody>
+        </table>
+      </div>
+
+      <div class="totals">
+        <div class="total-row">
+          <span>Sous-total</span>
+          <strong id="subtotal"></strong>
+        </div>
+        <div class="total-row">
+          <span>Livraison</span>
+          <strong id="shipping"></strong>
+        </div>
+        <div class="total-row grand-total">
+          <span>Total</span>
+          <strong id="total"></strong>
+        </div>
+      </div>
+
+      <div id="publicNote" class="note hidden"></div>
+
+      <div id="responseArea">
+        <div class="actions">
+          <button class="primary" id="acceptBtn">Accepter ce devis</button>
+          <button class="danger" id="rejectBtn">Refuser ce devis</button>
+        </div>
+        <p class="muted">
+          En acceptant, vous confirmez votre accord sur les produits,
+          les quantités et le montant indiqué. Le paiement sera proposé
+          dans une étape ultérieure.
+        </p>
+      </div>
+
+      <div id="message" class="message hidden" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="errorArea" class="hidden">
+      <h1>Devis indisponible</h1>
+      <div id="errorMessage" class="message error"></div>
+      <p class="muted">
+        Si vous pensez qu'il s'agit d'une erreur, contactez BoisRoyal.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    BoisRoyal · Votre partenaire bois de chauffage et charbon
+  </footer>
+</div>
+
+<script>
+const SUPABASE_URL = "https://evvblxiitorfdniqmqcf.supabase.co";
+const SUPABASE_KEY = "sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC";
+const FUNCTION_URL = SUPABASE_URL + "/functions/v1/boisroyal-quote-public";
+
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(window.location.search);
+const token = params.get("token");
+
+let currentQuote = null;
+let busy = false;
+
+function money(value){
+  return new Intl.NumberFormat("fr-FR",{
+    style:"currency",
+    currency:"EUR"
+  }).format(Number(value)||0);
+}
+
+function showMessage(text, type=""){
+  const box = $("message");
+  box.textContent = text;
+  box.className = "message " + type;
+  box.classList.remove("hidden");
+}
+
+function setBusy(value){
+  busy = value;
+  $("acceptBtn").disabled = value;
+  $("rejectBtn").disabled = value;
+}
+
+function statusLabel(status){
+  const labels = {
+    sent:"Devis envoyé",
+    accepted:"Devis accepté",
+    rejected:"Devis refusé",
+    expired:"Devis expiré",
+    pending:"En attente"
+  };
+  return labels[status] || "Statut inconnu";
+}
+
+function showError(message){
+  $("loading").classList.add("hidden");
+  $("content").classList.add("hidden");
+  $("errorArea").classList.remove("hidden");
+  $("errorMessage").textContent = message;
+}
+
+async function callQuote(action){
+  const response = await fetch(FUNCTION_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "apikey":SUPABASE_KEY,
+      "Authorization":"Bearer " + SUPABASE_KEY
+    },
+    body:JSON.stringify({token,action})
+  });
+
+  const data = await response.json().catch(()=>({}));
+  if(!response.ok){
+    throw new Error(data.error || "Impossible de communiquer avec le service de devis.");
+  }
+  return data;
+}
+
+function renderQuote(data){
+  const order = data.order;
+  currentQuote = order;
+
+  $("customerName").textContent = order.customer_name || "client";
+  $("orderNumber").textContent = "Référence : " + order.order_number;
+
+  const status = $("quoteStatus");
+  status.textContent = statusLabel(order.quote_status);
+  status.className = "status";
+  if(order.quote_status === "rejected") status.classList.add("rejected");
+  if(order.quote_status === "expired") status.classList.add("expired");
+  if(order.quote_status === "pending") status.classList.add("pending");
+
+  $("deliveryAddress").textContent = [
+    order.delivery_address,
+    order.delivery_postal_code,
+    order.delivery_city,
+    order.delivery_country
+  ].filter(Boolean).join(", ");
+
+  if(order.quote_valid_until){
+    $("validUntil").textContent =
+      "Devis valable jusqu'au " +
+      new Date(order.quote_valid_until).toLocaleDateString("fr-FR");
+  }
+
+  const tbody = $("itemsRows");
+  tbody.replaceChildren();
+
+  (data.items || []).forEach(item=>{
+    const tr = document.createElement("tr");
+    const product = document.createElement("td");
+    const quantity = document.createElement("td");
+    const amount = document.createElement("td");
+
+    product.textContent = item.product_name || "Produit";
+    quantity.textContent =
+      Number(item.quantity) + (item.unit ? " " + item.unit : "");
+    amount.textContent = money(item.line_total);
+
+    tr.append(product,quantity,amount);
+    tbody.appendChild(tr);
+  });
+
+  $("subtotal").textContent = money(order.subtotal);
+  $("shipping").textContent = money(order.shipping_cost);
+  $("total").textContent = money(order.total);
+
+  if(order.quote_public_note){
+    $("publicNote").textContent = order.quote_public_note;
+    $("publicNote").classList.remove("hidden");
+  }
+
+  $("responseArea").classList.toggle("hidden",order.quote_status !== "sent");
+
+  if(order.quote_status === "accepted"){
+    showMessage(
+      "Vous avez déjà accepté ce devis. Votre commande est confirmée. Le paiement sera proposé dans une prochaine étape.",
+      "success"
+    );
+  }else if(order.quote_status === "rejected"){
+    showMessage("Vous avez déjà refusé ce devis.");
+  }else if(order.quote_status === "expired"){
+    showMessage("Ce devis n'est plus valable. Contactez BoisRoyal pour une actualisation.","error");
+  }
+
+  $("loading").classList.add("hidden");
+  $("content").classList.remove("hidden");
+}
+
+async function loadQuote(){
+  if(!token){
+    showError("Le lien est incomplet : aucun code de devis n'a été fourni.");
+    return;
+  }
+
+  try{
+    const data = await callQuote("view");
+    renderQuote(data);
+  }catch(error){
+    showError(error.message);
+  }
+}
+
+async function respond(action){
+  if(busy) return;
+
+  const confirmation = action === "accept"
+    ? "Confirmer l'acceptation de ce devis ?"
+    : "Confirmer le refus de ce devis ?";
+
+  if(!confirm(confirmation)) return;
+
+  setBusy(true);
+  $("message").classList.add("hidden");
+
+  try{
+    const data = await callQuote(action);
+    renderQuote(data);
+
+    if(action === "accept"){
+      showMessage(
+        "Merci ! Votre devis a été accepté. Votre commande est confirmée. Nous vous communiquerons la prochaine étape pour le paiement.",
+        "success"
+      );
+    }else{
+      showMessage("Votre refus a bien été enregistré. Merci de nous avoir répondu.");
+    }
+  }catch(error){
+    showMessage(error.message,"error");
+  }finally{
+    setBusy(false);
+  }
+}
+
+$("acceptBtn").addEventListener("click",()=>respond("accept"));
+$("rejectBtn").addEventListener("click",()=>respond("reject"));
+
+loadQuote();
+</script>
+</body>
+</html>

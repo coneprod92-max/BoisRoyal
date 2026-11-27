@@ -1,0 +1,356 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BoisRoyal — Gestion des devis</title>
+<style>
+:root {
+  --bg:#F4EBDD;--paper:#FBF8F2;--white:#fff;
+  --brown:#30221B;--orange:#D96B2B;--orange-dark:#B94F1B;
+  --ink:#292522;--muted:#756B63;--line:#E7DED2;
+  --green:#287044;--red:#B83E30;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+.wrap{width:min(1150px,calc(100% - 28px));margin:auto;padding:25px 0 60px}
+header{background:var(--brown);color:white;padding:22px 24px;border-radius:16px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+h1,h2,h3{margin:0;color:var(--brown)}
+header h1{color:white;font-family:Georgia,serif}
+header h1 span{color:#F2A06E}
+header p{margin:5px 0 0;color:#D8C9BA;font-size:.88rem}
+.card{background:white;border:1px solid var(--line);border-radius:15px;padding:21px;margin-bottom:18px}
+h2{font-size:1.2rem;margin-bottom:14px}
+h3{font-size:1rem;margin-bottom:10px}
+button,.button{border:1px solid #D8CBBE;background:#fffdf9;color:var(--brown);border-radius:9px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+button:hover,.button:hover{border-color:var(--orange);color:var(--orange-dark)}
+button:disabled{opacity:.55;cursor:wait}
+.primary{background:var(--orange);border-color:var(--orange);color:white}
+.primary:hover{background:var(--orange-dark);color:white}
+.danger{color:var(--red)}
+label{display:block;margin:12px 0 5px;color:var(--muted);font-size:.83rem;font-weight:700}
+input,textarea{width:100%;padding:11px 12px;border:1px solid #DED4C8;border-radius:8px;font:inherit;background:#fffefa;color:var(--ink)}
+textarea{min-height:75px;resize:vertical}
+input:focus,textarea:focus{outline:0;border-color:var(--orange);box-shadow:0 0 0 3px #D96B2B20}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#F7F0E7;color:var(--brown);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+.scroll{overflow-x:auto;border-radius:10px}
+small{color:var(--muted)}
+.muted{color:var(--muted)}
+.msg{margin:12px 0;min-height:1.3em;font-size:.88rem;overflow-wrap:anywhere}
+.err{color:var(--red)}.ok{color:var(--green)}
+.hidden{display:none!important}
+.tag{display:inline-block;padding:4px 9px;border-radius:20px;background:#F5EEE6;font-size:.75rem;font-weight:750}
+.tag.sent,.tag.accepted{background:#EAF5EC;color:var(--green)}
+.tag.rejected,.tag.expired{background:#FBEDEA;color:var(--red)}
+.products{display:grid;gap:12px}
+.product-line{display:grid;grid-template-columns:minmax(160px,2fr) minmax(90px,.7fr) minmax(130px,1fr) minmax(130px,1fr);gap:12px;align-items:end;padding:12px;background:#FBF8F2;border:1px solid var(--line);border-radius:10px}
+.product-line strong{display:block;padding-bottom:10px}
+.product-line label{margin-top:0}
+.summary{max-width:430px;margin:18px 0 0 auto;background:#FBF8F2;padding:15px;border-radius:10px}
+.total-line{display:flex;justify-content:space-between;gap:15px;padding:5px 0}
+.total-line.final{font-size:1.15rem;font-weight:800;color:var(--brown);border-top:1px solid var(--line);margin-top:8px;padding-top:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.notice{padding:13px 15px;border-left:4px solid var(--orange);background:#FFF5EC;border-radius:8px;color:#6D4A35;font-size:.86rem;margin-bottom:15px}
+.login{max-width:440px;margin:10vh auto}
+@media(max-width:700px){.wrap{width:calc(100% - 18px);padding-top:10px}.card{padding:14px}.product-line{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}header{padding:17px}.summary{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1>Bois<span>Royal</span> · Devis</h1>
+    <p>Préparation, tarification et envoi des propositions commerciales.</p>
+  </div>
+  <div class="actions" style="margin:0">
+    <a class="button" href="admin.html">Retour administration</a>
+    <button id="logoutBtn">Déconnexion</button>
+  </div>
+</header>
+
+<section id="loginBox" class="card login hidden">
+  <h2>Accès administrateur</h2>
+  <p class="muted">Connecte-toi depuis la page d’administration principale.</p>
+  <a class="button primary" href="admin.html">Ouvrir l’administration</a>
+</section>
+
+<section id="workspace" class="hidden">
+  <div class="card">
+    <h2>Demandes de devis</h2>
+    <div class="notice">
+      Les prix saisis ici seront enregistrés dans la commande. Le client recevra un lien sécurisé par e-mail pour consulter, accepter ou refuser le devis.
+    </div>
+    <div class="actions">
+      <button id="refreshBtn">Actualiser les demandes</button>
+    </div>
+    <div id="listMsg" class="msg" role="status"></div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Référence</th>
+            <th>Client</th>
+            <th>Livraison</th>
+            <th>État du devis</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="requestRows">
+          <tr><td colspan="5">Chargement…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <section id="editor" class="card hidden">
+    <h2 id="editorTitle">Préparer un devis</h2>
+    <div id="customerDetails" class="notice"></div>
+
+    <h3>Produits et tarifs</h3>
+    <p class="muted" style="font-size:.85rem">Saisis le prix unitaire de chaque produit en euros. Les montants sont calculés automatiquement.</p>
+    <div id="productLines" class="products"></div>
+
+    <div class="summary">
+      <div class="total-line"><span>Sous-total produits</span><strong id="subtotal">0,00 €</strong></div>
+      <div class="total-line"><span>Livraison</span><strong id="shippingDisplay">0,00 €</strong></div>
+      <div class="total-line final"><span>Total du devis</span><strong id="total">0,00 €</strong></div>
+    </div>
+
+    <div class="grid2" style="margin-top:20px">
+      <div>
+        <label for="shippingCost">Frais de livraison (€)</label>
+        <input id="shippingCost" type="number" min="0" step="0.01" value="0">
+      </div>
+      <div>
+        <label for="validUntil">Devis valable jusqu’au</label>
+        <input id="validUntil" type="date">
+      </div>
+    </div>
+
+    <label for="publicNote">Message destiné au client</label>
+    <textarea id="publicNote" placeholder="Ex. Livraison prévue après confirmation de votre commande."></textarea>
+
+    <label for="internalNote">Note interne (non visible par le client)</label>
+    <textarea id="internalNote" placeholder="Informations réservées à l'administration…"></textarea>
+
+    <div class="notice" style="margin-top:18px">
+      Attention : l’envoi d’une nouvelle version du devis remplace la proposition précédente. Le client recevra un nouveau lien par e-mail.
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="sendQuoteBtn">Envoyer le devis par e-mail</button>
+      <button id="cancelEditBtn">Fermer</button>
+    </div>
+    <div id="editorMsg" class="msg" role="status" aria-live="polite"></div>
+  </section>
+</section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+<script>
+const SUPABASE_URL='https://evvblxiitorfdniqmqcf.supabase.co';
+const SUPABASE_KEY='sb_publishable_pJHLKhN_Qvj8M38uFNx4ow_WktH1zZC';
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=value=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(Number(value)||0);
+const dateFormat=value=>value?new Date(value).toLocaleString('fr-FR'):'Date inconnue';
+const statusLabels={pending:'À préparer',sent:'Envoyé',accepted:'Accepté',rejected:'Refusé',expired:'Expiré'};
+let requests=[];
+let currentOrder=null;
+let currentItems=[];
+
+function message(id,text,type=''){const el=$(id);el.textContent=text||'';el.className='msg '+type;}
+
+async function checkAdmin(){
+  const {data:{session}}=await db.auth.getSession();
+  if(!session){$('loginBox').classList.remove('hidden');return false;}
+  const {data,error}=await db.rpc('is_br_admin');
+  if(error||data!==true){
+    $('loginBox').classList.remove('hidden');
+    message('listMsg',"Ce compte n'a pas les droits d'administration.",'err');
+    return false;
+  }
+  $('workspace').classList.remove('hidden');
+  return true;
+}
+
+async function loadRequests(){
+  $('refreshBtn').disabled=true;
+  $('requestRows').innerHTML='<tr><td colspan="5">Chargement des demandes…</td></tr>';
+  message('listMsg','Récupération des demandes…');
+  try{
+    const {data,error}=await db.from('br_orders')
+      .select('id,order_number,customer_name,customer_email,customer_phone,delivery_address,delivery_postal_code,delivery_city,delivery_country,delivery_notes,status,payment_provider,created_at,quote_status,quote_revision,quote_valid_until')
+      .eq('payment_provider','quote_request')
+      .order('created_at',{ascending:false});
+    if(error)throw error;
+    requests=data||[];
+    if(!requests.length){
+      $('requestRows').innerHTML='<tr><td colspan="5">Aucune demande de devis.</td></tr>';
+      message('listMsg','Aucune demande trouvée.');
+      return;
+    }
+    $('requestRows').innerHTML=requests.map(order=>{
+      const status=order.quote_status||'pending';
+      const location=[order.delivery_postal_code,order.delivery_city,order.delivery_country].filter(Boolean).join(' ');
+      return `<tr>
+        <td><strong>${esc(order.order_number||order.id)}</strong><br><small>${esc(dateFormat(order.created_at))}</small></td>
+        <td><strong>${esc(order.customer_name||'Client')}</strong><br><small>${esc(order.customer_email||'Aucun e-mail')}</small><br><small>${esc(order.customer_phone||'')}</small></td>
+        <td>${esc(order.delivery_address||'Adresse non renseignée')}<br><small>${esc(location)}</small></td>
+        <td><span class="tag ${esc(status)}">${esc(statusLabels[status]||status)}</span><br><small>Version ${Number(order.quote_revision)||1}</small></td>
+        <td><button type="button" data-open="${esc(order.id)}">Préparer le devis</button></td>
+      </tr>`;
+    }).join('');
+    message('listMsg',requests.length+' demande(s) chargée(s).','ok');
+  }catch(error){
+    $('requestRows').innerHTML='<tr><td colspan="5">Erreur de chargement.</td></tr>';
+    message('listMsg','Erreur : '+error.message,'err');
+  }finally{$('refreshBtn').disabled=false;}
+}
+
+async function openQuote(orderId){
+  const order=requests.find(item=>String(item.id)===String(orderId));
+  if(!order)return;
+  if(!order.customer_email){
+    message('listMsg','Cette demande ne contient pas d’adresse e-mail. Il faut d’abord obtenir l’e-mail du client.','err');
+    return;
+  }
+  currentOrder=order;
+  $('editor').classList.remove('hidden');
+  $('editorTitle').textContent='Devis · '+(order.order_number||order.id);
+  $('customerDetails').innerHTML=
+    '<strong>'+esc(order.customer_name||'Client')+'</strong><br>'+
+    esc(order.customer_email)+'<br>'+
+    esc(order.customer_phone||'Téléphone non renseigné')+'<br>'+
+    esc(order.delivery_address||'Adresse non renseignée')+' '+
+    esc([order.delivery_postal_code,order.delivery_city,order.delivery_country].filter(Boolean).join(' '))+
+    (order.delivery_notes?'<br><small>Instructions : '+esc(order.delivery_notes)+'</small>':'');
+  message('editorMsg','Chargement des produits…');
+  $('productLines').innerHTML='';
+  try{
+    const {data,error}=await db.from('br_order_items')
+      .select('id,order_id,product_name,unit,quantity,unit_price,line_total')
+      .eq('order_id',order.id);
+    if(error)throw error;
+    currentItems=data||[];
+    if(!currentItems.length)throw new Error('Aucun produit trouvé pour cette demande.');
+    $('productLines').innerHTML=currentItems.map((item,index)=>`
+      <div class="product-line" data-item-id="${esc(item.id)}">
+        <div><strong>${esc(item.product_name||'Produit')}</strong><small>${esc(item.unit||'')}</small></div>
+        <div><label>Quantité</label><input value="${esc(item.quantity)}" disabled></div>
+        <div><label>Prix unitaire (€)</label><input class="unit-price" type="number" min="0" step="0.01" value="${Number(item.unit_price)||0}"></div>
+        <div><label>Total ligne</label><input class="line-total" value="${money(Number(item.quantity)*(Number(item.unit_price)||0))}" disabled></div>
+      </div>`).join('');
+    $('shippingCost').value='0';
+    $('publicNote').value='';
+    $('internalNote').value='';
+    const defaultDate=new Date();
+    defaultDate.setDate(defaultDate.getDate()+7);
+    $('validUntil').value=defaultDate.toISOString().slice(0,10);
+    updateTotals();
+    message('editorMsg','Tu peux maintenant renseigner les tarifs.','ok');
+    $('editor').scrollIntoView({behavior:'smooth'});
+  }catch(error){
+    message('editorMsg','Impossible de charger les produits : '+error.message,'err');
+  }
+}
+
+function updateTotals(){
+  let subtotal=0;
+  document.querySelectorAll('.product-line').forEach((line,index)=>{
+    const item=currentItems[index];
+    if(!item)return;
+    const price=Number(line.querySelector('.unit-price').value)||0;
+    const lineTotal=price*Number(item.quantity);
+    subtotal+=lineTotal;
+    line.querySelector('.line-total').value=money(lineTotal);
+  });
+  const shipping=Math.max(0,Number($('shippingCost').value)||0);
+  $('subtotal').textContent=money(subtotal);
+  $('shippingDisplay').textContent=money(shipping);
+  $('total').textContent=money(subtotal+shipping);
+}
+
+$('productLines').addEventListener('input',updateTotals);
+$('shippingCost').addEventListener('input',updateTotals);
+
+$('requestRows').addEventListener('click',event=>{
+  const button=event.target.closest('button[data-open]');
+  if(button)openQuote(button.dataset.open);
+});
+
+$('sendQuoteBtn').addEventListener('click',async()=>{
+  if(!currentOrder||!currentItems.length)return;
+  const validUntil=$('validUntil').value;
+  if(!validUntil){message('editorMsg','Choisis la date de validité du devis.','err');return;}
+  const items=[];
+  let invalid=false;
+  document.querySelectorAll('.product-line').forEach((line,index)=>{
+    const priceInput=line.querySelector('.unit-price');
+    const price=Number(priceInput.value);
+    if(!Number.isFinite(price)||price<0){invalid=true;return;}
+    items.push({id:currentItems[index].id,unit_price:price});
+  });
+  if(invalid||items.length!==currentItems.length){
+    message('editorMsg','Vérifie les prix unitaires saisis.','err');return;
+  }
+  const shipping=Number($('shippingCost').value);
+  if(!Number.isFinite(shipping)||shipping<0){
+    message('editorMsg','Les frais de livraison sont invalides.','err');return;
+  }
+  if(!confirm('Envoyer ce devis à '+currentOrder.customer_email+' ?'))return;
+
+  const button=$('sendQuoteBtn');
+  button.disabled=true;
+  message('editorMsg','Envoi du devis et de l’e-mail en cours…');
+  try{
+    const {data:{session},error:sessionError}=await db.auth.getSession();
+    if(sessionError||!session)throw new Error('Session administrateur expirée. Reconnecte-toi.');
+    const response=await fetch(SUPABASE_URL+'/functions/v1/boisroyal-quote-send',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':SUPABASE_KEY,
+        'Authorization':'Bearer '+session.access_token
+      },
+      body:JSON.stringify({
+        order_id:currentOrder.id,
+        items,
+        shipping_cost:shipping,
+        public_note:$('publicNote').value.trim(),
+        internal_note:$('internalNote').value.trim(),
+        valid_until:validUntil
+      })
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(result.error||result.message||'Erreur lors de l’envoi du devis.');
+    message('editorMsg','Devis envoyé avec succès à '+currentOrder.customer_email+'.','ok');
+    await loadRequests();
+  }catch(error){
+    message('editorMsg','Échec de l’envoi : '+error.message,'err');
+  }finally{button.disabled=false;}
+});
+
+$('refreshBtn').addEventListener('click',loadRequests);
+$('cancelEditBtn').addEventListener('click',()=>{
+  $('editor').classList.add('hidden');
+  currentOrder=null;currentItems=[];
+});
+$('logoutBtn').addEventListener('click',async()=>{
+  await db.auth.signOut();
+  window.location.href='admin.html';
+});
+
+(async()=>{
+  if(await checkAdmin())await loadRequests();
+})();
+</script>
+</body>
+</html>
