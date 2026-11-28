@@ -82,7 +82,7 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: 20px;
       font-size: 13px;
       font-weight: 700;
     }
@@ -92,6 +92,19 @@
       color: white;
       border-radius: 30px;
       padding: 12px 19px;
+    }
+
+    .language-select {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 10px 12px;
+      background: var(--paper);
+      color: var(--brown);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      max-width: 130px;
     }
 
     main {
@@ -229,7 +242,6 @@
       color: var(--muted);
     }
 
-    /* AVIS CLIENTS */
     .reviews-section {
       margin-top: 65px;
       padding: 35px;
@@ -429,7 +441,7 @@
 
     @media(max-width: 760px) {
       header { padding: 16px 5%; }
-      nav { gap: 12px; }
+      nav { gap: 10px; }
       nav a:not(.cart-link) { display: none; }
       .logo { font-size: 24px; }
       main { padding: 25px 17px 55px; }
@@ -442,6 +454,7 @@
       .reviews-section { padding: 22px 17px; margin-top: 45px; }
       .review-summary { gap: 10px; }
       .review-submit { width: 100%; }
+      .language-select { max-width: 115px; }
     }
   </style>
 </head>
@@ -451,26 +464,37 @@
   <div class="topbar">
     <span>📞 +33 7 45 76 70 85</span>
     <span>✉ contact@boisroyal.net</span>
-    <span>Livraison en Europe selon destination</span>
+    <span data-page-text="deliveryTop">Livraison en Europe selon destination</span>
   </div>
 
   <header>
     <a href="index.html" class="logo">Bois<span>Royal</span></a>
+
     <nav>
-      <a href="index.html">Accueil</a>
-      <a href="index.html#catalogue">Catalogue</a>
-      <a href="devis.html" class="cart-link">Mon panier</a>
+      <a href="index.html" data-page-text="home">Accueil</a>
+      <a href="index.html#catalogue" data-page-text="catalogue">Catalogue</a>
+
+      <select class="language-select" data-language-selector aria-label="Language">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="cs">🇨🇿 Čeština</option>
+      </select>
+
+      <a href="devis.html" class="cart-link" data-page-text="cart">Mon panier</a>
     </nav>
   </header>
 
   <main>
     <div class="breadcrumb">
-      <a href="index.html">Accueil</a> /
-      <a href="index.html#catalogue">Catalogue</a> /
+      <a href="index.html" data-page-text="home">Accueil</a> /
+      <a href="index.html#catalogue" data-page-text="catalogue">Catalogue</a> /
       <span id="breadcrumbName">Produit</span>
     </div>
 
-    <div id="loading" class="state">Chargement du produit…</div>
+    <div id="loading" class="state" data-page-text="loading">Chargement du produit…</div>
 
     <section id="productContent" hidden>
       <div class="product-layout">
@@ -486,27 +510,31 @@
           <div class="price" id="productPrice"></div>
           <div class="unit" id="productUnit"></div>
 
-          <div class="availability">✓ Consultez la disponibilité avant confirmation</div>
+          <div class="availability" data-page-text="availability">
+            ✓ Consultez la disponibilité avant confirmation
+          </div>
 
           <div class="actions">
-            <button class="add-button" id="addButton" type="button">
+            <button class="add-button" id="addButton" type="button" data-page-text="addCart">
               Ajouter au panier
             </button>
-            <a href="devis.html" class="quote-button">Demander un devis →</a>
+            <a href="devis.html" class="quote-button" data-page-text="askQuote">
+              Demander un devis →
+            </a>
           </div>
 
           <div class="trust">
-            <span>✓ Informations produit transparentes</span>
-            <span>✓ Frais de livraison confirmés avant validation</span>
-            <span>✓ Accompagnement pour votre commande</span>
+            <span data-page-text="trust1">✓ Informations produit transparentes</span>
+            <span data-page-text="trust2">✓ Frais de livraison confirmés avant validation</span>
+            <span data-page-text="trust3">✓ Accompagnement pour votre commande</span>
           </div>
         </div>
       </div>
 
-      <!-- ESPACE AVIS CLIENTS -->
       <section class="reviews-section" id="reviewsSection">
-        <h2>Avis clients</h2>
-        <p class="reviews-intro">
+        <h2 data-page-text="reviewsTitle">Avis clients</h2>
+
+        <p class="reviews-intro" data-page-text="reviewsIntro">
           Découvrez les retours de nos clients ayant reçu ce produit.
           Chaque avis est vérifié et validé par notre équipe avant publication.
         </p>
@@ -515,17 +543,18 @@
           <div class="review-average" id="reviewAverage">—</div>
           <div>
             <div class="review-stars" id="reviewAverageStars">☆☆☆☆☆</div>
-            <div class="review-count" id="reviewCount">Aucun avis publié pour le moment</div>
+            <div class="review-count" id="reviewCount"></div>
           </div>
         </div>
 
         <div class="review-list" id="reviewList">
-          <div class="no-reviews">Chargement des avis…</div>
+          <div class="no-reviews" data-page-text="reviewsLoading">Chargement des avis…</div>
         </div>
 
         <div class="review-form-wrap">
-          <h3>Vous avez acheté ce produit ?</h3>
-          <p class="reviews-intro">
+          <h3 data-page-text="reviewFormTitle">Vous avez acheté ce produit ?</h3>
+
+          <p class="reviews-intro" data-page-text="reviewFormIntro">
             Partagez votre expérience. Pour déposer un avis, votre commande
             doit avoir été livrée. Votre référence de commande et votre adresse
             e-mail permettront de vérifier votre achat.
@@ -533,59 +562,62 @@
 
           <form class="review-form" id="reviewForm">
             <div>
-              <label for="reviewOrder">Référence de commande *</label>
+              <label for="reviewOrder" data-page-text="orderLabel">Référence de commande *</label>
               <input
                 type="text"
                 id="reviewOrder"
                 name="order_number"
                 placeholder="Ex. BR-2026-0001"
+                data-page-placeholder="orderPlaceholder"
                 required
                 autocomplete="off"
               >
             </div>
 
             <div>
-              <label for="reviewEmail">Adresse e-mail utilisée lors de la commande *</label>
+              <label for="reviewEmail" data-page-text="emailLabel">Adresse e-mail utilisée lors de la commande *</label>
               <input
                 type="email"
                 id="reviewEmail"
                 name="customer_email"
                 placeholder="Votre adresse e-mail"
+                data-page-placeholder="emailPlaceholder"
                 required
                 autocomplete="email"
               >
             </div>
 
             <div>
-              <label for="reviewRating">Votre note *</label>
+              <label for="reviewRating" data-page-text="ratingLabel">Votre note *</label>
               <select id="reviewRating" name="rating" required>
-                <option value="">Choisissez une note</option>
-                <option value="5">★★★★★ — Excellent</option>
-                <option value="4">★★★★☆ — Très bien</option>
-                <option value="3">★★★☆☆ — Bien</option>
-                <option value="2">★★☆☆☆ — Moyen</option>
-                <option value="1">★☆☆☆☆ — Décevant</option>
+                <option value="" data-page-text="chooseRating">Choisissez une note</option>
+                <option value="5" data-page-text="excellent">★★★★★ — Excellent</option>
+                <option value="4" data-page-text="veryGood">★★★★☆ — Très bien</option>
+                <option value="3" data-page-text="good">★★★☆☆ — Bien</option>
+                <option value="2" data-page-text="average">★★☆☆☆ — Moyen</option>
+                <option value="1" data-page-text="disappointing">★☆☆☆☆ — Décevant</option>
               </select>
             </div>
 
             <div>
-              <label for="reviewComment">Votre commentaire (facultatif)</label>
+              <label for="reviewComment" data-page-text="commentLabel">Votre commentaire (facultatif)</label>
               <textarea
                 id="reviewComment"
                 name="comment"
                 maxlength="1000"
                 placeholder="Parlez-nous de votre expérience avec ce produit…"
+                data-page-placeholder="commentPlaceholder"
               ></textarea>
             </div>
 
-            <div class="review-note">
+            <div class="review-note" data-page-text="reviewNote">
               Votre avis sera transmis à notre équipe pour vérification.
               Il ne sera visible publiquement qu'après approbation.
             </div>
 
             <div id="reviewMessage" class="review-message" role="status"></div>
 
-            <button class="review-submit" id="reviewSubmit" type="submit">
+            <button class="review-submit" id="reviewSubmit" type="submit" data-page-text="sendReview">
               Envoyer mon avis
             </button>
           </form>
@@ -593,28 +625,31 @@
       </section>
 
       <div class="notice">
-        <strong>Une question sur ce produit ?</strong><br>
-        Contactez notre équipe pour obtenir des informations complémentaires
-        sur le conditionnement, la disponibilité et les modalités de livraison.
+        <strong data-page-text="questionTitle">Une question sur ce produit ?</strong><br>
+        <span data-page-text="questionText">
+          Contactez notre équipe pour obtenir des informations complémentaires
+          sur le conditionnement, la disponibilité et les modalités de livraison.
+        </span>
         <br><a href="mailto:contact@boisroyal.net">contact@boisroyal.net</a>
       </div>
     </section>
 
     <div id="error" class="state" hidden>
-      <h2>Produit introuvable</h2>
-      <p>Ce produit n'est peut-être plus disponible.</p>
-      <a href="index.html#catalogue" class="quote-button">Retour au catalogue</a>
+      <h2 data-page-text="notFound">Produit introuvable</h2>
+      <p data-page-text="notAvailable">Ce produit n'est peut-être plus disponible.</p>
+      <a href="index.html#catalogue" class="quote-button" data-page-text="backCatalog">Retour au catalogue</a>
     </div>
   </main>
 
   <footer>
     <strong>BoisRoyal</strong><br>
-    Bois de chauffage et charbon sélectionnés.<br>
+    <span data-page-text="footerDescription">Bois de chauffage et charbon sélectionnés.</span><br>
     <a href="mailto:contact@boisroyal.net">contact@boisroyal.net</a>
     · +33 7 45 76 70 85<br>
-    © <span id="year"></span> BoisRoyal. Tous droits réservés.
+    © <span id="year"></span> BoisRoyal. <span data-page-text="rights">Tous droits réservés.</span>
   </footer>
 
+  <script src="translations.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
@@ -628,9 +663,374 @@
       charcoal: "produit-caisse-bouleau.webp"
     };
 
+    const PAGE_TRANSLATIONS = {
+      fr: {
+        deliveryTop: "Livraison en Europe selon destination",
+        home: "Accueil", catalogue: "Catalogue", cart: "Mon panier",
+        loading: "Chargement du produit…",
+        availability: "✓ Consultez la disponibilité avant confirmation",
+        addCart: "Ajouter au panier", askQuote: "Demander un devis →",
+        trust1: "✓ Informations produit transparentes",
+        trust2: "✓ Frais de livraison confirmés avant validation",
+        trust3: "✓ Accompagnement pour votre commande",
+        reviewsTitle: "Avis clients",
+        reviewsIntro: "Découvrez les retours de nos clients ayant reçu ce produit. Chaque avis est vérifié et validé par notre équipe avant publication.",
+        reviewsLoading: "Chargement des avis…",
+        reviewFormTitle: "Vous avez acheté ce produit ?",
+        reviewFormIntro: "Partagez votre expérience. Pour déposer un avis, votre commande doit avoir été livrée. Votre référence de commande et votre adresse e-mail permettront de vérifier votre achat.",
+        orderLabel: "Référence de commande *",
+        orderPlaceholder: "Ex. BR-2026-0001",
+        emailLabel: "Adresse e-mail utilisée lors de la commande *",
+        emailPlaceholder: "Votre adresse e-mail",
+        ratingLabel: "Votre note *", chooseRating: "Choisissez une note",
+        excellent: "★★★★★ — Excellent", veryGood: "★★★★☆ — Très bien",
+        good: "★★★☆☆ — Bien", average: "★★☆☆☆ — Moyen",
+        disappointing: "★☆☆☆☆ — Décevant",
+        commentLabel: "Votre commentaire (facultatif)",
+        commentPlaceholder: "Parlez-nous de votre expérience avec ce produit…",
+        reviewNote: "Votre avis sera transmis à notre équipe pour vérification. Il ne sera visible publiquement qu'après approbation.",
+        sendReview: "Envoyer mon avis",
+        questionTitle: "Une question sur ce produit ?",
+        questionText: "Contactez notre équipe pour obtenir des informations complémentaires sur le conditionnement, la disponibilité et les modalités de livraison.",
+        notFound: "Produit introuvable",
+        notAvailable: "Ce produit n'est peut-être plus disponible.",
+        backCatalog: "Retour au catalogue",
+        footerDescription: "Bois de chauffage et charbon sélectionnés.",
+        rights: "Tous droits réservés.",
+        noReviewsCount: "Aucun avis publié pour le moment",
+        noReviews: "Aucun avis client publié pour ce produit pour le moment. Soyez le premier client à partager votre expérience après livraison.",
+        reviewLoadError: "Les avis ne peuvent pas être chargés pour le moment.",
+        reviewCount: n => `${n} avis client${n > 1 ? "s" : ""}`,
+        requiredFields: "Merci de remplir les champs obligatoires.",
+        invalidRating: "Veuillez choisir une note valide.",
+        longComment: "Votre commentaire dépasse 1 000 caractères.",
+        sending: "Envoi en cours…",
+        reviewSuccess: "Merci pour votre avis ! Votre achat a été vérifié et votre avis a été transmis à notre équipe. Il sera visible après validation.",
+        duplicate: "Un avis a déjà été envoyé pour ce produit avec cette commande.",
+        orderError: "Commande introuvable, adresse e-mail incorrecte ou livraison non encore confirmée. Vérifiez vos informations.",
+        productOrderError: "Ce produit ne figure pas dans la commande indiquée.",
+        reviewError: "Impossible d'envoyer votre avis pour le moment. Réessayez plus tard.",
+        unit: "Unité", quotePrice: "Sur devis",
+        categoryWood: "Bois de chauffage", categoryCharcoal: "Charbon de bois"
+      },
+
+      en: {
+        deliveryTop: "Delivery across Europe depending on destination",
+        home: "Home", catalogue: "Catalogue", cart: "My cart",
+        loading: "Loading product…",
+        availability: "✓ Check availability before confirming",
+        addCart: "Add to cart", askQuote: "Request a quote →",
+        trust1: "✓ Transparent product information",
+        trust2: "✓ Delivery costs confirmed before checkout",
+        trust3: "✓ Support with your order",
+        reviewsTitle: "Customer reviews",
+        reviewsIntro: "Read feedback from customers who have received this product. Every review is checked and approved by our team before publication.",
+        reviewsLoading: "Loading reviews…",
+        reviewFormTitle: "Have you purchased this product?",
+        reviewFormIntro: "Share your experience. To submit a review, your order must have been delivered. Your order reference and email address will help us verify your purchase.",
+        orderLabel: "Order reference *",
+        orderPlaceholder: "e.g. BR-2026-0001",
+        emailLabel: "Email address used for the order *",
+        emailPlaceholder: "Your email address",
+        ratingLabel: "Your rating *", chooseRating: "Choose a rating",
+        excellent: "★★★★★ — Excellent", veryGood: "★★★★☆ — Very good",
+        good: "★★★☆☆ — Good", average: "★★☆☆☆ — Average",
+        disappointing: "★☆☆☆☆ — Disappointing",
+        commentLabel: "Your comment (optional)",
+        commentPlaceholder: "Tell us about your experience with this product…",
+        reviewNote: "Your review will be sent to our team for verification. It will only be publicly visible after approval.",
+        sendReview: "Submit my review",
+        questionTitle: "Have a question about this product?",
+        questionText: "Contact our team for more information about packaging, availability and delivery arrangements.",
+        notFound: "Product not found",
+        notAvailable: "This product may no longer be available.",
+        backCatalog: "Back to catalogue",
+        footerDescription: "Selected firewood and charcoal.",
+        rights: "All rights reserved.",
+        noReviewsCount: "No reviews published yet",
+        noReviews: "No customer reviews have been published for this product yet. Be the first to share your experience after delivery.",
+        reviewLoadError: "Reviews cannot be loaded right now.",
+        reviewCount: n => `${n} customer review${n > 1 ? "s" : ""}`,
+        requiredFields: "Please complete all required fields.",
+        invalidRating: "Please choose a valid rating.",
+        longComment: "Your comment exceeds 1,000 characters.",
+        sending: "Sending…",
+        reviewSuccess: "Thank you for your review! Your purchase has been verified and your review has been sent to our team. It will be visible after approval.",
+        duplicate: "A review has already been submitted for this product with this order.",
+        orderError: "Order not found, incorrect email address or delivery not yet confirmed. Please check your details.",
+        productOrderError: "This product is not included in the specified order.",
+        reviewError: "Unable to submit your review right now. Please try again later.",
+        unit: "Unit", quotePrice: "Price on request",
+        categoryWood: "Firewood", categoryCharcoal: "Charcoal"
+      },
+
+      de: {
+        deliveryTop: "Lieferung in Europa je nach Zielort",
+        home: "Startseite", catalogue: "Katalog", cart: "Mein Warenkorb",
+        loading: "Produkt wird geladen…",
+        availability: "✓ Verfügbarkeit vor der Bestätigung prüfen",
+        addCart: "In den Warenkorb", askQuote: "Angebot anfordern →",
+        trust1: "✓ Transparente Produktinformationen",
+        trust2: "✓ Lieferkosten werden vor der Bestätigung mitgeteilt",
+        trust3: "✓ Unterstützung bei Ihrer Bestellung",
+        reviewsTitle: "Kundenbewertungen",
+        reviewsIntro: "Lesen Sie die Rückmeldungen unserer Kunden, die dieses Produkt erhalten haben. Jede Bewertung wird vor der Veröffentlichung von unserem Team geprüft.",
+        reviewsLoading: "Bewertungen werden geladen…",
+        reviewFormTitle: "Haben Sie dieses Produkt gekauft?",
+        reviewFormIntro: "Teilen Sie Ihre Erfahrung. Ihre Bestellung muss zugestellt worden sein. Ihre Bestellnummer und E-Mail-Adresse helfen uns, Ihren Kauf zu überprüfen.",
+        orderLabel: "Bestellnummer *",
+        orderPlaceholder: "z. B. BR-2026-0001",
+        emailLabel: "Bei der Bestellung verwendete E-Mail-Adresse *",
+        emailPlaceholder: "Ihre E-Mail-Adresse",
+        ratingLabel: "Ihre Bewertung *", chooseRating: "Bewertung auswählen",
+        excellent: "★★★★★ — Ausgezeichnet", veryGood: "★★★★☆ — Sehr gut",
+        good: "★★★☆☆ — Gut", average: "★★☆☆☆ — Mittelmäßig",
+        disappointing: "★☆☆☆☆ — Enttäuschend",
+        commentLabel: "Ihr Kommentar (optional)",
+        commentPlaceholder: "Berichten Sie uns von Ihren Erfahrungen mit diesem Produkt…",
+        reviewNote: "Ihre Bewertung wird zur Prüfung an unser Team gesendet. Sie wird erst nach Freigabe öffentlich angezeigt.",
+        sendReview: "Bewertung senden",
+        questionTitle: "Haben Sie eine Frage zu diesem Produkt?",
+        questionText: "Kontaktieren Sie unser Team für weitere Informationen zu Verpackung, Verfügbarkeit und Lieferbedingungen.",
+        notFound: "Produkt nicht gefunden",
+        notAvailable: "Dieses Produkt ist möglicherweise nicht mehr verfügbar.",
+        backCatalog: "Zurück zum Katalog",
+        footerDescription: "Ausgewähltes Brennholz und Holzkohle.",
+        rights: "Alle Rechte vorbehalten.",
+        noReviewsCount: "Noch keine Bewertungen veröffentlicht",
+        noReviews: "Für dieses Produkt wurden noch keine Kundenbewertungen veröffentlicht. Teilen Sie nach der Lieferung als Erster Ihre Erfahrung.",
+        reviewLoadError: "Bewertungen können derzeit nicht geladen werden.",
+        reviewCount: n => `${n} Kundenbewertung${n > 1 ? "en" : ""}`,
+        requiredFields: "Bitte füllen Sie alle Pflichtfelder aus.",
+        invalidRating: "Bitte wählen Sie eine gültige Bewertung.",
+        longComment: "Ihr Kommentar überschreitet 1.000 Zeichen.",
+        sending: "Wird gesendet…",
+        reviewSuccess: "Vielen Dank für Ihre Bewertung! Ihr Kauf wurde überprüft und Ihre Bewertung an unser Team gesendet. Sie wird nach der Freigabe veröffentlicht.",
+        duplicate: "Für dieses Produkt wurde bereits eine Bewertung mit dieser Bestellung abgegeben.",
+        orderError: "Bestellung nicht gefunden, falsche E-Mail-Adresse oder Lieferung noch nicht bestätigt. Bitte überprüfen Sie Ihre Angaben.",
+        productOrderError: "Dieses Produkt ist nicht in der angegebenen Bestellung enthalten.",
+        reviewError: "Ihre Bewertung kann derzeit nicht gesendet werden. Bitte versuchen Sie es später erneut.",
+        unit: "Einheit", quotePrice: "Preis auf Anfrage",
+        categoryWood: "Brennholz", categoryCharcoal: "Holzkohle"
+      },
+
+      es: {
+        deliveryTop: "Entrega en Europa según el destino",
+        home: "Inicio", catalogue: "Catálogo", cart: "Mi cesta",
+        loading: "Cargando producto…",
+        availability: "✓ Consulte la disponibilidad antes de confirmar",
+        addCart: "Añadir a la cesta", askQuote: "Solicitar presupuesto →",
+        trust1: "✓ Información transparente del producto",
+        trust2: "✓ Gastos de envío confirmados antes de validar",
+        trust3: "✓ Asistencia para su pedido",
+        reviewsTitle: "Opiniones de clientes",
+        reviewsIntro: "Descubra las opiniones de nuestros clientes que han recibido este producto. Nuestro equipo verifica y valida cada opinión antes de publicarla.",
+        reviewsLoading: "Cargando opiniones…",
+        reviewFormTitle: "¿Ha comprado este producto?",
+        reviewFormIntro: "Comparta su experiencia. Para publicar una opinión, su pedido debe haber sido entregado. La referencia del pedido y su correo electrónico nos permitirán verificar su compra.",
+        orderLabel: "Referencia del pedido *",
+        orderPlaceholder: "Ej. BR-2026-0001",
+        emailLabel: "Correo electrónico utilizado en el pedido *",
+        emailPlaceholder: "Su correo electrónico",
+        ratingLabel: "Su valoración *", chooseRating: "Elija una valoración",
+        excellent: "★★★★★ — Excelente", veryGood: "★★★★☆ — Muy bueno",
+        good: "★★★☆☆ — Bueno", average: "★★☆☆☆ — Regular",
+        disappointing: "★☆☆☆☆ — Decepcionante",
+        commentLabel: "Su comentario (opcional)",
+        commentPlaceholder: "Cuéntenos su experiencia con este producto…",
+        reviewNote: "Su opinión será enviada a nuestro equipo para su verificación. Solo será visible públicamente después de su aprobación.",
+        sendReview: "Enviar mi opinión",
+        questionTitle: "¿Tiene alguna pregunta sobre este producto?",
+        questionText: "Contacte con nuestro equipo para obtener más información sobre el embalaje, la disponibilidad y las condiciones de entrega.",
+        notFound: "Producto no encontrado",
+        notAvailable: "Es posible que este producto ya no esté disponible.",
+        backCatalog: "Volver al catálogo",
+        footerDescription: "Leña y carbón seleccionados.",
+        rights: "Todos los derechos reservados.",
+        noReviewsCount: "Todavía no hay opiniones publicadas",
+        noReviews: "Todavía no hay opiniones de clientes para este producto. Sea el primero en compartir su experiencia después de la entrega.",
+        reviewLoadError: "No se pueden cargar las opiniones en este momento.",
+        reviewCount: n => `${n} opinión${n > 1 ? "es" : ""} de clientes`,
+        requiredFields: "Complete los campos obligatorios.",
+        invalidRating: "Seleccione una valoración válida.",
+        longComment: "Su comentario supera los 1.000 caracteres.",
+        sending: "Enviando…",
+        reviewSuccess: "¡Gracias por su opinión! Su compra ha sido verificada y su opinión se ha enviado a nuestro equipo. Será visible después de su aprobación.",
+        duplicate: "Ya se ha enviado una opinión para este producto con este pedido.",
+        orderError: "Pedido no encontrado, correo electrónico incorrecto o entrega aún no confirmada. Compruebe sus datos.",
+        productOrderError: "Este producto no figura en el pedido indicado.",
+        reviewError: "No se puede enviar su opinión en este momento. Inténtelo de nuevo más tarde.",
+        unit: "Unidad", quotePrice: "Precio bajo solicitud",
+        categoryWood: "Leña", categoryCharcoal: "Carbón vegetal"
+      },
+
+      nl: {
+        deliveryTop: "Levering in Europa afhankelijk van de bestemming",
+        home: "Home", catalogue: "Catalogus", cart: "Mijn winkelwagen",
+        loading: "Product laden…",
+        availability: "✓ Controleer de beschikbaarheid vóór bevestiging",
+        addCart: "Toevoegen aan winkelwagen", askQuote: "Offerte aanvragen →",
+        trust1: "✓ Transparante productinformatie",
+        trust2: "✓ Bezorgkosten bevestigd vóór afronding",
+        trust3: "✓ Ondersteuning bij uw bestelling",
+        reviewsTitle: "Klantbeoordelingen",
+        reviewsIntro: "Lees de ervaringen van klanten die dit product hebben ontvangen. Elke beoordeling wordt vóór publicatie door ons team gecontroleerd en goedgekeurd.",
+        reviewsLoading: "Beoordelingen laden…",
+        reviewFormTitle: "Heeft u dit product gekocht?",
+        reviewFormIntro: "Deel uw ervaring. Uw bestelling moet zijn geleverd om een beoordeling te plaatsen. Uw bestelnummer en e-mailadres helpen ons uw aankoop te controleren.",
+        orderLabel: "Bestelnummer *",
+        orderPlaceholder: "Bijv. BR-2026-0001",
+        emailLabel: "E-mailadres dat bij de bestelling is gebruikt *",
+        emailPlaceholder: "Uw e-mailadres",
+        ratingLabel: "Uw beoordeling *", chooseRating: "Kies een beoordeling",
+        excellent: "★★★★★ — Uitstekend", veryGood: "★★★★☆ — Zeer goed",
+        good: "★★★☆☆ — Goed", average: "★★☆☆☆ — Gemiddeld",
+        disappointing: "★☆☆☆☆ — Teleurstellend",
+        commentLabel: "Uw opmerking (optioneel)",
+        commentPlaceholder: "Vertel ons over uw ervaring met dit product…",
+        reviewNote: "Uw beoordeling wordt ter controle naar ons team gestuurd. De beoordeling wordt pas openbaar na goedkeuring.",
+        sendReview: "Mijn beoordeling verzenden",
+        questionTitle: "Heeft u een vraag over dit product?",
+        questionText: "Neem contact op met ons team voor meer informatie over de verpakking, beschikbaarheid en leveringsvoorwaarden.",
+        notFound: "Product niet gevonden",
+        notAvailable: "Dit product is mogelijk niet meer beschikbaar.",
+        backCatalog: "Terug naar de catalogus",
+        footerDescription: "Geselecteerd brandhout en houtskool.",
+        rights: "Alle rechten voorbehouden.",
+        noReviewsCount: "Nog geen beoordelingen gepubliceerd",
+        noReviews: "Er zijn nog geen klantbeoordelingen voor dit product. Deel als eerste uw ervaring na levering.",
+        reviewLoadError: "Beoordelingen kunnen momenteel niet worden geladen.",
+        reviewCount: n => `${n} klantbeoordeling${n > 1 ? "en" : ""}`,
+        requiredFields: "Vul alle verplichte velden in.",
+        invalidRating: "Kies een geldige beoordeling.",
+        longComment: "Uw opmerking is langer dan 1.000 tekens.",
+        sending: "Verzenden…",
+        reviewSuccess: "Bedankt voor uw beoordeling! Uw aankoop is gecontroleerd en uw beoordeling is naar ons team gestuurd. Na goedkeuring wordt deze zichtbaar.",
+        duplicate: "Er is voor dit product al een beoordeling met deze bestelling ingediend.",
+        orderError: "Bestelling niet gevonden, onjuist e-mailadres of levering nog niet bevestigd. Controleer uw gegevens.",
+        productOrderError: "Dit product staat niet in de opgegeven bestelling.",
+        reviewError: "Uw beoordeling kan momenteel niet worden verzonden. Probeer het later opnieuw.",
+        unit: "Eenheid", quotePrice: "Prijs op aanvraag",
+        categoryWood: "Brandhout", categoryCharcoal: "Houtskool"
+      },
+
+      cs: {
+        deliveryTop: "Doručení po Evropě podle cílové destinace",
+        home: "Domů", catalogue: "Katalog", cart: "Můj košík",
+        loading: "Načítání produktu…",
+        availability: "✓ Před potvrzením ověřte dostupnost",
+        addCart: "Přidat do košíku", askQuote: "Požádat o nabídku →",
+        trust1: "✓ Transparentní informace o produktu",
+        trust2: "✓ Cena dopravy potvrzena před dokončením objednávky",
+        trust3: "✓ Podpora při vaší objednávce",
+        reviewsTitle: "Hodnocení zákazníků",
+        reviewsIntro: "Přečtěte si zkušenosti zákazníků, kteří tento produkt obdrželi. Každé hodnocení náš tým před zveřejněním ověřuje a schvaluje.",
+        reviewsLoading: "Načítání hodnocení…",
+        reviewFormTitle: "Zakoupili jste tento produkt?",
+        reviewFormIntro: "Podělte se o svou zkušenost. Pro odeslání hodnocení musí být vaše objednávka doručena. Číslo objednávky a e-mailová adresa nám pomohou ověřit váš nákup.",
+        orderLabel: "Číslo objednávky *",
+        orderPlaceholder: "Např. BR-2026-0001",
+        emailLabel: "E-mail použitý při objednávce *",
+        emailPlaceholder: "Vaše e-mailová adresa",
+        ratingLabel: "Vaše hodnocení *", chooseRating: "Vyberte hodnocení",
+        excellent: "★★★★★ — Vynikající", veryGood: "★★★★☆ — Velmi dobré",
+        good: "★★★☆☆ — Dobré", average: "★★☆☆☆ — Průměrné",
+        disappointing: "★☆☆☆☆ — Zklamání",
+        commentLabel: "Váš komentář (nepovinné)",
+        commentPlaceholder: "Popište nám svou zkušenost s tímto produktem…",
+        reviewNote: "Vaše hodnocení bude odesláno našemu týmu ke kontrole. Veřejně se zobrazí až po schválení.",
+        sendReview: "Odeslat hodnocení",
+        questionTitle: "Máte dotaz k tomuto produktu?",
+        questionText: "Kontaktujte náš tým a získejte další informace o balení, dostupnosti a podmínkách doručení.",
+        notFound: "Produkt nebyl nalezen",
+        notAvailable: "Tento produkt již nemusí být dostupný.",
+        backCatalog: "Zpět do katalogu",
+        footerDescription: "Vybrané palivové dřevo a dřevěné uhlí.",
+        rights: "Všechna práva vyhrazena.",
+        noReviewsCount: "Zatím nebylo zveřejněno žádné hodnocení",
+        noReviews: "K tomuto produktu zatím nebylo zveřejněno žádné zákaznické hodnocení. Podělte se jako první o svou zkušenost po doručení.",
+        reviewLoadError: "Hodnocení nyní nelze načíst.",
+        reviewCount: n => `Hodnocení zákazníků: ${n}`,
+        requiredFields: "Vyplňte prosím všechna povinná pole.",
+        invalidRating: "Vyberte platné hodnocení.",
+        longComment: "Váš komentář přesahuje 1 000 znaků.",
+        sending: "Odesílání…",
+        reviewSuccess: "Děkujeme za vaše hodnocení! Váš nákup byl ověřen a hodnocení bylo odesláno našemu týmu. Zobrazí se po schválení.",
+        duplicate: "K tomuto produktu již bylo odesláno hodnocení s touto objednávkou.",
+        orderError: "Objednávka nebyla nalezena, e-mailová adresa je nesprávná nebo doručení ještě nebylo potvrzeno. Zkontrolujte své údaje.",
+        productOrderError: "Tento produkt není uveden v zadané objednávce.",
+        reviewError: "Hodnocení nyní nelze odeslat. Zkuste to prosím později.",
+        unit: "Jednotka", quotePrice: "Cena na vyžádání",
+        categoryWood: "Palivové dřevo", categoryCharcoal: "Dřevěné uhlí"
+      }
+    };
+
     let currentProduct = null;
     let db = null;
     let approvedReviews = [];
+
+    function getLanguage() {
+      const lang = window.BoisRoyalI18n?.getLanguage?.() ||
+        localStorage.getItem("boisroyal_language") || "fr";
+
+      return PAGE_TRANSLATIONS[lang] ? lang : "fr";
+    }
+
+    function pt(key, ...args) {
+      const lang = getLanguage();
+      const value = PAGE_TRANSLATIONS[lang]?.[key] ??
+        PAGE_TRANSLATIONS.fr[key] ?? key;
+
+      return typeof value === "function" ? value(...args) : value;
+    }
+
+    function applyPageTranslations() {
+      document.documentElement.lang = getLanguage();
+
+      document.querySelectorAll("[data-page-text]").forEach(element => {
+        const key = element.dataset.pageText;
+        const value = pt(key);
+
+        if (element.tagName === "OPTION") {
+          element.textContent = value;
+        } else {
+          element.textContent = value;
+        }
+      });
+
+      document.querySelectorAll("[data-page-placeholder]").forEach(element => {
+        element.placeholder = pt(element.dataset.pagePlaceholder);
+      });
+
+      document.querySelectorAll("[data-language-selector]").forEach(select => {
+        select.value = getLanguage();
+      });
+
+      if (currentProduct) {
+        document.getElementById("productCategory").textContent = category(currentProduct);
+        document.getElementById("productPrice").textContent = money(currentProduct.price);
+        document.getElementById("productUnit").textContent =
+          currentProduct.unit || pt("unit");
+
+        renderReviews(approvedReviews);
+      }
+    }
+
+    document.querySelectorAll("[data-language-selector]").forEach(select => {
+      select.addEventListener("change", event => {
+        const lang = event.target.value;
+
+        if (window.BoisRoyalI18n?.setLanguage) {
+          window.BoisRoyalI18n.setLanguage(lang);
+        } else {
+          localStorage.setItem("boisroyal_language", lang);
+        }
+
+        applyPageTranslations();
+      });
+    });
+
+    window.addEventListener("boisroyal:languageChanged", applyPageTranslations);
 
     function esc(value) {
       return String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -645,24 +1045,27 @@
       if (rawCategory) {
         const normalized = rawCategory.toLowerCase();
 
-        if (normalized.includes("charbon")) return "Charbon de bois";
+        if (normalized.includes("charbon")) return pt("categoryCharcoal");
 
         if (normalized.includes("bois") || normalized.includes("chauffage")) {
-          return "Bois de chauffage";
+          return pt("categoryWood");
         }
 
-        return rawCategory.charAt(0).toLocaleUpperCase("fr-FR") + rawCategory.slice(1);
+        return rawCategory.charAt(0).toLocaleUpperCase() + rawCategory.slice(1);
       }
 
       return String(product.name || "").toLowerCase().includes("charbon")
-        ? "Charbon de bois"
-        : "Bois de chauffage";
+        ? pt("categoryCharcoal")
+        : pt("categoryWood");
     }
 
     function photo(product) {
       if (product.image_url) return product.image_url;
 
-      if (category(product) === "Charbon de bois") return PHOTOS.charcoal;
+      if (String(product.category || "").toLowerCase().includes("charbon") ||
+          String(product.name || "").toLowerCase().includes("charbon")) {
+        return PHOTOS.charcoal;
+      }
 
       return String(product.name || "").toLowerCase().includes("filet")
         ? PHOTOS.wood : PHOTOS.logs;
@@ -670,9 +1073,14 @@
 
     function money(value) {
       if (value === null || value === undefined || value === "" ||
-          !Number.isFinite(Number(value))) return "Sur devis";
+          !Number.isFinite(Number(value))) return pt("quotePrice");
 
-      return new Intl.NumberFormat("fr-FR", {
+      const locales = {
+        fr: "fr-FR", en: "en-GB", de: "de-DE",
+        es: "es-ES", nl: "nl-NL", cs: "cs-CZ"
+      };
+
+      return new Intl.NumberFormat(locales[getLanguage()], {
         style: "currency",
         currency: "EUR"
       }).format(Number(value));
@@ -690,7 +1098,7 @@
       const rawDescription = String(product.description || "").trim();
 
       const description = rawDescription ||
-        `${name} : découvrez ce produit ${productCategory} proposé par BoisRoyal.`;
+        `${name} : ${productCategory} BoisRoyal.`;
 
       const unit = String(product.unit || "").trim();
       const title = `${name} | ${productCategory} | BoisRoyal`;
@@ -741,25 +1149,15 @@
         Number.isFinite(Number(product.price));
 
       if (hasPrice) {
-        // BoisRoyal fonctionne avec un stock illimite.
-// La disponibilite reelle est confirmee avant la commande.
-        const inStock = true;
-
         productSchema.offers = {
           "@type": "Offer",
           "url": canonical,
           "priceCurrency": "EUR",
           "price": Number(product.price),
-          "availability": inStock
-            ? "https://schema.org/InStock"
-            : "https://schema.org/OutOfStock"
+          "availability": "https://schema.org/InStock"
         };
       }
 
-      /*
-       * Les données de notation structurées sont ajoutées uniquement
-       * si de vrais avis approuvés existent.
-       */
       if (reviews.length > 0) {
         const ratings = reviews
           .map(review => Number(review.rating))
@@ -797,13 +1195,8 @@
                 }
               };
 
-              if (review.comment) {
-                reviewSchema.reviewBody = String(review.comment);
-              }
-
-              if (review.created_at) {
-                reviewSchema.datePublished = String(review.created_at).slice(0, 10);
-              }
+              if (review.comment) reviewSchema.reviewBody = String(review.comment);
+              if (review.created_at) reviewSchema.datePublished = String(review.created_at).slice(0, 10);
 
               return reviewSchema;
             });
@@ -856,10 +1249,14 @@
       if (!value) return "";
 
       const date = new Date(value);
-
       if (Number.isNaN(date.getTime())) return "";
 
-      return new Intl.DateTimeFormat("fr-FR", {
+      const locales = {
+        fr: "fr-FR", en: "en-GB", de: "de-DE",
+        es: "es-ES", nl: "nl-NL", cs: "cs-CZ"
+      };
+
+      return new Intl.DateTimeFormat(locales[getLanguage()], {
         day: "2-digit",
         month: "long",
         year: "numeric"
@@ -887,13 +1284,10 @@
       if (validReviews.length === 0) {
         averageElement.textContent = "—";
         starsElement.textContent = "☆☆☆☆☆";
-        countElement.textContent = "Aucun avis publié pour le moment";
+        countElement.textContent = pt("noReviewsCount");
 
         listElement.innerHTML = `
-          <div class="no-reviews">
-            Aucun avis client publié pour ce produit pour le moment.
-            Soyez le premier client à partager votre expérience après livraison.
-          </div>
+          <div class="no-reviews">${esc(pt("noReviews"))}</div>
         `;
 
         updateSEO(currentProduct, []);
@@ -908,9 +1302,7 @@
 
       averageElement.textContent = average.toFixed(1).replace(".", ",") + "/5";
       starsElement.textContent = stars(average);
-
-      countElement.textContent =
-        `${validReviews.length} avis client${validReviews.length > 1 ? "s" : ""}`;
+      countElement.textContent = pt("reviewCount", validReviews.length);
 
       listElement.innerHTML = validReviews.map(review => `
         <article class="review-card">
@@ -948,9 +1340,7 @@
         console.error("Erreur de chargement des avis :", error);
 
         listElement.innerHTML = `
-          <div class="no-reviews">
-            Les avis ne peuvent pas être chargés pour le moment.
-          </div>
+          <div class="no-reviews">${esc(pt("reviewLoadError"))}</div>
         `;
 
         updateSEO(currentProduct, []);
@@ -977,22 +1367,22 @@
       const comment = document.getElementById("reviewComment").value.trim();
 
       if (!orderNumber || !email || !rating) {
-        showReviewMessage("Merci de remplir les champs obligatoires.", "error");
+        showReviewMessage(pt("requiredFields"), "error");
         return;
       }
 
       if (rating < 1 || rating > 5 || !Number.isInteger(rating)) {
-        showReviewMessage("Veuillez choisir une note valide.", "error");
+        showReviewMessage(pt("invalidRating"), "error");
         return;
       }
 
       if (comment.length > 1000) {
-        showReviewMessage("Votre commentaire dépasse 1 000 caractères.", "error");
+        showReviewMessage(pt("longComment"), "error");
         return;
       }
 
       submitButton.disabled = true;
-      submitButton.textContent = "Envoi en cours…";
+      submitButton.textContent = pt("sending");
 
       try {
         const { error } = await db.rpc("submit_br_product_review", {
@@ -1007,39 +1397,35 @@
 
         form.reset();
 
-        showReviewMessage(
-          "Merci pour votre avis ! Votre achat a été vérifié et votre avis a été transmis à notre équipe. Il sera visible après validation.",
-          "success"
-        );
+        showReviewMessage(pt("reviewSuccess"), "success");
 
       } catch (error) {
         console.error("Erreur d'envoi de l'avis :", error);
 
         let message = error?.message || "";
+        const lowerMessage = message.toLowerCase();
 
         if (
-          message.toLowerCase().includes("duplicate") ||
-          message.toLowerCase().includes("unique")
+          lowerMessage.includes("duplicate") ||
+          lowerMessage.includes("unique")
         ) {
-          message = "Un avis a déjà été envoyé pour ce produit avec cette commande.";
+          message = pt("duplicate");
         } else if (
-          message.toLowerCase().includes("commande introuvable") ||
-          message.toLowerCase().includes("livraison non confirmée")
+          lowerMessage.includes("commande introuvable") ||
+          lowerMessage.includes("livraison non confirmée")
         ) {
-          message = "Commande introuvable, adresse e-mail incorrecte ou livraison non encore confirmée. Vérifiez vos informations.";
-        } else if (
-          message.toLowerCase().includes("ce produit ne figure pas")
-        ) {
-          message = "Ce produit ne figure pas dans la commande indiquée.";
+          message = pt("orderError");
+        } else if (lowerMessage.includes("ce produit ne figure pas")) {
+          message = pt("productOrderError");
         } else if (!message) {
-          message = "Impossible d'envoyer votre avis pour le moment. Réessayez plus tard.";
+          message = pt("reviewError");
         }
 
         showReviewMessage(message, "error");
 
       } finally {
         submitButton.disabled = false;
-        submitButton.textContent = "Envoyer mon avis";
+        submitButton.textContent = pt("sendReview");
       }
     }
 
@@ -1050,9 +1436,7 @@
 
       try {
         cart = JSON.parse(localStorage.getItem("boisroyal_cart") || "[]");
-
         if (!Array.isArray(cart)) cart = [];
-
       } catch (error) {
         cart = [];
       }
@@ -1063,7 +1447,6 @@
 
       if (existing) {
         existing.quantity = Number(existing.quantity || 0) + 1;
-
       } else {
         cart.push({
           id: currentProduct.id,
@@ -1076,7 +1459,6 @@
       }
 
       localStorage.setItem("boisroyal_cart", JSON.stringify(cart));
-
       window.location.href = "devis.html?panier=1";
     }
 
@@ -1123,10 +1505,10 @@
         document.getElementById("productCategory").textContent = category(data);
 
         document.getElementById("productDescription").textContent =
-          data.description || "Contactez-nous pour plus d'informations sur ce produit.";
+          data.description || pt("questionText");
 
         document.getElementById("productPrice").textContent = money(data.price);
-        document.getElementById("productUnit").textContent = data.unit || "Unité";
+        document.getElementById("productUnit").textContent = data.unit || pt("unit");
 
         const image = document.getElementById("productImage");
 
@@ -1139,7 +1521,6 @@
         };
 
         updateSEO(data, []);
-
         await loadReviews(data.id);
 
       } catch (error) {
@@ -1156,6 +1537,7 @@
     document.getElementById("reviewForm")
       .addEventListener("submit", submitReview);
 
+    applyPageTranslations();
     loadProduct();
   </script>
 

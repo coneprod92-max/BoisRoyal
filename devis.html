@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,504 +7,164 @@
 <meta name="theme-color" content="#30221B">
 <meta name="description" content="Demandez votre devis BoisRoyal pour le bois de chauffage et le charbon.">
 <title>Votre commande | BoisRoyal</title>
-
 <style>
 :root {
-  --brown: #30221B;
-  --brown-2: #493126;
-  --brown-3: #604331;
-  --cream: #F4EBDD;
-  --paper: #FBF8F2;
-  --orange: #D96B2B;
-  --orange-dark: #B94F1B;
-  --charcoal: #292522;
-  --muted: #75685E;
-  --line: #E5D9C9;
-  --white: #FFFFFF;
-  --success: #286442;
-  --danger: #A43E2D;
-  --shadow: 0 22px 65px rgba(48, 34, 27, .12);
+  --brown:#30221B;--brown-2:#493126;--cream:#F4EBDD;--paper:#FBF8F2;
+  --orange:#D96B2B;--orange-dark:#B94F1B;--charcoal:#292522;
+  --muted:#75685E;--line:#E5D9C9;--success:#286442;--danger:#A43E2D;
+  --shadow:0 22px 65px rgba(48,34,27,.12)
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--charcoal);
-  background:
-    radial-gradient(circle at 8% 4%, rgba(217,107,43,.10), transparent 26rem),
-    linear-gradient(180deg, var(--cream) 0%, #F8F4ED 48%, #EFE5D7 100%);
-  font: 15px/1.65 Arial, Helvetica, sans-serif;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--charcoal);background:radial-gradient(circle at 8% 4%,rgba(217,107,43,.10),transparent 26rem),linear-gradient(180deg,var(--cream) 0%,#F8F4ED 48%,#EFE5D7 100%);font:15px/1.65 Arial,Helvetica,sans-serif}
+a{color:var(--orange-dark);text-decoration:none}
+a:hover{text-decoration:underline}
+main{width:min(850px,calc(100% - 32px));margin:0 auto;padding:28px 0 64px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.back-link{display:inline-flex;align-items:center;gap:8px;color:var(--brown);font-size:13px;font-weight:700}
+.brand{display:inline-flex;align-items:center;gap:9px;color:var(--brown);font:700 23px Georgia,serif;letter-spacing:.3px}
+.brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--orange);color:white;font:20px Arial,sans-serif}
+.language-select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--brown);font-weight:700;font-size:12px;cursor:pointer}
+.hero{position:relative;overflow:hidden;padding:clamp(25px,6vw,48px);margin-bottom:22px;border-radius:22px;color:var(--paper);background:linear-gradient(105deg,rgba(35,24,19,.96),rgba(65,43,31,.91)),var(--brown);box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:260px;height:260px;right:-90px;top:-105px;border:1px solid rgba(244,235,221,.17);border-radius:50%;box-shadow:0 0 0 24px rgba(244,235,221,.035),0 0 0 52px rgba(244,235,221,.025);pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;color:#F0A16F;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.eyebrow:before{content:"";width:24px;height:2px;background:var(--orange)}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif}
+h1{position:relative;z-index:1;max-width:620px;margin:0;font-size:clamp(36px,7vw,58px);line-height:1.05;letter-spacing:-1.5px}
+h1 span{color:#F0A16F}
+.hero-copy{position:relative;z-index:1;max-width:620px;margin:18px 0 0;color:#E5D8CB;font-size:15px}
+.notice{display:flex;gap:13px;align-items:flex-start;padding:17px 19px;margin:0 0 22px;border:1px solid #E8C9A8;border-radius:13px;color:#65401F;background:#FFF4E5;font-size:13px}
+.notice-icon{flex:0 0 30px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:white;background:var(--orange);font-weight:800}
+.notice strong{display:block;margin-bottom:2px;color:var(--brown)}
+.panel{padding:clamp(20px,5vw,38px);border:1px solid rgba(111,83,61,.12);border-radius:20px;background:var(--paper);box-shadow:var(--shadow)}
+.section-heading{display:flex;align-items:center;gap:13px;margin:0 0 18px}
+.section-number{flex:0 0 36px;display:grid;place-items:center;width:36px;height:36px;border-radius:11px;color:white;background:var(--brown);font:700 15px Georgia,serif}
+h2{margin:0;color:var(--brown);font-size:22px;line-height:1.2}
+.section-divider{height:1px;margin:28px 0;background:var(--line)}
+.product-list{display:grid;gap:10px}
+.product{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 17px;border:1px solid var(--line);border-radius:12px;background:#FFFDF9}
+.product b{display:block;color:var(--brown);font-size:14px}
+.product small{display:block;margin-top:3px;color:var(--muted);font-size:12px}
+.product .price{display:block;margin-top:5px;color:var(--orange-dark);font-weight:800}
+.quantity{white-space:nowrap;padding:7px 11px;border-radius:8px;color:var(--brown);background:var(--cream);font-size:13px;font-weight:800}
+.cart-total{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0 5px;margin-top:12px;border-top:1px solid var(--line);color:var(--brown);font-weight:800}
+.cart-total strong{color:var(--orange-dark);font-size:18px;text-align:right}
+.footer-note{margin:12px 0 0;color:var(--muted);font-size:12px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;margin:14px 0 6px;color:var(--brown);font-size:12px;font-weight:800}
+input,select,textarea{display:block;width:100%;min-width:0;padding:13px 14px;border:1px solid #DCCFBE;border-radius:9px;outline:none;color:var(--charcoal);background:#FFF;font:inherit;font-size:14px;transition:border-color .18s,box-shadow .18s,background .18s}
+input::placeholder,textarea::placeholder{color:#A69A8E}
+input:focus,select:focus,textarea:focus{border-color:var(--orange);background:#FFFEFC;box-shadow:0 0 0 3px rgba(217,107,43,.13)}
+textarea{resize:vertical;min-height:100px}
+button{display:flex;justify-content:center;align-items:center;gap:10px;width:100%;min-height:54px;margin-top:25px;padding:15px 20px;border:0;border-radius:10px;color:white;background:var(--orange);box-shadow:0 8px 20px rgba(185,79,27,.20);font-size:14px;font-weight:800;cursor:pointer;transition:background .18s,transform .18s,box-shadow .18s}
+button:hover:not(:disabled){background:var(--orange-dark);box-shadow:0 10px 24px rgba(185,79,27,.25);transform:translateY(-1px)}
+button:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
+#status{overflow-wrap:anywhere;margin:14px 0 0;font-size:13px;font-weight:700}
+#status.success{padding:13px 15px;border:1px solid #B8D8C0;border-radius:9px;color:var(--success);background:#EDF8EF}
+#status.error{padding:13px 15px;border:1px solid #E6BDB5;border-radius:9px;color:var(--danger);background:#FFF0ED}
+.empty{padding:22px 16px;border:1px dashed #D8C8B6;border-radius:11px;color:var(--muted);background:#FFFCF7;text-align:center;font-size:13px}
+.empty a{font-weight:700}
+.bottom-link{margin:25px 0 0;text-align:center;font-size:13px;font-weight:700}
+.bottom-link a{color:var(--brown)}
+@media(max-width:600px){
+ main{width:min(100% - 22px,850px);padding-top:17px}
+ .topbar{margin-bottom:18px}
+ .brand{font-size:20px}
+ .brand-mark{width:30px;height:30px;font-size:18px}
+ .hero{border-radius:16px;padding:28px 22px;margin-bottom:15px}
+ .hero-copy{font-size:14px}
+ .notice{padding:14px;margin-bottom:15px}
+ .panel{padding:19px 15px;border-radius:15px}
+ .form-grid{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+ .product{padding:13px 12px}
+ .product b{font-size:13px}
+ .quantity{padding:6px 8px;font-size:12px}
+ h2{font-size:20px}
 }
-a { color: var(--orange-dark); text-decoration: none; }
-a:hover { text-decoration: underline; }
-main {
-  width: min(850px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 28px 0 64px;
-}
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 28px;
-}
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--brown);
-  font-size: 13px;
-  font-weight: 700;
-}
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--brown);
-  font: 700 23px Georgia, "Times New Roman", serif;
-  letter-spacing: .3px;
-}
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--orange);
-  color: white;
-  font: 20px Arial, sans-serif;
-}
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(25px, 6vw, 48px);
-  margin-bottom: 22px;
-  border-radius: 22px;
-  color: var(--paper);
-  background:
-    linear-gradient(105deg, rgba(35,24,19,.96), rgba(65,43,31,.91)),
-    var(--brown);
-  box-shadow: var(--shadow);
-}
-.hero::after {
-  content: "";
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  right: -90px;
-  top: -105px;
-  border: 1px solid rgba(244,235,221,.17);
-  border-radius: 50%;
-  box-shadow: 0 0 0 24px rgba(244,235,221,.035), 0 0 0 52px rgba(244,235,221,.025);
-  pointer-events: none;
-}
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  color: #F0A16F;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.eyebrow::before {
-  content: "";
-  width: 24px;
-  height: 2px;
-  background: var(--orange);
-}
-h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; }
-h1 {
-  position: relative;
-  z-index: 1;
-  max-width: 620px;
-  margin: 0;
-  font-size: clamp(36px, 7vw, 58px);
-  line-height: 1.05;
-  letter-spacing: -1.5px;
-}
-h1 span { color: #F0A16F; }
-.hero-copy {
-  position: relative;
-  z-index: 1;
-  max-width: 620px;
-  margin: 18px 0 0;
-  color: #E5D8CB;
-  font-size: 15px;
-}
-.notice {
-  display: flex;
-  gap: 13px;
-  align-items: flex-start;
-  padding: 17px 19px;
-  margin: 0 0 22px;
-  border: 1px solid #E8C9A8;
-  border-radius: 13px;
-  color: #65401F;
-  background: #FFF4E5;
-  font-size: 13px;
-}
-.notice-icon {
-  flex: 0 0 30px;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  color: white;
-  background: var(--orange);
-  font-weight: 800;
-}
-.notice strong { display: block; margin-bottom: 2px; color: var(--brown); }
-.panel {
-  padding: clamp(20px, 5vw, 38px);
-  border: 1px solid rgba(111,83,61,.12);
-  border-radius: 20px;
-  background: var(--paper);
-  box-shadow: var(--shadow);
-}
-.section-heading {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin: 0 0 18px;
-}
-.section-number {
-  flex: 0 0 36px;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 11px;
-  color: white;
-  background: var(--brown);
-  font: 700 15px Georgia, serif;
-}
-h2 {
-  margin: 0;
-  color: var(--brown);
-  font-size: 22px;
-  line-height: 1.2;
-}
-.section-divider {
-  height: 1px;
-  margin: 28px 0;
-  background: var(--line);
-}
-.product-list { display: grid; gap: 10px; }
-.product {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 17px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #FFFDF9;
-}
-.product b {
-  display: block;
-  color: var(--brown);
-  font-size: 14px;
-}
-.product small {
-  display: block;
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 12px;
-}
-.product .price {
-  display: block;
-  margin-top: 5px;
-  color: var(--orange-dark);
-  font-weight: 800;
-}
-.quantity {
-  white-space: nowrap;
-  padding: 7px 11px;
-  border-radius: 8px;
-  color: var(--brown);
-  background: var(--cream);
-  font-size: 13px;
-  font-weight: 800;
-}
-.cart-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 0 5px;
-  margin-top: 12px;
-  border-top: 1px solid var(--line);
-  color: var(--brown);
-  font-weight: 800;
-}
-.cart-total strong { color: var(--orange-dark); font-size: 18px; text-align: right; }
-.footer-note {
-  margin: 12px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 16px;
-}
-.field { min-width: 0; }
-.field.full { grid-column: 1 / -1; }
-label {
-  display: block;
-  margin: 14px 0 6px;
-  color: var(--brown);
-  font-size: 12px;
-  font-weight: 800;
-}
-input, select, textarea {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  padding: 13px 14px;
-  border: 1px solid #DCCFBE;
-  border-radius: 9px;
-  outline: none;
-  color: var(--charcoal);
-  background: #FFFFFF;
-  font: inherit;
-  font-size: 14px;
-  transition: border-color .18s, box-shadow .18s, background .18s;
-}
-input::placeholder, textarea::placeholder { color: #A69A8E; }
-input:focus, select:focus, textarea:focus {
-  border-color: var(--orange);
-  background: #FFFEFC;
-  box-shadow: 0 0 0 3px rgba(217,107,43,.13);
-}
-textarea { resize: vertical; min-height: 100px; }
-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  min-height: 54px;
-  margin-top: 25px;
-  padding: 15px 20px;
-  border: 0;
-  border-radius: 10px;
-  color: white;
-  background: var(--orange);
-  box-shadow: 0 8px 20px rgba(185,79,27,.20);
-  font-size: 14px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: background .18s, transform .18s, box-shadow .18s;
-}
-button:hover:not(:disabled) {
-  background: var(--orange-dark);
-  box-shadow: 0 10px 24px rgba(185,79,27,.25);
-  transform: translateY(-1px);
-}
-button:disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
-#status {
-  overflow-wrap: anywhere;
-  margin: 14px 0 0;
-  font-size: 13px;
-  font-weight: 700;
-}
-#status.success {
-  padding: 13px 15px;
-  border: 1px solid #B8D8C0;
-  border-radius: 9px;
-  color: var(--success);
-  background: #EDF8EF;
-}
-#status.error {
-  padding: 13px 15px;
-  border: 1px solid #E6BDB5;
-  border-radius: 9px;
-  color: var(--danger);
-  background: #FFF0ED;
-}
-.empty {
-  padding: 22px 16px;
-  border: 1px dashed #D8C8B6;
-  border-radius: 11px;
-  color: var(--muted);
-  background: #FFFCF7;
-  text-align: center;
-  font-size: 13px;
-}
-.empty a { font-weight: 700; }
-.bottom-link {
-  margin: 25px 0 0;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 700;
-}
-.bottom-link a { color: var(--brown); }
-@media (max-width: 600px) {
-  main { width: min(100% - 22px, 850px); padding-top: 17px; }
-  .topbar { margin-bottom: 18px; }
-  .brand { font-size: 20px; }
-  .brand-mark { width: 30px; height: 30px; font-size: 18px; }
-  .hero { border-radius: 16px; padding: 28px 22px; margin-bottom: 15px; }
-  .hero-copy { font-size: 14px; }
-  .notice { padding: 14px; margin-bottom: 15px; }
-  .panel { padding: 19px 15px; border-radius: 15px; }
-  .form-grid { grid-template-columns: 1fr; }
-  .field.full { grid-column: auto; }
-  .product { padding: 13px 12px; }
-  .product b { font-size: 13px; }
-  .quantity { padding: 6px 8px; font-size: 12px; }
-  h2 { font-size: 20px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
-}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 </style>
+<script src="translations.js"></script>
 </head>
-
 <body>
 <main>
   <div class="topbar">
-    <a class="back-link" href="index.html">← Retour à la boutique</a>
-    <a class="brand" href="index.html" aria-label="BoisRoyal, accueil">
-      <span class="brand-mark">♨</span>
-      <span>BoisRoyal</span>
-    </a>
+    <a class="back-link" href="index.html" id="backTop">← Retour à la boutique</a>
+    <div class="topbar-right">
+      <select class="language-select" id="languageSelector" aria-label="Language">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="cs">🇨🇿 Čeština</option>
+      </select>
+      <a class="brand" href="index.html" aria-label="BoisRoyal, accueil">
+        <span class="brand-mark">♨</span><span>BoisRoyal</span>
+      </a>
+    </div>
   </div>
 
   <header class="hero">
-    <div class="eyebrow">Votre commande</div>
-    <h1>La chaleur commence <span>ici.</span></h1>
-    <p class="hero-copy">
-      Vérifiez votre sélection et indiquez votre adresse de livraison.
-      Notre équipe vous recontactera pour confirmer les disponibilités,
-      les frais de transport et les modalités de paiement.
-    </p>
+    <div class="eyebrow" id="eyebrow">Votre commande</div>
+    <h1 id="heroTitle">La chaleur commence <span>ici.</span></h1>
+    <p class="hero-copy" id="heroCopy">Vérifiez votre sélection et indiquez votre adresse de livraison. Notre équipe vous recontactera pour confirmer les disponibilités, les frais de transport et les modalités de paiement.</p>
   </header>
 
   <div class="notice">
     <span class="notice-icon">✓</span>
-    <div>
-      <strong>Demande gratuite et sans engagement.</strong>
-      Aucun paiement n'est demandé à cette étape. Votre commande sera
-      confirmée après validation avec notre équipe.
-    </div>
+    <div><strong id="noticeTitle">Demande gratuite et sans engagement.</strong><span id="noticeText">Aucun paiement n'est demandé à cette étape. Votre commande sera confirmée après validation avec notre équipe.</span></div>
   </div>
 
   <form class="panel" id="form">
     <section aria-labelledby="basket-title">
-      <div class="section-heading">
-        <span class="section-number">01</span>
-        <h2 id="basket-title">Votre sélection</h2>
-      </div>
-
-      <div class="product-list" id="productList">
-        <div class="empty">Chargement de votre panier...</div>
-      </div>
-
-      <div class="cart-total">
-        <span>Sous-total des produits</span>
-        <strong id="cartTotal">—</strong>
-      </div>
-
-      <p class="footer-note">
-        Les frais de livraison ne sont pas inclus. Le montant définitif
-        sera confirmé par BoisRoyal avant toute validation.
-      </p>
+      <div class="section-heading"><span class="section-number">01</span><h2 id="basket-title">Votre sélection</h2></div>
+      <div class="product-list" id="productList"><div class="empty" id="loadingText">Chargement de votre panier...</div></div>
+      <div class="cart-total"><span id="subtotalLabel">Sous-total des produits</span><strong id="cartTotal">—</strong></div>
+      <p class="footer-note" id="deliveryNote">Les frais de livraison ne sont pas inclus. Le montant définitif sera confirmé par BoisRoyal avant toute validation.</p>
     </section>
 
     <div class="section-divider"></div>
 
     <section aria-labelledby="contact-title">
-      <div class="section-heading">
-        <span class="section-number">02</span>
-        <h2 id="contact-title">Vos coordonnées</h2>
-      </div>
-
+      <div class="section-heading"><span class="section-number">02</span><h2 id="contact-title">Vos coordonnées</h2></div>
       <div class="form-grid">
-        <div class="field full">
-          <label for="name">Nom complet *</label>
-          <input id="name" name="name" maxlength="120"
-            autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="phone">Téléphone *</label>
-          <input id="phone" name="phone" type="tel" maxlength="40"
-            autocomplete="tel" required>
-        </div>
-        <div class="field">
-          <label for="email">Adresse e-mail *</label>
-          <input id="email" name="email" type="email" maxlength="180"
-            autocomplete="email" required>
-        </div>
+        <div class="field full"><label for="name" id="nameLabel">Nom complet *</label><input id="name" name="name" maxlength="120" autocomplete="name" required></div>
+        <div class="field"><label for="phone" id="phoneLabel">Téléphone *</label><input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel" required></div>
+        <div class="field"><label for="email" id="emailLabel">Adresse e-mail *</label><input id="email" name="email" type="email" maxlength="180" autocomplete="email" required></div>
       </div>
     </section>
 
     <div class="section-divider"></div>
 
     <section aria-labelledby="delivery-title">
-      <div class="section-heading">
-        <span class="section-number">03</span>
-        <h2 id="delivery-title">Adresse de livraison</h2>
-      </div>
-
+      <div class="section-heading"><span class="section-number">03</span><h2 id="delivery-title">Adresse de livraison</h2></div>
       <div class="form-grid">
-        <div class="field full">
-          <label for="address">Adresse complète *</label>
-          <input id="address" name="address" maxlength="220"
-            autocomplete="street-address" required>
-        </div>
-        <div class="field">
-          <label for="postal">Code postal *</label>
-          <input id="postal" name="postal" maxlength="20"
-            autocomplete="postal-code" required>
-        </div>
-        <div class="field">
-          <label for="city">Ville *</label>
-          <input id="city" name="city" maxlength="100"
-            autocomplete="address-level2" required>
-        </div>
-        <div class="field full">
-          <label for="country">Pays *</label>
+        <div class="field full"><label for="address" id="addressLabel">Adresse complète *</label><input id="address" name="address" maxlength="220" autocomplete="street-address" required></div>
+        <div class="field"><label for="postal" id="postalLabel">Code postal *</label><input id="postal" name="postal" maxlength="20" autocomplete="postal-code" required></div>
+        <div class="field"><label for="city" id="cityLabel">Ville *</label><input id="city" name="city" maxlength="100" autocomplete="address-level2" required></div>
+        <div class="field full"><label for="country" id="countryLabel">Pays *</label>
           <select id="country" name="country" required>
-            <option value="France">France</option>
-            <option value="Belgique">Belgique</option>
+            <option value="France">France</option><option value="Belgique">Belgique</option>
           </select>
         </div>
-        <div class="field full">
-          <label for="notes">Précisions (facultatif)</label>
-          <textarea id="notes" name="notes" maxlength="1200" rows="3"
-            placeholder="Instructions de livraison ou informations utiles..."></textarea>
-        </div>
+        <div class="field full"><label for="notes" id="notesLabel">Précisions (facultatif)</label><textarea id="notes" name="notes" maxlength="1200" rows="3" placeholder="Instructions de livraison ou informations utiles..." ></textarea></div>
       </div>
     </section>
 
     <div style="position:absolute;left:-9999px" aria-hidden="true">
-      <label for="website">Ne pas remplir</label>
-      <input id="website" name="website" tabindex="-1" autocomplete="off">
+      <label for="website">Ne pas remplir</label><input id="website" name="website" tabindex="-1" autocomplete="off">
     </div>
 
-    <button id="send" type="submit" disabled>
-      Envoyer ma demande gratuite <span aria-hidden="true">→</span>
-    </button>
-
+    <button id="send" type="submit" disabled><span id="sendLabel">Envoyer ma demande gratuite</span><span aria-hidden="true">→</span></button>
     <p id="status" role="status" aria-live="polite"></p>
-
-    <p class="footer-note">
-      * Champs obligatoires. Aucun paiement n'est effectué lors de
-      l'envoi de cette demande.
-    </p>
+    <p class="footer-note" id="requiredNote">* Champs obligatoires. Aucun paiement n'est effectué lors de l'envoi de cette demande.</p>
   </form>
 
-  <p class="bottom-link">
-    <a href="index.html">← Retour à BoisRoyal</a>
-  </p>
+  <p class="bottom-link"><a href="index.html" id="backBottom">← Retour à BoisRoyal</a></p>
 </main>
 
 <script>
@@ -517,212 +178,300 @@ const productList = document.getElementById('productList');
 const cartTotal = document.getElementById('cartTotal');
 
 let cart = [];
+let currentLanguage = 'fr';
 
-function readCart() {
-  try {
-    const data = JSON.parse(localStorage.getItem('boisroyal_cart') || '[]');
-    return Array.isArray(data) ? data : [];
-  } catch (error) {
-    return [];
-  }
+const TEXT = {
+fr:{
+back:'← Retour à la boutique',eyebrow:'Votre commande',title:'La chaleur commence',here:'ici.',
+hero:'Vérifiez votre sélection et indiquez votre adresse de livraison. Notre équipe vous recontactera pour confirmer les disponibilités, les frais de transport et les modalités de paiement.',
+noticeTitle:'Demande gratuite et sans engagement.',notice:'Aucun paiement n’est demandé à cette étape. Votre commande sera confirmée après validation avec notre équipe.',
+selection:'Votre sélection',loading:'Chargement de votre panier...',subtotal:'Sous-total des produits',deliveryNote:'Les frais de livraison ne sont pas inclus. Le montant définitif sera confirmé par BoisRoyal avant toute validation.',
+contact:'Vos coordonnées',name:'Nom complet *',phone:'Téléphone *',email:'Adresse e-mail *',delivery:'Adresse de livraison',address:'Adresse complète *',postal:'Code postal *',city:'Ville *',country:'Pays *',notes:'Précisions (facultatif)',placeholder:'Instructions de livraison ou informations utiles...',send:'Envoyer ma demande gratuite',sending:'Envoi en cours...',required:'* Champs obligatoires. Aucun paiement n’est effectué lors de l’envoi de cette demande.',backBottom:'← Retour à BoisRoyal',
+empty:'Votre panier est vide.',emptyLink:'Retournez à la boutique pour choisir vos produits.',quote:'Sur devis',unit:'Unité',unknown:' + produits sur devis',demo:'Un produit de démonstration est présent dans votre panier. Retournez à la boutique et rechargez le catalogue avant de recommencer.',quantity:'Une quantité de produit est invalide.',emptyError:'Votre panier est vide.',refused:'Demande refusée.',sendingStatus:'Envoi de votre demande...',sent:'Demande envoyée avec succès ! Référence : ',registered:'enregistrée',follow:'Suivre ma commande →',confirmed:'. BoisRoyal vous recontactera pour confirmer les prix, la livraison et les modalités de paiement.',generic:'Envoi impossible. Veuillez réessayer.',connection:'Erreur de connexion. Veuillez réessayer.',successEmpty:'Votre demande a bien été envoyée.',
+countries:[['France','France'],['Belgique','Belgique']]
+},
+en:{
+back:'← Back to shop',eyebrow:'Your order',title:'Warmth starts',here:'here.',
+hero:'Review your selection and enter your delivery address. Our team will contact you to confirm availability, delivery costs and payment arrangements.',
+noticeTitle:'Free request, no obligation.',notice:'No payment is required at this stage. Your order will be confirmed after validation with our team.',
+selection:'Your selection',loading:'Loading your cart...',subtotal:'Product subtotal',deliveryNote:'Delivery costs are not included. BoisRoyal will confirm the final amount before approval.',
+contact:'Your details',name:'Full name *',phone:'Phone *',email:'Email address *',delivery:'Delivery address',address:'Full address *',postal:'Postal code *',city:'City *',country:'Country *',notes:'Additional information (optional)',placeholder:'Delivery instructions or useful information...',send:'Send my free request',sending:'Sending...',required:'* Required fields. No payment is made when submitting this request.',backBottom:'← Back to BoisRoyal',
+empty:'Your cart is empty.',emptyLink:'Return to the shop to choose your products.',quote:'Quote required',unit:'Unit',unknown:' + products requiring a quote',demo:'A demo product is in your cart. Return to the shop and reload the catalogue before trying again.',quantity:'A product quantity is invalid.',emptyError:'Your cart is empty.',refused:'Request rejected.',sendingStatus:'Sending your request...',sent:'Request sent successfully! Reference: ',registered:'registered',follow:'Track my order →',confirmed:'. BoisRoyal will contact you to confirm prices, delivery and payment arrangements.',generic:'Unable to send. Please try again.',connection:'Connection error. Please try again.',successEmpty:'Your request has been sent successfully.',
+countries:[['France','France'],['Belgique','Belgium']]
+},
+de:{
+back:'← Zurück zum Shop',eyebrow:'Ihre Bestellung',title:'Wärme beginnt',here:'hier.',
+hero:'Überprüfen Sie Ihre Auswahl und geben Sie Ihre Lieferadresse ein. Unser Team kontaktiert Sie, um Verfügbarkeit, Lieferkosten und Zahlungsmodalitäten zu bestätigen.',
+noticeTitle:'Kostenlose und unverbindliche Anfrage.',notice:'In diesem Schritt ist keine Zahlung erforderlich. Ihre Bestellung wird nach Abstimmung mit unserem Team bestätigt.',
+selection:'Ihre Auswahl',loading:'Warenkorb wird geladen...',subtotal:'Zwischensumme der Produkte',deliveryNote:'Lieferkosten sind nicht enthalten. BoisRoyal bestätigt den endgültigen Betrag vor der Freigabe.',
+contact:'Ihre Kontaktdaten',name:'Vollständiger Name *',phone:'Telefon *',email:'E-Mail-Adresse *',delivery:'Lieferadresse',address:'Vollständige Adresse *',postal:'Postleitzahl *',city:'Stadt *',country:'Land *',notes:'Zusätzliche Angaben (optional)',placeholder:'Lieferhinweise oder nützliche Informationen...',send:'Kostenlose Anfrage senden',sending:'Wird gesendet...',required:'* Pflichtfelder. Beim Absenden dieser Anfrage erfolgt keine Zahlung.',backBottom:'← Zurück zu BoisRoyal',
+empty:'Ihr Warenkorb ist leer.',emptyLink:'Kehren Sie zum Shop zurück, um Produkte auszuwählen.',quote:'Preis auf Anfrage',unit:'Einheit',unknown:' + Produkte auf Anfrage',demo:'Ein Demo-Produkt befindet sich im Warenkorb. Kehren Sie zum Shop zurück und laden Sie den Katalog neu.',quantity:'Eine Produktmenge ist ungültig.',emptyError:'Ihr Warenkorb ist leer.',refused:'Anfrage abgelehnt.',sendingStatus:'Ihre Anfrage wird gesendet...',sent:'Anfrage erfolgreich gesendet! Referenz: ',registered:'registriert',follow:'Bestellung verfolgen →',confirmed:'. BoisRoyal wird Sie kontaktieren, um Preise, Lieferung und Zahlungsmodalitäten zu bestätigen.',generic:'Senden fehlgeschlagen. Bitte versuchen Sie es erneut.',connection:'Verbindungsfehler. Bitte versuchen Sie es erneut.',successEmpty:'Ihre Anfrage wurde erfolgreich gesendet.',
+countries:[['France','Frankreich'],['Belgique','Belgien']]
+},
+es:{
+back:'← Volver a la tienda',eyebrow:'Tu pedido',title:'El calor empieza',here:'aquí.',
+hero:'Revisa tu selección e indica tu dirección de entrega. Nuestro equipo se pondrá en contacto contigo para confirmar la disponibilidad, los gastos de transporte y las condiciones de pago.',
+noticeTitle:'Solicitud gratuita y sin compromiso.',notice:'No se requiere ningún pago en esta etapa. Tu pedido se confirmará tras la validación con nuestro equipo.',
+selection:'Tu selección',loading:'Cargando tu cesta...',subtotal:'Subtotal de productos',deliveryNote:'Los gastos de envío no están incluidos. BoisRoyal confirmará el importe final antes de cualquier validación.',
+contact:'Tus datos',name:'Nombre completo *',phone:'Teléfono *',email:'Correo electrónico *',delivery:'Dirección de entrega',address:'Dirección completa *',postal:'Código postal *',city:'Ciudad *',country:'País *',notes:'Información adicional (opcional)',placeholder:'Instrucciones de entrega o información útil...',send:'Enviar mi solicitud gratuita',sending:'Enviando...',required:'* Campos obligatorios. No se realiza ningún pago al enviar esta solicitud.',backBottom:'← Volver a BoisRoyal',
+empty:'Tu cesta está vacía.',emptyLink:'Vuelve a la tienda para elegir tus productos.',quote:'Precio bajo consulta',unit:'Unidad',unknown:' + productos bajo consulta',demo:'Hay un producto de demostración en tu cesta. Vuelve a la tienda y actualiza el catálogo antes de continuar.',quantity:'La cantidad de un producto no es válida.',emptyError:'Tu cesta está vacía.',refused:'Solicitud rechazada.',sendingStatus:'Enviando tu solicitud...',sent:'¡Solicitud enviada correctamente! Referencia: ',registered:'registrada',follow:'Seguir mi pedido →',confirmed:'. BoisRoyal se pondrá en contacto contigo para confirmar los precios, la entrega y las condiciones de pago.',generic:'No se pudo enviar. Inténtalo de nuevo.',connection:'Error de conexión. Inténtalo de nuevo.',successEmpty:'Tu solicitud se ha enviado correctamente.',
+countries:[['France','Francia'],['Belgique','Bélgica']]
+},
+nl:{
+back:'← Terug naar de winkel',eyebrow:'Uw bestelling',title:'Warmte begint',here:'hier.',
+hero:'Controleer uw selectie en vul uw bezorgadres in. Ons team neemt contact met u op om de beschikbaarheid, bezorgkosten en betalingsvoorwaarden te bevestigen.',
+noticeTitle:'Gratis en vrijblijvend verzoek.',notice:'In deze fase hoeft u niets te betalen. Uw bestelling wordt bevestigd na overleg met ons team.',
+selection:'Uw selectie',loading:'Winkelwagen laden...',subtotal:'Subtotaal producten',deliveryNote:'Bezorgkosten zijn niet inbegrepen. BoisRoyal bevestigt het definitieve bedrag vóór goedkeuring.',
+contact:'Uw gegevens',name:'Volledige naam *',phone:'Telefoon *',email:'E-mailadres *',delivery:'Bezorgadres',address:'Volledig adres *',postal:'Postcode *',city:'Stad *',country:'Land *',notes:'Aanvullende informatie (optioneel)',placeholder:'Bezorginstructies of nuttige informatie...',send:'Mijn gratis aanvraag verzenden',sending:'Verzenden...',required:'* Verplichte velden. Bij het verzenden van deze aanvraag vindt geen betaling plaats.',backBottom:'← Terug naar BoisRoyal',
+empty:'Uw winkelwagen is leeg.',emptyLink:'Ga terug naar de winkel om producten te kiezen.',quote:'Prijs op aanvraag',unit:'Eenheid',unknown:' + producten op aanvraag',demo:'Er staat een demoproduct in uw winkelwagen. Ga terug naar de winkel en laad de catalogus opnieuw.',quantity:'Een producthoeveelheid is ongeldig.',emptyError:'Uw winkelwagen is leeg.',refused:'Aanvraag geweigerd.',sendingStatus:'Uw aanvraag wordt verzonden...',sent:'Aanvraag succesvol verzonden! Referentie: ',registered:'geregistreerd',follow:'Mijn bestelling volgen →',confirmed:'. BoisRoyal neemt contact met u op om de prijzen, levering en betalingsvoorwaarden te bevestigen.',generic:'Verzenden mislukt. Probeer het opnieuw.',connection:'Verbindingsfout. Probeer het opnieuw.',successEmpty:'Uw aanvraag is succesvol verzonden.',
+countries:[['France','Frankrijk'],['Belgique','België']]
+},
+cs:{
+back:'← Zpět do obchodu',eyebrow:'Vaše objednávka',title:'Teplo začíná',here:'zde.',
+hero:'Zkontrolujte svůj výběr a zadejte doručovací adresu. Náš tým vás kontaktuje a potvrdí dostupnost, náklady na dopravu a platební podmínky.',
+noticeTitle:'Bezplatná a nezávazná žádost.',notice:'V této fázi není vyžadována žádná platba. Vaše objednávka bude potvrzena po ověření naším týmem.',
+selection:'Váš výběr',loading:'Načítání košíku...',subtotal:'Mezisoučet produktů',deliveryNote:'Náklady na doručení nejsou zahrnuty. BoisRoyal potvrdí konečnou částku před schválením.',
+contact:'Vaše kontaktní údaje',name:'Celé jméno *',phone:'Telefon *',email:'E-mailová adresa *',delivery:'Doručovací adresa',address:'Úplná adresa *',postal:'PSČ *',city:'Město *',country:'Země *',notes:'Doplňující informace (nepovinné)',placeholder:'Pokyny k doručení nebo užitečné informace...',send:'Odeslat bezplatnou žádost',sending:'Odesílání...',required:'* Povinná pole. Odesláním této žádosti neproběhne žádná platba.',backBottom:'← Zpět na BoisRoyal',
+empty:'Váš košík je prázdný.',emptyLink:'Vraťte se do obchodu a vyberte produkty.',quote:'Cena na vyžádání',unit:'Jednotka',unknown:' + produkty na vyžádání',demo:'V košíku je ukázkový produkt. Vraťte se do obchodu a znovu načtěte katalog.',quantity:'Množství produktu není platné.',emptyError:'Váš košík je prázdný.',refused:'Žádost byla zamítnuta.',sendingStatus:'Odesílání žádosti...',sent:'Žádost byla úspěšně odeslána! Reference: ',registered:'zaregistrována',follow:'Sledovat objednávku →',confirmed:'. BoisRoyal vás kontaktuje a potvrdí ceny, doručení a platební podmínky.',generic:'Odeslání se nezdařilo. Zkuste to znovu.',connection:'Chyba připojení. Zkuste to znovu.',successEmpty:'Vaše žádost byla úspěšně odeslána.',
+countries:[['France','Francie'],['Belgique','Belgie']]
+}
+};
+
+function t(key){return (TEXT[currentLanguage] && TEXT[currentLanguage][key]) || TEXT.fr[key] || key;}
+
+function applyTranslations(){
+  const ids={
+    backTop:'back',eyebrow:'eyebrow',noticeTitle:'noticeTitle',noticeText:'notice',
+    'basket-title':'selection',subtotalLabel:'subtotal',deliveryNote:'deliveryNote',
+    'contact-title':'contact',nameLabel:'name',phoneLabel:'phone',emailLabel:'email',
+    'delivery-title':'delivery',addressLabel:'address',postalLabel:'postal',
+    cityLabel:'city',countryLabel:'country',notesLabel:'notes',sendLabel:'send',
+    requiredNote:'required',backBottom:'backBottom'
+  };
+  Object.entries(ids).forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    if(el) el.textContent=t(key);
+  });
+  document.getElementById('heroTitle').innerHTML=t('title')+' <span>'+t('here')+'</span>';
+  document.getElementById('heroCopy').textContent=t('hero');
+  document.getElementById('notes').placeholder=t('placeholder');
+
+  const country=document.getElementById('country');
+  const selected=country.value;
+  country.innerHTML='';
+  t('countries').forEach(([value,label])=>{
+    const option=document.createElement('option');
+    option.value=value;
+    option.textContent=label;
+    country.appendChild(option);
+  });
+  country.value=selected || 'France';
+
+  document.getElementById('languageSelector').value=currentLanguage;
+  document.documentElement.lang=currentLanguage;
+  document.title=currentLanguage==='fr'?'Votre commande | BoisRoyal':
+    currentLanguage==='de'?'Ihre Bestellung | BoisRoyal':
+    currentLanguage==='es'?'Tu pedido | BoisRoyal':
+    currentLanguage==='nl'?'Uw bestelling | BoisRoyal':
+    currentLanguage==='cs'?'Vaše objednávka | BoisRoyal':'Your order | BoisRoyal';
+  renderCart();
 }
 
-function money(value) {
-  if (value === null || value === undefined || value === '' ||
-      !Number.isFinite(Number(value))) {
-    return 'Sur devis';
+function setLanguage(language){
+  if(!TEXT[language]) language='fr';
+  currentLanguage=language;
+  try{localStorage.setItem('boisroyal_language',language);}catch(e){}
+  if(window.BoisRoyalI18n && window.BoisRoyalI18n.setLanguage){
+    window.BoisRoyalI18n.setLanguage(language);
   }
+  applyTranslations();
+}
 
-  return new Intl.NumberFormat('fr-FR', {
-    style: 'currency',
-    currency: 'EUR'
+document.getElementById('languageSelector').addEventListener('change',e=>setLanguage(e.target.value));
+
+if(window.BoisRoyalI18n && window.BoisRoyalI18n.getLanguage){
+  currentLanguage=window.BoisRoyalI18n.getLanguage() || 'fr';
+}else{
+  try{currentLanguage=localStorage.getItem('boisroyal_language') || 'fr';}catch(e){}
+}
+if(!TEXT[currentLanguage]) currentLanguage='fr';
+
+function readCart(){
+  try{
+    const data=JSON.parse(localStorage.getItem('boisroyal_cart') || '[]');
+    return Array.isArray(data)?data:[];
+  }catch(error){return [];}
+}
+
+function money(value){
+  if(value===null||value===undefined||value===''||!Number.isFinite(Number(value))) return t('quote');
+  const locales={fr:'fr-FR',en:'en-GB',de:'de-DE',es:'es-ES',nl:'nl-NL',cs:'cs-CZ'};
+  return new Intl.NumberFormat(locales[currentLanguage] || 'fr-FR',{
+    style:'currency',currency:'EUR'
   }).format(Number(value));
 }
 
-function escapeHTML(value) {
-  return String(value ?? '').replace(/[&<>"']/g, char => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
+function escapeHTML(value){
+  return String(value??'').replace(/[&<>"']/g,char=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[char]));
 }
 
-function renderCart() {
-  cart = readCart();
+function renderCart(){
+  cart=readCart();
 
-  if (!cart.length) {
-    productList.innerHTML =
-      '<div class="empty">Votre panier est vide. ' +
-      '<a href="index.html">Retournez à la boutique pour choisir vos produits.</a></div>';
-
-    cartTotal.textContent = money(0);
-    button.disabled = true;
+  if(!cart.length){
+    productList.innerHTML='<div class="empty">'+escapeHTML(t('empty'))+' <a href="index.html">'+escapeHTML(t('emptyLink'))+'</a></div>';
+    cartTotal.textContent=money(0);
+    button.disabled=true;
     return;
   }
 
-  let subtotal = 0;
-  let hasUnknownPrice = false;
+  let subtotal=0;
+  let hasUnknownPrice=false;
 
-  productList.innerHTML = cart.map(item => {
-    const quantity = Number(item.quantity);
-    const price = item.price;
+  productList.innerHTML=cart.map(item=>{
+    const quantity=Number(item.quantity);
+    const price=item.price;
 
-    if (price === null || price === undefined || price === '' ||
-        !Number.isFinite(Number(price))) {
-      hasUnknownPrice = true;
-    } else {
-      subtotal += Number(price) * quantity;
+    if(price===null||price===undefined||price===''||!Number.isFinite(Number(price))){
+      hasUnknownPrice=true;
+    }else{
+      subtotal+=Number(price)*quantity;
     }
 
     return `
       <div class="product">
         <div>
-          <b>${escapeHTML(item.name || 'Produit BoisRoyal')}</b>
-          <small>${escapeHTML(item.unit || 'Unité')} · ${money(price)} / unité</small>
+          <b>${escapeHTML(item.name || 'BoisRoyal')}</b>
+          <small>${escapeHTML(item.unit || t('unit'))} · ${money(price)} / ${escapeHTML(t('unit').toLowerCase())}</small>
         </div>
         <div class="quantity">× ${quantity}</div>
-      </div>
-    `;
+      </div>`;
   }).join('');
 
-  cartTotal.textContent = hasUnknownPrice
-    ? money(subtotal) + ' + produits sur devis'
-    : money(subtotal);
-
-  button.disabled = false;
+  cartTotal.textContent=hasUnknownPrice?money(subtotal)+t('unknown'):money(subtotal);
+  button.disabled=false;
 }
 
-function getOrderItems() {
-  return cart.map(item => {
-    const quantity = Number(item.quantity);
-    const slug = String(item.slug || '').trim();
-    const id = String(item.id || '');
+function getOrderItems(){
+  return cart.map(item=>{
+    const quantity=Number(item.quantity);
+    const slug=String(item.slug || '').trim();
+    const id=String(item.id || '');
 
-    if (!slug || id.startsWith('demo-')) {
-      throw new Error(
-        'Un produit de démonstration est présent dans votre panier. ' +
-        'Retournez à la boutique et rechargez le catalogue avant de recommencer.'
-      );
+    if(!slug || id.startsWith('demo-')){
+      throw new Error(t('demo'));
     }
-
-    if (!Number.isInteger(quantity) || quantity < 1) {
-      throw new Error('Une quantité de produit est invalide.');
+    if(!Number.isInteger(quantity)||quantity<1){
+      throw new Error(t('quantity'));
     }
-
-    return { slug, quantity };
+    return {slug,quantity};
   });
 }
 
-form.addEventListener('submit', async function(event) {
+form.addEventListener('submit',async function(event){
   event.preventDefault();
 
-  const val = id => document.getElementById(id).value.trim();
+  const val=id=>document.getElementById(id).value.trim();
 
-  status.className = '';
-  status.textContent = '';
+  status.className='';
+  status.textContent='';
 
-  if (val('website')) {
-    status.textContent = 'Demande refusée.';
-    status.className = 'error';
+  if(val('website')){
+    status.textContent=t('refused');
+    status.className='error';
     return;
   }
 
-  cart = readCart();
+  cart=readCart();
 
-  if (!cart.length) {
-    status.textContent = 'Votre panier est vide.';
-    status.className = 'error';
+  if(!cart.length){
+    status.textContent=t('emptyError');
+    status.className='error';
     return;
   }
 
   let items;
-
-  try {
-    items = getOrderItems();
-  } catch (error) {
-    status.textContent = error.message;
-    status.className = 'error';
+  try{
+    items=getOrderItems();
+  }catch(error){
+    status.textContent=error.message;
+    status.className='error';
     return;
   }
 
-  const payload = {
-    customer_name: val('name'),
-    customer_phone: val('phone'),
-    customer_email: val('email'),
-    delivery_address: val('address'),
-    delivery_postal_code: val('postal'),
-    delivery_city: val('city'),
-    delivery_country: val('country'),
-    delivery_notes: val('notes'),
-    company_website: val('website'),
+  const payload={
+    customer_name:val('name'),
+    customer_phone:val('phone'),
+    customer_email:val('email'),
+    delivery_address:val('address'),
+    delivery_postal_code:val('postal'),
+    delivery_city:val('city'),
+    delivery_country:val('country'),
+    delivery_notes:val('notes'),
+    company_website:val('website'),
     items
   };
 
-  button.disabled = true;
-  button.textContent = 'Envoi en cours...';
-  status.textContent = 'Envoi de votre demande...';
+  button.disabled=true;
+  document.getElementById('sendLabel').textContent=t('sending');
+  status.textContent=t('sendingStatus');
 
-  try {
-    const response = await fetch(
-      URL_SUPABASE + '/functions/v1/boisroyal-order-request',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': CLE_PUBLIQUE
-        },
-        body: JSON.stringify(payload)
-      }
-    );
+  try{
+    const response=await fetch(URL_SUPABASE+'/functions/v1/boisroyal-order-request',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':CLE_PUBLIQUE
+      },
+      body:JSON.stringify(payload)
+    });
 
-    const result = await response.json();
+    const result=await response.json();
 
-    if (!response.ok) {
-      throw new Error(
-        result.error || 'Envoi impossible. Veuillez réessayer.'
-      );
+    if(!response.ok){
+      throw new Error(result.error || t('generic'));
     }
 
     localStorage.removeItem('boisroyal_cart');
-    cart = [];
+    cart=[];
 
-    productList.innerHTML =
-      '<div class="empty">Votre demande a bien été envoyée.</div>';
-    cartTotal.textContent = money(0);
+    productList.innerHTML='<div class="empty">'+escapeHTML(t('successEmpty'))+'</div>';
+    cartTotal.textContent=money(0);
 
-    status.textContent =
-      'Demande envoyée avec succès ! Référence : ' +
-      (result.order_number || 'enregistrée') +
-      '. BoisRoyal vous recontactera pour confirmer les prix, ' +
-      'la livraison et les modalités de paiement.';
+    status.textContent=t('sent')+(result.order_number || t('registered'))+t('confirmed');
+    status.className='success';
 
-    status.className = 'success';
-
-    const trackingLink = document.createElement('a');
-    trackingLink.href = 'suivi.html?ref=' + encodeURIComponent(result.order_number || '');
-    trackingLink.textContent = 'Suivre ma commande →';
-    trackingLink.style.display = 'inline-block';
-    trackingLink.style.marginTop = '8px';
-    trackingLink.style.fontWeight = '800';
+    const trackingLink=document.createElement('a');
+    trackingLink.href='suivi.html?ref='+encodeURIComponent(result.order_number || '');
+    trackingLink.textContent=t('follow');
+    trackingLink.style.display='inline-block';
+    trackingLink.style.marginTop='8px';
+    trackingLink.style.fontWeight='800';
     status.appendChild(document.createElement('br'));
     status.appendChild(trackingLink);
 
     form.reset();
-    button.disabled = true;
+    button.disabled=true;
 
-  } catch (error) {
-    status.textContent =
-      error.message || 'Erreur de connexion. Veuillez réessayer.';
-    status.className = 'error';
-    button.disabled = false;
-  } finally {
-    button.textContent = 'Envoyer ma demande gratuite';
+  }catch(error){
+    status.textContent=error.message || t('connection');
+    status.className='error';
+    button.disabled=false;
+  }finally{
+    document.getElementById('sendLabel').textContent=t('send');
   }
 });
 
-renderCart();
+window.addEventListener('boisroyal:languageChanged',event=>{
+  if(event.detail && event.detail.language && TEXT[event.detail.language]){
+    currentLanguage=event.detail.language;
+    applyTranslations();
+  }
+});
+
+applyTranslations();
 </script>
 </body>
 </html>

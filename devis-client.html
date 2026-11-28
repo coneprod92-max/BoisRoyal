@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#30221B">
 <meta name="description" content="Consultez et répondez à votre devis BoisRoyal.">
 <title>Mon devis — BoisRoyal</title>
+
 <style>
 :root {
   --bg:#F4EBDD;
@@ -34,10 +35,24 @@ header{
   color:white;
   padding:22px 26px;
   border-radius:16px 16px 0 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
 }
 .logo{font-family:Georgia,serif;font-size:28px;font-weight:bold}
 .logo span{color:#F2A06E}
 header p{margin:4px 0 0;color:#E6D8CB;font-size:14px}
+.language-select{
+  padding:9px 10px;
+  border:1px solid #806B5D;
+  border-radius:7px;
+  background:#493126;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
 main{
   background:var(--paper);
   padding:26px;
@@ -156,90 +171,106 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}
 }
 </style>
 </head>
+
 <body>
 <div class="wrap">
-  <header>
+
+<header>
+  <div>
     <div class="logo">Bois<span>Royal</span></div>
-    <p>Votre devis personnalisé</p>
-  </header>
+    <p data-i18n="subtitle">Votre devis personnalisé</p>
+  </div>
 
-  <main>
-    <div id="loading" class="loading">Chargement de votre devis…</div>
+  <select class="language-select" id="languageSelector" aria-label="Choose language">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="de">🇩🇪 Deutsch</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="nl">🇳🇱 Nederlands</option>
+    <option value="cs">🇨🇿 Čeština</option>
+  </select>
+</header>
 
-    <section id="content" class="hidden">
-      <h1>Bonjour <span id="customerName"></span> !</h1>
-      <p>Voici le détail de votre devis BoisRoyal.</p>
+<main>
+  <div id="loading" class="loading" data-i18n="loading">Chargement de votre devis…</div>
 
-      <p style="margin-top:15px">
-        <span class="reference" id="orderNumber"></span>
-        <span class="status" id="quoteStatus"></span>
+  <section id="content" class="hidden">
+    <h1><span data-i18n="hello">Bonjour</span> <span id="customerName"></span> !</h1>
+    <p data-i18n="intro">Voici le détail de votre devis BoisRoyal.</p>
+
+    <p style="margin-top:15px">
+      <span class="reference" id="orderNumber"></span>
+      <span class="status" id="quoteStatus"></span>
+    </p>
+
+    <div class="panel">
+      <h2 style="margin-top:0" data-i18n="delivery">Votre livraison</h2>
+      <p id="deliveryAddress"></p>
+      <p class="muted" id="validUntil"></p>
+    </div>
+
+    <h2 data-i18n="productsTitle">Détail des produits</h2>
+
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="product">Produit</th>
+            <th data-i18n="quantity">Quantité</th>
+            <th data-i18n="lineTotal">Prix total</th>
+          </tr>
+        </thead>
+        <tbody id="itemsRows"></tbody>
+      </table>
+    </div>
+
+    <div class="totals">
+      <div class="total-row">
+        <span data-i18n="subtotal">Sous-total</span>
+        <strong id="subtotal"></strong>
+      </div>
+      <div class="total-row">
+        <span data-i18n="shipping">Livraison</span>
+        <strong id="shipping"></strong>
+      </div>
+      <div class="total-row grand-total">
+        <span data-i18n="total">Total</span>
+        <strong id="total"></strong>
+      </div>
+    </div>
+
+    <div id="publicNote" class="note hidden"></div>
+
+    <div id="responseArea">
+      <div class="actions">
+        <button class="primary" id="acceptBtn" data-i18n="accept">Accepter ce devis</button>
+        <button class="danger" id="rejectBtn" data-i18n="reject">Refuser ce devis</button>
+      </div>
+      <p class="muted" data-i18n="acceptInfo">
+        En acceptant, vous confirmez votre accord sur les produits,
+        les quantités et le montant indiqué. Le paiement sera proposé
+        dans une étape ultérieure.
       </p>
+    </div>
 
-      <div class="panel">
-        <h2 style="margin-top:0">Votre livraison</h2>
-        <p id="deliveryAddress"></p>
-        <p class="muted" id="validUntil"></p>
-      </div>
+    <div id="message" class="message hidden" role="status" aria-live="polite"></div>
+  </section>
 
-      <h2>Détail des produits</h2>
-      <div style="overflow-x:auto">
-        <table>
-          <thead>
-            <tr>
-              <th>Produit</th>
-              <th>Quantité</th>
-              <th>Prix total</th>
-            </tr>
-          </thead>
-          <tbody id="itemsRows"></tbody>
-        </table>
-      </div>
+  <section id="errorArea" class="hidden">
+    <h1 data-i18n="unavailable">Devis indisponible</h1>
+    <div id="errorMessage" class="message error"></div>
+    <p class="muted" data-i18n="contactError">
+      Si vous pensez qu'il s'agit d'une erreur, contactez BoisRoyal.
+    </p>
+  </section>
+</main>
 
-      <div class="totals">
-        <div class="total-row">
-          <span>Sous-total</span>
-          <strong id="subtotal"></strong>
-        </div>
-        <div class="total-row">
-          <span>Livraison</span>
-          <strong id="shipping"></strong>
-        </div>
-        <div class="total-row grand-total">
-          <span>Total</span>
-          <strong id="total"></strong>
-        </div>
-      </div>
-
-      <div id="publicNote" class="note hidden"></div>
-
-      <div id="responseArea">
-        <div class="actions">
-          <button class="primary" id="acceptBtn">Accepter ce devis</button>
-          <button class="danger" id="rejectBtn">Refuser ce devis</button>
-        </div>
-        <p class="muted">
-          En acceptant, vous confirmez votre accord sur les produits,
-          les quantités et le montant indiqué. Le paiement sera proposé
-          dans une étape ultérieure.
-        </p>
-      </div>
-
-      <div id="message" class="message hidden" role="status" aria-live="polite"></div>
-    </section>
-
-    <section id="errorArea" class="hidden">
-      <h1>Devis indisponible</h1>
-      <div id="errorMessage" class="message error"></div>
-      <p class="muted">
-        Si vous pensez qu'il s'agit d'une erreur, contactez BoisRoyal.
-      </p>
-    </section>
-  </main>
-
-  <footer>
-    BoisRoyal · Votre partenaire bois de chauffage et charbon
-  </footer>
+<footer data-i18n="footer">
+  BoisRoyal · Votre partenaire bois de chauffage et charbon
+</footer>
 </div>
+
+<script src="translations.js"></script>
 
 <script>
 const SUPABASE_URL = "https://evvblxiitorfdniqmqcf.supabase.co";
@@ -252,182 +283,415 @@ const token = params.get("token");
 
 let currentQuote = null;
 let busy = false;
+let currentLanguage = "fr";
 
-function money(value){
-  return new Intl.NumberFormat("fr-FR",{
-    style:"currency",
-    currency:"EUR"
-  }).format(Number(value)||0);
+const LANGUAGES = {
+fr: {
+subtitle:"Votre devis personnalisé",
+loading:"Chargement de votre devis…",
+hello:"Bonjour",
+intro:"Voici le détail de votre devis BoisRoyal.",
+reference:"Référence : ",
+delivery:"Votre livraison",
+validUntil:"Devis valable jusqu'au ",
+productsTitle:"Détail des produits",
+product:"Produit",quantity:"Quantité",lineTotal:"Prix total",
+subtotal:"Sous-total",shipping:"Livraison",total:"Total",
+accept:"Accepter ce devis",reject:"Refuser ce devis",
+acceptInfo:"En acceptant, vous confirmez votre accord sur les produits, les quantités et le montant indiqué. Le paiement sera proposé dans une étape ultérieure.",
+unavailable:"Devis indisponible",
+contactError:"Si vous pensez qu'il s'agit d'une erreur, contactez BoisRoyal.",
+footer:"BoisRoyal · Votre partenaire bois de chauffage et charbon",
+productFallback:"Produit",unknownStatus:"Statut inconnu",
+statuses:{sent:"Devis envoyé",accepted:"Devis accepté",rejected:"Devis refusé",expired:"Devis expiré",pending:"En attente"},
+confirmAccept:"Confirmer l'acceptation de ce devis ?",
+confirmReject:"Confirmer le refus de ce devis ?",
+acceptedAlready:"Vous avez déjà accepté ce devis. Votre commande est confirmée. Le paiement sera proposé dans une prochaine étape.",
+rejectedAlready:"Vous avez déjà refusé ce devis.",
+expiredMessage:"Ce devis n'est plus valable. Contactez BoisRoyal pour une actualisation.",
+acceptedMessage:"Merci ! Votre devis a été accepté. Votre commande est confirmée. Nous vous communiquerons la prochaine étape pour le paiement.",
+rejectedMessage:"Votre refus a bien été enregistré. Merci de nous avoir répondu.",
+missingToken:"Le lien est incomplet : aucun code de devis n'a été fourni.",
+communicationError:"Impossible de communiquer avec le service de devis.",
+genericError:"Une erreur est survenue. Veuillez réessayer.",
+dateLocale:"fr-FR"
+},
+en: {
+subtitle:"Your personalised quote",
+loading:"Loading your quote…",
+hello:"Hello",
+intro:"Here are the details of your BoisRoyal quote.",
+reference:"Reference: ",
+delivery:"Your delivery",
+validUntil:"Quote valid until ",
+productsTitle:"Product details",
+product:"Product",quantity:"Quantity",lineTotal:"Total price",
+subtotal:"Subtotal",shipping:"Delivery",total:"Total",
+accept:"Accept this quote",reject:"Decline this quote",
+acceptInfo:"By accepting, you confirm your agreement with the products, quantities and amount shown. Payment will be offered at a later stage.",
+unavailable:"Quote unavailable",
+contactError:"If you believe this is an error, please contact BoisRoyal.",
+footer:"BoisRoyal · Your firewood and charcoal partner",
+productFallback:"Product",unknownStatus:"Unknown status",
+statuses:{sent:"Quote sent",accepted:"Quote accepted",rejected:"Quote declined",expired:"Quote expired",pending:"Pending"},
+confirmAccept:"Confirm acceptance of this quote?",
+confirmReject:"Confirm rejection of this quote?",
+acceptedAlready:"You have already accepted this quote. Your order is confirmed. Payment will be offered in a later step.",
+rejectedAlready:"You have already declined this quote.",
+expiredMessage:"This quote is no longer valid. Contact BoisRoyal for an update.",
+acceptedMessage:"Thank you! Your quote has been accepted. Your order is confirmed. We will let you know the next step for payment.",
+rejectedMessage:"Your rejection has been recorded. Thank you for responding.",
+missingToken:"The link is incomplete: no quote code was provided.",
+communicationError:"Unable to communicate with the quote service.",
+genericError:"An error occurred. Please try again.",
+dateLocale:"en-GB"
+},
+de: {
+subtitle:"Ihr persönliches Angebot",
+loading:"Ihr Angebot wird geladen…",
+hello:"Hallo",
+intro:"Hier finden Sie die Einzelheiten Ihres BoisRoyal-Angebots.",
+reference:"Referenz: ",
+delivery:"Ihre Lieferung",
+validUntil:"Angebot gültig bis ",
+productsTitle:"Produktdetails",
+product:"Produkt",quantity:"Menge",lineTotal:"Gesamtpreis",
+subtotal:"Zwischensumme",shipping:"Lieferung",total:"Gesamtbetrag",
+accept:"Angebot annehmen",reject:"Angebot ablehnen",
+acceptInfo:"Mit Ihrer Annahme bestätigen Sie die Produkte, Mengen und den angegebenen Betrag. Die Zahlung wird zu einem späteren Zeitpunkt angeboten.",
+unavailable:"Angebot nicht verfügbar",
+contactError:"Wenn Sie glauben, dass dies ein Fehler ist, kontaktieren Sie bitte BoisRoyal.",
+footer:"BoisRoyal · Ihr Partner für Brennholz und Holzkohle",
+productFallback:"Produkt",unknownStatus:"Unbekannter Status",
+statuses:{sent:"Angebot gesendet",accepted:"Angebot angenommen",rejected:"Angebot abgelehnt",expired:"Angebot abgelaufen",pending:"Ausstehend"},
+confirmAccept:"Möchten Sie dieses Angebot wirklich annehmen?",
+confirmReject:"Möchten Sie dieses Angebot wirklich ablehnen?",
+acceptedAlready:"Sie haben dieses Angebot bereits angenommen. Ihre Bestellung ist bestätigt. Die Zahlung wird in einem späteren Schritt angeboten.",
+rejectedAlready:"Sie haben dieses Angebot bereits abgelehnt.",
+expiredMessage:"Dieses Angebot ist nicht mehr gültig. Kontaktieren Sie BoisRoyal für eine Aktualisierung.",
+acceptedMessage:"Vielen Dank! Ihr Angebot wurde angenommen. Ihre Bestellung ist bestätigt. Wir informieren Sie über den nächsten Zahlungsschritt.",
+rejectedMessage:"Ihre Ablehnung wurde gespeichert. Vielen Dank für Ihre Rückmeldung.",
+missingToken:"Der Link ist unvollständig: Es wurde kein Angebotscode übermittelt.",
+communicationError:"Die Verbindung zum Angebotsdienst ist nicht möglich.",
+genericError:"Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+dateLocale:"de-DE"
+},
+es: {
+subtitle:"Tu presupuesto personalizado",
+loading:"Cargando tu presupuesto…",
+hello:"Hola",
+intro:"Aquí tienes los detalles de tu presupuesto BoisRoyal.",
+reference:"Referencia: ",
+delivery:"Tu entrega",
+validUntil:"Presupuesto válido hasta el ",
+productsTitle:"Detalles de los productos",
+product:"Producto",quantity:"Cantidad",lineTotal:"Precio total",
+subtotal:"Subtotal",shipping:"Entrega",total:"Total",
+accept:"Aceptar este presupuesto",reject:"Rechazar este presupuesto",
+acceptInfo:"Al aceptar, confirmas tu acuerdo con los productos, las cantidades y el importe indicado. El pago se ofrecerá en una etapa posterior.",
+unavailable:"Presupuesto no disponible",
+contactError:"Si crees que se trata de un error, ponte en contacto con BoisRoyal.",
+footer:"BoisRoyal · Tu socio de leña y carbón vegetal",
+productFallback:"Producto",unknownStatus:"Estado desconocido",
+statuses:{sent:"Presupuesto enviado",accepted:"Presupuesto aceptado",rejected:"Presupuesto rechazado",expired:"Presupuesto caducado",pending:"Pendiente"},
+confirmAccept:"¿Confirmas la aceptación de este presupuesto?",
+confirmReject:"¿Confirmas el rechazo de este presupuesto?",
+acceptedAlready:"Ya has aceptado este presupuesto. Tu pedido está confirmado. El pago se ofrecerá en una etapa posterior.",
+rejectedAlready:"Ya has rechazado este presupuesto.",
+expiredMessage:"Este presupuesto ya no es válido. Contacta con BoisRoyal para actualizarlo.",
+acceptedMessage:"¡Gracias! Tu presupuesto ha sido aceptado. Tu pedido está confirmado. Te comunicaremos el siguiente paso para el pago.",
+rejectedMessage:"Tu rechazo se ha registrado correctamente. Gracias por responder.",
+missingToken:"El enlace está incompleto: no se ha proporcionado ningún código de presupuesto.",
+communicationError:"No se puede comunicar con el servicio de presupuestos.",
+genericError:"Se ha producido un error. Inténtalo de nuevo.",
+dateLocale:"es-ES"
+},
+nl: {
+subtitle:"Uw persoonlijke offerte",
+loading:"Uw offerte wordt geladen…",
+hello:"Hallo",
+intro:"Hier vindt u de details van uw BoisRoyal-offerte.",
+reference:"Referentie: ",
+delivery:"Uw levering",
+validUntil:"Offerte geldig tot ",
+productsTitle:"Productgegevens",
+product:"Product",quantity:"Hoeveelheid",lineTotal:"Totaalprijs",
+subtotal:"Subtotaal",shipping:"Levering",total:"Totaal",
+accept:"Offerte accepteren",reject:"Offerte weigeren",
+acceptInfo:"Door te accepteren gaat u akkoord met de producten, hoeveelheden en het vermelde bedrag. Betaling wordt in een latere stap aangeboden.",
+unavailable:"Offerte niet beschikbaar",
+contactError:"Als u denkt dat dit een fout is, neem dan contact op met BoisRoyal.",
+footer:"BoisRoyal · Uw partner voor brandhout en houtskool",
+productFallback:"Product",unknownStatus:"Onbekende status",
+statuses:{sent:"Offerte verzonden",accepted:"Offerte geaccepteerd",rejected:"Offerte geweigerd",expired:"Offerte verlopen",pending:"In afwachting"},
+confirmAccept:"Wilt u deze offerte accepteren?",
+confirmReject:"Wilt u deze offerte weigeren?",
+acceptedAlready:"U heeft deze offerte al geaccepteerd. Uw bestelling is bevestigd. Betaling wordt in een volgende stap aangeboden.",
+rejectedAlready:"U heeft deze offerte al geweigerd.",
+expiredMessage:"Deze offerte is niet meer geldig. Neem contact op met BoisRoyal voor een update.",
+acceptedMessage:"Bedankt! Uw offerte is geaccepteerd. Uw bestelling is bevestigd. We informeren u over de volgende stap voor betaling.",
+rejectedMessage:"Uw weigering is geregistreerd. Bedankt voor uw reactie.",
+missingToken:"De link is onvolledig: er is geen offertecode opgegeven.",
+communicationError:"Kan geen verbinding maken met de offerteservice.",
+genericError:"Er is een fout opgetreden. Probeer het opnieuw.",
+dateLocale:"nl-NL"
+},
+cs: {
+subtitle:"Vaše individuální cenová nabídka",
+loading:"Načítání vaší cenové nabídky…",
+hello:"Dobrý den",
+intro:"Zde jsou podrobnosti vaší cenové nabídky BoisRoyal.",
+reference:"Reference: ",
+delivery:"Vaše doručení",
+validUntil:"Cenová nabídka platí do ",
+productsTitle:"Podrobnosti o produktech",
+product:"Produkt",quantity:"Množství",lineTotal:"Celková cena",
+subtotal:"Mezisoučet",shipping:"Doručení",total:"Celkem",
+accept:"Přijmout nabídku",reject:"Odmítnout nabídku",
+acceptInfo:"Přijetím potvrzujete souhlas s produkty, množstvím a uvedenou částkou. Možnost platby bude nabídnuta v pozdější fázi.",
+unavailable:"Cenová nabídka není dostupná",
+contactError:"Pokud se domníváte, že jde o chybu, kontaktujte BoisRoyal.",
+footer:"BoisRoyal · Váš partner pro palivové dřevo a dřevěné uhlí",
+productFallback:"Produkt",unknownStatus:"Neznámý stav",
+statuses:{sent:"Nabídka odeslána",accepted:"Nabídka přijata",rejected:"Nabídka odmítnuta",expired:"Platnost nabídky vypršela",pending:"Čeká na vyřízení"},
+confirmAccept:"Opravdu chcete tuto nabídku přijmout?",
+confirmReject:"Opravdu chcete tuto nabídku odmítnout?",
+acceptedAlready:"Tuto nabídku jste již přijali. Vaše objednávka je potvrzena. Možnost platby bude nabídnuta v dalším kroku.",
+rejectedAlready:"Tuto nabídku jste již odmítli.",
+expiredMessage:"Tato nabídka již není platná. Kontaktujte BoisRoyal a požádejte o aktualizaci.",
+acceptedMessage:"Děkujeme! Vaše nabídka byla přijata. Vaše objednávka je potvrzena. O dalším kroku platby vás budeme informovat.",
+rejectedMessage:"Vaše odmítnutí bylo zaznamenáno. Děkujeme za odpověď.",
+missingToken:"Odkaz není úplný: nebyl zadán žádný kód nabídky.",
+communicationError:"Nelze komunikovat se službou cenových nabídek.",
+genericError:"Došlo k chybě. Zkuste to prosím znovu.",
+dateLocale:"cs-CZ"
+}
+};
+
+function t(key) {
+return LANGUAGES[currentLanguage]?.[key] || LANGUAGES.fr[key] || key;
 }
 
-function showMessage(text, type=""){
-  const box = $("message");
-  box.textContent = text;
-  box.className = "message " + type;
-  box.classList.remove("hidden");
+function money(value) {
+return new Intl.NumberFormat(
+LANGUAGES[currentLanguage].dateLocale,
+{
+style:"currency",
+currency:"EUR"
+}
+).format(Number(value)||0);
 }
 
-function setBusy(value){
-  busy = value;
-  $("acceptBtn").disabled = value;
-  $("rejectBtn").disabled = value;
+function applyLanguage(language) {
+currentLanguage = LANGUAGES[language] ? language : "fr";
+
+document.documentElement.lang = currentLanguage;
+
+document.querySelectorAll("[data-i18n]").forEach(element => {
+const key = element.dataset.i18n;
+if (t(key)) element.textContent = t(key);
+});
+
+document.title = currentLanguage === "fr" ? "Mon devis — BoisRoyal" :
+currentLanguage === "en" ? "My quote — BoisRoyal" :
+currentLanguage === "de" ? "Mein Angebot — BoisRoyal" :
+currentLanguage === "es" ? "Mi presupuesto — BoisRoyal" :
+currentLanguage === "nl" ? "Mijn offerte — BoisRoyal" :
+"Moje nabídka — BoisRoyal";
+
+const selector = $("languageSelector");
+if (selector) selector.value = currentLanguage;
+
+try {
+localStorage.setItem("boisroyal_language", currentLanguage);
+} catch (error) {}
+
+if (currentQuote) renderQuoteDetails(currentQuote);
 }
 
-function statusLabel(status){
-  const labels = {
-    sent:"Devis envoyé",
-    accepted:"Devis accepté",
-    rejected:"Devis refusé",
-    expired:"Devis expiré",
-    pending:"En attente"
-  };
-  return labels[status] || "Statut inconnu";
+function showMessage(text, type="") {
+const box = $("message");
+box.textContent = text;
+box.className = "message " + type;
+box.classList.remove("hidden");
 }
 
-function showError(message){
-  $("loading").classList.add("hidden");
-  $("content").classList.add("hidden");
-  $("errorArea").classList.remove("hidden");
-  $("errorMessage").textContent = message;
+function setBusy(value) {
+busy = value;
+$("acceptBtn").disabled = value;
+$("rejectBtn").disabled = value;
 }
 
-async function callQuote(action){
-  const response = await fetch(FUNCTION_URL,{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
-      "apikey":SUPABASE_KEY,
-      "Authorization":"Bearer " + SUPABASE_KEY
-    },
-    body:JSON.stringify({token,action})
-  });
-
-  const data = await response.json().catch(()=>({}));
-  if(!response.ok){
-    throw new Error(data.error || "Impossible de communiquer avec le service de devis.");
-  }
-  return data;
+function statusLabel(status) {
+return LANGUAGES[currentLanguage].statuses[status] || t("unknownStatus");
 }
 
-function renderQuote(data){
-  const order = data.order;
-  currentQuote = order;
-
-  $("customerName").textContent = order.customer_name || "client";
-  $("orderNumber").textContent = "Référence : " + order.order_number;
-
-  const status = $("quoteStatus");
-  status.textContent = statusLabel(order.quote_status);
-  status.className = "status";
-  if(order.quote_status === "rejected") status.classList.add("rejected");
-  if(order.quote_status === "expired") status.classList.add("expired");
-  if(order.quote_status === "pending") status.classList.add("pending");
-
-  $("deliveryAddress").textContent = [
-    order.delivery_address,
-    order.delivery_postal_code,
-    order.delivery_city,
-    order.delivery_country
-  ].filter(Boolean).join(", ");
-
-  if(order.quote_valid_until){
-    $("validUntil").textContent =
-      "Devis valable jusqu'au " +
-      new Date(order.quote_valid_until).toLocaleDateString("fr-FR");
-  }
-
-  const tbody = $("itemsRows");
-  tbody.replaceChildren();
-
-  (data.items || []).forEach(item=>{
-    const tr = document.createElement("tr");
-    const product = document.createElement("td");
-    const quantity = document.createElement("td");
-    const amount = document.createElement("td");
-
-    product.textContent = item.product_name || "Produit";
-    quantity.textContent =
-      Number(item.quantity) + (item.unit ? " " + item.unit : "");
-    amount.textContent = money(item.line_total);
-
-    tr.append(product,quantity,amount);
-    tbody.appendChild(tr);
-  });
-
-  $("subtotal").textContent = money(order.subtotal);
-  $("shipping").textContent = money(order.shipping_cost);
-  $("total").textContent = money(order.total);
-
-  if(order.quote_public_note){
-    $("publicNote").textContent = order.quote_public_note;
-    $("publicNote").classList.remove("hidden");
-  }
-
-  $("responseArea").classList.toggle("hidden",order.quote_status !== "sent");
-
-  if(order.quote_status === "accepted"){
-    showMessage(
-      "Vous avez déjà accepté ce devis. Votre commande est confirmée. Le paiement sera proposé dans une prochaine étape.",
-      "success"
-    );
-  }else if(order.quote_status === "rejected"){
-    showMessage("Vous avez déjà refusé ce devis.");
-  }else if(order.quote_status === "expired"){
-    showMessage("Ce devis n'est plus valable. Contactez BoisRoyal pour une actualisation.","error");
-  }
-
-  $("loading").classList.add("hidden");
-  $("content").classList.remove("hidden");
+function showError(message) {
+$("loading").classList.add("hidden");
+$("content").classList.add("hidden");
+$("errorArea").classList.remove("hidden");
+$("errorMessage").textContent = message;
 }
 
-async function loadQuote(){
-  if(!token){
-    showError("Le lien est incomplet : aucun code de devis n'a été fourni.");
-    return;
-  }
+async function callQuote(action) {
+const response = await fetch(FUNCTION_URL, {
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"apikey":SUPABASE_KEY,
+"Authorization":"Bearer " + SUPABASE_KEY
+},
+body:JSON.stringify({token,action})
+});
 
-  try{
-    const data = await callQuote("view");
-    renderQuote(data);
-  }catch(error){
-    showError(error.message);
-  }
+const data = await response.json().catch(() => ({}));
+
+if (!response.ok) {
+throw new Error(data.error || t("communicationError"));
 }
 
-async function respond(action){
-  if(busy) return;
-
-  const confirmation = action === "accept"
-    ? "Confirmer l'acceptation de ce devis ?"
-    : "Confirmer le refus de ce devis ?";
-
-  if(!confirm(confirmation)) return;
-
-  setBusy(true);
-  $("message").classList.add("hidden");
-
-  try{
-    const data = await callQuote(action);
-    renderQuote(data);
-
-    if(action === "accept"){
-      showMessage(
-        "Merci ! Votre devis a été accepté. Votre commande est confirmée. Nous vous communiquerons la prochaine étape pour le paiement.",
-        "success"
-      );
-    }else{
-      showMessage("Votre refus a bien été enregistré. Merci de nous avoir répondu.");
-    }
-  }catch(error){
-    showMessage(error.message,"error");
-  }finally{
-    setBusy(false);
-  }
+return data;
 }
 
-$("acceptBtn").addEventListener("click",()=>respond("accept"));
-$("rejectBtn").addEventListener("click",()=>respond("reject"));
+function renderQuoteDetails(order) {
+$("customerName").textContent = order.customer_name || "client";
+$("orderNumber").textContent = t("reference") + order.order_number;
 
+const status = $("quoteStatus");
+status.textContent = statusLabel(order.quote_status);
+status.className = "status";
+
+if (order.quote_status === "rejected") status.classList.add("rejected");
+if (order.quote_status === "expired") status.classList.add("expired");
+if (order.quote_status === "pending") status.classList.add("pending");
+
+$("deliveryAddress").textContent = [
+order.delivery_address,
+order.delivery_postal_code,
+order.delivery_city,
+order.delivery_country
+].filter(Boolean).join(", ");
+
+if (order.quote_valid_until) {
+$("validUntil").textContent =
+t("validUntil") +
+new Date(order.quote_valid_until).toLocaleDateString(
+LANGUAGES[currentLanguage].dateLocale
+);
+} else {
+$("validUntil").textContent = "";
+}
+
+$("subtotal").textContent = money(order.subtotal);
+$("shipping").textContent = money(order.shipping_cost);
+$("total").textContent = money(order.total);
+
+if (order.quote_public_note) {
+$("publicNote").textContent = order.quote_public_note;
+$("publicNote").classList.remove("hidden");
+} else {
+$("publicNote").classList.add("hidden");
+}
+
+$("responseArea").classList.toggle("hidden", order.quote_status !== "sent");
+
+if (order.quote_status === "accepted") {
+showMessage(t("acceptedAlready"), "success");
+} else if (order.quote_status === "rejected") {
+showMessage(t("rejectedAlready"));
+} else if (order.quote_status === "expired") {
+showMessage(t("expiredMessage"), "error");
+}
+}
+
+function renderQuote(data) {
+const order = data.order;
+currentQuote = order;
+
+const tbody = $("itemsRows");
+tbody.replaceChildren();
+
+(data.items || []).forEach(item => {
+const tr = document.createElement("tr");
+const product = document.createElement("td");
+const quantity = document.createElement("td");
+const amount = document.createElement("td");
+
+product.textContent = item.product_name || t("productFallback");
+quantity.textContent =
+Number(item.quantity) + (item.unit ? " " + item.unit : "");
+amount.textContent = money(item.line_total);
+
+tr.append(product, quantity, amount);
+tbody.appendChild(tr);
+});
+
+renderQuoteDetails(order);
+
+$("loading").classList.add("hidden");
+$("content").classList.remove("hidden");
+}
+
+async function loadQuote() {
+if (!token) {
+showError(t("missingToken"));
+return;
+}
+
+try {
+const data = await callQuote("view");
+renderQuote(data);
+} catch (error) {
+showError(error.message || t("genericError"));
+}
+}
+
+async function respond(action) {
+if (busy) return;
+
+const confirmation = action === "accept"
+? t("confirmAccept")
+: t("confirmReject");
+
+if (!confirm(confirmation)) return;
+
+setBusy(true);
+$("message").classList.add("hidden");
+
+try {
+const data = await callQuote(action);
+renderQuote(data);
+
+if (action === "accept") {
+showMessage(t("acceptedMessage"), "success");
+} else {
+showMessage(t("rejectedMessage"));
+}
+} catch (error) {
+showMessage(error.message || t("genericError"), "error");
+} finally {
+setBusy(false);
+}
+}
+
+$("languageSelector").addEventListener("change", event => {
+applyLanguage(event.target.value);
+
+if (window.BoisRoyalI18n &&
+typeof window.BoisRoyalI18n.setLanguage === "function") {
+window.BoisRoyalI18n.setLanguage(event.target.value);
+}
+});
+
+$("acceptBtn").addEventListener("click", () => respond("accept"));
+$("rejectBtn").addEventListener("click", () => respond("reject"));
+
+let savedLanguage = "fr";
+try {
+savedLanguage = localStorage.getItem("boisroyal_language") || "fr";
+} catch (error) {}
+
+applyLanguage(savedLanguage);
 loadQuote();
 </script>
 </body>
